@@ -1,0 +1,6 @@
+# QA-A-05: body JSON "[]" diperlakukan sebagai objek kosong
+# Dibuat qa/tools/bukti.mjs, 2026-10-26T09:32:07.798Z, target http://127.0.0.1:8090 (dev-stack)
+
+POST /api/v1/customer body [] → 422 {"error":{"kode":"VALIDASI","pesan":"Periksa 2 isian yang ditandai.","field":{"nama":"Nama wajib diisi.","no_wa":"No WA wajib diisi."}}}
+POST /api/v1/customer body [1,2] → 400 {"error":{"kode":"JSON_TIDAK_VALID","pesan":"Body harus berupa objek JSON."}}
+POST /api/v1/customer body "x" → 400 {"error":{"kode":"JSON_TIDAK_VALID","pesan":"Body harus berupa objek JSON."}}

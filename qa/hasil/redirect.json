@@ -1,0 +1,37 @@
+{
+  "waktu": "2026-10-26T09:27:25.401Z",
+  "target": "http://127.0.0.1:8090",
+  "total": 4,
+  "lulus": 1,
+  "gagal": 3,
+  "hasil": [
+    {
+      "id": "RED-01",
+      "judul": "nextAman() tidak pernah mengembalikan tujuan di origin lain (16 payload)",
+      "lulus": false,
+      "catatan": "\"/..//evil.example/index.html\" → \"//evil.example/index.html\" (dibuka browser sebagai https://evil.example)\n\"/.//evil.example/index.html\" → \"//evil.example/index.html\" (dibuka browser sebagai https://evil.example)\n\"/%2e%2e//evil.example/index.html\" → \"//evil.example/index.html\" (dibuka browser sebagai https://evil.example)\n\"/%2e//evil.example/po.html\" → \"//evil.example/po.html\" (dibuka browser sebagai https://evil.example)\n\"/a/..//evil.example/index.html\" → \"//evil.example/index.html\" (dibuka browser sebagai https://evil.example)\n\"/././/evil.example/index.html\" → \"//evil.example/index.html\" (dibuka browser sebagai https://evil.example)",
+      "ms": 0
+    },
+    {
+      "id": "RED-02",
+      "judul": "nextAman() tidak pernah mengembalikan nilai berawalan \"//\" atau \"/\\\" (URL relatif-protokol)",
+      "lulus": false,
+      "catatan": "\"/..//evil.example/index.html\" → \"//evil.example/index.html\"\n\"/.//evil.example/index.html\" → \"//evil.example/index.html\"\n\"/%2e%2e//evil.example/index.html\" → \"//evil.example/index.html\"\n\"/%2e//evil.example/po.html\" → \"//evil.example/po.html\"\n\"/a/..//evil.example/index.html\" → \"//evil.example/index.html\"\n\"/././/evil.example/index.html\" → \"//evil.example/index.html\"",
+      "ms": 0
+    },
+    {
+      "id": "RED-03",
+      "judul": "Kontrol: path internal sah tetap diterima",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "RED-04",
+      "judul": "Setelah login dari /login.html?next=/..//evil.example/index.html browser tetap di origin aplikasi",
+      "lulus": false,
+      "catatan": "Setelah login browser membuka http://evil.example/index.html (request dicegat: http://evil.example/index.html); isi halaman: HALAMAN PENYERANG",
+      "ms": 698
+    }
+  ]
+}

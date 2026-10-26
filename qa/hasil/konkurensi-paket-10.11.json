@@ -1,0 +1,79 @@
+{
+  "waktu": "2026-10-26T09:28:14.541Z",
+  "target": "http://127.0.0.1:8282",
+  "total": 10,
+  "lulus": 10,
+  "gagal": 0,
+  "hasil": [
+    {
+      "id": "KON-01",
+      "judul": "Dua pembayaran pertama bersamaan untuk customer tanpa keranjang (10 putaran): keduanya 201, satu keranjang, Σ benar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 271
+    },
+    {
+      "id": "KON-02",
+      "judul": "Dua barang pertama bersamaan (membuat keranjang + mengunci kurs) dan barang vs pembayaran pertama bersamaan (10 putaran)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 603
+    },
+    {
+      "id": "KON-03",
+      "judul": "Dua pengembalian dana bersamaan (60.000 + 60.000, kelebihan 100.000; 10 putaran) → tepat satu 201, satu 422",
+      "lulus": true,
+      "catatan": null,
+      "ms": 388
+    },
+    {
+      "id": "KON-04",
+      "judul": "Hapus pembayaran bersamaan dengan catat pengembalian (10 putaran): dana diterima tidak pernah negatif, tepat satu sukses",
+      "lulus": true,
+      "catatan": "{\"refund 409, hapus 200\":7,\"refund 201, hapus 409\":3}",
+      "ms": 377
+    },
+    {
+      "id": "KON-05",
+      "judul": "Dua hapus pembayaran bersamaan saat ada pengembalian (bayar 50.000 + 50.000, refund 60.000; 10 putaran) → maks. satu terhapus",
+      "lulus": true,
+      "catatan": null,
+      "ms": 507
+    },
+    {
+      "id": "KON-06",
+      "judul": "Lepas tanda Kosong bersamaan dengan pengembalian penuh kelebihan (10 putaran): tidak ada 500, dana ≥ 0, refund tidak melebihi kelebihan saat dicatat",
+      "lulus": true,
+      "catatan": "{\"lepas 200, refund 409\":6,\"lepas 200, refund 201\":4}",
+      "ms": 662
+    },
+    {
+      "id": "KON-07",
+      "judul": "Ubah kurs (PATCH) bersamaan dengan barang pertama (20 putaran): kurs PO akhir == kurs snapshot barang; tidak pernah PATCH 200 sesudah terkunci",
+      "lulus": true,
+      "catatan": "{\"patch 200 → barang kurs 20000\":12,\"patch 409 → barang kurs 10000\":8}",
+      "ms": 863
+    },
+    {
+      "id": "KON-08",
+      "judul": "Dua PATCH kurs + dua barang pertama bersamaan (10 putaran): semua barang memakai kurs PO akhir",
+      "lulus": true,
+      "catatan": null,
+      "ms": 538
+    },
+    {
+      "id": "KON-09",
+      "judul": "Hapus customer (tanpa pesanan) bersamaan dengan barang/pembayaran pertama (10 putaran): tidak ada 500, tidak ada keranjang yatim",
+      "lulus": true,
+      "catatan": "{\"hapus 204, barang 404\":3,\"hapus 204, bayar 404\":4,\"hapus 409, barang 201\":2,\"hapus 409, bayar 201\":1}",
+      "ms": 246
+    },
+    {
+      "id": "KON-10",
+      "judul": "Arsipkan customer bersamaan dengan barang pertama di PO baru (10 putaran): tidak ada 500; barang ditolak 409 atau tersimpan sebelum arsip",
+      "lulus": true,
+      "catatan": "{\"arsip 200, barang 201\":4,\"arsip 200, barang 409\":6}",
+      "ms": 350
+    }
+  ]
+}

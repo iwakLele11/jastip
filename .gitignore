@@ -7,3 +7,7 @@ vendor/
 node_modules/
 # Hasil deploy/build-htdocs.sh (paket htdocs + zip)
 /build/
+
+# Keluaran QA yang dibuat ulang setiap run
+qa/tmp/
+docs/qa/screenshots/

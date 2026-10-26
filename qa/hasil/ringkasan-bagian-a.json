@@ -1,0 +1,192 @@
+{
+  "waktu": "2026-10-26T09:34:41.725614Z",
+  "total": 854,
+  "lulus": 832,
+  "gagal": 22,
+  "suite": [
+    {
+      "suite": "hitung-paket-10.11",
+      "waktu": "2026-10-26T09:28:08.172Z",
+      "target": "http://127.0.0.1:8282",
+      "total": 24,
+      "lulus": 24,
+      "gagal": 0,
+      "id_gagal": []
+    },
+    {
+      "suite": "hitung-paket-11.4",
+      "waktu": "2026-10-26T09:29:05.176Z",
+      "target": "http://127.0.0.1:8280",
+      "total": 24,
+      "lulus": 24,
+      "gagal": 0,
+      "id_gagal": []
+    },
+    {
+      "suite": "hitung",
+      "waktu": "2026-10-26T09:26:56.329Z",
+      "target": "http://127.0.0.1:8090",
+      "total": 24,
+      "lulus": 24,
+      "gagal": 0,
+      "id_gagal": []
+    },
+    {
+      "suite": "keamanan-paket-10.11",
+      "waktu": "2026-10-26T09:27:56.664Z",
+      "target": "http://127.0.0.1:8282",
+      "total": 46,
+      "lulus": 43,
+      "gagal": 3,
+      "id_gagal": [
+        "SEC-D9",
+        "SEC-G3",
+        "SEC-M4"
+      ]
+    },
+    {
+      "suite": "keamanan-paket-11.4",
+      "waktu": "2026-10-26T09:28:53.720Z",
+      "target": "http://127.0.0.1:8280",
+      "total": 46,
+      "lulus": 43,
+      "gagal": 3,
+      "id_gagal": [
+        "SEC-D9",
+        "SEC-G3",
+        "SEC-M4"
+      ]
+    },
+    {
+      "suite": "keamanan",
+      "waktu": "2026-10-26T09:34:03.937Z",
+      "target": "http://127.0.0.1:8090",
+      "total": 49,
+      "lulus": 46,
+      "gagal": 3,
+      "id_gagal": [
+        "SEC-D9",
+        "SEC-G3",
+        "SEC-M4"
+      ]
+    },
+    {
+      "suite": "konkurensi-paket-10.11",
+      "waktu": "2026-10-26T09:28:14.541Z",
+      "target": "http://127.0.0.1:8282",
+      "total": 10,
+      "lulus": 10,
+      "gagal": 0,
+      "id_gagal": []
+    },
+    {
+      "suite": "konkurensi-paket-11.4",
+      "waktu": "2026-10-26T09:29:11.601Z",
+      "target": "http://127.0.0.1:8280",
+      "total": 10,
+      "lulus": 10,
+      "gagal": 0,
+      "id_gagal": []
+    },
+    {
+      "suite": "konkurensi",
+      "waktu": "2026-10-26T09:27:18.388Z",
+      "target": "http://127.0.0.1:8090",
+      "total": 10,
+      "lulus": 10,
+      "gagal": 0,
+      "id_gagal": []
+    },
+    {
+      "suite": "mysql8-backend",
+      "waktu": "2026-10-26T09:30:44.924524Z",
+      "target": "backend/bin/test.sh, MySQL 8.4.13",
+      "total": 293,
+      "lulus": 291,
+      "gagal": 2,
+      "id_gagal": [
+        "Integration\\MigrationTest::testConstraintMenolakDataSalah",
+        "Integration\\SqlExportTest::testUpgradeSqlDenganPengaman"
+      ]
+    },
+    {
+      "suite": "mysql8-sql",
+      "waktu": "2026-10-26T09:30:47.488774Z",
+      "target": "MySQL 8.4.13 (default sql_mode, collation server utf8mb4_0900_ai_ci)",
+      "total": 10,
+      "lulus": 8,
+      "gagal": 2,
+      "id_gagal": [
+        "M8-06",
+        "M8-07"
+      ]
+    },
+    {
+      "suite": "paket-10.11",
+      "waktu": "2026-10-26T09:28:16.797956Z",
+      "target": "http://127.0.0.1:8282 (Apache + PHP-FPM, paket htdocs, MariaDB 10.11)",
+      "total": 128,
+      "lulus": 128,
+      "gagal": 0,
+      "id_gagal": []
+    },
+    {
+      "suite": "paket-11.4",
+      "waktu": "2026-10-26T09:29:13.936213Z",
+      "target": "http://127.0.0.1:8280 (Apache + PHP-FPM, paket htdocs, MariaDB 11.4)",
+      "total": 128,
+      "lulus": 128,
+      "gagal": 0,
+      "id_gagal": []
+    },
+    {
+      "suite": "redirect",
+      "waktu": "2026-10-26T09:27:25.401Z",
+      "target": "http://127.0.0.1:8090",
+      "total": 4,
+      "lulus": 1,
+      "gagal": 3,
+      "id_gagal": [
+        "RED-01",
+        "RED-02",
+        "RED-04"
+      ]
+    },
+    {
+      "suite": "rekap-paket-10.11",
+      "waktu": "2026-10-26T09:28:09.446Z",
+      "target": "http://127.0.0.1:8282",
+      "total": 16,
+      "lulus": 14,
+      "gagal": 2,
+      "id_gagal": [
+        "RKP-15",
+        "RKP-16"
+      ]
+    },
+    {
+      "suite": "rekap-paket-11.4",
+      "waktu": "2026-10-26T09:29:06.458Z",
+      "target": "http://127.0.0.1:8280",
+      "total": 16,
+      "lulus": 14,
+      "gagal": 2,
+      "id_gagal": [
+        "RKP-15",
+        "RKP-16"
+      ]
+    },
+    {
+      "suite": "rekap",
+      "waktu": "2026-10-26T09:27:05.218Z",
+      "target": "http://127.0.0.1:8090",
+      "total": 16,
+      "lulus": 14,
+      "gagal": 2,
+      "id_gagal": [
+        "RKP-15",
+        "RKP-16"
+      ]
+    }
+  ]
+}

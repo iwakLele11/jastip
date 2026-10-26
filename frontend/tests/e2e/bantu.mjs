@@ -81,6 +81,39 @@ export async function setModeKurs(request, mode) {
   expect(await res.text()).toBe(mode);
 }
 
+/**
+ * Simulasi tantangan "browser security system" InfinityFree di dev-router (/__dev/* tidak pernah
+ * ditantang): on (aktif + putar kunci), putar (putar kunci saja), rusak (tidak bisa selesai), off.
+ * Selama mode aktif, `request` / `page.request` tanpa cookie benar juga menerima HTML tantangan.
+ */
+export async function setModeTantangan(request, set) {
+  const res = await request.get(`/__dev/tantangan-mode?set=${set}`);
+  expect(res.status()).toBe(200);
+  expect(await res.text()).toBe(set === 'putar' ? 'on' : set);
+}
+
+/**
+ * Mencatat jejak tantangan di browser: respons /api/* berupa HTML (kena tantangan), jumlah
+ * pemulihan (request segarkan.html pertama, tanpa ?i=), dan URL navigasi halaman utama.
+ */
+export function pantauTantangan(page) {
+  const jejak = { api: [], pemulihan: 0, navigasi: [] };
+  page.on('response', (r) => {
+    const u = new URL(r.url());
+    if (u.pathname.startsWith('/api/') && (r.headers()['content-type'] ?? '').startsWith('text/html')) {
+      jejak.api.push(`${r.request().method()} ${u.pathname}`);
+    }
+  });
+  page.on('request', (r) => {
+    const u = new URL(r.url());
+    if (u.pathname.endsWith('/segarkan.html') && !u.searchParams.has('i')) jejak.pemulihan += 1;
+  });
+  page.on('framenavigated', (f) => {
+    if (f === page.mainFrame()) jejak.navigasi.push(f.url());
+  });
+  return jejak;
+}
+
 export const toast = (page) => page.locator('[data-toast]');
 
 /** Izin clipboard untuk origin aplikasi (Salin rekap WA + membaca hasilnya di test). */

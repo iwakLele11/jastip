@@ -49,7 +49,8 @@ function kembali(e, a) {
   const tujuan = new URL(a.href);
   asal.searchParams.delete('pesan');
   if (asal.origin !== location.origin) return;
-  const sama = (u) => `${u.pathname.replace(/\/index\.html$/, '/')}?${[...u.searchParams].filter(([k]) => k !== 'status').sort().join('&')}`;
+  // `status` = filter chip; `i` = tambahan tantangan hosting (InfinityFree ?i=N).
+  const sama = (u) => `${u.pathname.replace(/\/index\.html$/, '/')}?${[...u.searchParams].filter(([k]) => k !== 'status' && k !== 'i').sort().join('&')}`;
   if (sama(asal) === sama(tujuan)) {
     e.preventDefault();
     history.back();

@@ -6,7 +6,7 @@ import { persenUntukInput } from '../lib/format.js';
 import { parseDesimal } from '../lib/parse.js';
 import { setErrorField, terapkanError } from '../ui/field.js';
 import { mulaiHalaman } from '../ui/halaman.js';
-import { emptyState, setBanner, skeletonField, tombolMemuat } from '../ui/komponen.js';
+import { aksiCobaLagi, emptyState, setBanner, skeletonField, tombolMemuat } from '../ui/komponen.js';
 import { toast } from '../ui/toast.js';
 
 mulaiHalaman();
@@ -82,7 +82,7 @@ async function muat() {
     form.hidden = false;
   } catch (err) {
     catatJikaBug(err);
-    isi(memuat, emptyState({ jenis: 'error', pesan: pesanError(err, 'muat'), aksi: { label: 'Coba lagi', varian: 'secondary', onClick: muat } }));
+    isi(memuat, emptyState({ jenis: 'error', pesan: pesanError(err, 'muat'), aksi: aksiCobaLagi(err, muat, { varian: 'secondary' }) }));
   }
 }
 

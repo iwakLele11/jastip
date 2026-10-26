@@ -5,6 +5,7 @@
 //      ?v=<build> supaya cache browser aman setelah deploy.
 //   3. <link rel="modulepreload"> untuk seluruh graf impor tiap halaman (menghindari waterfall).
 //   4. CSS: Tailwind CLI v4, diminify, hanya kelas yang dipakai.
+//   5. Pemeriksaan hosting: js/awal.js skrip pertama tiap halaman, segarkan.html statis + penanda.
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
@@ -89,6 +90,10 @@ for (const f of halaman) {
   html = sisipkanKelas(sisipkanIkon(sisipkanPartial(html)));
 
   html = html.replace('href="css/app.css"', `href="css/app.css?v=${buildId}"`);
+  // awal.js (https + buang ?i= hosting) wajib skrip pertama, sebelum CSS dan modul halaman.
+  const skripPertama = html.match(/<script\b[^>]*>/)?.[0];
+  if (skripPertama !== '<script src="js/awal.js">') throw new Error(`${f}: skrip pertama harus js/awal.js (partial head)`);
+  html = html.replace('<script src="js/awal.js">', `<script src="js/awal.js?v=${buildId}">`);
   const entri = html.match(/<script type="module" src="(js\/pages\/[\w-]+\.js)"><\/script>/);
   if (!entri) throw new Error(`${f}: script modul halaman tidak ditemukan`);
   html = html.replace(entri[0], `<script type="module" src="${entri[1]}?v=${buildId}"></script>`);
@@ -106,6 +111,12 @@ for (const f of halaman) {
 }
 
 cpSync(path.join(SRC, 'assets'), DIST, { recursive: true });
+
+// segarkan.html: halaman pemulihan tantangan hosting (api.js). Statis, tanpa skrip, dengan penanda.
+const segarkan = readFileSync(path.join(DIST, 'segarkan.html'), 'utf8');
+if (!/<html[^>]*\sdata-segar="ok"/.test(segarkan) || /<script/i.test(segarkan) || !/name="robots" content="noindex/.test(segarkan)) {
+  throw new Error('segarkan.html harus berisi <html data-segar="ok">, noindex, dan tanpa <script>.');
+}
 
 // ---------- CSS (Tailwind v4) ----------
 const tw = spawnSync(

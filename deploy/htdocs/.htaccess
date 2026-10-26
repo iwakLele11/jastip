@@ -1,0 +1,64 @@
+# Paket htdocs aplikasi jastip (XAMPP lokal, InfinityFree, atau hosting Apache lain).
+# Web root = folder ini. Kode back-end, konfigurasi (app/.env), log, dan install.sql ada di
+# app/ dan tidak boleh bisa dibuka dari browser.
+
+Options -Indexes
+
+# Alamat "/" melayani front-end (index.html), bukan front controller API.
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # --- Paksa HTTPS ------------------------------------------------------------------
+    # Untuk InfinityFree / hosting dengan SSL: hapus tanda "# " di depan 4 baris berikut
+    # SETELAH https://domain-anda sudah bisa dibuka. JANGAN diaktifkan di XAMPP lokal.
+    # RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    # RewriteCond %{HTTPS} off
+    # RewriteCond %{HTTP:CF-Visitor} !{"scheme":"https"}
+    # RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Folder app/ dan dotfile / dot-folder (.env, .git, ...) selalu 403.
+    # (.well-known tetap boleh, dipakai untuk verifikasi sertifikat SSL.)
+    RewriteRule ^app(/|$) - [F,NC]
+    RewriteRule (^|/)\.(?!well-known/) - [F]
+
+    # Teruskan header Authorization ke PHP (token Bearer di FastCGI/CGI).
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Hanya /api/* yang diarahkan ke front controller. File statis dilayani apa adanya.
+    RewriteRule ^api(/.*)?$ index.php [L,QSA]
+</IfModule>
+
+# Dotfile (.env, .htaccess, ...) dan file .sql / .log tidak pernah dilayani di folder mana pun,
+# juga kalau mod_rewrite tidak aktif (mis. admin.sql yang tidak sengaja ikut terunggah).
+<FilesMatch "(?i)(^\.|\.(sql|log)$)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    # Semua file kecuali .php. Respons API (index.php) sudah membawa X-Content-Type-Options dan
+    # Referrer-Policy dari aplikasi; kalau di-set juga di sini, header muncul dobel di PHP-FPM.
+    <FilesMatch "^(?!.*\.php$)">
+        # SAMEORIGIN (bukan DENY): front-end memakai iframe dari origin yang sama.
+        Header set X-Frame-Options "SAMEORIGIN"
+        Header set X-Content-Type-Options "nosniff"
+        Header set Referrer-Policy "no-referrer"
+    </FilesMatch>
+
+    # Halaman HTML selalu dicek ulang ke server, supaya versi baru langsung terpakai.
+    <FilesMatch "\.html$">
+        Header set Cache-Control "no-cache"
+    </FilesMatch>
+    # CSS/JS: setiap URL membawa ?v=<hash build>, jadi aman di-cache lama.
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+</IfModule>

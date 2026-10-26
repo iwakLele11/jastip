@@ -16,6 +16,12 @@ use RuntimeException;
  */
 final class Migrator
 {
+    /** Definisi tabel pencatat migrasi (dipakai juga oleh MigrationSqlExport untuk install.sql). */
+    public const TABLE_DEFINITION = 'schema_migrations ('
+        . ' version VARCHAR(191) NOT NULL PRIMARY KEY,'
+        . ' applied_at DATETIME NOT NULL'
+        . ') ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci';
+
     public function __construct(private readonly PDO $pdo, private readonly string $directory)
     {
     }
@@ -108,12 +114,7 @@ final class Migrator
 
     private function ensureTable(): void
     {
-        $this->pdo->exec(
-            'CREATE TABLE IF NOT EXISTS schema_migrations ('
-            . ' version VARCHAR(191) NOT NULL PRIMARY KEY,'
-            . ' applied_at DATETIME NOT NULL'
-            . ') ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci'
-        );
+        $this->pdo->exec('CREATE TABLE IF NOT EXISTS ' . self::TABLE_DEFINITION);
     }
 
     /**
@@ -131,7 +132,17 @@ final class Migrator
      */
     private function available(): array
     {
-        $files = glob($this->directory . '/[0-9][0-9][0-9]_*.sql') ?: [];
+        return self::availableIn($this->directory);
+    }
+
+    /**
+     * File migrasi up di sebuah folder, urut versi.
+     *
+     * @return array<string, string> versi => path file up
+     */
+    public static function availableIn(string $directory): array
+    {
+        $files = glob($directory . '/[0-9][0-9][0-9]_*.sql') ?: [];
         $result = [];
         foreach ($files as $file) {
             if (str_ends_with($file, '.down.sql')) {

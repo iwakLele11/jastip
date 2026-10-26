@@ -9,7 +9,7 @@ import { idDariQuery, rute } from '../lib/rute.js';
 import { setErrorField, terapkanError } from '../ui/field.js';
 import { mulaiHalaman } from '../ui/halaman.js';
 import { KELAS } from '../ui/kelas.js';
-import { badgeTerkunci, emptyState, setBanner, skeletonField, tombolMemuat } from '../ui/komponen.js';
+import { aksiCobaLagi, badgeTerkunci, emptyState, setBanner, skeletonField, tombolMemuat } from '../ui/komponen.js';
 import { TEKS_TERKUNCI, teksBuffer, teksKursPasar } from '../ui/kurs.js';
 
 mulaiHalaman();
@@ -126,7 +126,8 @@ async function ambilKurs({ pindahKeOtomatis = false } = {}) {
     if (urut !== urutPermintaanKurs) return;
     catatJikaBug(err);
     Object.assign(otomatis, { status: 'gagal', data: null, dariPratinjau: false });
-    const pesan = err instanceof ApiError && err.kode === 'KURS_GAGAL' ? err.pesan : KURS_GAGAL;
+    // PERLU_MUAT_ULANG: pesannya sendiri, tapi tetap "Coba lagi" (muat ulang = isian form hilang).
+    const pesan = err instanceof ApiError && (err.kode === 'KURS_GAGAL' || err.perluMuatUlang) ? err.pesan : KURS_GAGAL;
     setBanner(kursBanner, { jenis: 'warning', pesan, aksi: { label: 'Coba lagi', onClick: () => ambilKurs({ pindahKeOtomatis: true }) } });
     setModeKurs('manual');
   } finally {
@@ -295,7 +296,7 @@ async function mulaiUbah() {
     if (err instanceof ApiError && err.status === 404) {
       tampilkanGagal(err.pesan, { label: 'Lihat daftar Open PO', href: rute.beranda(), varian: 'secondary' });
     } else {
-      tampilkanGagal(pesanError(err, 'muat'), { label: 'Coba lagi', varian: 'secondary', onClick: mulaiUbah });
+      tampilkanGagal(pesanError(err, 'muat'), aksiCobaLagi(err, mulaiUbah, { varian: 'secondary' }));
     }
     return;
   }

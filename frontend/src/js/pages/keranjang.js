@@ -14,7 +14,7 @@ import { bukaSheetUang } from '../ui/form-uang.js';
 import { mulaiHalaman } from '../ui/halaman.js';
 import { KELAS } from '../ui/kelas.js';
 import {
-  STATUS_BAYAR, badgeNetral, badgeStatus, banner, barisUang, emptyState, setBanner, skeletonBaris,
+  STATUS_BAYAR, aksiCobaLagi, badgeNetral, badgeStatus, banner, barisUang, emptyState, setBanner, skeletonBaris,
   skeletonRingkasan, tombolMemuat,
 } from '../ui/komponen.js';
 import { toast } from '../ui/toast.js';
@@ -626,8 +626,12 @@ async function salinKeClipboard() {
   janjiTeks.catch(() => {}); // ditangani di bawah
   const clip = navigator.clipboard;
   if (clip?.write && typeof ClipboardItem === 'function') {
+    // Teks bisa datang beberapa detik kemudian (mis. pemulihan tantangan hosting di api.js).
+    // Kalau browser menolak write() lebih dulu, janji blob ini tidak boleh jadi unhandled rejection.
+    const janjiBlob = janjiTeks.then((t) => new Blob([t], { type: 'text/plain' }));
+    janjiBlob.catch(() => {});
     try {
-      await clip.write([new ClipboardItem({ 'text/plain': janjiTeks.then((t) => new Blob([t], { type: 'text/plain' })) })]);
+      await clip.write([new ClipboardItem({ 'text/plain': janjiBlob })]);
       return await janjiTeks;
     } catch (err) {
       const teks = await janjiTeks.catch((e) => Promise.reject({ jenis: 'muat', err: e }));
@@ -687,7 +691,7 @@ async function salinRekap(tombol) {
     }
     const err = e?.err ?? e;
     catatJikaBug(err);
-    setBanner(bannerHalaman, { jenis: 'error', pesan: pesanError(err, 'muat'), aksi: { label: 'Coba lagi', onClick: () => salinRekap(tombol) } });
+    setBanner(bannerHalaman, { jenis: 'error', pesan: pesanError(err, 'muat'), aksi: aksiCobaLagi(err, () => salinRekap(tombol)) });
     bannerHalaman.scrollIntoView({ block: 'nearest' });
     return;
   }
@@ -707,7 +711,7 @@ async function muatUlang() {
     render(data);
   } catch (err) {
     catatJikaBug(err);
-    setBanner(bannerHalaman, { jenis: 'error', pesan: pesanError(err, 'muat'), aksi: { label: 'Coba lagi', onClick: muatUlang } });
+    setBanner(bannerHalaman, { jenis: 'error', pesan: pesanError(err, 'muat'), aksi: aksiCobaLagi(err, muatUlang) });
   }
 }
 
@@ -732,7 +736,7 @@ async function muat() {
     if (err instanceof ApiError && err.status === 404) {
       gagalMuat(err.pesan, err.pesan === 'Open PO tidak ditemukan.' ? { label: 'Lihat daftar Open PO', href: rute.beranda(), varian: 'secondary' } : kePo);
     } else {
-      gagalMuat(pesanError(err, 'muat'), { label: 'Coba lagi', varian: 'secondary', onClick: muat });
+      gagalMuat(pesanError(err, 'muat'), aksiCobaLagi(err, muat, { varian: 'secondary' }));
     }
     return;
   }

@@ -5,3 +5,5 @@
 .env
 vendor/
 node_modules/
+# Hasil deploy/build-htdocs.sh (paket htdocs + zip)
+/build/

@@ -8,7 +8,7 @@ import { idDariQuery, rute } from '../lib/rute.js';
 import { mulaiHalaman } from '../ui/halaman.js';
 import { KELAS } from '../ui/kelas.js';
 import {
-  STATUS_BAYAR, URUTAN_STATUS, badgeStatus, barisUang, emptyState, setBanner, skeletonBaris,
+  STATUS_BAYAR, URUTAN_STATUS, aksiCobaLagi, badgeStatus, barisUang, emptyState, setBanner, skeletonBaris,
   skeletonKursCard, tombolMemuat,
 } from '../ui/komponen.js';
 import { kartuKurs } from '../ui/kurs.js';
@@ -225,7 +225,7 @@ async function muatCustomer({ tambah = false, tombol = null } = {}) {
     catatJikaBug(err);
     pulihkan?.();
     // Data yang sudah tampil tetap ada; banner di atas daftar + Coba lagi (ui-spec §7.4).
-    setBanner(bannerCustomer, { jenis: 'error', pesan: pesanError(err, 'muat'), aksi: { label: 'Coba lagi', onClick: () => muatCustomer({ tambah }) } });
+    setBanner(bannerCustomer, { jenis: 'error', pesan: pesanError(err, 'muat'), aksi: aksiCobaLagi(err, () => muatCustomer({ tambah })) });
     if (meta === null) isi(daftar);
   } finally {
     if (urut === urutPermintaan) daftar.removeAttribute('aria-busy');
@@ -262,7 +262,7 @@ async function muat() {
       renderDaftar();
     } else {
       catatJikaBug(resCust.reason);
-      setBanner(bannerCustomer, { jenis: 'error', pesan: pesanError(resCust.reason, 'muat'), aksi: { label: 'Coba lagi', onClick: () => muatCustomer() } });
+      setBanner(bannerCustomer, { jenis: 'error', pesan: pesanError(resCust.reason, 'muat'), aksi: aksiCobaLagi(resCust.reason, () => muatCustomer()) });
     }
   } catch (err) {
     catatJikaBug(err);
@@ -274,7 +274,7 @@ async function muat() {
         pesan: tidakAda ? err.pesan : pesanError(err, 'muat'),
         aksi: tidakAda
           ? { label: 'Lihat daftar Open PO', href: rute.beranda(), varian: 'secondary' }
-          : { label: 'Coba lagi', varian: 'secondary', onClick: muat },
+          : aksiCobaLagi(err, muat, { varian: 'secondary' }),
       }),
     );
   }

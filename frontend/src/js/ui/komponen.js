@@ -1,5 +1,6 @@
 // Komponen dasar (ui-spec §4): StatusBadge, Banner, EmptyState, Skeleton, Button loading,
 // MoneyRow. Semua dibuat lewat DOM (h()), teks dari API tidak pernah masuk sebagai HTML.
+import { ApiError } from '../lib/api.js';
 import { h } from '../lib/dom.js';
 import { ikon } from '../lib/ikon.js';
 import { KELAS } from './kelas.js';
@@ -65,6 +66,19 @@ export function banner({ jenis, pesan, aksi }) {
         : null,
     ),
   );
+}
+
+/**
+ * Aksi Banner / EmptyState setelah gagal memuat: "Coba lagi", atau "Muat ulang" (muat ulang
+ * halaman) untuk PERLU_MUAT_ULANG, karena mencoba lagi tanpa memuat ulang tidak akan berhasil.
+ * Banner form tidak memakai ini: form tetap terisi, dan Simpan bisa dicoba lagi.
+ * @param {unknown} err
+ * @param {() => void} cobaLagi
+ * @param {{varian?: 'primary'|'secondary'}} [lain] properti tambahan, mis. varian EmptyState
+ */
+export function aksiCobaLagi(err, cobaLagi, lain = {}) {
+  if (err instanceof ApiError && err.perluMuatUlang) return { ...lain, label: 'Muat ulang', onClick: () => location.reload() };
+  return { ...lain, label: 'Coba lagi', onClick: cobaLagi };
 }
 
 /** Menampilkan banner di wadah (mengganti banner sebelumnya), atau mengosongkan jika p null. */

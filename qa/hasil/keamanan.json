@@ -1,0 +1,266 @@
+{
+  "waktu": "2026-10-26T06:58:38.078Z",
+  "total": 37,
+  "gagal": 6,
+  "hasil": [
+    {
+      "id": "SEC-A1",
+      "judul": "Semua 29 endpoint selain login/health menolak tanpa sesi (401 BELUM_MASUK)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 197
+    },
+    {
+      "id": "SEC-A2",
+      "judul": "Token palsu (cookie acak, Bearer acak, Bearer rusak) ditolak 401",
+      "lulus": true,
+      "catatan": null,
+      "ms": 34
+    },
+    {
+      "id": "SEC-A3",
+      "judul": "Health publik tidak membocorkan data aplikasi",
+      "lulus": true,
+      "catatan": null,
+      "ms": 7
+    },
+    {
+      "id": "SEC-B1",
+      "judul": "Cookie lokal: HttpOnly; SameSite=Strict; Path=/; Max-Age=43200 (tanpa Secure karena http lokal)",
+      "lulus": true,
+      "catatan": "jastip_sesi=<token>; Path=/; Max-Age=43200; HttpOnly; SameSite=Strict",
+      "ms": 202
+    },
+    {
+      "id": "SEC-B2",
+      "judul": "Token sesi 64 hex acak dan berbeda per login",
+      "lulus": true,
+      "catatan": null,
+      "ms": 408
+    },
+    {
+      "id": "SEC-C1",
+      "judul": "Logout 204, cookie Max-Age=0, token lama tidak bisa dipakai lagi",
+      "lulus": true,
+      "catatan": null,
+      "ms": 222
+    },
+    {
+      "id": "SEC-C2",
+      "judul": "Logout token mobile (Bearer) mengakhiri token itu",
+      "lulus": true,
+      "catatan": null,
+      "ms": 228
+    },
+    {
+      "id": "SEC-C3",
+      "judul": "Sesi berakhir setelah 12 jam tidak aktif (721 menit → 401 SESI_BERAKHIR; 719 menit → masih aktif)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 514
+    },
+    {
+      "id": "SEC-D1",
+      "judul": "Pesan login gagal sama untuk pengguna tidak ada dan kata sandi salah",
+      "lulus": true,
+      "catatan": null,
+      "ms": 789
+    },
+    {
+      "id": "SEC-D2",
+      "judul": "Waktu respons pengguna tidak ada ≈ pengguna ada (anti enumerasi)",
+      "lulus": false,
+      "catatan": "median ada 202 ms vs tidak ada 393 ms",
+      "ms": 2721
+    },
+    {
+      "id": "SEC-D3",
+      "judul": "5 gagal → percobaan ke-6 (sandi benar) ditolak 429 + Retry-After",
+      "lulus": true,
+      "catatan": "Terlalu banyak percobaan masuk. Coba lagi dalam 15 menit.",
+      "ms": 1024
+    },
+    {
+      "id": "SEC-D4",
+      "judul": "Blokir berlaku untuk variasi huruf besar dan spasi (QATHROTTLE, \" qathrottle \")",
+      "lulus": true,
+      "catatan": null,
+      "ms": 24
+    },
+    {
+      "id": "SEC-D5",
+      "judul": "Blokir tidak bisa dilewati dengan variasi aksen/Unicode yang dianggap sama oleh collation DB",
+      "lulus": false,
+      "catatan": "\"qáthrottle\" (71 e1 74 68 72 6f 74 74 6c 65) -> 200, login BERHASIL saat akun terkunci\n\"qathröttle\" (71 61 74 68 72 f6 74 74 6c 65) -> 200, login BERHASIL saat akun terkunci\n\"ｑａｔｈｒｏｔｔｌｅ\" (ff51 ff41 ff54 ff48 ff52 ff4f ff54 ff54 ff4c ff45) -> 200, login BERHASIL saat akun terkunci",
+      "ms": 1000
+    },
+    {
+      "id": "SEC-D6",
+      "judul": "Percobaan sandi dengan variasi nama pengguna dihitung terpisah (brute force > 5 kali / 15 menit)",
+      "lulus": false,
+      "catatan": "40 tebakan sandi untuk akun \"qabrute\" dalam 1 jendela 15 menit, hanya 0 ditolak 429 (40 benar-benar diperiksa). Login dengan sandi benar sesudahnya (\"qăbrute\") -> 200",
+      "ms": 8651
+    },
+    {
+      "id": "SEC-D7",
+      "judul": "Validasi login: field kosong 422 dengan pesan per field; tipe salah ditolak",
+      "lulus": true,
+      "catatan": null,
+      "ms": 22
+    },
+    {
+      "id": "SEC-E1",
+      "judul": "POST/PATCH/DELETE dengan Origin asing → 403 ORIGIN_DITOLAK (termasuk login)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 134
+    },
+    {
+      "id": "SEC-E2",
+      "judul": "Content-Type form/text/multipart → 415 (form HTML lintas situs tidak bisa mengubah data)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 33
+    },
+    {
+      "id": "SEC-E3",
+      "judul": "Method override (X-HTTP-Method-Override, _method) tidak didukung",
+      "lulus": true,
+      "catatan": null,
+      "ms": 30
+    },
+    {
+      "id": "SEC-E4",
+      "judul": "Tanpa CORS: preflight OPTIONS dan GET lintas origin tidak memberi Access-Control-Allow-Origin",
+      "lulus": true,
+      "catatan": "OPTIONS -> 405",
+      "ms": 15
+    },
+    {
+      "id": "SEC-F1",
+      "judul": "Pencarian customer dengan payload SQL/LIKE tidak error dan tidak mengembalikan semua data",
+      "lulus": true,
+      "catatan": null,
+      "ms": 103
+    },
+    {
+      "id": "SEC-F2",
+      "judul": "Parameter query tipe/isi aneh → 422/404, tidak pernah 500",
+      "lulus": true,
+      "catatan": "selain 404/422: /baris-pesanan/4294967297 -> 405",
+      "ms": 195
+    },
+    {
+      "id": "SEC-F3",
+      "judul": "Aksi tulis dengan ID di luar rentang INT → 404, bukan 500",
+      "lulus": true,
+      "catatan": null,
+      "ms": 70
+    },
+    {
+      "id": "SEC-F4",
+      "judul": "Payload SQL di field tersimpan apa adanya (prepared statement)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 19
+    },
+    {
+      "id": "SEC-G1",
+      "judul": "Body > 64 KB → 413; JSON rusak/array/terlalu dalam → 400",
+      "lulus": true,
+      "catatan": null,
+      "ms": 29
+    },
+    {
+      "id": "SEC-H1",
+      "judul": "5 request pembayaran identik bersamaan → semuanya tercatat konsisten (tanpa deadlock/500)",
+      "lulus": true,
+      "catatan": "Server tidak menolak duplikat (sesuai kontrak: pencegahan hanya di UI). Lihat uji UI QA-UI double submit.",
+      "ms": 77
+    },
+    {
+      "id": "SEC-H2",
+      "judul": "Pengembalian dana bersamaan tidak bisa melebihi kelebihan bayar (kunci baris)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 54
+    },
+    {
+      "id": "SEC-H3",
+      "judul": "Hapus pembayaran bersamaan dengan catat pengembalian tidak membuat dana diterima negatif",
+      "lulus": true,
+      "catatan": "refund 409, hapus 200",
+      "ms": 46
+    },
+    {
+      "id": "SEC-I1",
+      "judul": "API: X-Content-Type-Options nosniff, Cache-Control no-store, Referrer-Policy, Content-Type JSON",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "SEC-I2",
+      "judul": "API tidak mengirim X-Powered-By (versi PHP)",
+      "lulus": false,
+      "catatan": "X-Powered-By: PHP/8.4.23",
+      "ms": 0
+    },
+    {
+      "id": "SEC-I3",
+      "judul": "HTML: CSP (meta) default-src self tanpa inline script",
+      "lulus": true,
+      "catatan": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'",
+      "ms": 1
+    },
+    {
+      "id": "SEC-I4",
+      "judul": "HTML: perlindungan clickjacking (X-Frame-Options / CSP frame-ancestors di header HTTP)",
+      "lulus": false,
+      "catatan": "tidak ada X-Frame-Options maupun header CSP frame-ancestors (meta CSP tidak bisa memuat frame-ancestors). Header: connection, content-length, content-type, date, host",
+      "ms": 0
+    },
+    {
+      "id": "SEC-I5",
+      "judul": "HTML: X-Content-Type-Options dan Referrer-Policy di header HTTP",
+      "lulus": false,
+      "catatan": "nosniff=null, referrer-policy=null",
+      "ms": 0
+    },
+    {
+      "id": "SEC-J1",
+      "judul": "Error 404/405/415/422 tidak memuat path file, SQL, atau stack trace",
+      "lulus": true,
+      "catatan": "404, 405, 415, 422, 400",
+      "ms": 20
+    },
+    {
+      "id": "SEC-K1",
+      "judul": "File sensitif tidak bisa diakses dari web server lokal",
+      "lulus": true,
+      "catatan": null,
+      "ms": 11
+    },
+    {
+      "id": "SEC-L1",
+      "judul": "Produksi: cookie __Host-jastip_sesi dengan Secure; HttpOnly; SameSite=Strict",
+      "lulus": true,
+      "catatan": "__Host-jastip_sesi=<token>; Path=/; Max-Age=43200; HttpOnly; SameSite=Strict; Secure",
+      "ms": 422
+    },
+    {
+      "id": "SEC-L2",
+      "judul": "Produksi menolak start jika cookie tidak Secure atau origin bukan https (500 generik tanpa detail)",
+      "lulus": true,
+      "catatan": "500, 500",
+      "ms": 421
+    },
+    {
+      "id": "SEC-L3",
+      "judul": "Produksi: database tidak bisa dihubungi → health 503 tanpa detail koneksi",
+      "lulus": true,
+      "catatan": "health 503; /open-po 401 {\"error\":{\"kode\":\"BELUM_MASUK\",\"pesan\":\"Silakan masuk terlebih dahulu.\"}}",
+      "ms": 227
+    }
+  ]
+}

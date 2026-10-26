@@ -6,7 +6,7 @@ import { ikon } from '../lib/ikon.js';
 import { rute } from '../lib/rute.js';
 import { mulaiHalaman } from '../ui/halaman.js';
 import { KELAS } from '../ui/kelas.js';
-import { badgeTerkunci, emptyState, skeletonKartu, tombolMemuat } from '../ui/komponen.js';
+import { aksiCobaLagi, badgeTerkunci, emptyState, skeletonKartu, tombolMemuat } from '../ui/komponen.js';
 
 mulaiHalaman();
 
@@ -90,7 +90,7 @@ async function muat({ tambah = false, tombol = null } = {}) {
     pulihkan?.();
     const pesan = pesanError(err, 'muat');
     if (tambah) {
-      wadah.append(emptyState({ jenis: 'error', pesan, aksi: { label: 'Coba lagi', varian: 'secondary', onClick: () => { wadah.lastChild.remove(); muat({ tambah: true }); } } }));
+      wadah.append(emptyState({ jenis: 'error', pesan, aksi: aksiCobaLagi(err, () => { wadah.lastChild.remove(); muat({ tambah: true }); }, { varian: 'secondary' }) }));
       return;
     }
     isi(
@@ -98,7 +98,7 @@ async function muat({ tambah = false, tombol = null } = {}) {
       emptyState({
         jenis: 'error',
         pesan: err?.jaringan ? 'Daftar Open PO tidak bisa dimuat. Periksa koneksi, lalu coba lagi.' : pesan,
-        aksi: { label: 'Coba lagi', varian: 'secondary', onClick: () => muat() },
+        aksi: aksiCobaLagi(err, () => muat(), { varian: 'secondary' }),
       }),
     );
   }

@@ -8,6 +8,20 @@ export const HALAMAN_INTERNAL = new Set([
 ]);
 
 /**
+ * Membuang parameter `i=<angka>` yang ditambahkan tantangan hosting (InfinityFree: redirect ke
+ * URL yang sama + ?i=N) dari query string. Parameter lain dan urutannya tidak diubah.
+ * Logika yang sama dipakai src/js/awal.js (skrip klasik, tidak bisa mengimpor modul ini).
+ * @param {string} search mis. "?id=3&i=1" → "?id=3"
+ */
+export function buangParamHosting(search) {
+  const bagian = search.replace(/^\?/, '').split('&');
+  const sisa = bagian.filter((p) => !/^i=\d+$/.test(p));
+  if (sisa.length === bagian.length) return search;
+  const q = sisa.filter(Boolean).join('&');
+  return q ? `?${q}` : '';
+}
+
+/**
  * Mengembalikan path internal yang aman untuk `next`, atau null.
  * Mencegah open redirect: hanya path relatif-origin ("/..."), bukan "//host" atau "/\host",
  * origin harus sama, dan nama file harus salah satu halaman aplikasi (bukan login.html).
@@ -28,7 +42,7 @@ export function nextAman(nilai, origin) {
   if (url.origin !== origin) return null;
   const file = url.pathname.slice(url.pathname.lastIndexOf('/') + 1);
   if (!HALAMAN_INTERNAL.has(file)) return null;
-  return url.pathname + url.search;
+  return url.pathname + buangParamHosting(url.search);
 }
 
 /** ID dari query string: bilangan bulat positif (sama dengan aturan `{id}` di API), atau null. */

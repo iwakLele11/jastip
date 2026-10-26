@@ -7,7 +7,7 @@ import { idDariQuery, rute } from '../lib/rute.js';
 import { konfirmasi } from '../ui/dialog.js';
 import { setErrorField, terapkanError } from '../ui/field.js';
 import { mulaiHalaman } from '../ui/halaman.js';
-import { emptyState, setBanner, skeletonField, tombolMemuat } from '../ui/komponen.js';
+import { aksiCobaLagi, emptyState, setBanner, skeletonField, tombolMemuat } from '../ui/komponen.js';
 import { pasangFieldNoWa } from '../ui/no-wa.js';
 
 mulaiHalaman();
@@ -152,7 +152,7 @@ async function mulaiUbah() {
   } catch (err) {
     catatJikaBug(err);
     if (err instanceof ApiError && err.status === 404) gagal(err.pesan, { label: 'Lihat daftar customer', href: rute.customer(), varian: 'secondary' });
-    else gagal(pesanError(err, 'muat'), { label: 'Coba lagi', varian: 'secondary', onClick: mulaiUbah });
+    else gagal(pesanError(err, 'muat'), aksiCobaLagi(err, mulaiUbah, { varian: 'secondary' }));
     return;
   }
   memuat.hidden = true;

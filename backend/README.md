@@ -12,7 +12,8 @@ REST API JSON untuk aplikasi jastip (MVP). PHP murni + PDO + MySQL, tanpa framew
 backend/
 ├── bin/
 │   ├── migrate.php          migrasi up / down / status
-│   ├── create-admin.php     buat admin atau ganti kata sandi
+│   ├── create-admin.php     buat admin atau ganti kata sandi (--sql: cetak SQL, tanpa koneksi DB)
+│   ├── export-sql.php       install.sql / SQL upgrade dari migrasi, untuk phpMyAdmin
 │   └── test.sh              satu perintah untuk semua test
 ├── database/migrations/     001_init.sql + 001_init.down.sql
 ├── public/                  DOCUMENT ROOT: index.php (front controller), .htaccess
@@ -27,7 +28,7 @@ backend/
 │   ├── Auth/                sesi, cookie, login throttle
 │   ├── Kurs/                klien Frankfurter
 │   ├── Config/              konfigurasi dari environment / .env
-│   └── Infrastructure/      Database, Migrator, Logger, Clock
+│   └── Infrastructure/      Database, Migrator, MigrationSqlExport, Logger, Clock
 ├── storage/logs/            log aplikasi (JSON per baris)
 └── tests/
     ├── Unit/Domain/         rumus scope + kasus tepi, teks rekap WA per status
@@ -60,6 +61,15 @@ php bin/create-admin.php pemilik            # kata sandi diminta tanpa ditampilk
 php bin/create-admin.php pemilik --reset    # ganti kata sandi (lupa sandi), semua sesi lama diakhiri
 ```
 
+Hosting tanpa CLI (mis. InfinityFree): jalankan skrip di komputer sendiri dengan `--sql`. Kata sandi diminta seperti biasa, lalu skrip mencetak SQL siap tempel di tab SQL phpMyAdmin (`INSERT`; dengan `--reset`: `UPDATE` hash + hapus sesi). Tidak ada koneksi database. SQL ke STDOUT, pesan ke STDERR:
+
+```bash
+php bin/create-admin.php pemilik --sql > ../admin.sql
+php bin/create-admin.php pemilik --sql --reset > ../admin.sql
+```
+
+Di Windows ketikan kata sandi tidak bisa disembunyikan; skrip menampilkan peringatan.
+
 Server lokal:
 
 ```bash
@@ -78,6 +88,16 @@ Setel `APP_ALLOWED_ORIGINS=http://127.0.0.1:8080` (atau origin front-end lokal) 
 | `php bin/migrate.php down --yes [--steps=N]` | Rollback N migrasi terakhir. **Menghapus tabel dan data.** Ditolak di `APP_ENV=production` kecuali ditambah `--allow-production` |
 
 File baru: `database/migrations/NNN_nama.sql` + `NNN_nama.down.sql`. DDL MySQL melakukan implicit commit, jadi migrasi yang gagal di tengah perlu dibereskan manual. Backup dulu sebelum migrasi di production.
+
+Migrasi tidak boleh memakai `DELIMITER`, `USE`, atau `CREATE DATABASE`, dan setiap pernyataan diakhiri `;` di akhir baris. Aturan ini dicek oleh `bin/export-sql.php`, supaya file yang sama bisa diimpor lewat phpMyAdmin:
+
+| Perintah | Hasil |
+|---|---|
+| `php bin/export-sql.php install` | Skema lengkap untuk database **kosong** + tabel `schema_migrations` (definisi sama dengan `Migrator`) berisi semua versi, jadi `migrate.php up` sesudahnya tidak menjalankan ulang |
+| `php bin/export-sql.php upgrade 002_nama` | Satu migrasi lanjutan. Pernyataan pertama mencatat versi di `schema_migrations` sekaligus pengaman: gagal sebelum ada perubahan kalau versi itu sudah tercatat atau versi sebelumnya belum ada |
+| `php bin/export-sql.php versions` | Daftar versi |
+
+`deploy/build-htdocs.sh` memakai perintah ini untuk `app/install.sql` dan `app/upgrade/NNN_*.sql` di paket htdocs.
 
 ## Menjalankan test
 
@@ -133,6 +153,8 @@ Semua dari environment variable; file `.env` hanya cadangan (lihat `.env.example
 Aplikasi menolak start di production jika cookie tidak Secure atau origin bukan HTTPS.
 
 ## Catatan deploy
+
+Untuk XAMPP lokal dan hosting gratis tanpa CLI (InfinityFree) ada paket htdocs siap unggah: `deploy/build-htdocs.sh` dan panduan di [`docs/deploy/jalankan-lokal-xampp.md`](../docs/deploy/jalankan-lokal-xampp.md) dan [`docs/deploy/infinityfree.md`](../docs/deploy/infinityfree.md). Di paket itu web root berisi front-end + `index.php` (front controller ke `app/`), dan kode ini berada di `app/` yang ditolak dari web oleh `.htaccess`. Catatan di bawah untuk server sendiri (VPS) dengan document root `backend/public/`.
 
 1. **HTTPS wajib** (data pribadi customer, cookie `Secure` dan awalan `__Host-`). Arahkan HTTP ke HTTPS di web server.
 2. **Document root = `backend/public/`.** Folder lain (`src/`, `.env`, `vendor/`, `storage/`) tidak boleh bisa diakses dari web.

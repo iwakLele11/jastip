@@ -14,6 +14,9 @@ use Throwable;
  */
 final class Database
 {
+    /** Mode SQL ketat untuk setiap koneksi (dipakai juga di install.sql). */
+    public const SQL_MODE = 'STRICT_TRANS_TABLES,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
     private ?PDO $pdo = null;
 
     /**
@@ -49,8 +52,7 @@ final class Database
         ]);
         // Semua DATETIME dalam UTC; mode ketat supaya data salah ditolak, bukan dipotong.
         $pdo->exec("SET time_zone = '+00:00'");
-        $pdo->exec("SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_DATE,NO_ZERO_IN_DATE,"
-            . "ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'");
+        $pdo->exec("SET SESSION sql_mode = '" . self::SQL_MODE . "'");
 
         return $pdo;
     }

@@ -14,17 +14,20 @@ Front-end aplikasi jastip (MVP, tahap 1 + 2): HTML semantik + Tailwind CSS v4 + 
 frontend/
 ├── package.json             build, test, test:e2e, icons
 ├── scripts/
-│   ├── build.mjs            src → dist (partial HTML, ikon inline, token kelas, versi cache, modulepreload, Tailwind)
+│   ├── build.mjs            src → dist (partial HTML, ikon inline, token kelas, versi cache, modulepreload, Tailwind,
+│   │                        cek awal.js skrip pertama + segarkan.html statis)
 │   └── salin-ikon.mjs       salin path Heroicons yang dipakai ke src/js/lib/ikon-data.js
 ├── src/
 │   ├── pages/               satu file .html per layar (MPA)
 │   ├── partials/            head, topnav, bottomnav, toast, tautan "Langsung ke konten"
 │   ├── styles/app.css       Tailwind v4 + token warna @theme (ui-spec §2 / §12.1)
-│   ├── assets/              favicon.svg
+│   ├── assets/              favicon.svg, segarkan.html (halaman pemulihan tantangan hosting, tanpa JS)
 │   └── js/
-│       ├── lib/             api.js (klien API), format.js, parse.js, harga.js (pratinjau harga BigInt),
-│       │                    validasi.js (form barang / nominal, pesan = server), rute.js (rute +
-│       │                    validasi `next`), dom.js (pembuat elemen aman), ikon.js
+│       ├── awal.js          skrip klasik pertama tiap halaman: http → https, buang ?i=N hosting
+│       ├── lib/             api.js (klien API + pemulihan tantangan hosting), format.js, parse.js,
+│       │                    harga.js (pratinjau harga BigInt), validasi.js (form barang / nominal,
+│       │                    pesan = server), rute.js (rute + validasi `next` + buang ?i=N),
+│       │                    dom.js (pembuat elemen aman), ikon.js
 │       ├── ui/              kelas.js (kelas komponen), komponen.js (StatusBadge, Banner, EmptyState,
 │       │                    Skeleton, tombol loading, MoneyRow), field.js (error/peringatan field),
 │       │                    dialog.js (ConfirmDialog, Sheet, ActionSheet), toast.js, kurs.js (KursCard),
@@ -34,9 +37,11 @@ frontend/
 │       │                    sheet-customer.js (sheet Tambah customer ke Open PO)
 │       └── pages/           satu modul per layar
 ├── tests/
-│   ├── unit/                node --test: harga, format/parse, rute, validasi
+│   ├── unit/                node --test: harga, format/parse, rute, validasi, awal (https + ?i=N),
+│   │                        api-tantangan (deteksi + pemulihan tantangan hosting)
 │   └── e2e/                 Playwright 1.64.1 (mobile 360×740 + desktop 1280×800):
-│                            bantu.mjs (fixture + helper), komponen, tahap1, tahap2
+│                            bantu.mjs (fixture + helper), komponen, tahap1, tahap2,
+│                            tantangan-hosting (InfinityFree + https)
 └── dist/                    hasil build (artefak deploy, tidak di-commit)
 ```
 
@@ -76,7 +81,8 @@ Lainnya:
   internal ke halaman aplikasi (`src/js/lib/rute.js`, dites di `tests/unit/rute.test.mjs`).
 - **Keamanan DOM**: data API tidak pernah lewat `innerHTML`/template string HTML. Semua elemen
   dibuat dengan `h()` (`src/js/lib/dom.js`), teks masuk sebagai text node. CSP di `<meta>`:
-  `default-src 'self'`, tanpa inline script/style.
+  `default-src 'self'`, `frame-src 'self'` (iframe pemulihan, lihat [Hosting InfinityFree](#hosting-infinityfree)),
+  tanpa inline script/style.
 - **Angka**: desimal di-parse dari string ke bilangan bulat (`parse.js`), tanpa `parseFloat`.
   Total, DP, status, ringkasan, jumlah chip, dan teks rekap selalu dari API. Setiap aksi keranjang
   mengembalikan objek keranjang lengkap dan layar dirender ulang dari objek itu. Pratinjau harga
@@ -108,7 +114,7 @@ npm run build        # → dist/
 ## Test
 
 ```bash
-npm test             # unit test (node --test): harga, format/parse, rute, validasi
+npm test             # unit test (node --test): harga, format/parse, rute, validasi, awal, api-tantangan
 npm run test:e2e     # build + E2E Playwright lewat ../.tools/dev-stack.sh
 ```
 
@@ -120,6 +126,13 @@ error JavaScript, aset statis yang gagal dimuat, atau respons API 400/403/415/5x
 "Failed to load resource" untuk respons API yang memang diuji (401, 404, 409, 422, 502) diabaikan.
 
 Screenshot ditulis ke `docs/design/screenshots/` setiap kali E2E berjalan.
+
+`tantangan-hosting.spec.mjs` memakai simulasi tantangan InfinityFree di dev-router
+(`/__dev/tantangan-mode`) dan selalu mematikannya di `finally`. Nama file sengaja diurutkan setelah
+`tahap2`, supaya data test-nya tidak muncul di screenshot daftar mobile. Test "tantangan tidak bisa
+diselesaikan" sengaja menunggu batas waktu pemulihan (±15 detik per project). `dev-stack.sh` memakai MariaDB bersama di port 3307: kalau
+proses lain menghentikannya di tengah run (mis. `.tools/paket-smoke.sh` dengan DB 11.4), test berikutnya
+gagal dengan 500 / `PDOException 2002` di `.tools/dev-app.log`. Itu bukan bug aplikasi; jalankan ulang.
 
 Test Salin rekap WA memberi izin `clipboard-read`/`clipboard-write` ke context lalu membandingkan
 isi clipboard dengan teks rekap yang diharapkan (persis ui-spec §9.6). Fallback "Salin manual"
@@ -139,6 +152,61 @@ npm run build
 
 Mode kurs gagal: `GET http://127.0.0.1:8090/__dev/kurs-mode?set=gagal` (kembalikan dengan `?set=ok`).
 
+Simulasi tantangan InfinityFree: `GET http://127.0.0.1:8090/__dev/tantangan-mode?set=on` (aktif + kunci
+diputar), `?set=putar` (putar kunci saja, seperti setelah tab lama tidak aktif), `?set=rusak` (tantangan
+tidak pernah selesai), `?set=off`.
+
+## Hosting InfinityFree
+
+Paket gratis InfinityFree memakai "browser security system": setiap request (halaman, aset, `/api/*`)
+tanpa cookie `__test` yang valid dijawab **HTML 200 `text/html`** berisi JavaScript yang memasang cookie
+lalu redirect ke URL yang sama + `?i=N`. Kunci cookie diputar berkala, jadi setelah tab lama tidak
+aktif, `fetch()` ke API bisa menerima HTML itu, dan fetch tidak menjalankan JS-nya. Tantangan dicegat
+sebelum PHP, jadi request yang kena tantangan **tidak diproses** server.
+
+**Halaman** (navigasi biasa) diselesaikan browser sendiri. `src/js/awal.js` lalu membuang `i=N` dari URL
+dengan `history.replaceState` sebelum modul halaman membaca `location.search`, jadi `id`/`po`/`customer`/
+`status`, `next` login, `?pesan=`, chip filter, dan tautan yang dibangun dari URL tidak pernah membawa
+`i`. `nextAman()` (`rute.js`) juga membuang `i` dari `next`.
+
+**Request API** (`src/js/lib/api.js`):
+
+1. Deteksi: respons `/api` 2xx (selain 204) yang `Content-Type`-nya bukan JSON, `type ===
+   'opaqueredirect'` (fetch memakai `redirect: 'manual'`), atau `redirected`. Respons non-2xx yang bukan
+   JSON (mis. 500/503 HTML dari hosting) tetap error server biasa dan **tidak** diulang, karena request
+   itu mungkin sudah diproses.
+2. Pemulihan: iframe tersembunyi (`hidden`, `aria-hidden`, `tabindex=-1`) memuat
+   `segarkan.html?t=<waktu>` (query unik supaya tidak dari cache). Browser menjalankan tantangan di iframe
+   itu; pemulihan selesai saat dokumen iframe berisi penanda `<html data-segar="ok">`, bukan pada `load`
+   pertama (halaman tantangan muat dulu lalu redirect). Batas waktu 15 detik, lalu iframe dihapus.
+3. Request yang kena tantangan bersamaan memakai **satu** pemulihan. Request yang dikirim sebelum
+   pemulihan lain selesai langsung diulang tanpa pemulihan baru.
+4. Request asli diulang **satu kali** (method, body sama), juga setelah batas waktu habis (cookie bisa
+   saja sudah terpasang, dan request yang ditantang tidak pernah diproses). Kalau masih ditantang:
+   `ApiError` kode `PERLU_MUAT_ULANG`, pesan "Koneksi ke server perlu diperbarui. Muat ulang halaman,
+   lalu coba lagi." Banner / EmptyState muat data memakai aksi **Muat ulang** (`aksiCobaLagi()` di
+   `ui/komponen.js`) menggantikan "Coba lagi". Banner form hanya menampilkan pesan; isi form tetap dan
+   Simpan bisa dicoba lagi.
+5. Salin rekap WA: `ClipboardItem` tetap diberi promise teks; promise itu menunggu pemulihan (Chrome
+   menunggu promise selesai). Kalau gagal, banner dengan aksi Muat ulang.
+
+**HTTPS**: cookie sesi produksi ber-flag `Secure`, jadi login lewat http tampak gagal tanpa penjelasan.
+`awal.js` (skrip klasik, sinkron, pertama di `<head>`, karena CSP melarang inline script) mengalihkan
+`http:` ke `https:` dengan `location.replace` untuk host publik. Tetap http: `localhost`, `127.x.x.x`,
+`[::1]`, `10.x`, `172.16–31.x`, `192.168.x` (mis. XAMPP dibuka dari HP lewat IP LAN), dan `*.local`.
+Selama pengalihan, `<html data-pindah-https>` membuat `api()` tidak mengirim apa pun lewat http.
+Domain InfinityFree harus punya sertifikat SSL aktif.
+
+Yang dibutuhkan dari paket deploy (back-end): `segarkan.html` ikut tersalin ke root `htdocs` di samping
+halaman lain (iframe memakai path relatif), dan header-nya tidak menolak frame same-origin
+(`X-Frame-Options: SAMEORIGIN` aman; jangan `DENY` / `frame-ancestors 'none'`).
+
+Belum bisa dipastikan tanpa InfinityFree asli: apakah halaman tantangan asli boleh tampil di iframe
+(tidak mengirim `X-Frame-Options: DENY`), apakah redirect-nya tetap `https://` (redirect ke `http://`
+diblokir sebagai mixed content di iframe; request tetap diulang sekali setelah 15 detik), seberapa
+sering kunci diputar, dan perilaku `ClipboardItem` dengan promise yang lama di Safari iOS. Hash URL
+(`#q=` di daftar customer) hilang kalau halaman itu sendiri kena tantangan top-level.
+
 ## Deploy
 
 `dist/` adalah artefak deploy. Front-end dan API satu origin: isi `dist/` disalin ke document root
@@ -149,6 +217,9 @@ npm ci --cache /projects/sandbox/.tools/npm-cache   # di mesin build biasa: npm 
 npm test && npm run build
 rsync -a dist/ /var/www/jastip/backend/public/      # JANGAN pakai --delete (index.php, .htaccess)
 ```
+
+Untuk InfinityFree, paket deploy back-end menaruh isi `dist/` di root `htdocs` (lihat
+[Hosting InfinityFree](#hosting-infinityfree)).
 
 Catatan server:
 

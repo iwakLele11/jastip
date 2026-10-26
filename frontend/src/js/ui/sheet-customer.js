@@ -11,7 +11,7 @@ import { rute } from '../lib/rute.js';
 import { bukaSheet } from './dialog.js';
 import { setErrorField, terapkanError } from './field.js';
 import { KELAS } from './kelas.js';
-import { emptyState, setBanner, skeletonBaris, tombolMemuat } from './komponen.js';
+import { aksiCobaLagi, emptyState, setBanner, skeletonBaris, tombolMemuat } from './komponen.js';
 import { pasangFieldNoWa } from './no-wa.js';
 
 const PER_HALAMAN_CARI = 20;
@@ -120,7 +120,7 @@ export function bukaSheetTambahCustomer(po) {
       pulihkan?.();
       hasil.setAttribute('aria-busy', 'false');
       if (!tambah) isi(hasil);
-      setBanner(bannerCari, { jenis: 'error', pesan: pesanError(err, 'muat'), aksi: { label: 'Coba lagi', onClick: () => cari({ tambah }) } });
+      setBanner(bannerCari, { jenis: 'error', pesan: pesanError(err, 'muat'), aksi: aksiCobaLagi(err, () => cari({ tambah })) });
     }
   }
 

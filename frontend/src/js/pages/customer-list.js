@@ -8,7 +8,7 @@ import { tampakSepertiNoWa } from '../lib/parse.js';
 import { rute } from '../lib/rute.js';
 import { mulaiHalaman } from '../ui/halaman.js';
 import { KELAS } from '../ui/kelas.js';
-import { emptyState, skeletonBaris, tombolMemuat } from '../ui/komponen.js';
+import { aksiCobaLagi, emptyState, skeletonBaris, tombolMemuat } from '../ui/komponen.js';
 
 mulaiHalaman();
 
@@ -114,7 +114,7 @@ async function muat({ tambah = false, tombol = null } = {}) {
     if (signal.aborted) return;
     catatJikaBug(err);
     pulihkan?.();
-    isi(daftar, emptyState({ jenis: 'error', pesan: pesanError(err, 'muat'), aksi: { label: 'Coba lagi', varian: 'secondary', onClick: () => muat() } }));
+    isi(daftar, emptyState({ jenis: 'error', pesan: pesanError(err, 'muat'), aksi: aksiCobaLagi(err, () => muat(), { varian: 'secondary' }) }));
   }
 }
 

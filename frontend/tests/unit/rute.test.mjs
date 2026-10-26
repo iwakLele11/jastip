@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { idDariQuery, nextAman } from '../../src/js/lib/rute.js';
+import { buangParamHosting, idDariQuery, nextAman } from '../../src/js/lib/rute.js';
 
 const O = 'https://jastip.example';
 
@@ -28,4 +28,21 @@ test('idDariQuery: bilangan bulat positif saja', () => {
   for (const salah of [null, '', '0', '-1', '1.5', '01', 'abc', '12a', '12345678901']) {
     assert.equal(idDariQuery(salah), null, String(salah));
   }
+});
+
+test('buangParamHosting: hanya i=<angka> dari tantangan hosting yang dibuang', () => {
+  assert.equal(buangParamHosting('?id=3&i=1'), '?id=3');
+  assert.equal(buangParamHosting('?i=1&id=3&status=lunas'), '?id=3&status=lunas');
+  assert.equal(buangParamHosting('?i=12'), '');
+  assert.equal(buangParamHosting('?po=3&i=1&customer=5&i=2'), '?po=3&customer=5');
+  for (const tetap of ['', '?id=3', '?i=', '?i=abc', '?pi=1', '?ii=1', '?item=2', '?next=%2Fpo.html%3Fi%3D1']) {
+    assert.equal(buangParamHosting(tetap), tetap, tetap);
+  }
+});
+
+test('nextAman menerima URL dengan ?i=N tambahan, lalu membuangnya', () => {
+  assert.equal(nextAman('/po.html?id=3&status=lunas&i=1', O), '/po.html?id=3&status=lunas');
+  assert.equal(nextAman('/keranjang.html?i=2&po=3&customer=5', O), '/keranjang.html?po=3&customer=5');
+  assert.equal(nextAman('/?i=1', O), '/');
+  assert.equal(nextAman('/login.html?i=1', O), null);
 });

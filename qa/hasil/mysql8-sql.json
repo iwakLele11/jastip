@@ -1,0 +1,69 @@
+{
+  "waktu": "2026-10-26T09:30:47.488774Z",
+  "target": "MySQL 8.4.13 (default sql_mode, collation server utf8mb4_0900_ai_ci)",
+  "total": 10,
+  "lulus": 8,
+  "gagal": 2,
+  "hasil": [
+    {
+      "id": "M8-00",
+      "judul": "server MySQL 8.4",
+      "lulus": true,
+      "catatan": "8.4"
+    },
+    {
+      "id": "M8-01",
+      "judul": "install.sql paket diimpor ke DB kosong",
+      "lulus": true,
+      "catatan": "0 "
+    },
+    {
+      "id": "M8-02",
+      "judul": "11 tabel, schema_migrations = 001_init",
+      "lulus": true,
+      "catatan": "11 001_init"
+    },
+    {
+      "id": "M8-03",
+      "judul": "impor kedua berhenti di pernyataan pertama (1050)",
+      "lulus": true,
+      "catatan": "ERROR 1050 (42S01) at line 12: Table 'schema_migrations' already exists"
+    },
+    {
+      "id": "M8-04",
+      "judul": "CHECK constraint ditegakkan MySQL 8 (pengaturan id=2 ditolak, error 3819 SQLSTATE HY000)",
+      "lulus": true,
+      "catatan": "ERROR 3819 (HY000) at line 1: Check constraint 'chk_pengaturan_satu_baris' is violated."
+    },
+    {
+      "id": "M8-05",
+      "judul": "upgrade SQL dibuat; pernyataan pertama = INSERT … (SELECT … FROM schema_migrations …)",
+      "lulus": true,
+      "catatan": "INSERT INTO schema_migrations (version, applied_at) VALUES ('002_qa_contoh', (SELECT UTC_TIMESTAMP() FROM schema_migrations WHERE version = '001_init'));"
+    },
+    {
+      "id": "M8-06",
+      "judul": "upgrade 002 ke DB yang sudah berisi 001_init (kasus normal) berhasil",
+      "lulus": false,
+      "catatan": "harap [berhasil], dapat [ERROR 1093 (HY000) at line 14: You can't specify target table 'schema_migrations' for update in FROM clause]"
+    },
+    {
+      "id": "M8-07",
+      "judul": "setelah upgrade: schema_migrations 001_init,002_qa_contoh dan tabel qa_contoh ada",
+      "lulus": false,
+      "catatan": "harap [001_init,002_qa_contoh 1], dapat [001_init 0]"
+    },
+    {
+      "id": "M8-08",
+      "judul": "kalau pengaman gagal, tidak ada yang berubah (qa_contoh tidak dibuat)",
+      "lulus": true,
+      "catatan": "ya"
+    },
+    {
+      "id": "M8-09",
+      "judul": "SQL create-admin --sql dan --sql --reset jalan di MySQL 8 (UPDATE 1 baris, sesi terhapus)",
+      "lulus": true,
+      "catatan": " 1 0"
+    }
+  ]
+}

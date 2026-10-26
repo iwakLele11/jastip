@@ -1,0 +1,2025 @@
+{
+  "waktu": "2026-10-26T10:09:34.318Z",
+  "target": "http://127.0.0.1:8090",
+  "total": 288,
+  "lulus": 230,
+  "gagal": 58,
+  "hasil": [
+    {
+      "id": "MTX-chromium-320-alur",
+      "judul": "chromium 156.0.8078.4 320×568: alur utama selesai lewat UI",
+      "lulus": true,
+      "catatan": "20 dtk; salin rekap: Tersalin (*REKAP JASTIP - Open PO c320 Nov 2026*); toast sempat menutupi (< 400 ms): toast menutupi button \"+ Customer\"; keyboard ±280px (320×288), fokus Markup: Markup terlihat=true, angka pratinjau terlihat=true",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-320-panjang",
+      "judul": "chromium 156.0.8078.4 320×568: semua layar data panjang bisa dibuka dan dipakai",
+      "lulus": false,
+      "catatan": "panjang: saran: locator.click: Timeout 15000ms exceeded. Call log:   - waiting for locator('#tambah-barang')",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-320-alur-hscroll",
+      "judul": "chromium 156.0.8078.4 320×568: hscroll (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-320-panjang-hscroll",
+      "judul": "chromium 156.0.8078.4 320×568: hscroll (data panjang, 8 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] scroll horizontal 957>320: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"1 AUD = Rp1.000.000Terkunci\"; span \"2 customer · Rp200.800.000.010.000\"; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\"\n[keranjang-panjang] scroll horizontal 343>320: dd \"Rp999.999.010.000\"; div#sticky-bar \"Salin rekap WA + Tambah barang\"; div \"Salin rekap WA + Tambah barang\"; button#tambah-barang \"+ Tambah barang\"\n[keranjang-ekstrem] scroll horizontal 391>320: dd \"Rp198.800.000.000.000\"; div#sticky-bar \"Salin rekap WA + Tambah barang\"; div \"Salin rekap WA + Tambah barang\"; button#tambah-barang \"+ Tambah barang\"\n[dialog-hapus-panjang] scroll horizontal 1334>311: di dalam dialog: dialog \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-320-alur-keluar-meluber",
+      "judul": "chromium 156.0.8078.4 320×568: keluar-meluber (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-320-panjang-keluar-meluber",
+      "judul": "chromium 156.0.8078.4 320×568: keluar-meluber (data panjang, 8 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] keluar: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [16–957 dari 320]; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [16–957 dari 320]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [33–940 dari 320]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [33–912 dari 320]; span \"1 AUD = Rp1.000.000Terkunci\" [33–940 dari 320]; span \"2 customer · Rp200.800.000.010.000\" [33–940 dari 320]; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 320]; a \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 320]; span \"Open PO f1440 Nov 2026\" [33–940 dari 320]; span \"1 AUD = Rp13.054Terkunci\" [33–940 dari 320]; span \"1 customer · Rp2.551.000\" [33–940 dari 320]; li \"Open PO f1024 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 320]\n[po-detail-panjang] terpotong: span \"081220072220\" meluber 28px; span \"08123456789012\" meluber 26px\n[keranjang-panjang] keluar: dd \"Rp999.999.010.000\" [127–343 dari 320]; div#sticky-bar \"Salin rekap WA + Tambah barang\" [0–343 dari 320]; div \"Salin rekap WA + Tambah barang\" [0–343 dari 320]; button#tambah-barang \"+ Tambah barang\" [177–327 dari 320]\n[keranjang-ekstrem] keluar: dd \"Rp198.800.000.000.000\" [127–391 dari 320]; div#sticky-bar \"Salin rekap WA + Tambah barang\" [0–391 dari 320]; div \"Salin rekap WA + Tambah barang\" [0–391 dari 320]; button#tambah-barang \"+ Tambah barang\" [201–375 dari 320]\n[sheet-pembayaran-panjang] keluar: div \"Catat pembayaran\" [0–343 dari 320]; button \"Tutup\" [295–339 dari 320]; div \"NominalRpIsi sisa Rp999.999.010.000TanggalBatalSim\" [0–343 dari 320]; form \"NominalRpIsi sisa Rp999.999.010.000TanggalBatalSim\" [16–327 dari 320]; div \"NominalRpIsi sisa Rp999.999.010.000\" [16–327 dari 320]; label \"Nominal\" [16–327 dari 320]; div \"Rp\" [16–327 dari 320]; input#uang-2-nominal \"999.999.010.000\" [61–326 dari 320]; div \"Isi sisa Rp999.999.010.000\" [16–327 dari 320]; div \"Tanggal\" [16–327 dari 320]; label \"Tanggal\" [16–327 dari 320]; input#uang-2-tanggal \"2026-10-26\" [16–327 dari 320]\n[dialog-tutup-tanpa-menyimpan] keluar: div \"Tutup tanpa menyimpan?Isian di form ini akan hilan\" [16–327 dari 320]; div \"Kembali ke formTutup\" [16–327 dari 320]\n[actionsheet-panjang] keluar: div \"TasKulitAsliAustraliaEdisiTerbatasTasKulitAsliAust\" [0–343 dari 320]; h2#aksi-judul-6 \"TasKulitAsliAustraliaEdisiTerbatasTasKulitAsliAust\" [16–327 dari 320]; p \"10 × Rp100.000.000.000 · Rp1.000.000.000.000\" [16–327 dari 320]; div \"UbahTandai KosongBarang tidak tersedia, tidak dita\" [0–343 dari 320]; ul \"UbahTandai KosongBarang tidak tersedia, tidak dita\" [0–343 dari 320]; li \"Ubah\" [0–343 dari 320]; button \"Ubah\" [0–343 dari 320]; li \"Tandai KosongBarang tidak tersedia, tidak ditagih\" [0–343 dari 320]; button \"Tandai KosongBarang tidak tersedia, tidak ditagih\" [0–343 dari 320]; li \"Hapus\" [0–343 dari 320]; button \"Hapus\" [0–343 dari 320]; div \"Batal\" [0–343 dari 320]\n[dialog-hapus-panjang] terpotong: h2#dialog-judul-8 \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\" meluber 1043px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-320-alur-tumpang",
+      "judul": "chromium 156.0.8078.4 320×568: tumpang (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-320-panjang-tumpang",
+      "judul": "chromium 156.0.8078.4 320×568: tumpang (data panjang, 8 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-320-alur-tertutup",
+      "judul": "chromium 156.0.8078.4 320×568: tertutup (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-320-panjang-tertutup",
+      "judul": "chromium 156.0.8078.4 320×568: tertutup (data panjang, 8 state)",
+      "lulus": false,
+      "catatan": "[po-detail-panjang] tertutup: a \"RinaWulandariSetiawatiRinaWulandariSetiawatiRinaWu\" tertutup header \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-320-alur-sentuh",
+      "judul": "chromium 156.0.8078.4 320×568: sentuh (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-320-panjang-sentuh",
+      "judul": "chromium 156.0.8078.4 320×568: sentuh (data panjang, 8 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-320-alur-modal",
+      "judul": "chromium 156.0.8078.4 320×568: modal (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-320-panjang-modal",
+      "judul": "chromium 156.0.8078.4 320×568: modal (data panjang, 8 state)",
+      "lulus": false,
+      "catatan": "[sheet-pembayaran-panjang] modal \"Catat pembayaran\": {\"judul\":\"Catat pembayaran\",\"atas\":260,\"bawah\":609,\"tinggi\":349,\"vh\":609,\"muat\":false,\"bisaScroll\":false,\"scrollHeight\":296,\"clientHeight\":296,\"tombolTerakhir\":\"button \\\"Simpan Rp999.999.010.000\\\"\",\"terakhirTerjangkau\":true}\n[dialog-tutup-tanpa-menyimpan] modal \"Tutup tanpa menyimpan?\": {\"judul\":\"Tutup tanpa menyimpan?\",\"atas\":223,\"bawah\":387,\"tinggi\":164,\"vh\":609,\"muat\":false,\"bisaScroll\":false,\"scrollHeight\":null,\"clientHeight\":null,\"tombolTerakhir\":\"button \\\"Tutup\\\"\",\"terakhirTerjangkau\":true}\n[actionsheet-panjang] modal \"TasKulitAsliAustraliaEdisiTerbatasTasKulitAsliAustraliaEdisi\": {\"judul\":\"TasKulitAsliAustraliaEdisiTerbatasTasKulitAsliAustraliaEdisi\",\"atas\":219,\"bawah\":609,\"tinggi\":390,\"vh\":609,\"muat\":false,\"bisaScroll\":false,\"scrollHeight\":172,\"clientHeight\":172,\"tombolTerakhir\":\"button \\\"Batal\\\"\",\"terakhirTerjangkau\":true}\n[dialog-hapus-panjang] modal \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAsliAustrali\": {\"judul\":\"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAsliAustrali\",\"atas\":173,\"bawah\":437,\"tinggi\":264,\"vh\":609,\"muat\":false,\"bisaScroll\":false,\"scrollHeight\":null,\"clientHeight\":null,\"tombolTerakhir\":\"button \\\"Hapus barang\\\"\",\"terakhirTerjangkau\":true}",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-320-toast",
+      "judul": "chromium 156.0.8078.4 320×568: toast tidak menutupi sticky bar / FAB / bottom nav / isi dialog, tidak keluar layar",
+      "lulus": false,
+      "catatan": "panjang: toast keluar layar -64–384\npanjang: toast -64+448 melebihi 320",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-320-inputmode",
+      "judul": "chromium 156.0.8078.4 320×568: inputmode / type keyboard sesuai ui-spec §12.2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-320-konsol",
+      "judul": "chromium 156.0.8078.4 320×568: tanpa error JS, aset gagal, pelanggaran CSP, dialog JS",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-360-alur",
+      "judul": "chromium 156.0.8078.4 360×640: alur utama selesai lewat UI",
+      "lulus": true,
+      "catatan": "20 dtk; salin rekap: Tersalin (*REKAP JASTIP - Open PO c360 Nov 2026*); keyboard ±280px (360×360), fokus Markup: Markup terlihat=true, angka pratinjau terlihat=true",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-360-panjang",
+      "judul": "chromium 156.0.8078.4 360×640: semua layar data panjang bisa dibuka dan dipakai",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-360-alur-hscroll",
+      "judul": "chromium 156.0.8078.4 360×640: hscroll (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-360-panjang-hscroll",
+      "judul": "chromium 156.0.8078.4 360×640: hscroll (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] scroll horizontal 957>360: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"1 AUD = Rp1.000.000Terkunci\"; span \"2 customer · Rp200.800.000.010.000\"; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\"\n[keranjang-ekstrem] scroll horizontal 391>360: dd \"Rp198.800.000.000.000\"; div#sticky-bar \"Salin rekap WA + Tambah barang\"; div \"Salin rekap WA + Tambah barang\"; button#tambah-barang \"+ Tambah barang\"\n[dialog-hapus-panjang] scroll horizontal 1334>328: di dalam dialog: dialog \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-360-alur-keluar-meluber",
+      "judul": "chromium 156.0.8078.4 360×640: keluar-meluber (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-360-panjang-keluar-meluber",
+      "judul": "chromium 156.0.8078.4 360×640: keluar-meluber (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] keluar: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [16–957 dari 360]; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [16–957 dari 360]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [33–940 dari 360]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [33–912 dari 360]; span \"1 AUD = Rp1.000.000Terkunci\" [33–940 dari 360]; span \"2 customer · Rp200.800.000.010.000\" [33–940 dari 360]; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 360]; a \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 360]; span \"Open PO f1440 Nov 2026\" [33–940 dari 360]; span \"1 AUD = Rp13.054Terkunci\" [33–940 dari 360]; span \"1 customer · Rp2.551.000\" [33–940 dari 360]; li \"Open PO f1024 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 360]\n[keranjang-ekstrem] keluar: dd \"Rp198.800.000.000.000\" [127–391 dari 360]; div#sticky-bar \"Salin rekap WA + Tambah barang\" [0–391 dari 360]; div \"Salin rekap WA + Tambah barang\" [0–391 dari 360]; button#tambah-barang \"+ Tambah barang\" [201–375 dari 360]\n[dialog-hapus-panjang] terpotong: h2#dialog-judul-8 \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\" meluber 1026px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-360-alur-tumpang",
+      "judul": "chromium 156.0.8078.4 360×640: tumpang (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-360-panjang-tumpang",
+      "judul": "chromium 156.0.8078.4 360×640: tumpang (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-360-alur-tertutup",
+      "judul": "chromium 156.0.8078.4 360×640: tertutup (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-360-panjang-tertutup",
+      "judul": "chromium 156.0.8078.4 360×640: tertutup (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-360-alur-sentuh",
+      "judul": "chromium 156.0.8078.4 360×640: sentuh (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-360-panjang-sentuh",
+      "judul": "chromium 156.0.8078.4 360×640: sentuh (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-360-alur-modal",
+      "judul": "chromium 156.0.8078.4 360×640: modal (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-360-panjang-modal",
+      "judul": "chromium 156.0.8078.4 360×640: modal (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-360-toast",
+      "judul": "chromium 156.0.8078.4 360×640: toast tidak menutupi sticky bar / FAB / bottom nav / isi dialog, tidak keluar layar",
+      "lulus": false,
+      "catatan": "panjang: toast keluar layar -44–404\npanjang: toast -44+448 melebihi 360",
+      "ms": 1
+    },
+    {
+      "id": "MTX-chromium-360-inputmode",
+      "judul": "chromium 156.0.8078.4 360×640: inputmode / type keyboard sesuai ui-spec §12.2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-360-konsol",
+      "judul": "chromium 156.0.8078.4 360×640: tanpa error JS, aset gagal, pelanggaran CSP, dialog JS",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-390-alur",
+      "judul": "chromium 156.0.8078.4 390×844: alur utama selesai lewat UI",
+      "lulus": true,
+      "catatan": "19 dtk; salin rekap: Tersalin (*REKAP JASTIP - Open PO c390 Nov 2026*); toast sempat menutupi (< 400 ms): toast menutupi button \"+ Customer\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-390-panjang",
+      "judul": "chromium 156.0.8078.4 390×844: semua layar data panjang bisa dibuka dan dipakai",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-390-alur-hscroll",
+      "judul": "chromium 156.0.8078.4 390×844: hscroll (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-390-panjang-hscroll",
+      "judul": "chromium 156.0.8078.4 390×844: hscroll (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] scroll horizontal 957>390: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"1 AUD = Rp1.000.000Terkunci\"; span \"2 customer · Rp200.800.000.010.000\"; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\"\n[dialog-hapus-panjang] scroll horizontal 1334>358: di dalam dialog: dialog \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-390-alur-keluar-meluber",
+      "judul": "chromium 156.0.8078.4 390×844: keluar-meluber (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-390-panjang-keluar-meluber",
+      "judul": "chromium 156.0.8078.4 390×844: keluar-meluber (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] keluar: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [16–957 dari 390]; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [16–957 dari 390]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [33–940 dari 390]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [33–912 dari 390]; span \"1 AUD = Rp1.000.000Terkunci\" [33–940 dari 390]; span \"2 customer · Rp200.800.000.010.000\" [33–940 dari 390]; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 390]; a \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 390]; span \"Open PO f1440 Nov 2026\" [33–940 dari 390]; span \"1 AUD = Rp13.054Terkunci\" [33–940 dari 390]; span \"1 customer · Rp2.551.000\" [33–940 dari 390]; li \"Open PO f1024 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 390]\n[dialog-hapus-panjang] terpotong: h2#dialog-judul-8 \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\" meluber 996px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-390-alur-tumpang",
+      "judul": "chromium 156.0.8078.4 390×844: tumpang (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-390-panjang-tumpang",
+      "judul": "chromium 156.0.8078.4 390×844: tumpang (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-390-alur-tertutup",
+      "judul": "chromium 156.0.8078.4 390×844: tertutup (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-390-panjang-tertutup",
+      "judul": "chromium 156.0.8078.4 390×844: tertutup (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-390-alur-sentuh",
+      "judul": "chromium 156.0.8078.4 390×844: sentuh (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-390-panjang-sentuh",
+      "judul": "chromium 156.0.8078.4 390×844: sentuh (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-390-alur-modal",
+      "judul": "chromium 156.0.8078.4 390×844: modal (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-390-panjang-modal",
+      "judul": "chromium 156.0.8078.4 390×844: modal (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-390-toast",
+      "judul": "chromium 156.0.8078.4 390×844: toast tidak menutupi sticky bar / FAB / bottom nav / isi dialog, tidak keluar layar",
+      "lulus": false,
+      "catatan": "panjang: toast keluar layar -29–419\npanjang: toast -29+448 melebihi 390",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-390-inputmode",
+      "judul": "chromium 156.0.8078.4 390×844: inputmode / type keyboard sesuai ui-spec §12.2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-390-konsol",
+      "judul": "chromium 156.0.8078.4 390×844: tanpa error JS, aset gagal, pelanggaran CSP, dialog JS",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-768-alur",
+      "judul": "chromium 156.0.8078.4 768×1024: alur utama selesai lewat UI",
+      "lulus": true,
+      "catatan": "18 dtk; salin rekap: Tersalin (*REKAP JASTIP - Open PO c768 Nov 2026*)",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-768-panjang",
+      "judul": "chromium 156.0.8078.4 768×1024: semua layar data panjang bisa dibuka dan dipakai",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-768-alur-hscroll",
+      "judul": "chromium 156.0.8078.4 768×1024: hscroll (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-768-panjang-hscroll",
+      "judul": "chromium 156.0.8078.4 768×1024: hscroll (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] scroll horizontal 965>768: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"1 AUD = Rp1.000.000Terkunci\"; span \"2 customer · Rp200.800.000.010.000\"; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\"\n[dialog-hapus-panjang] scroll horizontal 1334>384: di dalam dialog: dialog \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-768-alur-keluar-meluber",
+      "judul": "chromium 156.0.8078.4 768×1024: keluar-meluber (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-768-panjang-keluar-meluber",
+      "judul": "chromium 156.0.8078.4 768×1024: keluar-meluber (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] keluar: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [24–965 dari 768]; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [24–965 dari 768]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [41–948 dari 768]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [41–920 dari 768]; span \"1 AUD = Rp1.000.000Terkunci\" [41–948 dari 768]; span \"2 customer · Rp200.800.000.010.000\" [41–948 dari 768]; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [24–965 dari 768]; a \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [24–965 dari 768]; span \"Open PO f1440 Nov 2026\" [41–948 dari 768]; span \"1 AUD = Rp13.054Terkunci\" [41–948 dari 768]; span \"1 customer · Rp2.551.000\" [41–948 dari 768]; li \"Open PO f1024 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [24–965 dari 768]\n[dialog-hapus-panjang] terpotong: h2#dialog-judul-8 \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\" meluber 970px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-768-alur-tumpang",
+      "judul": "chromium 156.0.8078.4 768×1024: tumpang (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-768-panjang-tumpang",
+      "judul": "chromium 156.0.8078.4 768×1024: tumpang (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-768-alur-tertutup",
+      "judul": "chromium 156.0.8078.4 768×1024: tertutup (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-768-panjang-tertutup",
+      "judul": "chromium 156.0.8078.4 768×1024: tertutup (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-768-alur-modal",
+      "judul": "chromium 156.0.8078.4 768×1024: modal (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-768-panjang-modal",
+      "judul": "chromium 156.0.8078.4 768×1024: modal (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-768-toast",
+      "judul": "chromium 156.0.8078.4 768×1024: toast tidak menutupi sticky bar / FAB / bottom nav / isi dialog, tidak keluar layar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-768-inputmode",
+      "judul": "chromium 156.0.8078.4 768×1024: inputmode / type keyboard sesuai ui-spec §12.2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-768-konsol",
+      "judul": "chromium 156.0.8078.4 768×1024: tanpa error JS, aset gagal, pelanggaran CSP, dialog JS",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1024-alur",
+      "judul": "chromium 156.0.8078.4 1024×768: alur utama selesai lewat UI",
+      "lulus": true,
+      "catatan": "16 dtk; salin rekap: Tersalin (*REKAP JASTIP - Open PO c1024 Nov 2026*)",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1024-panjang",
+      "judul": "chromium 156.0.8078.4 1024×768: semua layar data panjang bisa dibuka dan dipakai",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1024-alur-hscroll",
+      "judul": "chromium 156.0.8078.4 1024×768: hscroll (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1024-panjang-hscroll",
+      "judul": "chromium 156.0.8078.4 1024×768: hscroll (data panjang, 10 state)",
+      "lulus": false,
+      "catatan": "[dialog-hapus-panjang] scroll horizontal 1334>384: di dalam dialog: dialog \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1024-alur-keluar-meluber",
+      "judul": "chromium 156.0.8078.4 1024×768: keluar-meluber (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1024-panjang-keluar-meluber",
+      "judul": "chromium 156.0.8078.4 1024×768: keluar-meluber (data panjang, 10 state)",
+      "lulus": false,
+      "catatan": "[dialog-hapus-panjang] terpotong: h2#dialog-judul-6 \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\" meluber 970px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1024-alur-tumpang",
+      "judul": "chromium 156.0.8078.4 1024×768: tumpang (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1024-panjang-tumpang",
+      "judul": "chromium 156.0.8078.4 1024×768: tumpang (data panjang, 10 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1024-alur-tertutup",
+      "judul": "chromium 156.0.8078.4 1024×768: tertutup (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1024-panjang-tertutup",
+      "judul": "chromium 156.0.8078.4 1024×768: tertutup (data panjang, 10 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1024-alur-modal",
+      "judul": "chromium 156.0.8078.4 1024×768: modal (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1024-panjang-modal",
+      "judul": "chromium 156.0.8078.4 1024×768: modal (data panjang, 10 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1024-toast",
+      "judul": "chromium 156.0.8078.4 1024×768: toast tidak menutupi sticky bar / FAB / bottom nav / isi dialog, tidak keluar layar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1024-inputmode",
+      "judul": "chromium 156.0.8078.4 1024×768: inputmode / type keyboard sesuai ui-spec §12.2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1024-konsol",
+      "judul": "chromium 156.0.8078.4 1024×768: tanpa error JS, aset gagal, pelanggaran CSP, dialog JS",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1440-alur",
+      "judul": "chromium 156.0.8078.4 1440×900: alur utama selesai lewat UI",
+      "lulus": true,
+      "catatan": "16 dtk; salin rekap: Tersalin (*REKAP JASTIP - Open PO c1440 Nov 2026*)",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1440-panjang",
+      "judul": "chromium 156.0.8078.4 1440×900: semua layar data panjang bisa dibuka dan dipakai",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1440-alur-hscroll",
+      "judul": "chromium 156.0.8078.4 1440×900: hscroll (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1440-panjang-hscroll",
+      "judul": "chromium 156.0.8078.4 1440×900: hscroll (data panjang, 10 state)",
+      "lulus": false,
+      "catatan": "[dialog-hapus-panjang] scroll horizontal 1334>384: di dalam dialog: dialog \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1440-alur-keluar-meluber",
+      "judul": "chromium 156.0.8078.4 1440×900: keluar-meluber (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1440-panjang-keluar-meluber",
+      "judul": "chromium 156.0.8078.4 1440×900: keluar-meluber (data panjang, 10 state)",
+      "lulus": false,
+      "catatan": "[dialog-hapus-panjang] terpotong: h2#dialog-judul-6 \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\" meluber 970px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1440-alur-tumpang",
+      "judul": "chromium 156.0.8078.4 1440×900: tumpang (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1440-panjang-tumpang",
+      "judul": "chromium 156.0.8078.4 1440×900: tumpang (data panjang, 10 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1440-alur-tertutup",
+      "judul": "chromium 156.0.8078.4 1440×900: tertutup (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1440-panjang-tertutup",
+      "judul": "chromium 156.0.8078.4 1440×900: tertutup (data panjang, 10 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1440-alur-modal",
+      "judul": "chromium 156.0.8078.4 1440×900: modal (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1440-panjang-modal",
+      "judul": "chromium 156.0.8078.4 1440×900: modal (data panjang, 10 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1440-toast",
+      "judul": "chromium 156.0.8078.4 1440×900: toast tidak menutupi sticky bar / FAB / bottom nav / isi dialog, tidak keluar layar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1440-inputmode",
+      "judul": "chromium 156.0.8078.4 1440×900: inputmode / type keyboard sesuai ui-spec §12.2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-chromium-1440-konsol",
+      "judul": "chromium 156.0.8078.4 1440×900: tanpa error JS, aset gagal, pelanggaran CSP, dialog JS",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-320-alur",
+      "judul": "webkit 27.2 320×568: alur utama selesai lewat UI",
+      "lulus": true,
+      "catatan": "20 dtk; salin rekap: Tersalin; toast sempat menutupi (< 400 ms): toast menutupi button \"+ Customer\"; keyboard ±280px (320×288), fokus Markup: Markup terlihat=true, angka pratinjau terlihat=false",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-320-panjang",
+      "judul": "webkit 27.2 320×568: semua layar data panjang bisa dibuka dan dipakai",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-320-alur-hscroll",
+      "judul": "webkit 27.2 320×568: hscroll (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-320-panjang-hscroll",
+      "judul": "webkit 27.2 320×568: hscroll (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] scroll horizontal 957>320: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"1 AUD = Rp1.000.000Terkunci\"; span \"2 customer · Rp200.800.000.010.000\"; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\"\n[keranjang-panjang] scroll horizontal 343>320: dd \"Rp999.999.010.000\"\n[keranjang-ekstrem] scroll horizontal 391>320: dd \"Rp198.800.000.000.000\"\n[dialog-hapus-panjang] scroll horizontal 1334>288: di dalam dialog: dialog \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-320-alur-keluar-meluber",
+      "judul": "webkit 27.2 320×568: keluar-meluber (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-320-panjang-keluar-meluber",
+      "judul": "webkit 27.2 320×568: keluar-meluber (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] keluar: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [16–957 dari 320]; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [16–957 dari 320]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [33–940 dari 320]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [33–912 dari 320]; span \"1 AUD = Rp1.000.000Terkunci\" [33–940 dari 320]; span \"2 customer · Rp200.800.000.010.000\" [33–940 dari 320]; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 320]; a \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 320]; span \"Open PO f1440 Nov 2026\" [33–940 dari 320]; span \"1 AUD = Rp13.054Terkunci\" [33–940 dari 320]; span \"1 customer · Rp2.551.000\" [33–940 dari 320]; li \"Open PO f1024 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 320]\n[po-detail-panjang] terpotong: span \"081220072220\" meluber 28px; span \"08123456789012\" meluber 26px\n[keranjang-panjang] keluar: dd \"Rp999.999.010.000\" [127–343 dari 320]\n[keranjang-ekstrem] keluar: dd \"Rp198.800.000.000.000\" [127–391 dari 320]\n[dialog-hapus-panjang] terpotong: h2#dialog-judul-8 \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\" meluber 1066px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-320-alur-tumpang",
+      "judul": "webkit 27.2 320×568: tumpang (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-320-panjang-tumpang",
+      "judul": "webkit 27.2 320×568: tumpang (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-320-alur-tertutup",
+      "judul": "webkit 27.2 320×568: tertutup (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-320-panjang-tertutup",
+      "judul": "webkit 27.2 320×568: tertutup (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[po-detail-panjang] tertutup: a \"RinaWulandariSetiawatiRinaWulandariSetiawatiRinaWu\" tertutup header \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"\n[keranjang-panjang] tertutup: button \"Sepatu lari edisi terbatas warna hijau tosca ukura\" tertutup header \"RinaWulandariSetiawatiRinaWulandariSetiawatiRinaWu\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-320-alur-sentuh",
+      "judul": "webkit 27.2 320×568: sentuh (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-320-panjang-sentuh",
+      "judul": "webkit 27.2 320×568: sentuh (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-320-alur-modal",
+      "judul": "webkit 27.2 320×568: modal (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-320-panjang-modal",
+      "judul": "webkit 27.2 320×568: modal (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-320-toast",
+      "judul": "webkit 27.2 320×568: toast tidak menutupi sticky bar / FAB / bottom nav / isi dialog, tidak keluar layar",
+      "lulus": false,
+      "catatan": "panjang: toast keluar layar -64–384\npanjang: toast -64+448 melebihi 320",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-320-inputmode",
+      "judul": "webkit 27.2 320×568: inputmode / type keyboard sesuai ui-spec §12.2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-320-konsol",
+      "judul": "webkit 27.2 320×568: tanpa error JS, aset gagal, pelanggaran CSP, dialog JS",
+      "lulus": false,
+      "catatan": "alur: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/index.html)\nalur: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/keranjang.html?po=7&customer=8)\nalur: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/po.html?id=7)\npanjang: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/)\npanjang: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/po.html?id=19)\npanjang: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/keranjang.html?po=19&customer=20)\npanjang: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/keranjang.html?po=19&customer=21)\nCSP: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy.",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-360-alur",
+      "judul": "webkit 27.2 360×640: alur utama selesai lewat UI",
+      "lulus": true,
+      "catatan": "20 dtk; salin rekap: Tersalin; toast sempat menutupi (< 400 ms): toast menutupi button \"+ Customer\"; keyboard ±280px (360×360), fokus Markup: Markup terlihat=true, angka pratinjau terlihat=false",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-360-panjang",
+      "judul": "webkit 27.2 360×640: semua layar data panjang bisa dibuka dan dipakai",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-360-alur-hscroll",
+      "judul": "webkit 27.2 360×640: hscroll (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-360-panjang-hscroll",
+      "judul": "webkit 27.2 360×640: hscroll (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] scroll horizontal 957>360: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"1 AUD = Rp1.000.000Terkunci\"; span \"2 customer · Rp200.800.000.010.000\"; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\"\n[keranjang-ekstrem] scroll horizontal 391>360: dd \"Rp198.800.000.000.000\"\n[dialog-hapus-panjang] scroll horizontal 1334>328: di dalam dialog: dialog \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-360-alur-keluar-meluber",
+      "judul": "webkit 27.2 360×640: keluar-meluber (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-360-panjang-keluar-meluber",
+      "judul": "webkit 27.2 360×640: keluar-meluber (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] keluar: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [16–957 dari 360]; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [16–957 dari 360]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [33–940 dari 360]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [33–912 dari 360]; span \"1 AUD = Rp1.000.000Terkunci\" [33–940 dari 360]; span \"2 customer · Rp200.800.000.010.000\" [33–940 dari 360]; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 360]; a \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 360]; span \"Open PO f1440 Nov 2026\" [33–940 dari 360]; span \"1 AUD = Rp13.054Terkunci\" [33–940 dari 360]; span \"1 customer · Rp2.551.000\" [33–940 dari 360]; li \"Open PO f1024 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 360]\n[keranjang-ekstrem] keluar: dd \"Rp198.800.000.000.000\" [127–391 dari 360]\n[dialog-hapus-panjang] terpotong: h2#dialog-judul-8 \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\" meluber 1026px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-360-alur-tumpang",
+      "judul": "webkit 27.2 360×640: tumpang (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-360-panjang-tumpang",
+      "judul": "webkit 27.2 360×640: tumpang (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-360-alur-tertutup",
+      "judul": "webkit 27.2 360×640: tertutup (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-360-panjang-tertutup",
+      "judul": "webkit 27.2 360×640: tertutup (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-360-alur-sentuh",
+      "judul": "webkit 27.2 360×640: sentuh (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-360-panjang-sentuh",
+      "judul": "webkit 27.2 360×640: sentuh (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-360-alur-modal",
+      "judul": "webkit 27.2 360×640: modal (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-360-panjang-modal",
+      "judul": "webkit 27.2 360×640: modal (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-360-toast",
+      "judul": "webkit 27.2 360×640: toast tidak menutupi sticky bar / FAB / bottom nav / isi dialog, tidak keluar layar",
+      "lulus": false,
+      "catatan": "panjang: toast keluar layar -44–404\npanjang: toast -44+448 melebihi 360",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-360-inputmode",
+      "judul": "webkit 27.2 360×640: inputmode / type keyboard sesuai ui-spec §12.2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-360-konsol",
+      "judul": "webkit 27.2 360×640: tanpa error JS, aset gagal, pelanggaran CSP, dialog JS",
+      "lulus": false,
+      "catatan": "alur: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/index.html)\nalur: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/keranjang.html?po=8&customer=9)\nalur: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/po.html?id=8)\npanjang: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/)\npanjang: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/keranjang.html?po=19&customer=20)\npanjang: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/keranjang.html?po=19&customer=21)\nCSP: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy.",
+      "ms": 1
+    },
+    {
+      "id": "MTX-webkit-390-alur",
+      "judul": "webkit 27.2 390×844: alur utama selesai lewat UI",
+      "lulus": true,
+      "catatan": "19 dtk; salin rekap: Tersalin",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-390-panjang",
+      "judul": "webkit 27.2 390×844: semua layar data panjang bisa dibuka dan dipakai",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-390-alur-hscroll",
+      "judul": "webkit 27.2 390×844: hscroll (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-390-panjang-hscroll",
+      "judul": "webkit 27.2 390×844: hscroll (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] scroll horizontal 957>390: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"1 AUD = Rp1.000.000Terkunci\"; span \"2 customer · Rp200.800.000.010.000\"; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\"\n[dialog-hapus-panjang] scroll horizontal 1334>358: di dalam dialog: dialog \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-390-alur-keluar-meluber",
+      "judul": "webkit 27.2 390×844: keluar-meluber (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-390-panjang-keluar-meluber",
+      "judul": "webkit 27.2 390×844: keluar-meluber (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] keluar: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [16–957 dari 390]; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [16–957 dari 390]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [33–940 dari 390]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [33–912 dari 390]; span \"1 AUD = Rp1.000.000Terkunci\" [33–940 dari 390]; span \"2 customer · Rp200.800.000.010.000\" [33–940 dari 390]; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 390]; a \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 390]; span \"Open PO f1440 Nov 2026\" [33–940 dari 390]; span \"1 AUD = Rp13.054Terkunci\" [33–940 dari 390]; span \"1 customer · Rp2.551.000\" [33–940 dari 390]; li \"Open PO f1024 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 390]\n[dialog-hapus-panjang] terpotong: h2#dialog-judul-8 \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\" meluber 996px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-390-alur-tumpang",
+      "judul": "webkit 27.2 390×844: tumpang (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-390-panjang-tumpang",
+      "judul": "webkit 27.2 390×844: tumpang (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-390-alur-tertutup",
+      "judul": "webkit 27.2 390×844: tertutup (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-390-panjang-tertutup",
+      "judul": "webkit 27.2 390×844: tertutup (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-390-alur-sentuh",
+      "judul": "webkit 27.2 390×844: sentuh (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-390-panjang-sentuh",
+      "judul": "webkit 27.2 390×844: sentuh (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-390-alur-modal",
+      "judul": "webkit 27.2 390×844: modal (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-390-panjang-modal",
+      "judul": "webkit 27.2 390×844: modal (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-390-toast",
+      "judul": "webkit 27.2 390×844: toast tidak menutupi sticky bar / FAB / bottom nav / isi dialog, tidak keluar layar",
+      "lulus": false,
+      "catatan": "panjang: toast keluar layar -29–419\npanjang: toast -29+448 melebihi 390",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-390-inputmode",
+      "judul": "webkit 27.2 390×844: inputmode / type keyboard sesuai ui-spec §12.2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-390-konsol",
+      "judul": "webkit 27.2 390×844: tanpa error JS, aset gagal, pelanggaran CSP, dialog JS",
+      "lulus": false,
+      "catatan": "alur: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/index.html)\nalur: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/keranjang.html?po=9&customer=10)\nalur: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/po.html?id=9)\npanjang: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/)\npanjang: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/keranjang.html?po=19&customer=20)\nCSP: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy.",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-768-alur",
+      "judul": "webkit 27.2 768×1024: alur utama selesai lewat UI",
+      "lulus": true,
+      "catatan": "18 dtk; salin rekap: Tersalin",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-768-panjang",
+      "judul": "webkit 27.2 768×1024: semua layar data panjang bisa dibuka dan dipakai",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-768-alur-hscroll",
+      "judul": "webkit 27.2 768×1024: hscroll (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-768-panjang-hscroll",
+      "judul": "webkit 27.2 768×1024: hscroll (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] scroll horizontal 965>768: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"1 AUD = Rp1.000.000Terkunci\"; span \"2 customer · Rp200.800.000.010.000\"; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\"\n[dialog-hapus-panjang] scroll horizontal 1334>384: di dalam dialog: dialog \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-768-alur-keluar-meluber",
+      "judul": "webkit 27.2 768×1024: keluar-meluber (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-768-panjang-keluar-meluber",
+      "judul": "webkit 27.2 768×1024: keluar-meluber (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] keluar: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [24–965 dari 768]; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [24–965 dari 768]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [41–948 dari 768]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [41–920 dari 768]; span \"1 AUD = Rp1.000.000Terkunci\" [41–948 dari 768]; span \"2 customer · Rp200.800.000.010.000\" [41–948 dari 768]; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [24–965 dari 768]; a \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [24–965 dari 768]; span \"Open PO f1440 Nov 2026\" [41–948 dari 768]; span \"1 AUD = Rp13.054Terkunci\" [41–948 dari 768]; span \"1 customer · Rp2.551.000\" [41–948 dari 768]; li \"Open PO f1024 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [24–965 dari 768]\n[dialog-hapus-panjang] terpotong: h2#dialog-judul-8 \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\" meluber 970px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-768-alur-tumpang",
+      "judul": "webkit 27.2 768×1024: tumpang (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-768-panjang-tumpang",
+      "judul": "webkit 27.2 768×1024: tumpang (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-768-alur-tertutup",
+      "judul": "webkit 27.2 768×1024: tertutup (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-768-panjang-tertutup",
+      "judul": "webkit 27.2 768×1024: tertutup (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-768-alur-modal",
+      "judul": "webkit 27.2 768×1024: modal (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-768-panjang-modal",
+      "judul": "webkit 27.2 768×1024: modal (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-768-toast",
+      "judul": "webkit 27.2 768×1024: toast tidak menutupi sticky bar / FAB / bottom nav / isi dialog, tidak keluar layar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-768-inputmode",
+      "judul": "webkit 27.2 768×1024: inputmode / type keyboard sesuai ui-spec §12.2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-768-konsol",
+      "judul": "webkit 27.2 768×1024: tanpa error JS, aset gagal, pelanggaran CSP, dialog JS",
+      "lulus": false,
+      "catatan": "alur: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/index.html)\nalur: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/keranjang.html?po=10&customer=11)\nalur: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/po.html?id=10)\npanjang: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/)\npanjang: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/keranjang.html?po=19&customer=20)\nCSP: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy.",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1024-alur",
+      "judul": "webkit 27.2 1024×768: alur utama selesai lewat UI",
+      "lulus": true,
+      "catatan": "16 dtk; salin rekap: Tersalin",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1024-panjang",
+      "judul": "webkit 27.2 1024×768: semua layar data panjang bisa dibuka dan dipakai",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1024-alur-hscroll",
+      "judul": "webkit 27.2 1024×768: hscroll (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1024-panjang-hscroll",
+      "judul": "webkit 27.2 1024×768: hscroll (data panjang, 10 state)",
+      "lulus": false,
+      "catatan": "[dialog-hapus-panjang] scroll horizontal 1334>384: di dalam dialog: dialog \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1024-alur-keluar-meluber",
+      "judul": "webkit 27.2 1024×768: keluar-meluber (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1024-panjang-keluar-meluber",
+      "judul": "webkit 27.2 1024×768: keluar-meluber (data panjang, 10 state)",
+      "lulus": false,
+      "catatan": "[dialog-hapus-panjang] terpotong: h2#dialog-judul-6 \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\" meluber 970px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1024-alur-tumpang",
+      "judul": "webkit 27.2 1024×768: tumpang (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1024-panjang-tumpang",
+      "judul": "webkit 27.2 1024×768: tumpang (data panjang, 10 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1024-alur-tertutup",
+      "judul": "webkit 27.2 1024×768: tertutup (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1024-panjang-tertutup",
+      "judul": "webkit 27.2 1024×768: tertutup (data panjang, 10 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1024-alur-modal",
+      "judul": "webkit 27.2 1024×768: modal (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1024-panjang-modal",
+      "judul": "webkit 27.2 1024×768: modal (data panjang, 10 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1024-toast",
+      "judul": "webkit 27.2 1024×768: toast tidak menutupi sticky bar / FAB / bottom nav / isi dialog, tidak keluar layar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1024-inputmode",
+      "judul": "webkit 27.2 1024×768: inputmode / type keyboard sesuai ui-spec §12.2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1024-konsol",
+      "judul": "webkit 27.2 1024×768: tanpa error JS, aset gagal, pelanggaran CSP, dialog JS",
+      "lulus": false,
+      "catatan": "alur: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/index.html)\nalur: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/keranjang.html?po=11&customer=12)\nalur: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/po.html?id=11)\npanjang: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/keranjang.html?po=19&customer=20)\nCSP: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy.",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1440-alur",
+      "judul": "webkit 27.2 1440×900: alur utama selesai lewat UI",
+      "lulus": true,
+      "catatan": "16 dtk; salin rekap: Tersalin",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1440-panjang",
+      "judul": "webkit 27.2 1440×900: semua layar data panjang bisa dibuka dan dipakai",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1440-alur-hscroll",
+      "judul": "webkit 27.2 1440×900: hscroll (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1440-panjang-hscroll",
+      "judul": "webkit 27.2 1440×900: hscroll (data panjang, 10 state)",
+      "lulus": false,
+      "catatan": "[dialog-hapus-panjang] scroll horizontal 1334>384: di dalam dialog: dialog \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1440-alur-keluar-meluber",
+      "judul": "webkit 27.2 1440×900: keluar-meluber (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1440-panjang-keluar-meluber",
+      "judul": "webkit 27.2 1440×900: keluar-meluber (data panjang, 10 state)",
+      "lulus": false,
+      "catatan": "[dialog-hapus-panjang] terpotong: h2#dialog-judul-6 \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\" meluber 970px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1440-alur-tumpang",
+      "judul": "webkit 27.2 1440×900: tumpang (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1440-panjang-tumpang",
+      "judul": "webkit 27.2 1440×900: tumpang (data panjang, 10 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1440-alur-tertutup",
+      "judul": "webkit 27.2 1440×900: tertutup (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1440-panjang-tertutup",
+      "judul": "webkit 27.2 1440×900: tertutup (data panjang, 10 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1440-alur-modal",
+      "judul": "webkit 27.2 1440×900: modal (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1440-panjang-modal",
+      "judul": "webkit 27.2 1440×900: modal (data panjang, 10 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1440-toast",
+      "judul": "webkit 27.2 1440×900: toast tidak menutupi sticky bar / FAB / bottom nav / isi dialog, tidak keluar layar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1440-inputmode",
+      "judul": "webkit 27.2 1440×900: inputmode / type keyboard sesuai ui-spec §12.2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-webkit-1440-konsol",
+      "judul": "webkit 27.2 1440×900: tanpa error JS, aset gagal, pelanggaran CSP, dialog JS",
+      "lulus": false,
+      "catatan": "alur: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/index.html)\nalur: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/keranjang.html?po=12&customer=13)\nalur: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/po.html?id=12)\npanjang: console.error: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy. (http://127.0.0.1:8090/keranjang.html?po=19&customer=20)\nCSP: Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' does not appear in the style-src directive of the Content Security Policy.",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-320-alur",
+      "judul": "firefox 157.0 320×568: alur utama selesai lewat UI",
+      "lulus": true,
+      "catatan": "22 dtk; salin rekap: Tersalin; keyboard ±280px (320×288), fokus Markup: Markup terlihat=true, angka pratinjau terlihat=true",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-320-panjang",
+      "judul": "firefox 157.0 320×568: semua layar data panjang bisa dibuka dan dipakai",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-320-alur-hscroll",
+      "judul": "firefox 157.0 320×568: hscroll (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-320-panjang-hscroll",
+      "judul": "firefox 157.0 320×568: hscroll (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] scroll horizontal 957>320: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"1 AUD = Rp1.000.000Terkunci\"; span \"2 customer · Rp200.800.000.010.000\"; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\"\n[keranjang-panjang] scroll horizontal 343>320: dd \"Rp999.999.010.000\"\n[keranjang-ekstrem] scroll horizontal 391>320: dd \"Rp198.800.000.000.000\"\n[dialog-hapus-panjang] scroll horizontal 1334>288: di dalam dialog: dialog \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-320-alur-keluar-meluber",
+      "judul": "firefox 157.0 320×568: keluar-meluber (alur, 20 state)",
+      "lulus": false,
+      "catatan": "[sheet-tambah-customer] terpotong: button \"+ Buat customer baru \"Rina f320\"\" meluber 3px\n[keranjang-kosong] terpotong: button \"Salin rekap WA\" meluber 5px; button#tambah-barang \"+ Tambah barang\" meluber 14px\n[sheet-barang] terpotong: button \"Simpan\" meluber 8px\n[keranjang-belum-bayar] terpotong: button \"Salin rekap WA\" meluber 5px; button#tambah-barang \"+ Tambah barang\" meluber 14px\n[keranjang-lebih-bayar] terpotong: button \"Salin rekap WA\" meluber 5px; button#tambah-barang \"+ Tambah barang\" meluber 14px\n[keranjang] terpotong: button#tambah-barang \"+ Tambah barang\" meluber 14px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-320-panjang-keluar-meluber",
+      "judul": "firefox 157.0 320×568: keluar-meluber (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] keluar: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [16–957 dari 320]; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [16–957 dari 320]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [33–940 dari 320]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [33–912 dari 320]; span \"1 AUD = Rp1.000.000Terkunci\" [33–940 dari 320]; span \"2 customer · Rp200.800.000.010.000\" [33–940 dari 320]; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 320]; a \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 320]; span \"Open PO f1440 Nov 2026\" [33–940 dari 320]; span \"1 AUD = Rp13.054Terkunci\" [33–940 dari 320]; span \"1 customer · Rp2.551.000\" [33–940 dari 320]; li \"Open PO f1024 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 320]\n[po-detail-panjang] terpotong: span \"081220072220\" meluber 28px; span \"08123456789012\" meluber 26px\n[keranjang-panjang] keluar: dd \"Rp999.999.010.000\" [127–343 dari 320]\n[keranjang-panjang] terpotong: button \"Salin rekap WA\" meluber 5px; button#tambah-barang \"+ Tambah barang\" meluber 14px\n[keranjang-ekstrem] keluar: dd \"Rp198.800.000.000.000\" [127–391 dari 320]\n[keranjang-ekstrem] terpotong: button \"Salin rekap WA\" meluber 5px; button#tambah-barang \"+ Tambah barang\" meluber 14px\n[sheet-pembayaran-panjang] terpotong: button \"Simpan Rp999.999.010.000\" meluber 17px\n[dialog-hapus-panjang] terpotong: h2#dialog-judul-8 \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\" meluber 1066px\n[saran-panjang] terpotong: button \"Simpan\" meluber 8px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-320-alur-tumpang",
+      "judul": "firefox 157.0 320×568: tumpang (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-320-panjang-tumpang",
+      "judul": "firefox 157.0 320×568: tumpang (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-320-alur-tertutup",
+      "judul": "firefox 157.0 320×568: tertutup (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-320-panjang-tertutup",
+      "judul": "firefox 157.0 320×568: tertutup (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[po-detail-panjang] tertutup: a \"RinaWulandariSetiawatiRinaWulandariSetiawatiRinaWu\" tertutup header \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"\n[keranjang-panjang] tertutup: button \"Sepatu lari edisi terbatas warna hijau tosca ukura\" tertutup header \"RinaWulandariSetiawatiRinaWulandariSetiawatiRinaWu\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-320-alur-sentuh",
+      "judul": "firefox 157.0 320×568: sentuh (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-320-panjang-sentuh",
+      "judul": "firefox 157.0 320×568: sentuh (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-320-alur-modal",
+      "judul": "firefox 157.0 320×568: modal (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-320-panjang-modal",
+      "judul": "firefox 157.0 320×568: modal (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-320-toast",
+      "judul": "firefox 157.0 320×568: toast tidak menutupi sticky bar / FAB / bottom nav / isi dialog, tidak keluar layar",
+      "lulus": false,
+      "catatan": "panjang: toast keluar layar -64–384\npanjang: toast -64+448 melebihi 320",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-320-inputmode",
+      "judul": "firefox 157.0 320×568: inputmode / type keyboard sesuai ui-spec §12.2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-320-konsol",
+      "judul": "firefox 157.0 320×568: tanpa error JS, aset gagal, pelanggaran CSP, dialog JS",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-360-alur",
+      "judul": "firefox 157.0 360×640: alur utama selesai lewat UI",
+      "lulus": true,
+      "catatan": "21 dtk; salin rekap: Tersalin; keyboard ±280px (360×360), fokus Markup: Markup terlihat=true, angka pratinjau terlihat=true",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-360-panjang",
+      "judul": "firefox 157.0 360×640: semua layar data panjang bisa dibuka dan dipakai",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-360-alur-hscroll",
+      "judul": "firefox 157.0 360×640: hscroll (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-360-panjang-hscroll",
+      "judul": "firefox 157.0 360×640: hscroll (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] scroll horizontal 957>360: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"1 AUD = Rp1.000.000Terkunci\"; span \"2 customer · Rp200.800.000.010.000\"; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\"\n[keranjang-ekstrem] scroll horizontal 391>360: dd \"Rp198.800.000.000.000\"\n[dialog-hapus-panjang] scroll horizontal 1334>328: di dalam dialog: dialog \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-360-alur-keluar-meluber",
+      "judul": "firefox 157.0 360×640: keluar-meluber (alur, 20 state)",
+      "lulus": false,
+      "catatan": "[keranjang-kosong] terpotong: button#tambah-barang \"+ Tambah barang\" meluber 4px\n[keranjang-belum-bayar] terpotong: button#tambah-barang \"+ Tambah barang\" meluber 4px\n[keranjang-lebih-bayar] terpotong: button#tambah-barang \"+ Tambah barang\" meluber 4px\n[keranjang] terpotong: button#tambah-barang \"+ Tambah barang\" meluber 4px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-360-panjang-keluar-meluber",
+      "judul": "firefox 157.0 360×640: keluar-meluber (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] keluar: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [16–957 dari 360]; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [16–957 dari 360]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [33–940 dari 360]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [33–912 dari 360]; span \"1 AUD = Rp1.000.000Terkunci\" [33–940 dari 360]; span \"2 customer · Rp200.800.000.010.000\" [33–940 dari 360]; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 360]; a \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 360]; span \"Open PO f1440 Nov 2026\" [33–940 dari 360]; span \"1 AUD = Rp13.054Terkunci\" [33–940 dari 360]; span \"1 customer · Rp2.551.000\" [33–940 dari 360]; li \"Open PO f1024 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 360]\n[keranjang-panjang] terpotong: button#tambah-barang \"+ Tambah barang\" meluber 4px\n[keranjang-ekstrem] keluar: dd \"Rp198.800.000.000.000\" [127–391 dari 360]\n[keranjang-ekstrem] terpotong: button#tambah-barang \"+ Tambah barang\" meluber 4px\n[dialog-hapus-panjang] terpotong: h2#dialog-judul-8 \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\" meluber 1026px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-360-alur-tumpang",
+      "judul": "firefox 157.0 360×640: tumpang (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-360-panjang-tumpang",
+      "judul": "firefox 157.0 360×640: tumpang (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-360-alur-tertutup",
+      "judul": "firefox 157.0 360×640: tertutup (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-360-panjang-tertutup",
+      "judul": "firefox 157.0 360×640: tertutup (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-360-alur-sentuh",
+      "judul": "firefox 157.0 360×640: sentuh (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-360-panjang-sentuh",
+      "judul": "firefox 157.0 360×640: sentuh (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-360-alur-modal",
+      "judul": "firefox 157.0 360×640: modal (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-360-panjang-modal",
+      "judul": "firefox 157.0 360×640: modal (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-360-toast",
+      "judul": "firefox 157.0 360×640: toast tidak menutupi sticky bar / FAB / bottom nav / isi dialog, tidak keluar layar",
+      "lulus": false,
+      "catatan": "panjang: toast keluar layar -44–404\npanjang: toast -44+448 melebihi 360",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-360-inputmode",
+      "judul": "firefox 157.0 360×640: inputmode / type keyboard sesuai ui-spec §12.2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-360-konsol",
+      "judul": "firefox 157.0 360×640: tanpa error JS, aset gagal, pelanggaran CSP, dialog JS",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-390-alur",
+      "judul": "firefox 157.0 390×844: alur utama selesai lewat UI",
+      "lulus": true,
+      "catatan": "21 dtk; salin rekap: Tersalin",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-390-panjang",
+      "judul": "firefox 157.0 390×844: semua layar data panjang bisa dibuka dan dipakai",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-390-alur-hscroll",
+      "judul": "firefox 157.0 390×844: hscroll (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-390-panjang-hscroll",
+      "judul": "firefox 157.0 390×844: hscroll (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] scroll horizontal 957>390: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"1 AUD = Rp1.000.000Terkunci\"; span \"2 customer · Rp200.800.000.010.000\"; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\"\n[dialog-hapus-panjang] scroll horizontal 1334>358: di dalam dialog: dialog \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-390-alur-keluar-meluber",
+      "judul": "firefox 157.0 390×844: keluar-meluber (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-390-panjang-keluar-meluber",
+      "judul": "firefox 157.0 390×844: keluar-meluber (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] keluar: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [16–957 dari 390]; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [16–957 dari 390]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [33–940 dari 390]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [33–912 dari 390]; span \"1 AUD = Rp1.000.000Terkunci\" [33–940 dari 390]; span \"2 customer · Rp200.800.000.010.000\" [33–940 dari 390]; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 390]; a \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 390]; span \"Open PO f1440 Nov 2026\" [33–940 dari 390]; span \"1 AUD = Rp13.054Terkunci\" [33–940 dari 390]; span \"1 customer · Rp2.551.000\" [33–940 dari 390]; li \"Open PO f1024 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [16–957 dari 390]\n[dialog-hapus-panjang] terpotong: h2#dialog-judul-8 \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\" meluber 996px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-390-alur-tumpang",
+      "judul": "firefox 157.0 390×844: tumpang (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-390-panjang-tumpang",
+      "judul": "firefox 157.0 390×844: tumpang (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-390-alur-tertutup",
+      "judul": "firefox 157.0 390×844: tertutup (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-390-panjang-tertutup",
+      "judul": "firefox 157.0 390×844: tertutup (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-390-alur-sentuh",
+      "judul": "firefox 157.0 390×844: sentuh (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-390-panjang-sentuh",
+      "judul": "firefox 157.0 390×844: sentuh (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-390-alur-modal",
+      "judul": "firefox 157.0 390×844: modal (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-390-panjang-modal",
+      "judul": "firefox 157.0 390×844: modal (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-390-toast",
+      "judul": "firefox 157.0 390×844: toast tidak menutupi sticky bar / FAB / bottom nav / isi dialog, tidak keluar layar",
+      "lulus": false,
+      "catatan": "panjang: toast keluar layar -29–419\npanjang: toast -29+448 melebihi 390",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-390-inputmode",
+      "judul": "firefox 157.0 390×844: inputmode / type keyboard sesuai ui-spec §12.2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-390-konsol",
+      "judul": "firefox 157.0 390×844: tanpa error JS, aset gagal, pelanggaran CSP, dialog JS",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-768-alur",
+      "judul": "firefox 157.0 768×1024: alur utama selesai lewat UI",
+      "lulus": true,
+      "catatan": "19 dtk; salin rekap: Tersalin",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-768-panjang",
+      "judul": "firefox 157.0 768×1024: semua layar data panjang bisa dibuka dan dipakai",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-768-alur-hscroll",
+      "judul": "firefox 157.0 768×1024: hscroll (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-768-panjang-hscroll",
+      "judul": "firefox 157.0 768×1024: hscroll (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] scroll horizontal 965>768: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\"; span \"1 AUD = Rp1.000.000Terkunci\"; span \"2 customer · Rp200.800.000.010.000\"; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\"\n[dialog-hapus-panjang] scroll horizontal 1334>384: di dalam dialog: dialog \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-768-alur-keluar-meluber",
+      "judul": "firefox 157.0 768×1024: keluar-meluber (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-768-panjang-keluar-meluber",
+      "judul": "firefox 157.0 768×1024: keluar-meluber (data panjang, 11 state)",
+      "lulus": false,
+      "catatan": "[beranda-panjang] keluar: li \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [24–965 dari 768]; a \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [24–965 dari 768]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [41–948 dari 768]; span \"POAustraliaNovember2026SpesialPOAustraliaNovember2\" [41–920 dari 768]; span \"1 AUD = Rp1.000.000Terkunci\" [41–948 dari 768]; span \"2 customer · Rp200.800.000.010.000\" [41–948 dari 768]; li \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [24–965 dari 768]; a \"Open PO f1440 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [24–965 dari 768]; span \"Open PO f1440 Nov 2026\" [41–948 dari 768]; span \"1 AUD = Rp13.054Terkunci\" [41–948 dari 768]; span \"1 customer · Rp2.551.000\" [41–948 dari 768]; li \"Open PO f1024 Nov 20261 AUD = Rp13.054Terkunci1 cu\" [24–965 dari 768]\n[dialog-hapus-panjang] terpotong: h2#dialog-judul-8 \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\" meluber 970px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-768-alur-tumpang",
+      "judul": "firefox 157.0 768×1024: tumpang (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-768-panjang-tumpang",
+      "judul": "firefox 157.0 768×1024: tumpang (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-768-alur-tertutup",
+      "judul": "firefox 157.0 768×1024: tertutup (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-768-panjang-tertutup",
+      "judul": "firefox 157.0 768×1024: tertutup (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-768-alur-modal",
+      "judul": "firefox 157.0 768×1024: modal (alur, 20 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-768-panjang-modal",
+      "judul": "firefox 157.0 768×1024: modal (data panjang, 11 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-768-toast",
+      "judul": "firefox 157.0 768×1024: toast tidak menutupi sticky bar / FAB / bottom nav / isi dialog, tidak keluar layar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-768-inputmode",
+      "judul": "firefox 157.0 768×1024: inputmode / type keyboard sesuai ui-spec §12.2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-768-konsol",
+      "judul": "firefox 157.0 768×1024: tanpa error JS, aset gagal, pelanggaran CSP, dialog JS",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1024-alur",
+      "judul": "firefox 157.0 1024×768: alur utama selesai lewat UI",
+      "lulus": true,
+      "catatan": "17 dtk; salin rekap: Tersalin",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1024-panjang",
+      "judul": "firefox 157.0 1024×768: semua layar data panjang bisa dibuka dan dipakai",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1024-alur-hscroll",
+      "judul": "firefox 157.0 1024×768: hscroll (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1024-panjang-hscroll",
+      "judul": "firefox 157.0 1024×768: hscroll (data panjang, 10 state)",
+      "lulus": false,
+      "catatan": "[dialog-hapus-panjang] scroll horizontal 1334>384: di dalam dialog: dialog \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1024-alur-keluar-meluber",
+      "judul": "firefox 157.0 1024×768: keluar-meluber (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1024-panjang-keluar-meluber",
+      "judul": "firefox 157.0 1024×768: keluar-meluber (data panjang, 10 state)",
+      "lulus": false,
+      "catatan": "[dialog-hapus-panjang] terpotong: h2#dialog-judul-6 \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\" meluber 970px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1024-alur-tumpang",
+      "judul": "firefox 157.0 1024×768: tumpang (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1024-panjang-tumpang",
+      "judul": "firefox 157.0 1024×768: tumpang (data panjang, 10 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1024-alur-tertutup",
+      "judul": "firefox 157.0 1024×768: tertutup (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1024-panjang-tertutup",
+      "judul": "firefox 157.0 1024×768: tertutup (data panjang, 10 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1024-alur-modal",
+      "judul": "firefox 157.0 1024×768: modal (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1024-panjang-modal",
+      "judul": "firefox 157.0 1024×768: modal (data panjang, 10 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1024-toast",
+      "judul": "firefox 157.0 1024×768: toast tidak menutupi sticky bar / FAB / bottom nav / isi dialog, tidak keluar layar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1024-inputmode",
+      "judul": "firefox 157.0 1024×768: inputmode / type keyboard sesuai ui-spec §12.2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1024-konsol",
+      "judul": "firefox 157.0 1024×768: tanpa error JS, aset gagal, pelanggaran CSP, dialog JS",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1440-alur",
+      "judul": "firefox 157.0 1440×900: alur utama selesai lewat UI",
+      "lulus": true,
+      "catatan": "17 dtk; salin rekap: Tersalin",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1440-panjang",
+      "judul": "firefox 157.0 1440×900: semua layar data panjang bisa dibuka dan dipakai",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1440-alur-hscroll",
+      "judul": "firefox 157.0 1440×900: hscroll (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1440-panjang-hscroll",
+      "judul": "firefox 157.0 1440×900: hscroll (data panjang, 10 state)",
+      "lulus": false,
+      "catatan": "[dialog-hapus-panjang] scroll horizontal 1334>384: di dalam dialog: dialog \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\"",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1440-alur-keluar-meluber",
+      "judul": "firefox 157.0 1440×900: keluar-meluber (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1440-panjang-keluar-meluber",
+      "judul": "firefox 157.0 1440×900: keluar-meluber (data panjang, 10 state)",
+      "lulus": false,
+      "catatan": "[dialog-hapus-panjang] terpotong: h2#dialog-judul-6 \"Hapus TasKulitAsliAustraliaEdisiTerbatasTasKulitAs\" meluber 970px",
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1440-alur-tumpang",
+      "judul": "firefox 157.0 1440×900: tumpang (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1440-panjang-tumpang",
+      "judul": "firefox 157.0 1440×900: tumpang (data panjang, 10 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1440-alur-tertutup",
+      "judul": "firefox 157.0 1440×900: tertutup (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1440-panjang-tertutup",
+      "judul": "firefox 157.0 1440×900: tertutup (data panjang, 10 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1440-alur-modal",
+      "judul": "firefox 157.0 1440×900: modal (alur, 19 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1440-panjang-modal",
+      "judul": "firefox 157.0 1440×900: modal (data panjang, 10 state)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1440-toast",
+      "judul": "firefox 157.0 1440×900: toast tidak menutupi sticky bar / FAB / bottom nav / isi dialog, tidak keluar layar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1440-inputmode",
+      "judul": "firefox 157.0 1440×900: inputmode / type keyboard sesuai ui-spec §12.2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "MTX-firefox-1440-konsol",
+      "judul": "firefox 157.0 1440×900: tanpa error JS, aset gagal, pelanggaran CSP, dialog JS",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    }
+  ]
+}

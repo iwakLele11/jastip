@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="tests/bootstrap.php"
+         colors="true"
+         cacheDirectory=".phpunit.cache"
+         failOnWarning="true"
+         failOnRisky="true"
+         beStrictAboutOutputDuringTests="true">
+    <testsuites>
+        <testsuite name="unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="integration">
+            <directory>tests/Integration</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory>src</directory>
+        </include>
+    </source>
+    <php>
+        <!-- Database test lokal. Nama database WAJIB berakhiran _test karena
+             dihapus dan dibuat ulang setiap run. Bisa ditimpa lewat environment. -->
+        <env name="TEST_DB_HOST" value="127.0.0.1" force="false"/>
+        <env name="TEST_DB_PORT" value="3307" force="false"/>
+        <env name="TEST_DB_NAME" value="jastip_test" force="false"/>
+        <env name="TEST_DB_USER" value="root" force="false"/>
+        <env name="TEST_DB_PASSWORD" value="" force="false"/>
+    </php>
+</phpunit>

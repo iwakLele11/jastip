@@ -1,0 +1,50 @@
+# QA-A-03: tanda * di nama Open PO merusak judul tebal rekap WA; nama customer/barang memicu format WA
+# Dibuat qa/tools/bukti.mjs, 2026-10-26T09:32:07.493Z, target http://127.0.0.1:8090 (dev-stack)
+
+POST /api/v1/open-po {"nama": "PO *Spesial* Nov"} → GET …/rekap:
+  | *REKAP JASTIP - PO *Spesial* Nov*
+  | Customer: Rina *VIP* (081234567890)
+  | 
+  | 1. Tas *Promo*
+  |    1 x Rp10.000 = Rp10.000
+  | 
+  | *Total: Rp10.000*
+  | DP 50%: Rp5.000
+  | *Mohon transfer DP: Rp5.000*
+  | Status: BELUM BAYAR
+
+POST /api/v1/open-po {"nama": "PO Nov 2026*"} → GET …/rekap:
+  | *REKAP JASTIP - PO Nov 2026**
+  | Customer: Rina *VIP* (081234567890)
+  | 
+  | 1. Tas *Promo*
+  |    1 x Rp10.000 = Rp10.000
+  | 
+  | *Total: Rp10.000*
+  | DP 50%: Rp5.000
+  | *Mohon transfer DP: Rp5.000*
+  | Status: BELUM BAYAR
+
+POST /api/v1/open-po {"nama": "*PO Nov 2026"} → GET …/rekap:
+  | *REKAP JASTIP - *PO Nov 2026*
+  | Customer: Rina *VIP* (081234567890)
+  | 
+  | 1. Tas *Promo*
+  |    1 x Rp10.000 = Rp10.000
+  | 
+  | *Total: Rp10.000*
+  | DP 50%: Rp5.000
+  | *Mohon transfer DP: Rp5.000*
+  | Status: BELUM BAYAR
+
+POST /api/v1/open-po {"nama": "PO 5* Nov"} → GET …/rekap:
+  | *REKAP JASTIP - PO 5* Nov*
+  | Customer: Rina *VIP* (081234567890)
+  | 
+  | 1. Tas *Promo*
+  |    1 x Rp10.000 = Rp10.000
+  | 
+  | *Total: Rp10.000*
+  | DP 50%: Rp5.000
+  | *Mohon transfer DP: Rp5.000*
+  | Status: BELUM BAYAR

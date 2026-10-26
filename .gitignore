@@ -1,0 +1,7 @@
+# Alat lokal sandbox (PHP statis, MariaDB, Playwright) — bukan bagian aplikasi
+.tools/
+# Konfigurasi lingkungan Kiro sandbox
+.kiro/
+.env
+vendor/
+node_modules/

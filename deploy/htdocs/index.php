@@ -27,6 +27,7 @@ $gagalMulai = static function (string $alasan): never {
     );
     @file_put_contents(__DIR__ . '/app/storage/logs/app.log', $line . "\n", FILE_APPEND | LOCK_EX);
 
+    header_remove('X-Powered-By');
     http_response_code(500);
     header('Content-Type: application/json; charset=utf-8');
     header('Cache-Control: no-store');

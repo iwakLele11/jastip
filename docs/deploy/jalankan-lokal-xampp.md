@@ -5,7 +5,7 @@ Panduan ini untuk menjalankan aplikasi di laptop sendiri, misalnya untuk mencoba
 Yang dibutuhkan:
 
 - Laptop Windows 10/11.
-- File paket **`jastip-htdocs.zip`** (dibuat oleh developer dengan `deploy/build-htdocs.sh`).
+- File paket **`jastip-htdocs.zip`**. Unduh dari folder [`rilis/`](../../rilis/) di repository GitHub (buka filenya, lalu klik tombol **Download raw file**), atau buat sendiri dengan `deploy/build-htdocs.sh`.
 - Koneksi internet hanya untuk mengunduh XAMPP dan untuk kurs otomatis.
 
 Perkiraan waktu: 30 menit.

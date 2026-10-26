@@ -16,6 +16,7 @@ try {
 } catch (Throwable $e) {
     // Konfigurasi salah (mis. .env tidak lengkap). Detail hanya ke log server.
     error_log('jastip: gagal memulai aplikasi: ' . $e->getMessage());
+    header_remove('X-Powered-By');
     http_response_code(500);
     header('Content-Type: application/json; charset=utf-8');
     header('Cache-Control: no-store');

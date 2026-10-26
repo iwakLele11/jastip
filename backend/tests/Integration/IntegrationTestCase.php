@@ -10,6 +10,7 @@ use Jastip\Http\Kernel;
 use Jastip\Http\Request;
 use Jastip\Http\Response;
 use Jastip\Infrastructure\Database;
+use Jastip\Tests\Support\CountingPasswordHasher;
 use Jastip\Tests\Support\MemoryLogger;
 use Jastip\Tests\Support\MutableClock;
 use Jastip\Tests\Support\StubExchangeRateProvider;
@@ -27,10 +28,12 @@ abstract class IntegrationTestCase extends TestCase
     protected const COOKIE = '__Host-jastip_sesi';
     protected const ADMIN = 'admin';
     protected const PASSWORD = 'kata-sandi-uji-123';
+    protected const IP = '203.0.113.7';
 
     protected MutableClock $clock;
     protected StubExchangeRateProvider $rates;
     protected MemoryLogger $logger;
+    protected CountingPasswordHasher $passwords;
     protected Kernel $app;
     protected PDO $pdo;
     protected ?string $sessionToken = null;
@@ -43,6 +46,7 @@ abstract class IntegrationTestCase extends TestCase
         $this->clock = new MutableClock();
         $this->rates = new StubExchangeRateProvider();
         $this->logger = new MemoryLogger();
+        $this->passwords = new CountingPasswordHasher();
         $this->sessionToken = null;
 
         $s = TestDatabase::settings();
@@ -65,6 +69,7 @@ abstract class IntegrationTestCase extends TestCase
             $this->rates,
             $this->clock,
             $this->logger,
+            $this->passwords,
         );
     }
 
@@ -79,6 +84,7 @@ abstract class IntegrationTestCase extends TestCase
         ?array $body = null,
         array $headers = [],
         array $query = [],
+        string $ip = self::IP,
     ): Response {
         if (in_array($method, ['POST', 'PUT', 'PATCH'], true) && !array_key_exists('Content-Type', $headers)) {
             $headers['Content-Type'] = 'application/json';
@@ -86,7 +92,12 @@ abstract class IntegrationTestCase extends TestCase
         $cookies = $this->sessionToken === null ? [] : [self::COOKIE => $this->sessionToken];
         $raw = $body === null ? '' : (string) json_encode($body, JSON_UNESCAPED_UNICODE);
 
-        return $this->app->handle(new Request($method, $path, $query, $headers, $raw, $cookies, '203.0.113.7'));
+        return $this->app->handle(new Request($method, $path, $query, $headers, $raw, $cookies, $ip));
+    }
+
+    protected function login(string $username, string $password, string $ip = self::IP): Response
+    {
+        return $this->call('POST', '/api/v1/auth/login', ['nama_pengguna' => $username, 'kata_sandi' => $password], ip: $ip);
     }
 
     /**

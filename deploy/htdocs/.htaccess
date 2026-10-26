@@ -44,6 +44,12 @@ DirectoryIndex index.html
 </FilesMatch>
 
 <IfModule mod_headers.c>
+    # Versi PHP tidak perlu dibocorkan. index.php sudah menghapus header ini; baris ini lapisan
+    # kedua. "always" diperlukan untuk PHP-FPM/FastCGI (header skrip ada di tabel "always"),
+    # baris tanpa "always" untuk mod_php (XAMPP).
+    Header unset X-Powered-By
+    Header always unset X-Powered-By
+
     # Semua file kecuali .php. Respons API (index.php) sudah membawa X-Content-Type-Options dan
     # Referrer-Policy dari aplikasi; kalau di-set juga di sini, header muncul dobel di PHP-FPM.
     <FilesMatch "^(?!.*\.php$)">

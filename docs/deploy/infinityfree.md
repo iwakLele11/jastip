@@ -4,7 +4,7 @@ Panduan ini memasang aplikasi di internet supaya bisa dibuka dari HP dan laptop 
 
 Yang dibutuhkan:
 
-- File paket **`jastip-htdocs.zip`** (dibuat developer dengan `deploy/build-htdocs.sh`).
+- File paket **`jastip-htdocs.zip`**. Unduh dari folder [`rilis/`](../../rilis/) di repository GitHub (buka filenya, lalu klik tombol **Download raw file**), atau buat sendiri dengan `deploy/build-htdocs.sh`.
 - Laptop Windows dengan **XAMPP** terpasang (lihat langkah 1 di [jalankan-lokal-xampp.md](jalankan-lokal-xampp.md)). Di sini XAMPP hanya dipakai untuk menjalankan PHP satu kali (membuat akun admin). Apache dan MySQL tidak perlu dinyalakan.
 - Program **FileZilla Client** (gratis, <https://filezilla-project.org>) untuk mengunggah file.
 

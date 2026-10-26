@@ -7,6 +7,11 @@ namespace Jastip\Repository;
 use DateTimeImmutable;
 use Jastip\Infrastructure\Database;
 
+/**
+ * Log login gagal (tabel percobaan_login) untuk pembatasan. kunci_hash = SHA-256 dari kunci yang
+ * disusun AuthService: nama pengguna ternormalisasi, atau kunci berawalan untuk IP dan nama yang
+ * tidak valid. Nama pengguna dan IP tidak pernah disimpan apa adanya.
+ */
 final class LoginAttemptRepository
 {
     public function __construct(private readonly Database $db)

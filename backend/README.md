@@ -25,13 +25,14 @@ backend/
 │   ├── Repository/          SQL (PDO prepared statement)
 │   ├── Domain/              hitungan murni tanpa DB: harga, total, DP, status, aturan refund/hapus
 │   │                        pembayaran, teks rekap WA, no WA, desimal
-│   ├── Auth/                sesi, cookie, login throttle
+│   ├── Auth/                sesi, cookie, login throttle, aturan nama pengguna, hash kata sandi
 │   ├── Kurs/                klien Frankfurter
 │   ├── Config/              konfigurasi dari environment / .env
 │   └── Infrastructure/      Database, Migrator, MigrationSqlExport, Logger, Clock
 ├── storage/logs/            log aplikasi (JSON per baris)
 └── tests/
     ├── Unit/Domain/         rumus scope + kasus tepi, teks rekap WA per status
+    ├── Unit/Auth/           normalisasi nama pengguna, hash dummy bcrypt
     ├── Integration/         lewat Kernel ke MariaDB/MySQL sungguhan + 1 smoke test php -S
     │                        + KonkurensiTest (dua transaksi bersamaan, proses PHP kedua)
     └── Support/             stub, clock, logger, kernel-request.php (request di proses terpisah)
@@ -146,7 +147,8 @@ Semua dari environment variable; file `.env` hanya cadangan (lihat `.env.example
 | `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` | | |
 | `SESSION_COOKIE_SECURE` | `true` | `false` ditolak di production |
 | `SESSION_IDLE_MINUTES` | `720` | 12 jam tidak aktif |
-| `LOGIN_MAX_ATTEMPTS`, `LOGIN_WINDOW_MINUTES` | `5`, `15` | |
+| `LOGIN_MAX_ATTEMPTS`, `LOGIN_WINDOW_MINUTES` | `5`, `15` | Login gagal per nama pengguna per jendela (menit) |
+| `LOGIN_MAX_ATTEMPTS_PER_IP` | `20` | Login gagal per IP (`REMOTE_ADDR`) per jendela yang sama |
 | `KURS_API_URL`, `KURS_TIMEOUT_SECONDS` | Frankfurter v2, `5` | |
 | `LOG_PATH` | `storage/logs/app.log` | Relatif ke `backend/`, absolut, atau `php://stderr` |
 
@@ -197,7 +199,12 @@ Jadwalkan backup harian, simpan di luar server aplikasi, dan uji restore secara 
 - Query selalu prepared statement (PDO native, `ATTR_EMULATE_PREPARES=false`).
 - Kata sandi: `password_hash(PASSWORD_DEFAULT)`, min. 10 karakter, maks. 72 byte (batas bcrypt). Tidak ada kredensial default.
 - Token sesi 32 byte acak, di DB hanya hash SHA-256. Cookie `HttpOnly; Secure; SameSite=Strict`.
-- Login gagal dibatasi 5 kali per nama pengguna per 15 menit (`429`). Nama pengguna di tabel percobaan disimpan sebagai hash.
+- Login gagal dibatasi 5 kali per nama pengguna dan 20 kali per IP per 15 menit (`429`). Detail di kontrak API §4.
+  - Nama pengguna valid hanya ASCII `[A-Za-z0-9._-]{3,50}` (`Auth/Username`, aturan yang sama dengan `create-admin.php`). Nama di luar pola langsung `401` tanpa pencarian ke DB, tetapi tetap dihitung.
+  - Pencarian admin membandingkan `LOWER(nama_pengguna)` secara biner dengan nama ternormalisasi (huruf kecil ASCII), bukan lewat collation `utf8mb4_unicode_ci` yang menyamakan huruf beraksen dan fullwidth. Kunci pembatasan memakai nilai ternormalisasi yang sama. Nama tetap disimpan seperti diketik (huruf besar boleh).
+  - IP dari `REMOTE_ADDR` saja (`X-Forwarded-For` tidak dipercaya). Di tabel `percobaan_login` nama pengguna dan IP hanya disimpan sebagai hash SHA-256 dan dihapus setelah jendela lewat. Hash IPv4 tanpa garam bisa ditebak ulang, jadi ini pseudonim, bukan anonim.
+  - Setiap login gagal menjalankan tepat satu `password_verify`. Kalau akun tidak ada, verifikasi memakai hash bcrypt dummy yang sudah dihitung (`Auth/PhpPasswordHasher::DUMMY_HASHES`, cost sesuai default PHP), supaya waktu respons tidak membedakan pengguna ada dan tidak ada.
+- Header `X-Powered-By` dihapus dari semua respons API (`ResponseEmitter` dan front controller). Paket htdocs juga menghapusnya lewat `.htaccess`.
 - CSRF: cek `Origin` + wajib `Content-Type: application/json` + `SameSite=Strict`.
 - Log tidak memuat kata sandi, token, atau data customer. Pesan `PDOException` tidak dicatat (bisa memuat nilai data); yang dicatat SQLSTATE dan lokasi.
 - Pencarian customer (`?q=`) dan cek no WA (`?no_wa=`) memakai query string, sehingga bisa tercatat di access log web server. Matikan pencatatan query string atau batasi retensi access log.

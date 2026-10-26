@@ -19,6 +19,7 @@
 
 declare(strict_types=1);
 
+use Jastip\Auth\Username;
 use Jastip\Config\Config;
 use Jastip\Infrastructure\Database;
 use Jastip\Repository\AdminRepository;
@@ -120,7 +121,7 @@ $flags = array_slice($argv, 2);
 $reset = in_array('--reset', $flags, true);
 $sqlOnly = in_array('--sql', $flags, true);
 
-if (preg_match('/^[A-Za-z0-9._-]{3,50}$/D', $username) !== 1) {
+if (!Username::isValid($username)) {
     fwrite(STDERR, USAGE);
     fwrite(STDERR, "Nama pengguna 3–50 karakter: huruf, angka, titik, garis bawah, tanda hubung.\n");
     exit(2);
@@ -145,7 +146,8 @@ try {
     $config = Config::fromEnvironment(dirname(__DIR__));
     $db = Database::fromConfig($config);
     $admins = new AdminRepository($db);
-    $existing = $admins->findByUsername($username);
+    // Dicari tanpa membedakan huruf besar/kecil, sama dengan login. Nama disimpan seperti diketik.
+    $existing = $admins->findByNormalizedUsername(strtolower($username));
 
     if ($existing !== null && !$reset) {
         fwrite(STDERR, "Admin '{$username}' sudah ada. Pakai --reset untuk mengganti kata sandi.\n");

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Jastip\Tests\Integration;
 
-use Jastip\Http\Response;
 use Jastip\Infrastructure\Migrator;
 
 /**
@@ -67,11 +66,6 @@ final class CreateAdminSqlTest extends IntegrationTestCase
         }
         self::assertSame(1, (int) $this->pdo->query("SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE()"
             . " AND TABLE_NAME = 'admin'")->fetchColumn());
-    }
-
-    private function login(string $username, string $password): Response
-    {
-        return $this->call('POST', '/api/v1/auth/login', ['nama_pengguna' => $username, 'kata_sandi' => $password]);
     }
 
     private function runSql(string $sql): void

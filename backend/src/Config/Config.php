@@ -29,6 +29,7 @@ final class Config
         public readonly int $sessionIdleMinutes,
         public readonly int $loginMaxAttempts,
         public readonly int $loginWindowMinutes,
+        public readonly int $loginMaxAttemptsPerIp,
         public readonly string $kursApiUrl,
         public readonly int $kursTimeoutSeconds,
         public readonly string $logPath,
@@ -86,6 +87,7 @@ final class Config
             sessionIdleMinutes: self::int($env, 'SESSION_IDLE_MINUTES', 720),
             loginMaxAttempts: self::int($env, 'LOGIN_MAX_ATTEMPTS', 5),
             loginWindowMinutes: self::int($env, 'LOGIN_WINDOW_MINUTES', 15),
+            loginMaxAttemptsPerIp: self::int($env, 'LOGIN_MAX_ATTEMPTS_PER_IP', 20),
             kursApiUrl: $env['KURS_API_URL'] ?? 'https://api.frankfurter.dev/v2/rate/aud/idr',
             kursTimeoutSeconds: self::int($env, 'KURS_TIMEOUT_SECONDS', 5),
             logPath: $logPath,
@@ -100,7 +102,7 @@ final class Config
         return [
             'APP_ENV', 'APP_ALLOWED_ORIGINS', 'DB_HOST', 'DB_PORT', 'DB_NAME', 'DB_USER', 'DB_PASSWORD',
             'SESSION_COOKIE_SECURE', 'SESSION_IDLE_MINUTES', 'LOGIN_MAX_ATTEMPTS', 'LOGIN_WINDOW_MINUTES',
-            'KURS_API_URL', 'KURS_TIMEOUT_SECONDS', 'LOG_PATH',
+            'LOGIN_MAX_ATTEMPTS_PER_IP', 'KURS_API_URL', 'KURS_TIMEOUT_SECONDS', 'LOG_PATH',
         ];
     }
 

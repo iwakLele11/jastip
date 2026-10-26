@@ -95,7 +95,7 @@ Tidak ada token CSRF terpisah yang perlu dikelola front-end.
 | 413 | `BODY_TERLALU_BESAR` | Body > 64 KB | "Ukuran data terlalu besar." |
 | 415 | `CONTENT_TYPE_TIDAK_DIDUKUNG` | `POST`/`PATCH` tanpa JSON | "Gunakan Content-Type: application/json." |
 | 422 | `VALIDASI` | Input tidak valid | lihat atas |
-| 429 | `TERLALU_BANYAK_PERCOBAAN` | ≥ 5 login gagal / nama pengguna / 15 menit (header `Retry-After` dalam detik) | "Terlalu banyak percobaan masuk. Coba lagi dalam {n} menit." |
+| 429 | `TERLALU_BANYAK_PERCOBAAN` | ≥ 5 login gagal / nama pengguna / 15 menit, atau ≥ 20 login gagal / IP / 15 menit (header `Retry-After` dalam detik) | "Terlalu banyak percobaan masuk. Coba lagi dalam {n} menit." |
 | 500 | `KESALAHAN_SERVER` | Error tak terduga (detail hanya di log server) | "Terjadi kesalahan di server. Coba lagi beberapa saat lagi." |
 | 502 | `KURS_GAGAL` | Frankfurter gagal / timeout 5 detik / respons tidak valid | "Kurs otomatis gagal diambil. Isi kurs manual, atau coba lagi." |
 | 503 | `LAYANAN_TIDAK_TERSEDIA` | Health check: database mati | "Database tidak dapat dihubungi." |
@@ -186,7 +186,7 @@ Publik, tanpa data aplikasi. Untuk monitoring uptime.
 
 | Field | Aturan | Pesan |
 |---|---|---|
-| `nama_pengguna` | wajib, tidak peka huruf besar/kecil, spasi di tepi dibuang | "Isi nama pengguna." |
+| `nama_pengguna` | wajib, spasi di tepi dibuang, tidak peka huruf besar/kecil (ASCII). Nama yang valid hanya 3–50 karakter `A–Z a–z 0–9 . _ -`; nama lain (huruf beraksen, fullwidth, karakter tak terlihat, terlalu pendek/panjang) dijawab `401 LOGIN_GAGAL` | "Isi nama pengguna." |
 | `kata_sandi` | wajib | "Isi kata sandi." |
 | `klien` | opsional, `web` (default) atau `mobile` | "klien harus web atau mobile." |
 
@@ -201,7 +201,20 @@ Publik, tanpa data aplikasi. Untuk monitoring uptime.
 ```
 `200` (mobile): sama, ditambah `"token": "<64 hex>"` dan `"jenis_token": "Bearer"`, tanpa cookie.
 
-Error: `401 LOGIN_GAGAL` (pesan sama untuk pengguna tidak ada dan kata sandi salah), `422 VALIDASI`, `429 TERLALU_BANYAK_PERCOBAAN`. Saat terblokir, kata sandi yang benar pun ditolak sampai jendela 15 menit lewat. Login sukses menghapus hitungan gagal.
+Error: `401 LOGIN_GAGAL` (pesan sama untuk pengguna tidak ada, nama di luar pola, dan kata sandi salah), `422 VALIDASI`, `429 TERLALU_BANYAK_PERCOBAAN`.
+
+Pembatasan login (hanya login gagal yang dihitung, jendela 15 menit):
+
+| Batas | Default | Variabel |
+|---|---|---|
+| Per nama pengguna | 5 gagal | `LOGIN_MAX_ATTEMPTS` |
+| Per IP | 20 gagal | `LOGIN_MAX_ATTEMPTS_PER_IP` |
+
+- Saat terblokir, kata sandi yang benar pun ditolak sampai jendela lewat. `Retry-After` = detik sampai batas yang terkena terbuka lagi.
+- Hitungan per nama pengguna memakai nama yang sudah dinormalisasi (trim + huruf kecil ASCII), sama dengan pencarian akun. `Admin`, `ADMIN`, dan ` admin ` adalah satu hitungan. Nama di luar pola tidak pernah dicocokkan ke akun mana pun, tetapi tetap dihitung (untuk nama itu dan untuk IP).
+- IP diambil dari koneksi (`REMOTE_ADDR`). `X-Forwarded-For` tidak dipakai. Di belakang proxy/CDN semua klien bisa terlihat dari IP proxy yang sama.
+- Login sukses menghapus hitungan nama pengguna itu. Hitungan IP tidak dihapus dan berjalan terus sampai jendela lewat.
+- Nama pengguna dan IP hanya disimpan sebagai hash SHA-256, dan barisnya dihapus setelah jendela lewat.
 
 ### `POST /auth/logout`
 

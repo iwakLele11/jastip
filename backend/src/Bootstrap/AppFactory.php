@@ -6,6 +6,8 @@ namespace Jastip\Bootstrap;
 
 use Jastip\Auth\AuthContext;
 use Jastip\Auth\AuthService;
+use Jastip\Auth\PasswordHasher;
+use Jastip\Auth\PhpPasswordHasher;
 use Jastip\Auth\SessionCookie;
 use Jastip\Config\Config;
 use Jastip\Http\Controller\AuthController;
@@ -69,6 +71,7 @@ final class AppFactory
         ExchangeRateProvider $rates,
         Clock $clock,
         Logger $logger,
+        PasswordHasher $passwords = new PhpPasswordHasher(),
     ): Kernel {
         $settingsRepo = new SettingsRepository($db);
         $customerRepo = new CustomerRepository($db);
@@ -77,11 +80,13 @@ final class AppFactory
             new AdminRepository($db),
             new SessionRepository($db),
             new LoginAttemptRepository($db),
+            $passwords,
             $clock,
             $logger,
             $config->sessionIdleMinutes,
             $config->loginMaxAttempts,
             $config->loginWindowMinutes,
+            $config->loginMaxAttemptsPerIp,
         );
 
         $health = new HealthController($db, $logger);

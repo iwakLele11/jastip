@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="id">
+<head>
+<!-- @include head -->
+<title>Masuk · Jastip Admin</title>
+<script type="module" src="js/pages/login.js"></script>
+</head>
+<body class="bg-page text-ink antialiased">
+<main id="konten" class="mx-auto flex min-h-dvh max-w-sm flex-col justify-center px-4 py-10 md:px-0">
+  <div class="md:rounded-xl md:border md:border-line md:bg-surface md:p-6">
+    <h1 class="text-xl font-semibold">Jastip Admin</h1>
+    <p class="mt-1 text-ink-muted">Masuk untuk mengelola Open PO.</p>
+
+    <form id="form-login" class="mt-6 space-y-4" novalidate>
+      <div data-banner-form hidden></div>
+      <div>
+        <label for="nama-pengguna" class="{{label}}">Nama pengguna</label>
+        <input id="nama-pengguna" name="nama_pengguna" type="text" class="{{input}}" autocomplete="username" autocapitalize="none" spellcheck="false" enterkeyhint="next" required>
+      </div>
+      <div>
+        <label for="kata-sandi" class="{{label}}">Kata sandi</label>
+        <div class="{{inputGrup}}" data-input-grup>
+          <input id="kata-sandi" name="kata_sandi" type="password" class="{{inputDalamGrup}}" autocomplete="current-password" enterkeyhint="done" required>
+          <button type="button" id="lihat-sandi" class="{{tombolIkon}} text-ink-muted" aria-label="Tampilkan kata sandi" aria-controls="kata-sandi">
+            <span data-ikon-lihat><!-- @ikon eye 24 size-6 --></span>
+            <span data-ikon-sembunyi hidden><!-- @ikon eye-slash 24 size-6 --></span>
+          </button>
+        </div>
+      </div>
+      <button type="submit" id="tombol-masuk" class="{{tombolPrimary}} w-full">Masuk</button>
+    </form>
+  </div>
+</main>
+</body>
+</html>

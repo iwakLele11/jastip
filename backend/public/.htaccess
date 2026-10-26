@@ -1,0 +1,21 @@
+# Apache (shared hosting). Document root harus folder public/.
+Options -Indexes
+
+# Alamat "/" melayani front-end (index.html), bukan front controller API.
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Teruskan header Authorization ke PHP (dibutuhkan untuk token Bearer di FastCGI/CGI).
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Hanya /api/* yang diarahkan ke front controller. File statis front-end dilayani apa adanya.
+    RewriteRule ^api(/.*)?$ index.php [L,QSA]
+</IfModule>
+
+# Jangan pernah melayani file dotfile (.env, .git, dst.) kalau ada yang tersalin ke sini.
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>

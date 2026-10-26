@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="id">
+<head>
+<!-- @include head -->
+<title>Customer · Jastip Admin</title>
+<script type="module" src="js/pages/customer-list.js"></script>
+</head>
+<body class="bg-page text-ink antialiased">
+<!-- @include lewati -->
+<!-- @include topnav aktif=customer -->
+<main id="konten" class="pb-40 md:pb-10">
+  <header class="sticky top-0 z-20 border-b border-line bg-page md:static md:border-0">
+    <div class="mx-auto flex h-14 max-w-3xl items-center gap-2 px-4 md:h-auto md:px-6 md:pt-8 md:pb-2">
+      <h1 class="min-w-0 flex-1 truncate text-xl font-semibold">Customer</h1>
+      <a href="customer-form.html" class="{{tombolPrimary}} max-md:hidden">+ Customer baru</a>
+    </div>
+  </header>
+  <div class="mx-auto max-w-3xl px-4 pt-4 md:px-6">
+    <div data-banner-halaman hidden class="mb-4"></div>
+    <form id="form-cari" role="search" class="mb-4" novalidate>
+      <label for="cari" class="{{label}}">Cari nama atau no WA</label>
+      <div class="{{inputGrup}}" data-input-grup>
+        <span class="shrink-0 pl-3 text-ink-muted"><!-- @ikon magnifying-glass 24 size-5 --></span>
+        <input id="cari" name="q" type="search" class="{{inputDalamGrup}} [&::-webkit-search-cancel-button]:appearance-none" autocomplete="off" spellcheck="false" enterkeyhint="search" maxlength="100">
+        <button type="button" id="hapus-cari" class="{{tombolIkon}} text-ink-muted" aria-label="Hapus pencarian" hidden><!-- @ikon x-mark 24 size-5 --></button>
+      </div>
+    </form>
+    <div id="daftar"></div>
+  </div>
+</main>
+<a href="customer-form.html" data-fab class="{{fab}} bottom-[calc(5rem+env(safe-area-inset-bottom))]">+ Customer</a>
+<!-- @include bottomnav aktif=customer -->
+<!-- @include toast -->
+</body>
+</html>

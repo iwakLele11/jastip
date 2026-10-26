@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="id">
+<head>
+<!-- @include head -->
+<title>Keranjang · Jastip Admin</title>
+<script type="module" src="js/pages/keranjang.js"></script>
+</head>
+<body class="bg-page text-ink antialiased">
+<!-- @include lewati -->
+<!-- @include topnav aktif=open-po -->
+<main id="konten" class="pb-28 lg:pb-10">
+  <header class="sticky top-0 z-20 border-b border-line bg-page">
+    <div class="mx-auto flex min-h-14 max-w-6xl items-center gap-1 px-2 py-1 md:gap-3 md:px-4">
+      <a id="tautan-kembali" href="index.html" data-kembali class="{{tombolIkon}}" aria-label="Kembali"><!-- @ikon chevron-left 24 size-6 --></a>
+      <div class="min-w-0 flex-1">
+        <h1 id="judul" class="text-xl font-semibold break-words">Keranjang</h1>
+        <p id="subjudul" class="text-sm text-ink-muted break-words" hidden></p>
+      </div>
+    </div>
+  </header>
+  <div class="mx-auto max-w-6xl px-4 pt-4 md:px-6">
+    <div data-banner-halaman hidden class="mb-4"></div>
+    <div id="banner-arsip" hidden class="mb-4"></div>
+    <div id="memuat"></div>
+    <!-- Mobile: satu kolom, urutan ringkasan → barang → riwayat → pengembalian dana (order-*).
+         lg: dua kolom; pembungkus `contents` menjadi kolom kiri (form + barang) dan kanan (sticky). -->
+    <div id="isi-keranjang" class="flex flex-col gap-6 lg:flex-row lg:items-start" hidden>
+      <div class="contents lg:block lg:min-w-0 lg:flex-1 lg:space-y-6">
+        <section id="kartu-form-barang" class="{{kartu}} hidden scroll-mt-18 lg:block"></section>
+        <section id="bagian-barang" class="order-2" aria-labelledby="judul-barang">
+          <h2 id="judul-barang" class="{{judulBagian}} rounded {{fokus}}" tabindex="-1">Barang</h2>
+          <div id="banner-barang" hidden class="mt-3"></div>
+          <div id="daftar-barang" class="mt-3"></div>
+        </section>
+      </div>
+      <div class="contents lg:sticky lg:top-18 lg:block lg:w-96 lg:shrink-0 lg:space-y-4">
+        <section id="ringkasan" class="order-1" aria-labelledby="judul-ringkasan"></section>
+        <button type="button" data-salin-rekap data-fokus="salin-rekap-lg" class="{{tombolSecondary}} w-full max-lg:hidden">Salin rekap WA</button>
+        <div id="blok-pengembalian" class="order-4"></div>
+        <section id="bagian-riwayat" class="order-3" aria-labelledby="judul-riwayat">
+          <h2 id="judul-riwayat" class="{{judulBagian}} rounded {{fokus}}" tabindex="-1">Riwayat pembayaran</h2>
+          <div id="banner-riwayat" hidden class="mt-3"></div>
+          <div id="daftar-riwayat" class="mt-3"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+</main>
+<!-- StickyActionBar (di bawah lg), 50:50 -->
+<div id="sticky-bar" data-sticky-bar class="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-surface pb-[env(safe-area-inset-bottom)] lg:hidden" hidden>
+  <div class="mx-auto flex max-w-lg gap-2 px-4 py-3 md:max-w-6xl md:gap-3 md:px-6">
+    <button type="button" data-salin-rekap data-fokus="salin-rekap" class="{{tombolSecondary}} min-w-0 flex-1">Salin rekap WA</button>
+    <button type="button" id="tambah-barang" data-fokus="tambah-barang" class="{{tombolPrimary}} min-w-0 flex-1" aria-haspopup="dialog">+ Tambah barang</button>
+  </div>
+</div>
+<!-- @include toast -->
+</body>
+</html>

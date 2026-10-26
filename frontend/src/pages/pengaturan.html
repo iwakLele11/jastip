@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="id">
+<head>
+<!-- @include head -->
+<title>Pengaturan · Jastip Admin</title>
+<script type="module" src="js/pages/pengaturan.js"></script>
+</head>
+<body class="bg-page text-ink antialiased">
+<!-- @include lewati -->
+<!-- @include topnav aktif=pengaturan -->
+<main id="konten" class="pb-24 md:pb-10">
+  <header class="sticky top-0 z-20 border-b border-line bg-page md:static md:border-0">
+    <div class="mx-auto flex h-14 max-w-lg items-center px-4 md:h-auto md:px-6 md:pt-8 md:pb-2">
+      <h1 class="min-w-0 flex-1 truncate text-xl font-semibold">Pengaturan</h1>
+    </div>
+  </header>
+  <div class="mx-auto max-w-lg px-4 pt-4 md:px-6">
+    <div data-banner-halaman hidden class="mb-4"></div>
+    <div id="memuat"></div>
+    <form id="form-pengaturan" class="space-y-6" novalidate hidden>
+      <section class="space-y-3" aria-labelledby="judul-perhitungan">
+        <h2 id="judul-perhitungan" class="{{judulBagian}}">Perhitungan</h2>
+        <div class="{{kartu}} space-y-5">
+          <div>
+            <label for="markup" class="{{label}}">Default markup</label>
+            <div class="{{inputGrup}}" data-input-grup>
+              <input id="markup" name="default_markup_persen" type="text" inputmode="decimal" class="{{inputDalamGrup}}" autocomplete="off" enterkeyhint="next" aria-describedby="markup-bantuan">
+              <span class="{{imbuhan}}" aria-hidden="true">%</span>
+            </div>
+            <p id="markup-bantuan" class="{{bantuan}}">Terisi otomatis di form barang. Tidak mengubah barang yang sudah ada.</p>
+          </div>
+          <div>
+            <label for="buffer" class="{{label}}">Buffer kurs AUD</label>
+            <div class="{{inputGrup}}" data-input-grup>
+              <input id="buffer" name="buffer_aud_persen" type="text" inputmode="decimal" class="{{inputDalamGrup}}" autocomplete="off" enterkeyhint="next" aria-describedby="buffer-bantuan">
+              <span class="{{imbuhan}}" aria-hidden="true">%</span>
+            </div>
+            <p id="buffer-bantuan" class="{{bantuan}}">Ditambahkan ke kurs pasar saat kurs otomatis diambil. Tidak mengubah kurs Open PO yang sudah ada.</p>
+          </div>
+          <div>
+            <label for="dp" class="{{label}}">DP</label>
+            <div class="{{inputGrup}}" data-input-grup>
+              <input id="dp" name="dp_persen" type="text" inputmode="decimal" class="{{inputDalamGrup}}" autocomplete="off" enterkeyhint="done" aria-describedby="dp-bantuan">
+              <span class="{{imbuhan}}" aria-hidden="true">%</span>
+            </div>
+            <p id="dp-bantuan" class="{{bantuan}}">Persentase DP dari total keranjang. Berlaku untuk Open PO baru.</p>
+          </div>
+        </div>
+      </section>
+      <div data-banner-form hidden></div>
+      <button type="submit" id="tombol-simpan" class="{{tombolPrimary}} w-full md:w-auto">Simpan pengaturan</button>
+    </form>
+    <div class="mt-6 md:hidden">
+      <button type="button" data-keluar class="{{tombolSecondary}} w-full">
+        <!-- @ikon arrow-right-start-on-rectangle 24 size-5 -->
+        Keluar
+      </button>
+    </div>
+  </div>
+</main>
+<!-- @include bottomnav aktif=pengaturan -->
+<!-- @include toast -->
+</body>
+</html>

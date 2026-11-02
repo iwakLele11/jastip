@@ -21,6 +21,7 @@ Pengguna: satu admin (pemilik jastip). Customer tidak login; mereka memesan lewa
 | [`frontend/`](frontend/) | HTML + Tailwind CSS v4 + JavaScript vanilla (MPA). Lihat [`frontend/README.md`](frontend/README.md) |
 | [`docs/product/scope-mvp.md`](docs/product/scope-mvp.md) | Scope, aturan bisnis, rumus, contoh hitungan QA |
 | [`docs/product/panduan-penggunaan.md`](docs/product/panduan-penggunaan.md) | Panduan pemakaian aplikasi untuk admin (bahasa sederhana) |
+| [`docs/product/panduan-cepat-admin.md`](docs/product/panduan-cepat-admin.md) | Panduan cepat 1 halaman untuk admin |
 | [`docs/design/ui-spec.md`](docs/design/ui-spec.md) | Spesifikasi UI/UX, palet warna, microcopy |
 | [`docs/design/screenshots/`](docs/design/screenshots/) | Screenshot hasil test E2E (`m-` = HP 360px, `d-` = desktop) |
 | [`docs/api/api-contract.md`](docs/api/api-contract.md) | Kontrak API v1 |

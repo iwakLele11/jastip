@@ -78,6 +78,7 @@ final class KeranjangService
             (string) $cart['open_po']['nama'],
             (string) $cart['customer']['nama'],
             WhatsAppNumber::fromCanonical((string) $cart['customer']['no_wa'])->display(),
+            $cart['customer']['alamat'] === null ? null : (string) $cart['customer']['alamat'],
             $items,
             $cart['summary'],
         );

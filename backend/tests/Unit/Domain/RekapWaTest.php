@@ -48,7 +48,7 @@ final class RekapWaTest extends TestCase
 
     private static function rekap(CartSummary $summary, bool $bKosong = false): string
     {
-        return RekapWa::text('Open PO Australia Nov 2026', 'Rina', '081234567890', self::items($bKosong), $summary);
+        return RekapWa::text('Open PO Australia Nov 2026', 'Rina', '081234567890', null, self::items($bKosong), $summary);
     }
 
     public function testBelumBayar(): void
@@ -131,7 +131,7 @@ final class RekapWaTest extends TestCase
 
     public function testPersenDesimalMemakaiKoma(): void
     {
-        $text = RekapWa::text('PO', 'Rina', '081234567890', [
+        $text = RekapWa::text('PO', 'Rina', '081234567890', null, [
             new RekapItem('Barang A', 1, 100_000, 100_000, false),
         ], CartCalculator::summarize(100_000, 3_750, 0, 0));
 
@@ -148,13 +148,32 @@ final class RekapWaTest extends TestCase
             . "DP 50%: Rp0\n"
             . "*Sisa pelunasan: Rp0*\n"
             . 'Status: LUNAS ✅',
-            RekapWa::text('PO', 'Rina', '081234567890', [], CartCalculator::summarize(0, 5_000, 0, 0)),
+            RekapWa::text('PO', 'Rina', '081234567890', null, [], CartCalculator::summarize(0, 5_000, 0, 0)),
         );
+    }
+
+    public function testAlamatTampilJikaTerisi(): void
+    {
+        $text = RekapWa::text('PO', 'Rina', '081234567890', 'Jl. Melati No. 5, Jakarta', [], CartCalculator::summarize(0, 5_000, 0, 0));
+        self::assertStringStartsWith(
+            "*REKAP JASTIP - PO*\nCustomer: Rina (081234567890)\nAlamat: Jl. Melati No. 5, Jakarta\n\n",
+            $text,
+        );
+    }
+
+    public function testAlamatTidakTampilJikaKosong(): void
+    {
+        // null dan string kosong/spasi: baris "Alamat:" tidak muncul sama sekali.
+        foreach ([null, '', '   '] as $alamat) {
+            $text = RekapWa::text('PO', 'Rina', '081234567890', $alamat, [], CartCalculator::summarize(0, 5_000, 0, 0));
+            self::assertStringNotContainsString('Alamat:', $text);
+            self::assertStringStartsWith("*REKAP JASTIP - PO*\nCustomer: Rina (081234567890)\n\n", $text);
+        }
     }
 
     public function testNamaBerisiBarisBaruDijadikanSatuBaris(): void
     {
-        $text = RekapWa::text(" PO\nNov ", "Rina \t Sari", '081234567890', [
+        $text = RekapWa::text(" PO\nNov ", "Rina \t Sari", '081234567890', null, [
             new RekapItem("Barang\r\nA ", 1, 1_000, 1_000, false),
         ], CartCalculator::summarize(1_000, 5_000, 0, 0));
 

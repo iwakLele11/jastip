@@ -234,9 +234,12 @@ Fitur paling sering dipakai untuk komunikasi ke customer.
 2. Klik **Salin rekap WA**. Teks rekap tersalin ke clipboard.
 3. Buka WhatsApp customer, **tempel** (paste), kirim.
 
-Isi rekap otomatis rapi: daftar barang, total, DP, yang sudah dibayar, sisa, dan status. Format
-rupiah seperti `Rp2.551.000`, dan tulisan tebal WhatsApp (`*teks*`) tampil benar. Barang Kosong
-ditandai, barang yang dikembalikan ditampilkan.
+Isi rekap otomatis rapi: alamat customer (kalau diisi), daftar barang, total, DP, yang sudah
+dibayar, sisa, dan status. Format rupiah seperti `Rp2.551.000`, dan tulisan tebal WhatsApp
+(`*teks*`) tampil benar. Barang Kosong ditandai, barang yang dikembalikan ditampilkan.
+
+Baris **Alamat** hanya muncul kalau customer punya alamat. Kalau alamatnya belum diisi, baris itu
+tidak ditampilkan (rekap tetap rapi).
 
 Rekap **tidak** menampilkan harga asli AUD, kurs, atau markup — jadi aman dikirim ke customer.
 
@@ -245,6 +248,7 @@ Contoh hasil rekap:
 ```
 *REKAP JASTIP - Open PO Australia Nov 2026*
 Customer: Rina (0812xxxxxxxx)
+Alamat: Jl. Melati No. 5, Jakarta
 
 1. Barang A
    2 x Rp359.000 = Rp718.000

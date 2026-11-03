@@ -9,6 +9,7 @@ namespace Jastip\Domain;
  *
  *   *REKAP JASTIP - {nama Open PO}*
  *   Customer: {nama} ({no WA})
+ *   Alamat: {alamat}        (hanya jika alamat terisi)
  *
  *   {n}. {nama barang}
  *      {qty} x {harga/unit} = {subtotal}
@@ -36,14 +37,19 @@ final class RekapWa
         string $namaOpenPo,
         string $namaCustomer,
         string $noWaTampil,
+        ?string $alamat,
         array $items,
         CartSummary $summary,
     ): string {
         $lines = [
             '*REKAP JASTIP - ' . self::singleLine($namaOpenPo) . '*',
             'Customer: ' . self::singleLine($namaCustomer) . ' (' . $noWaTampil . ')',
-            '',
         ];
+        // Alamat opsional: baris hanya muncul jika terisi (bukan kosong/spasi saja).
+        if ($alamat !== null && self::singleLine($alamat) !== '') {
+            $lines[] = 'Alamat: ' . self::singleLine($alamat);
+        }
+        $lines[] = '';
 
         foreach ($items as $i => $item) {
             $nomor = ($i + 1) . '. ' . self::singleLine($item->namaBarang);

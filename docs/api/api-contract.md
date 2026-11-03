@@ -693,7 +693,7 @@ Selalu diizinkan. Status bisa kembali ke Lebih bayar. `200` objek keranjang.
 ```
 Format persis ui-spec §9.6 (sumber kebenaran untuk kata-kata; contoh di scope-mvp.md adalah draf awal):
 
-- Judul `*REKAP JASTIP - {nama PO}*`, baris `Customer: {nama} ({no_wa_tampil})`, baris kosong.
+- Judul `*REKAP JASTIP - {nama PO}*`, baris `Customer: {nama} ({no_wa_tampil})`, lalu `Alamat: {alamat}` hanya jika alamat customer terisi (dilewati kalau kosong), baris kosong.
 - Barang bernomor sesuai urutan `barang`. Baris qty diindentasi 3 spasi: `{qty} x {Rp unit} = {Rp subtotal}`. Barang Kosong: `{n}. {nama} (Kosong, tidak ditagih)` tanpa baris qty.
 - Baris kosong, `*Total: {total}*`, `DP {dp_persen}%: {dp}` (persen memakai koma desimal, mis. `DP 37,5%`).
 - `Sudah dibayar: {total_pembayaran}` jika ada pembayaran atau pengembalian dana. `Dikembalikan: {total_pengembalian}` jika ada pengembalian dana.

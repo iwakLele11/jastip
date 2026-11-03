@@ -1,0 +1,10 @@
+# QA-A-01: nextAman() (frontend/src/js/lib/rute.js) mengembalikan URL relatif-protokol
+# Dibuat qa/tools/bukti.mjs, 2026-10-26T09:32:05.132Z, target http://127.0.0.1:8090 (dev-stack)
+
+nextAman("/..//evil.example/index.html", "https://jastipku.rf.gd") = "//evil.example/index.html"  → location.replace() membuka https://evil.example/index.html
+nextAman("/.//evil.example/index.html", "https://jastipku.rf.gd") = "//evil.example/index.html"  → location.replace() membuka https://evil.example/index.html
+nextAman("/%2e%2e//evil.example/po.html", "https://jastipku.rf.gd") = "//evil.example/po.html"  → location.replace() membuka https://evil.example/po.html
+nextAman("//evil.example/index.html", "https://jastipku.rf.gd") = null
+
+Chromium (qa/frontend/next-redirect.mjs, RED-04): Setelah login browser membuka http://evil.example/index.html (request dicegat: http://evil.example/index.html); isi halaman: HALAMAN PENYERANG
+Screenshot: docs/qa/bukti/open-redirect-next.png

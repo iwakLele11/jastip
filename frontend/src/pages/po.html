@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="id">
+<head>
+<!-- @include head -->
+<title>Open PO · Jastip Admin</title>
+<script type="module" src="js/pages/open-po-detail.js"></script>
+</head>
+<body class="bg-page text-ink antialiased">
+<!-- @include lewati -->
+<!-- @include topnav aktif=open-po -->
+<main id="konten" class="pb-28 md:pb-10">
+  <header class="sticky top-0 z-20 border-b border-line bg-page">
+    <div class="mx-auto flex min-h-14 max-w-6xl items-center gap-1 px-2 py-1 md:gap-3 md:px-4">
+      <a href="index.html" data-kembali class="{{tombolIkon}}" aria-label="Kembali"><!-- @ikon chevron-left 24 size-6 --></a>
+      <h1 id="judul" class="min-w-0 flex-1 text-xl font-semibold break-words">Open PO</h1>
+      <button type="button" id="tambah-customer-header" class="{{tombolPrimary}} max-md:hidden" aria-haspopup="dialog" hidden>+ Tambah customer</button>
+      <a id="tautan-ubah" href="po-form.html" class="{{tombolGhost}}" hidden>Ubah</a>
+    </div>
+  </header>
+  <div class="mx-auto max-w-6xl px-4 pt-4 md:px-6">
+    <div data-banner-halaman hidden class="mb-4"></div>
+    <div id="memuat"></div>
+    <div id="isi-po" class="lg:flex lg:items-start lg:gap-6" hidden>
+      <div id="kolom-kiri" class="space-y-4 lg:sticky lg:top-18 lg:w-80 lg:shrink-0"></div>
+      <section class="mt-6 min-w-0 flex-1 space-y-3 lg:mt-0" aria-labelledby="judul-customer">
+        <h2 id="judul-customer" class="{{judulBagian}}">Customer</h2>
+        <div id="banner-customer" hidden></div>
+        <fieldset id="filter-status" hidden>
+          <legend class="sr-only">Filter status</legend>
+          <div id="chip-status" class="flex flex-wrap gap-2"></div>
+        </fieldset>
+        <div id="daftar-customer"></div>
+      </section>
+    </div>
+  </div>
+</main>
+<button type="button" id="fab-customer" data-fab class="{{fab}} bottom-[calc(1rem+env(safe-area-inset-bottom))]" aria-haspopup="dialog" hidden>+ Customer</button>
+<!-- @include toast -->
+</body>
+</html>

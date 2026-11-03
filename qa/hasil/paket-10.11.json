@@ -1,0 +1,777 @@
+{
+  "waktu": "2026-10-26T09:28:16.797956Z",
+  "target": "http://127.0.0.1:8282 (Apache + PHP-FPM, paket htdocs, MariaDB 10.11)",
+  "total": 128,
+  "lulus": 128,
+  "gagal": 0,
+  "hasil": [
+    {
+      "id": "PKT-D00",
+      "judul": "versi server",
+      "lulus": true,
+      "catatan": "10.11"
+    },
+    {
+      "id": "PKT-D01",
+      "judul": "impor install.sql ke DB kosong",
+      "lulus": true,
+      "catatan": "0 "
+    },
+    {
+      "id": "PKT-D02",
+      "judul": "11 tabel, semua utf8mb4_unicode_ci",
+      "lulus": true,
+      "catatan": "11 11"
+    },
+    {
+      "id": "PKT-D03",
+      "judul": "schema_migrations berisi 001_init; pengaturan awal 10%/3%/50%",
+      "lulus": true,
+      "catatan": "001_init 1000 300 5000"
+    },
+    {
+      "id": "PKT-D04",
+      "judul": "CHECK constraint aktif setelah impor (baris pengaturan kedua ditolak)",
+      "lulus": true,
+      "catatan": "ditolak"
+    },
+    {
+      "id": "PKT-D05",
+      "judul": "impor kedua gagal di pernyataan pertama (Table 'schema_migrations' already exists)",
+      "lulus": true,
+      "catatan": "-------------- CREATE TABLE schema_migrations ( version VARCHAR(191) NOT NULL PRIMARY KEY, applied_at DATETIME NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci --------------  ERROR 1050 (42S01) at line 12: Table 'schema_migrations' already exists"
+    },
+    {
+      "id": "PKT-D06",
+      "judul": "baris error = CREATE TABLE schema_migrations (pernyataan pertama setelah SET)",
+      "lulus": true,
+      "catatan": "12"
+    },
+    {
+      "id": "PKT-D07",
+      "judul": "impor kedua tidak mengubah skema/data (checksum)",
+      "lulus": true,
+      "catatan": "8c91a5f1dbe2"
+    },
+    {
+      "id": "PKT-D08",
+      "judul": "migrate.php status dari paket: 001_init sudah",
+      "lulus": true,
+      "catatan": "001_init sudah"
+    },
+    {
+      "id": "PKT-U01",
+      "judul": "upgrade 003 sebelum 002 → gagal di pernyataan pertama, tanpa perubahan",
+      "lulus": true,
+      "catatan": "-------------- INSERT INTO schema_migrations (version, applied_at) VALUES ('003_qa_lagi', (SELECT UTC_TIMESTAMP() FROM schema_migrations WHERE version = '002_qa_contoh')) --------------  ERROR 1048 (23000) at line 14: Column 'applied_at' cannot be null 0"
+    },
+    {
+      "id": "PKT-U02",
+      "judul": "upgrade 002 (normal) berhasil dan tercatat",
+      "lulus": true,
+      "catatan": " 001_init,002_qa_contoh"
+    },
+    {
+      "id": "PKT-U03",
+      "judul": "upgrade 002 diimpor ulang → Duplicate entry di pernyataan pertama",
+      "lulus": true,
+      "catatan": "-------------- INSERT INTO schema_migrations (version, applied_at) VALUES ('002_qa_contoh', (SELECT UTC_TIMESTAMP() FROM schema_migrations WHERE version = '001_init')) --------------  ERROR 1062 (23000) at line 14: Duplicate entry '002_qa_contoh' for key 'PRIMARY'"
+    },
+    {
+      "id": "PKT-U04",
+      "judul": "migrate.php status setelah upgrade SQL: 002 tercatat 'sudah' (tidak dijalankan ulang)",
+      "lulus": true,
+      "catatan": "001_init sudah 002_qa_contoh sudah"
+    },
+    {
+      "id": "PKT-A01",
+      "judul": "--sql: exit 0, STDOUT 2 komentar + 1 INSERT, pesan di STDERR",
+      "lulus": true,
+      "catatan": "0 2 1 ya"
+    },
+    {
+      "id": "PKT-A02",
+      "judul": "--sql: STDOUT tidak memuat kata sandi; hash bcrypt cocok dengan kata sandi",
+      "lulus": true,
+      "catatan": "tidak cocok"
+    },
+    {
+      "id": "PKT-A03",
+      "judul": "SQL admin diimpor: 1 row inserted",
+      "lulus": true,
+      "catatan": "1"
+    },
+    {
+      "id": "PKT-A04",
+      "judul": "nama tidak valid (ab, 'nama spasi', pémilik, 51 karakter) → exit 2 tanpa SQL",
+      "lulus": true,
+      "catatan": "2: 2: 2: 2:"
+    },
+    {
+      "id": "PKT-A05",
+      "judul": "kata sandi < 10 karakter / > 72 byte → exit 1 tanpa SQL",
+      "lulus": true,
+      "catatan": "1: 1:"
+    },
+    {
+      "id": "PKT-A06",
+      "judul": "opsi tidak dikenal (--sq) → exit 2",
+      "lulus": true,
+      "catatan": "2"
+    },
+    {
+      "id": "PKT-A07",
+      "judul": "INSERT kedua untuk nama sama beda huruf (PEMILIK) ditolak Duplicate entry, admin tetap 1",
+      "lulus": true,
+      "catatan": "-------------- INSERT INTO admin (nama_pengguna, password_hash) VALUES ('PEMILIK', '$2y$12$6dcJqVLlun/pQdl7jzuF6OtzlgbiS5P8A7IgIefuHMHv/xLtleijW') --------------  ERROR 1062 (23000) at line 3: Duplicate entry 'PEMILIK' for key 'uq_admin_nama_pengguna' 1"
+    },
+    {
+      "id": "PKT-H00",
+      "judul": "/ melayani index.html (bukan index.php)",
+      "lulus": true,
+      "catatan": "3d6e717e19761b05f571d7305ef1e513  -"
+    },
+    {
+      "id": "PKT-H01 /",
+      "judul": "HTML /: XFO | nosniff | Referrer-Policy | Cache-Control",
+      "lulus": true,
+      "catatan": "SAMEORIGIN|nosniff|no-referrer|no-cache"
+    },
+    {
+      "id": "PKT-H01 /index.html",
+      "judul": "HTML /index.html: XFO | nosniff | Referrer-Policy | Cache-Control",
+      "lulus": true,
+      "catatan": "SAMEORIGIN|nosniff|no-referrer|no-cache"
+    },
+    {
+      "id": "PKT-H01 /login.html",
+      "judul": "HTML /login.html: XFO | nosniff | Referrer-Policy | Cache-Control",
+      "lulus": true,
+      "catatan": "SAMEORIGIN|nosniff|no-referrer|no-cache"
+    },
+    {
+      "id": "PKT-H01 /keranjang.html",
+      "judul": "HTML /keranjang.html: XFO | nosniff | Referrer-Policy | Cache-Control",
+      "lulus": true,
+      "catatan": "SAMEORIGIN|nosniff|no-referrer|no-cache"
+    },
+    {
+      "id": "PKT-H02 /css/app.css",
+      "judul": "CSS/JS /css/app.css: Cache-Control immutable + nosniff",
+      "lulus": true,
+      "catatan": "public, max-age=31536000, immutable|nosniff"
+    },
+    {
+      "id": "PKT-H02 /js/pages/open-po-list.js",
+      "judul": "CSS/JS /js/pages/open-po-list.js: Cache-Control immutable + nosniff",
+      "lulus": true,
+      "catatan": "public, max-age=31536000, immutable|nosniff"
+    },
+    {
+      "id": "PKT-H02 /js/awal.js",
+      "judul": "CSS/JS /js/awal.js: Cache-Control immutable + nosniff",
+      "lulus": true,
+      "catatan": "public, max-age=31536000, immutable|nosniff"
+    },
+    {
+      "id": "PKT-H03",
+      "judul": "JS dilayani dengan Content-Type JavaScript (nosniff tidak memblokir modul)",
+      "lulus": true,
+      "catatan": "application/javascript"
+    },
+    {
+      "id": "PKT-H04",
+      "judul": "tanpa X-Powered-By di HTML, CSS, JS, SVG, API 200/401/404, 403, 404, skrip PHP polos",
+      "lulus": true,
+      "catatan": null
+    },
+    {
+      "id": "PKT-H05",
+      "judul": "API: Cache-Control no-store, nosniff dan Referrer-Policy tepat sekali",
+      "lulus": true,
+      "catatan": "no-store|nosniff|no-referrer"
+    },
+    {
+      "id": "PKT-H06",
+      "judul": "tanpa CORS: GET API dari Origin asing tanpa Access-Control-Allow-Origin",
+      "lulus": true,
+      "catatan": null
+    },
+    {
+      "id": "PKT-F01 /app",
+      "judul": "/app → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F02 /app/",
+      "judul": "/app/ → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F03 /app/.env",
+      "judul": "/app/.env → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F04 /app/.env.txt",
+      "judul": "/app/.env.txt → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F05 /app/.env.contoh-lokal",
+      "judul": "/app/.env.contoh-lokal → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F06 /app/.env.contoh-infinityfree",
+      "judul": "/app/.env.contoh-infinityfree → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F07 /app/install.sql",
+      "judul": "/app/install.sql → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F08 /app/storage/logs/app.log",
+      "judul": "/app/storage/logs/app.log → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F09 /app/storage/logs/",
+      "judul": "/app/storage/logs/ → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F10 /app/vendor/autoload.php",
+      "judul": "/app/vendor/autoload.php → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F11 /app/vendor/composer/installed.json",
+      "judul": "/app/vendor/composer/installed.json → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F12 /app/src/Bootstrap/AppFactory.php",
+      "judul": "/app/src/Bootstrap/AppFactory.php → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F13 /app/src/Http/Kernel.php",
+      "judul": "/app/src/Http/Kernel.php → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F14 /app/bin/create-admin.php",
+      "judul": "/app/bin/create-admin.php → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F15 /app/bin/migrate.php",
+      "judul": "/app/bin/migrate.php → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F16 /app/database/migrations/001_init.sql",
+      "judul": "/app/database/migrations/001_init.sql → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F17 /app/.htaccess",
+      "judul": "/app/.htaccess → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F18 /.htaccess",
+      "judul": "/.htaccess → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F19 /.HTACCESS",
+      "judul": "/.HTACCESS → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F20 /.env",
+      "judul": "/.env → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F21 /.git/config",
+      "judul": "/.git/config → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F22 /APP/.env",
+      "judul": "/APP/.env → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F23 /App/install.sql",
+      "judul": "/App/install.sql → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F24 /aPp/vendor/autoload.php",
+      "judul": "/aPp/vendor/autoload.php → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F25 /%61pp/.env",
+      "judul": "/%61pp/.env → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F26 /%41PP/install.sql",
+      "judul": "/%41PP/install.sql → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F27 /app%2f.env",
+      "judul": "/app%2f.env ditolak (403/404, bukan isi file)",
+      "lulus": true,
+      "catatan": "404"
+    },
+    {
+      "id": "PKT-F28 /app/.env/",
+      "judul": "/app/.env/ → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F29 /app/.env.",
+      "judul": "/app/.env. → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F30 /app/install.sql.",
+      "judul": "/app/install.sql. → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F31 /app/install.sql%20",
+      "judul": "/app/install.sql%20 → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F32 /app/install.sql%00",
+      "judul": "/app/install.sql%00 ditolak (403/404, bukan isi file)",
+      "lulus": true,
+      "catatan": "404"
+    },
+    {
+      "id": "PKT-F33 /./app/.env",
+      "judul": "/./app/.env → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F34 //app/.env",
+      "judul": "//app/.env → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F35 /js/../app/.env",
+      "judul": "/js/../app/.env → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F36 /api/../app/.env",
+      "judul": "/api/../app/.env → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F37 /index.php/../app/.env",
+      "judul": "/index.php/../app/.env → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F38 /app/./.env",
+      "judul": "/app/./.env → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F39 /admin.sql",
+      "judul": "/admin.sql → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F40 /Backup.SQL",
+      "judul": "/Backup.SQL → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F41 /error.log",
+      "judul": "/error.log → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F42 /php_error.LOG",
+      "judul": "/php_error.LOG → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F43 /app./.env",
+      "judul": "/app./.env → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F44 /app./vendor/autoload.php",
+      "judul": "/app./vendor/autoload.php → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F45 /app./src/Bootstrap/AppFactory.php",
+      "judul": "/app./src/Bootstrap/AppFactory.php → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F46 /app./bin/create-admin.php",
+      "judul": "/app./bin/create-admin.php → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F47 /App%20/vendor/autoload.php",
+      "judul": "/App%20/vendor/autoload.php → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F48 /APP/vendor/autoload.php",
+      "judul": "/APP/vendor/autoload.php → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-F90",
+      "judul": "kontrol: /.well-known/acme-challenge/uji.txt tetap 200 (verifikasi SSL)",
+      "lulus": true,
+      "catatan": "200"
+    },
+    {
+      "id": "PKT-F91",
+      "judul": "isi .env / install.sql / .sql tidak pernah ada di body respons",
+      "lulus": true,
+      "catatan": "0"
+    },
+    {
+      "id": "PKT-L01 /js/",
+      "judul": "listing /js/ dimatikan → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-L01 /css/",
+      "judul": "listing /css/ dimatikan → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-L01 /js/pages/",
+      "judul": "listing /js/pages/ dimatikan → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-L01 /js/lib/",
+      "judul": "listing /js/lib/ dimatikan → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-L01 /.well-known/",
+      "judul": "listing /.well-known/ dimatikan → 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-L02",
+      "judul": "/index.php langsung → 404 JSON (bukan halaman lain)",
+      "lulus": true,
+      "catatan": "404 ENDPOINT_TIDAK_DITEMUKAN"
+    },
+    {
+      "id": "PKT-L03",
+      "judul": "/index.php/api/v1/health (PATH_INFO) tidak melayani API",
+      "lulus": true,
+      "catatan": "404"
+    },
+    {
+      "id": "PKT-L04",
+      "judul": "/api dan /api/ → 404 JSON dari API; /apix dan /api.html → 404 Apache",
+      "lulus": true,
+      "catatan": "404 404 404 404 application/json"
+    },
+    {
+      "id": "PKT-L05",
+      "judul": "/api/v1/health lewat rewrite → 200",
+      "lulus": true,
+      "catatan": "{\"data\":{\"status\":\"ok\",\"database\":\"ok\"}}"
+    },
+    {
+      "id": "PKT-L06",
+      "judul": "header Authorization (Bearer) sampai ke PHP lewat FastCGI",
+      "lulus": true,
+      "catatan": "401 BELUM_MASUK"
+    },
+    {
+      "id": "PKT-P01",
+      "judul": "login admin dari SQL --sql",
+      "lulus": true,
+      "catatan": "pemilik"
+    },
+    {
+      "id": "PKT-P02",
+      "judul": "cookie lokal jastip_sesi (development, http)",
+      "lulus": true,
+      "catatan": "jastip_sesi"
+    },
+    {
+      "id": "PKT-P03",
+      "judul": "origin lain ditolak",
+      "lulus": true,
+      "catatan": "ORIGIN_DITOLAK"
+    },
+    {
+      "id": "PKT-A10",
+      "judul": "sebelum reset: sesi cookie dan token mobile aktif",
+      "lulus": true,
+      "catatan": "200 200"
+    },
+    {
+      "id": "PKT-A11",
+      "judul": "--reset: START TRANSACTION, UPDATE … WHERE nama_pengguna = 'Pemilik', DELETE sesi_login, COMMIT",
+      "lulus": true,
+      "catatan": "1 1 1 1"
+    },
+    {
+      "id": "PKT-A12",
+      "judul": "impor --reset (nama beda huruf): UPDATE 1 row affected, DELETE ≥ 2 sesi",
+      "lulus": true,
+      "catatan": "1 ya"
+    },
+    {
+      "id": "PKT-A13",
+      "judul": "setelah reset: sesi lama 401, token mobile 401, sandi lama 401, sandi baru 200",
+      "lulus": true,
+      "catatan": "401 401 401 200"
+    },
+    {
+      "id": "PKT-A14",
+      "judul": "--reset untuk nama yang tidak ada: UPDATE 0 rows (sesuai panduan: 0 = salah ketik)",
+      "lulus": true,
+      "catatan": "0"
+    },
+    {
+      "id": "PKT-S01",
+      "judul": "4 baris berubah",
+      "lulus": true,
+      "catatan": "4"
+    },
+    {
+      "id": "PKT-S02",
+      "judul": "http halaman → 301 ke https dengan path + query",
+      "lulus": true,
+      "catatan": "301 https://127.0.0.1:8282/po.html?id=1"
+    },
+    {
+      "id": "PKT-S03",
+      "judul": "http API → 301 ke https",
+      "lulus": true,
+      "catatan": "301 https://127.0.0.1:8282/api/v1/health"
+    },
+    {
+      "id": "PKT-S04",
+      "judul": "di belakang proxy HTTPS (X-Forwarded-Proto / CF-Visitor) → 200 tanpa loop",
+      "lulus": true,
+      "catatan": "200 200 200"
+    },
+    {
+      "id": "PKT-S05",
+      "judul": "dengan HTTPS aktif /app/.env dan /.htaccess tetap 403",
+      "lulus": true,
+      "catatan": "403 403"
+    },
+    {
+      "id": "PKT-C01a",
+      "judul": "APP_ENV=production + SESSION_COOKIE_SECURE=false: health 500 dengan pesan generik",
+      "lulus": true,
+      "catatan": "500 {\"error\":{\"kode\":\"KESALAHAN_SERVER\",\"pesan\":\"Terjadi kesalahan di server. Coba lagi beberapa saat lagi.\"}}"
+    },
+    {
+      "id": "PKT-C01b",
+      "judul": "APP_ENV=production + SESSION_COOKIE_SECURE=false: alasan tercatat di app/storage/logs/app.log",
+      "lulus": true,
+      "catatan": "{\"waktu\":\"2026-10-26T09:28:16Z\",\"level\":\"error\",\"kejadian\":\"gagal_memulai_aplikasi\",\"konteks\":{\"alasan\":\"konfigurasi: SESSION_COOKIE_SECURE wajib true di production (HTTPS).\"}}"
+    },
+    {
+      "id": "PKT-C01c",
+      "judul": "APP_ENV=production + SESSION_COOKIE_SECURE=false: respons tidak memuat alasan/rahasia",
+      "lulus": true,
+      "catatan": "0"
+    },
+    {
+      "id": "PKT-C02a",
+      "judul": "APP_ENV=production + origin http: health 500 dengan pesan generik",
+      "lulus": true,
+      "catatan": "500 {\"error\":{\"kode\":\"KESALAHAN_SERVER\",\"pesan\":\"Terjadi kesalahan di server. Coba lagi beberapa saat lagi.\"}}"
+    },
+    {
+      "id": "PKT-C02b",
+      "judul": "APP_ENV=production + origin http: alasan tercatat di app/storage/logs/app.log",
+      "lulus": true,
+      "catatan": "{\"waktu\":\"2026-10-26T09:28:16Z\",\"level\":\"error\",\"kejadian\":\"gagal_memulai_aplikasi\",\"konteks\":{\"alasan\":\"konfigurasi: APP_ALLOWED_ORIGINS di production wajib https.\"}}"
+    },
+    {
+      "id": "PKT-C02c",
+      "judul": "APP_ENV=production + origin http: respons tidak memuat alasan/rahasia",
+      "lulus": true,
+      "catatan": "0"
+    },
+    {
+      "id": "PKT-C03a",
+      "judul": "production + salah satu origin http: health 500 dengan pesan generik",
+      "lulus": true,
+      "catatan": "500 {\"error\":{\"kode\":\"KESALAHAN_SERVER\",\"pesan\":\"Terjadi kesalahan di server. Coba lagi beberapa saat lagi.\"}}"
+    },
+    {
+      "id": "PKT-C03b",
+      "judul": "production + salah satu origin http: alasan tercatat di app/storage/logs/app.log",
+      "lulus": true,
+      "catatan": "{\"waktu\":\"2026-10-26T09:28:16Z\",\"level\":\"error\",\"kejadian\":\"gagal_memulai_aplikasi\",\"konteks\":{\"alasan\":\"konfigurasi: APP_ALLOWED_ORIGINS di production wajib https.\"}}"
+    },
+    {
+      "id": "PKT-C03c",
+      "judul": "production + salah satu origin http: respons tidak memuat alasan/rahasia",
+      "lulus": true,
+      "catatan": "0"
+    },
+    {
+      "id": "PKT-C04a",
+      "judul": "APP_ENV salah ketik (produksi): health 500 dengan pesan generik",
+      "lulus": true,
+      "catatan": "500 {\"error\":{\"kode\":\"KESALAHAN_SERVER\",\"pesan\":\"Terjadi kesalahan di server. Coba lagi beberapa saat lagi.\"}}"
+    },
+    {
+      "id": "PKT-C04b",
+      "judul": "APP_ENV salah ketik (produksi): alasan tercatat di app/storage/logs/app.log",
+      "lulus": true,
+      "catatan": "{\"waktu\":\"2026-10-26T09:28:16Z\",\"level\":\"error\",\"kejadian\":\"gagal_memulai_aplikasi\",\"konteks\":{\"alasan\":\"konfigurasi: APP_ENV harus salah satu dari: development, staging, production, testing\"}}"
+    },
+    {
+      "id": "PKT-C04c",
+      "judul": "APP_ENV salah ketik (produksi): respons tidak memuat alasan/rahasia",
+      "lulus": true,
+      "catatan": "0"
+    },
+    {
+      "id": "PKT-C05a",
+      "judul": "app/.env tidak ada (tersimpan sebagai .env.txt): health 500 dengan pesan generik",
+      "lulus": true,
+      "catatan": "500 {\"error\":{\"kode\":\"KESALAHAN_SERVER\",\"pesan\":\"Terjadi kesalahan di server. Coba lagi beberapa saat lagi.\"}}"
+    },
+    {
+      "id": "PKT-C05b",
+      "judul": "app/.env tidak ada (tersimpan sebagai .env.txt): alasan tercatat di app/storage/logs/app.log",
+      "lulus": true,
+      "catatan": "{\"waktu\":\"2026-10-26T09:28:16Z\",\"level\":\"error\",\"kejadian\":\"gagal_memulai_aplikasi\",\"konteks\":{\"alasan\":\"konfigurasi: DB_NAME wajib diisi. (file app/.env tidak ditemukan)\"}}"
+    },
+    {
+      "id": "PKT-C05c",
+      "judul": "app/.env tidak ada (tersimpan sebagai .env.txt): respons tidak memuat alasan/rahasia",
+      "lulus": true,
+      "catatan": "0"
+    },
+    {
+      "id": "PKT-C06",
+      "judul": "production benar: health 200",
+      "lulus": true,
+      "catatan": "{\"data\":{\"status\":\"ok\",\"database\":\"ok\"}}"
+    },
+    {
+      "id": "PKT-C07",
+      "judul": "production benar: cookie __Host- dengan Secure; HttpOnly; SameSite=Strict",
+      "lulus": true,
+      "catatan": "__Host-jastip_sesi=<token>; Path=/; Max-Age=43200; HttpOnly; SameSite=Strict; Secure"
+    },
+    {
+      "id": "PKT-C08",
+      "judul": "production: Origin http lokal ditolak 403",
+      "lulus": true,
+      "catatan": "403"
+    },
+    {
+      "id": "PKT-C09",
+      "judul": "production, password DB salah: health 503 tanpa detail koneksi",
+      "lulus": true,
+      "catatan": "503 {\"error\":{\"kode\":\"LAYANAN_TIDAK_TERSEDIA\",\"pesan\":\"Database tidak dapat dihubungi.\"}}"
+    },
+    {
+      "id": "PKT-C10",
+      "judul": ".env dengan akhir baris Windows (CRLF, dari Notepad) tetap terbaca",
+      "lulus": true,
+      "catatan": "200"
+    },
+    {
+      "id": "PKT-C11",
+      "judul": ".env UTF-8 dengan BOM (Notepad 'UTF-8 with BOM') tetap terbaca",
+      "lulus": true,
+      "catatan": "200"
+    },
+    {
+      "id": "PKT-C12",
+      "judul": "app.log tidak memuat password DB / kata sandi admin",
+      "lulus": true,
+      "catatan": "0"
+    },
+    {
+      "id": "PKT-E01",
+      "judul": "error.log Apache tanpa error tak terduga",
+      "lulus": true,
+      "catatan": "0"
+    }
+  ]
+}

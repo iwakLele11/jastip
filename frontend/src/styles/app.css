@@ -1,0 +1,56 @@
+/* Tailwind CSS v4. Token warna = ui-spec §2 / §12.1. Nama token = nama kelas utilitas
+   (bg-page, text-ink, bg-lunas-bg text-lunas-fg, dst.). Palet bawaan Tailwind dimatikan
+   supaya hanya warna yang disetujui yang bisa dipakai. */
+@import "tailwindcss" source(none);
+
+@source "../pages";
+@source "../partials";
+@source "../js";
+
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+
+  --color-page: #fbf7eb;
+  --color-surface: #fffdf8;
+  --color-ink: #2b2620;
+  --color-ink-muted: #5e5648;
+  --color-ink-subtle: #736a5a;
+  --color-line: #e6dfcc;
+  --color-line-strong: #8a8070;
+  --color-primary: #2f6d5f;
+  --color-primary-hover: #26594d;
+  --color-primary-soft: #e3eeea;
+  --color-danger: #a33a2a;
+  --color-danger-hover: #8a3324;
+
+  --color-belum-bayar-bg: #f6e3de;
+  --color-belum-bayar-fg: #8a3324;
+  --color-kurang-dp-bg: #f5eacb;
+  --color-kurang-dp-fg: #75550f;
+  --color-dp-bg: #e2eaf3;
+  --color-dp-fg: #2e5378;
+  --color-lunas-bg: #e1eedf;
+  --color-lunas-fg: #2f5e2e;
+  --color-lebih-bayar-bg: #ece3f0;
+  --color-lebih-bayar-fg: #5e3a6e;
+  --color-kosong-bg: #ece8e0;
+  --color-kosong-fg: #5e5648;
+}
+
+@layer base {
+  html {
+    background-color: var(--color-page);
+    color: var(--color-ink);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    min-height: 100dvh;
+  }
+
+  /* Angka uang selalu rata kolom (ui-spec §3.1). */
+  table {
+    font-variant-numeric: tabular-nums;
+  }
+}

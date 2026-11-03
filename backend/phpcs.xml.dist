@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<ruleset name="jastip">
+    <description>PSR-12 untuk back-end jastip.</description>
+    <file>src</file>
+    <file>tests</file>
+    <file>bin</file>
+    <file>public</file>
+    <arg name="extensions" value="php"/>
+    <arg name="colors"/>
+    <arg value="sp"/>
+    <rule ref="PSR12"/>
+    <!-- Skrip CLI dan front controller boleh berisi deklarasi + logika di satu file. -->
+    <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
+        <exclude-pattern>bin/*</exclude-pattern>
+    </rule>
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="140"/>
+            <property name="absoluteLineLimit" value="180"/>
+        </properties>
+    </rule>
+</ruleset>

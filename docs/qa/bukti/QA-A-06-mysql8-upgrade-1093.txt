@@ -1,0 +1,22 @@
+# QA-A-06: pengaman SQL upgrade ditolak MySQL 8.4 (error 1093)
+# Sumber: qa/mysql8/sql-mysql8.sh dan qa/mysql8/test-backend-mysql8.sh, 2026-10-26T09:32:23Z
+
+Server: MySQL 8.4.13 (sql_mode default, collation server utf8mb4_0900_ai_ci)
+
+Upgrade SQL contoh (MigrationSqlExport::upgrade('002_qa_contoh'), sama dengan bin/export-sql.php upgrade):
+  baris 14:INSERT INTO schema_migrations (version, applied_at) VALUES ('002_qa_contoh', (SELECT UTC_TIMESTAMP() FROM schema_migrations WHERE version = '001_init'));
+
+Impor ke DB yang sudah berisi 001_init (kasus normal, seharusnya berhasil):
+  ERROR 1093 (HY000) at line 14: You can't specify target table 'schema_migrations' for update in FROM clause
+
+Setelahnya: schema_migrations = 001_init saja, tabel qa_contoh tidak dibuat (gagal aman, tetapi upgrade tidak pernah bisa jalan).
+
+PHPUnit (backend/bin/test.sh terhadap MySQL 8.4):
+  2) Jastip\Tests\Integration\SqlExportTest::testUpgradeSqlDenganPengaman
+  SQLSTATE[HY000]: General error: 1093 You can't specify target table 'schema_migrations' for update in FROM clause
+  Failed asserting that 1093 is identical to 1048.
+  
+  /projects/sandbox/backend/tests/Integration/SqlExportTest.php:178
+  /projects/sandbox/backend/tests/Integration/SqlExportTest.php:103
+
+Pembanding MariaDB 10.11 / 11.4 (qa/paket/uji-paket.sh PKT-U01..U04): upgrade 002 normal berhasil, impor ulang → 1062 Duplicate entry, urutan salah → 1048 applied_at cannot be null.

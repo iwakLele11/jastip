@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Preview warna & tata letak (bukan kode produksi)</title>
+<style>
+  :root{
+    --page:#FBF7EB; --surface:#FFFDF8; --ink:#2B2620; --muted:#5E5648; --subtle:#736A5A;
+    --line:#E6DFCC; --line-strong:#8A8070; --primary:#2F6D5F; --primary-soft:#E3EEEA;
+    --dp-bg:#E2EAF3; --dp-fg:#2E5378; --lunas-bg:#E1EEDF; --lunas-fg:#2F5E2E;
+    --belum-bg:#F6E3DE; --belum-fg:#8A3324; --lebih-bg:#ECE3F0; --lebih-fg:#5E3A6E;
+    --kurang-bg:#F5EACB; --kurang-fg:#75550F; --kosong-bg:#ECE8E0; --kosong-fg:#5E5648;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:#d9d4c7;padding:24px;color:var(--ink)}
+  .row{display:flex;gap:24px;align-items:flex-start}
+  .phone{width:360px;height:740px;background:var(--page);border-radius:24px;overflow:hidden;position:relative;border:1px solid #bfb8a6}
+  .cap{font-size:13px;color:#4a4438;margin-bottom:8px;font-weight:600}
+  .bar{height:56px;display:flex;align-items:center;gap:8px;padding:0 16px;border-bottom:1px solid var(--line)}
+  .bar h1{font-size:20px;font-weight:600}
+  .bar .sub{font-size:14px;color:var(--muted)}
+  .content{padding:16px;display:flex;flex-direction:column;gap:16px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px}
+  .pad{padding:16px}
+  .sect{font-size:18px;font-weight:600}
+  .muted{color:var(--muted);font-size:14px}
+  .num{font-variant-numeric:tabular-nums}
+  .badge{display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 8px;border-radius:999px;font-size:14px;font-weight:500}
+  .b-dp{background:var(--dp-bg);color:var(--dp-fg)} .b-lunas{background:var(--lunas-bg);color:var(--lunas-fg)}
+  .b-belum{background:var(--belum-bg);color:var(--belum-fg)} .b-lebih{background:var(--lebih-bg);color:var(--lebih-fg)}
+  .b-kurang{background:var(--kurang-bg);color:var(--kurang-fg)} .b-kosong{background:var(--kosong-bg);color:var(--kosong-fg)}
+  .money{display:flex;justify-content:space-between;font-size:16px;padding:4px 0}
+  .money span:first-child{color:var(--muted)}
+  .strong{border-top:1px solid var(--line);margin-top:8px;padding-top:12px}
+  .strong span:last-child{font-size:24px;font-weight:600}
+  .btn{height:44px;border-radius:8px;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;width:100%}
+  .btn-p{background:var(--primary);color:#fff}
+  .btn-s{background:var(--surface);border:1px solid var(--line-strong);color:var(--ink)}
+  .line{padding:12px 16px;border-top:1px solid var(--line)}
+  .line:first-child{border-top:none}
+  .line .t{display:flex;justify-content:space-between;align-items:center;font-weight:600}
+  .line .d{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-top:4px}
+  .line .d b{color:var(--ink);font-weight:600;font-size:16px}
+  .strike{text-decoration:line-through}
+  .sticky{position:absolute;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:12px 16px;display:flex;gap:8px}
+  .nav{position:absolute;left:0;right:0;bottom:0;height:64px;background:var(--page);border-top:1px solid var(--line);display:flex}
+  .nav div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:14px;color:var(--muted);gap:2px}
+  .nav .on{color:var(--primary);font-weight:600}
+  .nav .on i{background:var(--primary-soft)}
+  .nav i{width:56px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-style:normal}
+  .fab{position:absolute;right:16px;bottom:80px;height:56px;padding:0 20px;border-radius:999px;background:var(--primary);color:#fff;font-weight:600;display:flex;align-items:center;box-shadow:0 4px 8px rgba(43,38,32,.2)}
+  .po .t{font-weight:600;display:flex;justify-content:space-between}
+  .legend{width:300px}
+  .sw{display:flex;align-items:center;gap:8px;font-size:13px;margin:6px 0}
+  .sw i{width:28px;height:20px;border-radius:4px;border:1px solid #0002;display:inline-block}
+</style>
+</head>
+<body>
+<div class="row">
+
+  <div>
+    <div class="cap">Beranda: Daftar Open PO (HP 360px)</div>
+    <div class="phone">
+      <div class="bar"><h1>Open PO</h1></div>
+      <div class="content">
+        <div class="sect">Buka (1)</div>
+        <div class="card pad po">
+          <div class="t"><span>Australia Nov 2026</span><span class="muted">›</span></div>
+          <div class="muted" style="margin-top:4px">1 AUD = Rp13.054 &nbsp;<span class="badge b-kosong"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg> Terkunci</span></div>
+          <div class="muted num" style="margin-top:4px">12 customer · Rp24.380.000</div>
+        </div>
+        <div class="sect">Selesai (2)</div>
+        <div class="card">
+          <div class="line po"><div class="t"><span>Australia Okt 2026</span><span class="muted">›</span></div>
+            <div class="muted num" style="margin-top:4px">1 AUD = Rp12.910 · 18 customer · Rp31.200.000</div></div>
+          <div class="line po"><div class="t"><span>Australia Sep 2026</span><span class="muted">›</span></div>
+            <div class="muted num" style="margin-top:4px">1 AUD = Rp12.780 · 15 customer · Rp27.450.000</div></div>
+        </div>
+      </div>
+      <div class="fab">+ Open PO</div>
+      <div class="nav">
+        <div class="on"><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007Z"/></svg></i>Open PO</div>
+        <div><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.25"/><path d="M3 19.5a6 6 0 0 1 12 0"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2a4.5 4.5 0 0 1 5.5 4.3"/></svg></i>Customer</div>
+        <div><i><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 6h9.75M3.75 6H7.5m3 12h9.75m-16.5 0H7.5m9-6h3.75m-16.5 0h9.75"/><circle cx="9" cy="6" r="1.5"/><circle cx="9" cy="18" r="1.5"/><circle cx="15" cy="12" r="1.5"/></svg></i>Pengaturan</div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="cap">Keranjang customer dalam Open PO (HP 360px)</div>
+    <div class="phone">
+      <div class="bar"><span style="font-size:22px">‹</span><div><h1 style="font-size:18px">Rina</h1><div class="sub">Australia Nov 2026 · 081234567890</div></div></div>
+      <div class="content">
+        <div class="card pad">
+          <span class="badge b-dp"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="1.5"/><circle cx="12" cy="12" r="2.5"/></svg> DP</span>
+          <div style="margin-top:8px" class="num">
+            <div class="money"><span>Total</span><span>Rp2.551.000</span></div>
+            <div class="money"><span>DP 50%</span><span>Rp1.276.000</span></div>
+            <div class="money"><span>Dana diterima</span><span>Rp1.468.000</span></div>
+            <div class="money strong"><span>Sisa pelunasan</span><span>Rp1.083.000</span></div>
+          </div>
+          <div class="btn btn-s" style="margin-top:12px">Catat pembayaran</div>
+        </div>
+        <div class="sect">Barang (3)</div>
+        <div class="card num">
+          <div class="line"><div class="t"><span>Barang A</span><span class="muted"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="18" cy="12" r="1"/></svg></span></div>
+            <div class="d"><span>2 × Rp359.000</span><b>Rp718.000</b></div></div>
+          <div class="line"><div class="t"><span style="color:var(--muted)">Barang B &nbsp;<span class="badge b-kosong"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.64 5.64l12.72 12.72"/></svg> Kosong</span></span><span class="muted"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="18" cy="12" r="1"/></svg></span></div>
+            <div class="d"><span class="strike">3 × Rp128.000</span><span>tidak dihitung</span></div></div>
+          <div class="line"><div class="t"><span>Barang C</span><span class="muted"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="18" cy="12" r="1"/></svg></span></div>
+            <div class="d"><span>1 × Rp1.833.000</span><b>Rp1.833.000</b></div></div>
+        </div>
+      </div>
+      <div class="sticky">
+        <div class="btn btn-s">Salin rekap WA</div>
+        <div class="btn btn-p">+ Tambah barang</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="cap">Palet warna</div>
+    <div class="sw"><i style="background:#FBF7EB"></i>Latar halaman · krem #FBF7EB</div>
+    <div class="sw"><i style="background:#FFFDF8"></i>Kartu · #FFFDF8</div>
+    <div class="sw"><i style="background:#2B2620"></i>Teks utama · #2B2620</div>
+    <div class="sw"><i style="background:#2F6D5F"></i>Tombol utama · hijau sage #2F6D5F</div>
+    <div class="cap" style="margin-top:16px">Status pembayaran</div>
+    <div class="sw"><span class="badge b-belum"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Belum bayar</span></div>
+    <div class="sw"><span class="badge b-kurang"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg> Kurang DP</span></div>
+    <div class="sw"><span class="badge b-dp"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="1.5"/><circle cx="12" cy="12" r="2.5"/></svg> DP</span></div>
+    <div class="sw"><span class="badge b-lunas"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg> Lunas</span></div>
+    <div class="sw"><span class="badge b-lebih"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"/></svg> Lebih bayar</span></div>
+    <div class="sw"><span class="badge b-kosong"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M5.64 5.64l12.72 12.72"/></svg> Kosong</span></div>
+    <p class="muted" style="margin-top:16px;font-size:12px">Preview statis untuk konfirmasi warna dan tata letak. Ikon versi final memakai Heroicons. Bukan kode produksi.</p>
+  </div>
+
+</div>
+</body>
+</html>

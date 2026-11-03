@@ -1,0 +1,13 @@
+# QA-A-02: login gagal paralel melewati batas 5 / nama pengguna dan 20 / IP
+# Dibuat qa/tools/bukti.mjs, 2026-10-26T09:32:05.133Z, target http://127.0.0.1:8090 (dev-stack)
+
+30 POST /api/v1/auth/login bersamaan untuk "qabukti" (sandi salah):
+  status: 401 401 429 429 429 429 401 429 429 429 429 429 429 429 429 401 429 401 429 401 429 429 429 429 401 429 429 429 429 429
+  diperiksa (401): 7, ditolak (429): 23  (kontrak §4: maks. 5)
+
+40 login gagal bersamaan dengan 40 nama berbeda dari 127.0.0.1:
+  diperiksa (401): 20, ditolak (429): 20  (kontrak §4: maks. 20)
+
+keamanan.json SEC-D9: Tebakan yang benar-benar diperiksa (401, bukan 429) per putaran: nama "qaparalel" 5/5/5 (batas 5), per IP 23/23/24 (batas 20). Cek batas dan pencatatan percobaan tidak atomik.
+keamanan-paket-10.11.json SEC-D9: Tebakan yang benar-benar diperiksa (401, bukan 429) per putaran: nama "qaparalel" 8/8/8 (batas 5), per IP 22/22/22 (batas 20). Cek batas dan pencatatan percobaan tidak atomik.
+keamanan-paket-11.4.json SEC-D9: Tebakan yang benar-benar diperiksa (401, bukan 429) per putaran: nama "qaparalel" 8/8/8 (batas 5), per IP 20/22/21 (batas 20). Cek batas dan pencatatan percobaan tidak atomik.

@@ -7,16 +7,12 @@ Options -Indexes
 # Alamat "/" melayani front-end (index.html), bukan front controller API.
 DirectoryIndex index.html
 
-# --- Izinkan method PATCH dan DELETE --------------------------------------------------
-# Sebagian hosting (mis. CWP/cPanel dengan ModSecurity) memblokir PATCH/DELETE dengan
-# "403 Forbidden" sebelum request sampai ke PHP. API ini memakai PATCH (ubah barang,
-# ubah kurs) dan DELETE (hapus barang/pembayaran), jadi method itu harus diizinkan.
-# Dibungkus <IfModule mod_security2.c> supaya diabaikan (tanpa error) kalau ModSecurity
-# tidak ada. Kalau baris ini tetap membuat "500 Internal Server Error", hapus seluruh blok
-# ini dan minta hosting mengizinkan PATCH/DELETE (lihat docs/deploy/indowebsite.md).
-<IfModule mod_security2.c>
-    SecRuleRemoveById 911100
-</IfModule>
+# Catatan method PATCH/DELETE: sebagian hosting (mis. InfinityFree, CWP) hanya menerima
+# GET/POST/OPTIONS dan menolak PATCH/DELETE dengan 403. Aplikasi menanganinya sendiri lewat
+# method override (front-end mengirim POST + header X-HTTP-Method-Override, server
+# mengembalikannya ke method asli). Jadi TIDAK perlu aturan apa pun di sini, dan jangan
+# menambahkan direktif ModSecurity (mis. SecRuleRemoveById) karena bisa memicu 500 di server
+# yang tidak memuat modul itu.
 
 <IfModule mod_rewrite.c>
     RewriteEngine On

@@ -11,14 +11,11 @@ DirectoryIndex index.html
 # Sebagian hosting (mis. CWP/cPanel dengan ModSecurity) memblokir PATCH/DELETE dengan
 # "403 Forbidden" sebelum request sampai ke PHP. API ini memakai PATCH (ubah barang,
 # ubah kurs) dan DELETE (hapus barang/pembayaran), jadi method itu harus diizinkan.
-# Kalau hosting tidak memakai ModSecurity, blok ini diabaikan tanpa efek samping.
-<IfModule mod_security.c>
-    SecFilterEngine Off
-    SecFilterScanPOST Off
-</IfModule>
+# Dibungkus <IfModule mod_security2.c> supaya diabaikan (tanpa error) kalau ModSecurity
+# tidak ada. Kalau baris ini tetap membuat "500 Internal Server Error", hapus seluruh blok
+# ini dan minta hosting mengizinkan PATCH/DELETE (lihat docs/deploy/indowebsite.md).
 <IfModule mod_security2.c>
     SecRuleRemoveById 911100
-    SecRuleRemoveByMsg "Method is not allowed by policy"
 </IfModule>
 
 <IfModule mod_rewrite.c>

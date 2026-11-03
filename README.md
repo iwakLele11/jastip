@@ -57,6 +57,7 @@ Panduan langkah demi langkah untuk pengguna:
 - [`docs/deploy/jalankan-lokal-xampp.md`](docs/deploy/jalankan-lokal-xampp.md): XAMPP 8.4 di Windows (`http://localhost`), opsional dibuka dari HP di Wi-Fi yang sama.
 - [`docs/deploy/infinityfree.md`](docs/deploy/infinityfree.md): InfinityFree (HTTPS, phpMyAdmin, FileZilla), backup, batasan hosting gratis, dan cara update.
 - [`docs/deploy/indowebsite.md`](docs/deploy/indowebsite.md): Indowebsite / hosting cPanel (atur versi PHP 8.2+, phpMyAdmin, File Manager).
+- [`docs/deploy/update-ongkos-fee.md`](docs/deploy/update-ongkos-fee.md): menerapkan update model harga ongkos berat + fee jastip (ada migrasi DB).
 
 Di InfinityFree API hanya bisa diakses dari browser (ada pengecekan JavaScript + cookie untuk setiap request). Aplikasi mobile nanti butuh hosting lain.
 

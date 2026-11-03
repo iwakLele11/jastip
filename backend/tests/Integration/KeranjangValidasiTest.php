@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
  */
 final class KeranjangValidasiTest extends IntegrationTestCase
 {
-    private const BARANG_OK = ['nama_barang' => 'Barang A', 'harga_aud' => '24,95', 'qty' => 2, 'markup_persen' => '10'];
+    private const BARANG_OK = ['nama_barang' => 'Barang A', 'harga_aud' => '24,95', 'qty' => 2, 'ongkos_berat' => '5', 'fee_jastip' => '3'];
 
     /** @var array<string, mixed> */
     private array $po;
@@ -38,7 +38,8 @@ final class KeranjangValidasiTest extends IntegrationTestCase
                 'nama_barang' => 'Nama barang wajib diisi.',
                 'harga_aud' => 'Harga wajib diisi.',
                 'qty' => 'Qty minimal 1.',
-                'markup_persen' => 'Markup wajib diisi.',
+                'ongkos_berat' => 'Ongkos berat wajib diisi.',
+                'fee_jastip' => 'Fee jastip wajib diisi.',
             ]],
             'nama spasi' => [['nama_barang' => '   '] + $ok, ['nama_barang' => 'Nama barang wajib diisi.']],
             'nama 151 karakter' => [['nama_barang' => str_repeat('é', 151)] + $ok, ['nama_barang' => 'Nama barang maksimal 150 karakter.']],
@@ -55,11 +56,13 @@ final class KeranjangValidasiTest extends IntegrationTestCase
             'qty pecahan' => [['qty' => 1.5] + $ok, ['qty' => 'Qty harus bilangan bulat.']],
             'qty teks' => [['qty' => '2'] + $ok, ['qty' => 'Qty harus bilangan bulat.']],
             'qty 1000' => [['qty' => 1000] + $ok, ['qty' => 'Qty maksimal 999.']],
-            'markup kosong' => [['markup_persen' => ''] + $ok, ['markup_persen' => 'Markup wajib diisi.']],
-            'markup negatif' => [['markup_persen' => '-0,5'] + $ok, ['markup_persen' => 'Markup tidak boleh negatif.']],
-            'markup di atas 100' => [['markup_persen' => '100,01'] + $ok, ['markup_persen' => 'Markup maksimal 100%.']],
-            'markup 3 desimal' => [['markup_persen' => '7,555'] + $ok, ['markup_persen' => 'Maksimal 2 angka di belakang koma.']],
-            'markup angka JSON' => [['markup_persen' => 10] + $ok, ['markup_persen' => 'Isi angka, mis. 10.']],
+            'ongkos kosong' => [['ongkos_berat' => ''] + $ok, ['ongkos_berat' => 'Ongkos berat wajib diisi.']],
+            'ongkos negatif' => [['ongkos_berat' => '-0,5'] + $ok, ['ongkos_berat' => 'Ongkos berat tidak boleh negatif.']],
+            'ongkos di atas maksimum' => [['ongkos_berat' => '100000,01'] + $ok, ['ongkos_berat' => 'Ongkos berat maksimal AUD 100.000,00.']],
+            'ongkos 3 desimal' => [['ongkos_berat' => '7,555'] + $ok, ['ongkos_berat' => 'Maksimal 2 angka di belakang koma.']],
+            'ongkos angka JSON' => [['ongkos_berat' => 5] + $ok, ['ongkos_berat' => 'Isi angka saja, mis. 5.']],
+            'fee kosong' => [['fee_jastip' => ''] + $ok, ['fee_jastip' => 'Fee jastip wajib diisi.']],
+            'fee negatif' => [['fee_jastip' => '-1'] + $ok, ['fee_jastip' => 'Fee jastip tidak boleh negatif.']],
         ];
     }
 
@@ -77,7 +80,10 @@ final class KeranjangValidasiTest extends IntegrationTestCase
         );
 
         self::assertSame($fields, $error['field']);
-        self::assertSame(count($fields) === 1 ? reset($fields) : 'Periksa 4 isian yang ditandai.', $error['pesan']);
+        self::assertSame(
+            count($fields) === 1 ? reset($fields) : sprintf('Periksa %d isian yang ditandai.', count($fields)),
+            $error['pesan'],
+        );
         // Validasi gagal: tidak ada keranjang dibuat dan kurs belum terkunci.
         self::assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM keranjang')->fetchColumn());
         self::assertFalse($this->ok($this->call('GET', '/api/v1/open-po/' . $this->po['id']))['kurs_terkunci']);
@@ -89,19 +95,23 @@ final class KeranjangValidasiTest extends IntegrationTestCase
             'nama_barang' => str_repeat('é', 150),
             'harga_aud' => '100000',
             'qty' => 999,
-            'markup_persen' => '100',
+            'ongkos_berat' => '0',
+            'fee_jastip' => '0',
         ]), 201);
 
         $line = $cart['barang'][0];
         self::assertSame('100000.00', $line['harga_aud']);
-        self::assertSame('100', $line['markup_persen']);
-        // 10.000.000 sen × 13.054 × 2 = Rp2.610.800.000 per unit.
-        self::assertSame(2_610_800_000, $line['harga_jual_unit']);
-        self::assertSame(2_610_800_000 * 999, $line['subtotal']);
+        self::assertSame('0.00', $line['ongkos_berat']);
+        self::assertSame('0.00', $line['fee_jastip']);
+        self::assertNull($line['markup_persen']);
+        self::assertFalse($line['model_lama']);
+        // 10.000.000 sen × 13.054 / 100 = Rp1.305.400.000 per unit (sudah kelipatan Rp1.000).
+        self::assertSame(1_305_400_000, $line['harga_jual_unit']);
+        self::assertSame(1_305_400_000 * 999, $line['subtotal']);
 
-        $nol = $this->ok($this->call('PATCH', '/api/v1/baris-pesanan/' . $line['id'], ['markup_persen' => '0', 'harga_aud' => '0,01']));
-        // 1 sen × 13.054 = Rp130,54 → Rp1.000.
-        self::assertSame(1_000, $nol['barang'][0]['harga_jual_unit']);
+        $kecil = $this->ok($this->call('PATCH', '/api/v1/baris-pesanan/' . $line['id'], ['harga_aud' => '0,01']));
+        // 1 sen × 13.054 / 100 = Rp1,3 → Rp1.000.
+        self::assertSame(1_000, $kecil['barang'][0]['harga_jual_unit']);
     }
 
     public function testValidasiUbahBarisHanyaFieldYangDikirim(): void

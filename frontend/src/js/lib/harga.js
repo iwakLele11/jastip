@@ -5,9 +5,34 @@ import { parseBulat, parseDesimal } from './parse.js';
 export const MAX_HARGA_SEN = 10_000_000n; // AUD 100.000,00
 export const MAX_KURS = 1_000_000n;
 export const MAX_MARKUP_BP = 10_000n; // 100%
+export const MAX_TAMBAHAN_SEN = 10_000_000n; // AUD 100.000,00 (ongkos berat, fee jastip)
 export const MAX_QTY = 999n;
 
 const ceilDiv = (a, b) => (a + b - 1n) / b; // a ≥ 0, b > 0
+
+/**
+ * Model BARU (ongkos berat + fee jastip, sen AUD). Mirror Pricing::hargaJualUnitTambahan.
+ *   harga_jual_unit = bulat_ke_atas_Rp1000( (harga + ongkos + fee) × kurs / 100 )
+ *
+ * @returns {{hargaJualUnit: bigint, subtotal: bigint, totalSen: bigint, kurs: bigint, qty: bigint}}
+ */
+export function hitungHargaJualTambahan({ hargaSen, ongkosSen, feeSen, kurs, qty }) {
+  const h = BigInt(hargaSen);
+  const o = BigInt(ongkosSen);
+  const f = BigInt(feeSen);
+  const k = BigInt(kurs);
+  const q = BigInt(qty);
+  if (h <= 0n || h > MAX_HARGA_SEN) throw new RangeError('Harga AUD di luar rentang.');
+  if (o < 0n || o > MAX_TAMBAHAN_SEN) throw new RangeError('Ongkos berat di luar rentang.');
+  if (f < 0n || f > MAX_TAMBAHAN_SEN) throw new RangeError('Fee jastip di luar rentang.');
+  if (k <= 0n || k > MAX_KURS) throw new RangeError('Kurs di luar rentang.');
+  if (q < 1n || q > MAX_QTY) throw new RangeError('Qty di luar rentang.');
+
+  const totalSen = h + o + f;
+  const rupiah = (totalSen * k) / 100n; // floor; sen × kurs selalu kelipatan... dibagi 100
+  const hargaJualUnit = ceilDiv(rupiah, 1000n) * 1000n;
+  return { hargaJualUnit, subtotal: hargaJualUnit * q, totalSen, kurs: k, qty: q };
+}
 
 /**
  * Hitungan inti. Semua argumen bilangan bulat (number atau bigint).
@@ -43,26 +68,28 @@ export function hitungHargaJual({ hargaSen, kurs, markupBp, qty }) {
 }
 
 /**
- * Pratinjau dari isi form (string). Mengembalikan null jika ada input yang tidak valid,
- * supaya layar kembali ke teks petunjuk dan tidak menampilkan angka yang salah (ui-spec §7.6).
+ * Pratinjau dari isi form (string). Model baru: harga + ongkos berat + fee jastip (semua AUD).
+ * Mengembalikan null jika ada input yang tidak valid, supaya layar kembali ke teks petunjuk.
  *
- * @param {{harga: string, qty: string, markup: string, kurs: number|bigint}} input
+ * @param {{harga: string, qty: string, ongkos: string, fee: string, kurs: number|bigint}} input
  */
-export function pratinjauHarga({ harga, qty, markup, kurs }) {
+export function pratinjauHarga({ harga, qty, ongkos, fee, kurs }) {
   const h = parseDesimal(harga, 2);
   const q = parseBulat(qty);
-  const m = parseDesimal(markup, 2);
-  if (!h.ok || !q.ok || !m.ok) return null;
+  const o = parseDesimal(ongkos, 2);
+  const f = parseDesimal(fee, 2);
+  if (!h.ok || !q.ok || !o.ok || !f.ok) return null;
   if (h.nilai <= 0n || h.nilai > MAX_HARGA_SEN) return null;
   if (q.nilai < 1n || q.nilai > MAX_QTY) return null;
-  if (m.nilai > MAX_MARKUP_BP) return null;
+  if (o.nilai > MAX_TAMBAHAN_SEN || f.nilai > MAX_TAMBAHAN_SEN) return null;
   const k = BigInt(kurs);
   if (k <= 0n || k > MAX_KURS) return null;
   return {
     hargaSen: h.nilai,
-    markupBp: m.nilai,
+    ongkosSen: o.nilai,
+    feeSen: f.nilai,
     qty: q.nilai,
     kurs: k,
-    ...hitungHargaJual({ hargaSen: h.nilai, kurs: k, markupBp: m.nilai, qty: q.nilai }),
+    ...hitungHargaJualTambahan({ hargaSen: h.nilai, ongkosSen: o.nilai, feeSen: f.nilai, kurs: k, qty: q.nilai }),
   };
 }

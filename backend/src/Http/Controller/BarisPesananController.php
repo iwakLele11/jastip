@@ -12,7 +12,7 @@ use Jastip\Service\BarisPesananService;
 
 final class BarisPesananController
 {
-    private const FIELDS = ['nama_barang', 'harga_aud', 'qty', 'markup_persen'];
+    private const FIELDS = ['nama_barang', 'harga_aud', 'qty', 'ongkos_berat', 'fee_jastip'];
 
     public function __construct(private readonly BarisPesananService $service)
     {
@@ -35,7 +35,8 @@ final class BarisPesananController
             (string) $values['nama_barang'],
             (int) $values['harga_aud_sen'],
             (int) $values['qty'],
-            (int) $values['markup_bp'],
+            (int) $values['ongkos_berat_sen'],
+            (int) $values['fee_jastip_sen'],
         );
 
         return Response::data(
@@ -47,6 +48,7 @@ final class BarisPesananController
 
     /**
      * PATCH /baris-pesanan/{id}. Semua field opsional, aturan sama dengan tambah.
+     * Hanya untuk baris model baru (ongkos + fee); baris lama (markup) tidak bisa diubah.
      *
      * @param array<string, int> $params
      */
@@ -56,7 +58,7 @@ final class BarisPesananController
         $changes = $this->validate($v, array_values(array_filter(self::FIELDS, $v->has(...))));
         $v->throwIfInvalid();
 
-        /** @var array{nama_barang?: string, harga_aud_sen?: int, qty?: int, markup_bp?: int} $changes */
+        /** @var array{nama_barang?: string, harga_aud_sen?: int, qty?: int, ongkos_berat_sen?: int, fee_jastip_sen?: int} $changes */
         return Response::data(KeranjangController::present($this->service->update($params['id'], $changes)));
     }
 
@@ -110,14 +112,23 @@ final class BarisPesananController
                 'max' => 'Qty maksimal 999.',
             ], 1, Pricing::MAX_QTY);
         }
-        if (in_array('markup_persen', $fields, true)) {
-            $values['markup_bp'] = $v->decimal('markup_persen', 2, [
-                'wajib' => 'Markup wajib diisi.',
-                'bukan_angka' => 'Isi angka, mis. 10.',
+        if (in_array('ongkos_berat', $fields, true)) {
+            $values['ongkos_berat_sen'] = $v->decimal('ongkos_berat', 2, [
+                'wajib' => 'Ongkos berat wajib diisi.',
+                'bukan_angka' => 'Isi angka saja, mis. 5.',
                 'desimal' => 'Maksimal 2 angka di belakang koma.',
-                'negatif' => 'Markup tidak boleh negatif.',
-                'max' => 'Markup maksimal 100%.',
-            ], Pricing::MAX_MARKUP_BP);
+                'negatif' => 'Ongkos berat tidak boleh negatif.',
+                'max' => 'Ongkos berat maksimal AUD 100.000,00.',
+            ], Pricing::MAX_TAMBAHAN_SEN);
+        }
+        if (in_array('fee_jastip', $fields, true)) {
+            $values['fee_jastip_sen'] = $v->decimal('fee_jastip', 2, [
+                'wajib' => 'Fee jastip wajib diisi.',
+                'bukan_angka' => 'Isi angka saja, mis. 3.',
+                'desimal' => 'Maksimal 2 angka di belakang koma.',
+                'negatif' => 'Fee jastip tidak boleh negatif.',
+                'max' => 'Fee jastip maksimal AUD 100.000,00.',
+            ], Pricing::MAX_TAMBAHAN_SEN);
         }
 
         return array_filter($values, static fn (mixed $value): bool => $value !== null);

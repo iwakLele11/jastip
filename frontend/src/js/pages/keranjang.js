@@ -5,7 +5,7 @@
 // keranjang lengkap, dan layar selalu dirender ulang dari objek itu (tidak dihitung di sini).
 import { Api, ApiError, catatJikaBug, pesanError } from '../lib/api.js';
 import { $, h, idUnik, isi, wajib } from '../lib/dom.js';
-import { formatPersen, formatRupiah, formatRupiahPengembalian, formatTanggal, persenUntukInput } from '../lib/format.js';
+import { audUntukInput, formatPersen, formatRupiah, formatRupiahPengembalian, formatTanggal } from '../lib/format.js';
 import { ikon } from '../lib/ikon.js';
 import { idDariQuery, rute } from '../lib/rute.js';
 import { bukaSheet, konfirmasi, pilihAksi } from '../ui/dialog.js';
@@ -50,7 +50,8 @@ if (idPo !== null) wajib('#tautan-kembali').href = rute.poDetail(idPo);
 
 /** Objek keranjang terakhir dari API (kontrak §10). */
 let k = null;
-let defaultMarkup = null;
+let defaultOngkos = null;
+let defaultFee = null;
 let formKartu = null;
 let formSheet = null;
 
@@ -235,7 +236,9 @@ function barisBarang(b) {
       'div',
       // Lebar tetap supaya kolom subtotal rata walau label "Lepas tanda Kosong" lebih panjang.
       { class: 'flex w-84 shrink-0 justify-end gap-1' },
-      h('button', { type: 'button', class: KELAS.tombolBaris, 'aria-label': `Ubah ${nama}`, dataset: { fokus: `baris-${b.id}-ubah` }, onClick: () => ubahBaris(b) }, 'Ubah'),
+      b.model_lama
+        ? ''
+        : h('button', { type: 'button', class: KELAS.tombolBaris, 'aria-label': `Ubah ${nama}`, dataset: { fokus: `baris-${b.id}-ubah` }, onClick: () => ubahBaris(b) }, 'Ubah'),
       tombolKosong,
       h('button', { type: 'button', class: KELAS.tombolBarisDanger, 'aria-label': `Hapus ${nama}`, dataset: { fokus: `baris-${b.id}-hapus` }, onClick: () => hapusBaris(b) }, 'Hapus'),
     ),
@@ -315,7 +318,7 @@ function renderAksi() {
   if (!arsip || !formKartu?.adaPerubahan()) kartuForm.classList.toggle('lg:block', !arsip);
 }
 
-const konteksForm = () => ({ kurs: k.open_po.kurs_jastip, kursTerkunci: k.open_po.kurs_terkunci, defaultMarkup });
+const konteksForm = () => ({ kurs: k.open_po.kurs_jastip, kursTerkunci: k.open_po.kurs_terkunci, defaultOngkos, defaultFee });
 
 // ---------- Barang: tambah / ubah ----------
 
@@ -430,6 +433,10 @@ function bukaTambahBarang() {
 }
 
 async function ubahBaris(b) {
+  if (b.model_lama) {
+    toast('Barang lama tidak bisa diubah. Hapus lalu tambahkan lagi.');
+    return;
+  }
   if (!lg.matches || !formKartu) {
     bukaSheetBarang('ubah', b);
     return;
@@ -445,7 +452,8 @@ async function menuBaris(b, tombol) {
     judul: b.nama_barang,
     subjudul: b.kosong ? h('span', {}, h('s', {}, teksQtyHarga(b)), ' · tidak dihitung') : `${teksQtyHarga(b)} · ${rp(b.subtotal)}`,
     aksi: [
-      { nilai: 'ubah', label: 'Ubah', ikon: 'pencil-square' },
+      // Barang lama (markup %) tidak bisa diubah: hapus lalu tambahkan lagi.
+      ...(b.model_lama ? [] : [{ nilai: 'ubah', label: 'Ubah', ikon: 'pencil-square' }]),
       b.kosong
         ? { nilai: 'lepas', label: 'Lepas tanda Kosong', ikon: 'arrow-uturn-left' }
         : { nilai: 'kosong', label: 'Tandai Kosong', bantuan: 'Barang tidak tersedia, tidak ditagih', ikon: 'no-symbol' },
@@ -740,8 +748,11 @@ async function muat() {
     }
     return;
   }
-  // Default markup dari Pengaturan; kalau gagal dimuat, field Markup kosong dan wajib diisi.
-  if (resP.status === 'fulfilled') defaultMarkup = persenUntukInput(resP.value.data.default_markup_persen);
+  // Default ongkos berat & fee jastip dari Pengaturan; kalau gagal dimuat, field kosong (wajib diisi).
+  if (resP.status === 'fulfilled') {
+    defaultOngkos = audUntukInput(resP.value.data.default_ongkos_berat);
+    defaultFee = audUntukInput(resP.value.data.default_fee_jastip);
+  }
   else catatJikaBug(resP.reason);
 
   k = resK.value.data;

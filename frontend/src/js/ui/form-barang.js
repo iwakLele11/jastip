@@ -1,12 +1,12 @@
 // OrderLineForm + PricePreview (ui-spec §6.5, §7.6, §12.2, §12.3). Satu komponen untuk Sheet
 // tambah/ubah barang (mobile) dan kartu "Tambah barang" yang selalu terbuka (lg).
 // - Nama barang: combobox ARIA, saran dari GET /open-po/{id}/barang-unik (diambil sekali,
-//   difilter di perangkat, maks. 6). Memilih saran mengisi nama + harga AUD; markup tidak berubah.
+//   difilter di perangkat, maks. 6). Memilih saran mengisi nama + harga AUD; ongkos & fee tetap.
 // - Pratinjau dihitung di perangkat dengan harga.js (BigInt, rumus sama dengan server). Tampilan
 //   langsung diperbarui; live region untuk pembaca layar diperbarui 500 ms setelah ketikan terakhir.
 import { ApiError, catatJikaBug, pesanError } from '../lib/api.js';
 import { debounce, h, idUnik } from '../lib/dom.js';
-import { audUntukInput, formatAud, formatPersenBp, formatRupiah, formatRupiahSen, persenUntukInput } from '../lib/format.js';
+import { audUntukInput, formatAud, formatRupiah, formatRupiahSen } from '../lib/format.js';
 import { pratinjauHarga } from '../lib/harga.js';
 import { ikon } from '../lib/ikon.js';
 import { parseBulat } from '../lib/parse.js';
@@ -18,7 +18,7 @@ import { banner, setBanner, tombolMemuat } from './komponen.js';
 const PETUNJUK = 'Isi harga dan qty untuk melihat harga jual.';
 const MAKS_SARAN = 6;
 const JEDA_LIVE_MS = 500;
-const FIELD_HARGA = ['harga_aud', 'qty', 'markup_persen'];
+const FIELD_HARGA = ['harga_aud', 'qty', 'ongkos_berat', 'fee_jastip'];
 
 const audDariSen = (sen) => formatAud(`${sen / 100n}.${(sen % 100n).toString().padStart(2, '0')}`);
 const kecil = (s) => s.toLocaleLowerCase('id');
@@ -26,7 +26,7 @@ const kecil = (s) => s.toLocaleLowerCase('id');
 /**
  * @param {{
  *   varian: 'sheet'|'kartu',
- *   konteks: {kurs: number, kursTerkunci: boolean, defaultMarkup: string|null},
+ *   konteks: {kurs: number, kursTerkunci: boolean, defaultOngkos: string|null, defaultFee: string|null},
  *   saran: () => Promise<Array<{nama_barang: string, harga_aud: string}>>,
  *   simpan: (body: object, ctx: {mode: 'tambah'|'ubah', baris: object|null, tambahLagi: boolean,
  *            pratinjau: object|null}) => Promise<unknown>,
@@ -55,11 +55,12 @@ export function buatFormBarang({ varian, konteks, saran, simpan, sesudahSimpan, 
   });
   const inputHarga = h('input', { id: `${id}-harga`, type: 'text', inputmode: 'decimal', class: KELAS.inputDalamGrup, autocomplete: 'off', enterkeyhint: 'next' });
   const inputQty = h('input', { id: `${id}-qty`, type: 'text', inputmode: 'numeric', class: `${KELAS.inputDalamGrup} px-1 text-center tabular-nums`, autocomplete: 'off', enterkeyhint: 'next' });
-  const inputMarkup = h('input', { id: `${id}-markup`, type: 'text', inputmode: 'decimal', class: KELAS.inputDalamGrup, autocomplete: 'off', enterkeyhint: 'done' });
+  const inputOngkos = h('input', { id: `${id}-ongkos`, type: 'text', inputmode: 'decimal', class: KELAS.inputDalamGrup, autocomplete: 'off', enterkeyhint: 'next' });
+  const inputFee = h('input', { id: `${id}-fee`, type: 'text', inputmode: 'decimal', class: KELAS.inputDalamGrup, autocomplete: 'off', enterkeyhint: 'done' });
   const kelasStepper = `inline-flex size-11 shrink-0 items-center justify-center rounded-lg text-ink hover:bg-page aria-disabled:cursor-not-allowed aria-disabled:text-ink-subtle aria-disabled:hover:bg-transparent focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-primary`;
   const tombolKurang = h('button', { type: 'button', class: kelasStepper, 'aria-label': 'Kurangi qty', 'aria-controls': inputQty.id, onClick: () => ubahQty(-1) }, ikon('minus', 24, 'size-5'));
   const tombolTambah = h('button', { type: 'button', class: kelasStepper, 'aria-label': 'Tambah qty', 'aria-controls': inputQty.id, onClick: () => ubahQty(1) }, ikon('plus', 24, 'size-5'));
-  const peta = { nama_barang: inputNama, harga_aud: inputHarga, qty: inputQty, markup_persen: inputMarkup };
+  const peta = { nama_barang: inputNama, harga_aud: inputHarga, qty: inputQty, ongkos_berat: inputOngkos, fee_jastip: inputFee };
 
   const judulKartu = varian === 'kartu' ? h('h2', { id: `${id}-judul`, class: KELAS.judulBagian, tabindex: '-1' }, 'Tambah barang') : null;
   const bannerKurs = h('div', { hidden: true, dataset: { bannerKurs: '' } });
@@ -119,27 +120,33 @@ export function buatFormBarang({ varian, konteks, saran, simpan, sesudahSimpan, 
     ),
     h(
       'div',
+      { class: 'min-w-0' },
+      h('label', { for: inputQty.id, class: KELAS.label }, 'Qty'),
+      h(
+        'div',
+        {
+          class: 'mt-1 flex h-11 w-full items-center rounded-lg border border-line-strong bg-surface text-base has-[input:focus]:border-primary has-[input:focus]:outline-2 has-[input:focus]:outline-primary has-[[aria-invalid=true]]:border-danger',
+          dataset: { inputGrup: '' },
+        },
+        tombolKurang,
+        inputQty,
+        tombolTambah,
+      ),
+    ),
+    h(
+      'div',
       { class: 'grid grid-cols-2 gap-3' },
       h(
         'div',
         { class: 'min-w-0' },
-        h('label', { for: inputQty.id, class: KELAS.label }, 'Qty'),
-        h(
-          'div',
-          {
-            class: 'mt-1 flex h-11 w-full items-center rounded-lg border border-line-strong bg-surface text-base has-[input:focus]:border-primary has-[input:focus]:outline-2 has-[input:focus]:outline-primary has-[[aria-invalid=true]]:border-danger',
-            dataset: { inputGrup: '' },
-          },
-          tombolKurang,
-          inputQty,
-          tombolTambah,
-        ),
+        h('label', { for: inputOngkos.id, class: KELAS.label }, 'Ongkos berat'),
+        h('div', { class: KELAS.inputGrup, dataset: { inputGrup: '' } }, h('span', { class: KELAS.imbuhan, 'aria-hidden': 'true' }, 'AUD'), inputOngkos),
       ),
       h(
         'div',
         { class: 'min-w-0' },
-        h('label', { for: inputMarkup.id, class: KELAS.label }, 'Markup'),
-        h('div', { class: KELAS.inputGrup, dataset: { inputGrup: '' } }, inputMarkup, h('span', { class: KELAS.imbuhan, 'aria-hidden': 'true' }, '%')),
+        h('label', { for: inputFee.id, class: KELAS.label }, 'Fee jastip'),
+        h('div', { class: KELAS.inputGrup, dataset: { inputGrup: '' } }, h('span', { class: KELAS.imbuhan, 'aria-hidden': 'true' }, 'AUD'), inputFee),
       ),
     ),
     pratinjau,
@@ -151,7 +158,7 @@ export function buatFormBarang({ varian, konteks, saran, simpan, sesudahSimpan, 
   const kursAktif = () => (mode === 'ubah' && baris ? baris.kurs_jastip : ktx.kurs);
 
   function hitung() {
-    return pratinjauHarga({ harga: inputHarga.value, qty: inputQty.value, markup: inputMarkup.value, kurs: kursAktif() });
+    return pratinjauHarga({ harga: inputHarga.value, qty: inputQty.value, ongkos: inputOngkos.value, fee: inputFee.value, kurs: kursAktif() });
   }
 
   const umumkan = debounce((teks) => {
@@ -166,10 +173,11 @@ export function buatFormBarang({ varian, konteks, saran, simpan, sesudahSimpan, 
     if (p) {
       ddUnit.textContent = formatRupiah(p.hargaJualUnit);
       ddSubtotal.textContent = formatRupiah(p.subtotal);
-      keterangan.textContent = `Kurs ${formatRupiah(p.kurs)} · markup ${formatPersenBp(p.markupBp)}`;
+      keterangan.textContent = `Kurs ${formatRupiah(p.kurs)} · ongkos ${audDariSen(p.ongkosSen)} · fee ${audDariSen(p.feeSen)}`;
+      const totalSen = p.hargaSen + p.ongkosSen + p.feeSen;
       const baris2 = [
-        [`${audDariSen(p.hargaSen)} × ${formatRupiah(p.kurs)}`, formatRupiahSen(p.senSebelumMarkup)],
-        [`+ markup ${formatPersenBp(p.markupBp)}`, formatRupiahSen(p.sen)],
+        [`${audDariSen(p.hargaSen)} + ongkos ${audDariSen(p.ongkosSen)} + fee ${audDariSen(p.feeSen)}`, audDariSen(totalSen)],
+        [`${audDariSen(totalSen)} × ${formatRupiah(p.kurs)}`, formatRupiahSen(totalSen * p.kurs)],
         ['Dibulatkan ke atas ke ribuan', formatRupiah(p.hargaJualUnit)],
         [`× ${p.qty}`, formatRupiah(p.subtotal)],
       ];
@@ -205,7 +213,7 @@ export function buatFormBarang({ varian, konteks, saran, simpan, sesudahSimpan, 
     renderPratinjau();
   }
 
-  for (const el of [inputHarga, inputQty, inputMarkup]) {
+  for (const el of [inputHarga, inputQty, inputOngkos, inputFee]) {
     el.addEventListener('input', () => {
       setErrorField(el, null);
       renderPratinjau();
@@ -341,8 +349,8 @@ export function buatFormBarang({ varian, konteks, saran, simpan, sesudahSimpan, 
     }
   });
 
-  // Enter di field berurutan pindah ke field berikutnya; Enter di Markup (terakhir) = Simpan.
-  for (const [el, berikut] of [[inputHarga, inputQty], [inputQty, inputMarkup]]) {
+  // Enter di field berurutan pindah ke field berikutnya; Enter di Fee jastip (terakhir) = Simpan.
+  for (const [el, berikut] of [[inputHarga, inputQty], [inputQty, inputOngkos], [inputOngkos, inputFee]]) {
     el.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
@@ -352,7 +360,7 @@ export function buatFormBarang({ varian, konteks, saran, simpan, sesudahSimpan, 
   }
 
   // ---------- Simpan ----------
-  const nilai = () => ({ nama: inputNama.value, harga: inputHarga.value, qty: inputQty.value, markup: inputMarkup.value });
+  const nilai = () => ({ nama: inputNama.value, harga: inputHarga.value, qty: inputQty.value, ongkos: inputOngkos.value, fee: inputFee.value });
 
   async function kirim(tambahLagi) {
     if (menyimpan) return;
@@ -407,11 +415,12 @@ export function buatFormBarang({ varian, konteks, saran, simpan, sesudahSimpan, 
     bannerKurs.replaceChildren(tampil ? banner({ jenis: 'info', pesan: `Kurs ${formatRupiah(ktx.kurs)} akan terkunci setelah barang pertama disimpan.` }) : '');
   }
 
-  function isi({ nama = '', harga = '', qty = '1', markup = ktx.defaultMarkup ?? '' }) {
+  function isi({ nama = '', harga = '', qty = '1', ongkos = ktx.defaultOngkos ?? '', fee = ktx.defaultFee ?? '' }) {
     inputNama.value = nama;
     inputHarga.value = harga;
     inputQty.value = qty;
-    inputMarkup.value = markup;
+    inputOngkos.value = ongkos;
+    inputFee.value = fee;
     for (const el of Object.values(peta)) setErrorField(el, null);
     setBanner(bannerForm, null);
     tutupSaran();
@@ -431,7 +440,13 @@ export function buatFormBarang({ varian, konteks, saran, simpan, sesudahSimpan, 
     form.dataset.mode = mode;
     renderBannerKurs();
     if (ubah) {
-      isi({ nama: b.nama_barang, harga: audUntukInput(b.harga_aud), qty: String(b.qty), markup: persenUntukInput(b.markup_persen) });
+      isi({
+        nama: b.nama_barang,
+        harga: audUntukInput(b.harga_aud),
+        qty: String(b.qty),
+        ongkos: audUntukInput(b.ongkos_berat),
+        fee: audUntukInput(b.fee_jastip),
+      });
     } else {
       isi({});
     }

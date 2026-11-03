@@ -238,32 +238,33 @@ Dipakai front-end saat aplikasi dibuka untuk tahu sudah login atau belum.
 ```json
 {
   "data": {
-    "default_markup_persen": "10",
+    "default_ongkos_berat": "5.00",
+    "default_fee_jastip": "3.00",
     "buffer_aud_persen": "3",
     "dp_persen": "50",
     "diubah_pada": "2026-10-25T09:00:00Z"
   }
 }
 ```
-Nilai awal migrasi: markup 10%, buffer 3%, DP 50%.
+Nilai awal migrasi: ongkos berat AUD 5,00, fee jastip AUD 3,00, buffer 3%, DP 50%.
 
 ### `PATCH /pengaturan`
 
 Semua field opsional, hanya yang dikirim yang diubah. Respons sama dengan `GET`.
 
 ```json
-{ "default_markup_persen": "12,5", "buffer_aud_persen": "3", "dp_persen": "50" }
+{ "default_ongkos_berat": "5", "default_fee_jastip": "3", "buffer_aud_persen": "3", "dp_persen": "50" }
 ```
 
 | Field | Rentang | Pesan |
 |---|---|---|
-| `default_markup_persen` | 0–100, maks. 2 desimal | "Markup wajib diisi." / "Markup tidak boleh negatif." / "Markup maksimal 100%." |
-| `buffer_aud_persen` | 0–100, maks. 2 desimal | "Buffer wajib diisi." / "Buffer tidak boleh negatif." / "Buffer maksimal 100%." |
+| `default_ongkos_berat` | ≥ 0 AUD, maks. 2 desimal, maks. 100.000,00 | "Ongkos berat wajib diisi." / "Ongkos berat tidak boleh negatif." / "Ongkos berat maksimal AUD 100.000,00." / "Isi angka saja, mis. 5." |
+| `default_fee_jastip` | ≥ 0 AUD, maks. 2 desimal, maks. 100.000,00 | "Fee jastip wajib diisi." / "Fee jastip tidak boleh negatif." / "Fee jastip maksimal AUD 100.000,00." / "Isi angka saja, mis. 3." |
+| `buffer_aud_persen` | 0–100, maks. 2 desimal | "Buffer wajib diisi." / "Buffer tidak boleh negatif." / "Buffer maksimal 100%." / "Isi angka, mis. 10." |
 | `dp_persen` | 0–100, maks. 2 desimal | "DP wajib diisi." / "DP harus antara 0 dan 100%." |
-| semua | bukan angka / angka JSON | "Isi angka, mis. 10." |
 | semua | > 2 desimal | "Maksimal 2 angka di belakang koma." |
 
-Perubahan tidak memengaruhi PO, baris, atau keranjang yang sudah ada: buffer dan DP % disalin ke PO saat PO dibuat (ui-spec §13 P4), markup disalin ke baris saat baris disimpan.
+Perubahan tidak memengaruhi PO, baris, atau keranjang yang sudah ada: buffer dan DP % disalin ke PO saat PO dibuat, ongkos berat + fee jastip disalin ke baris saat baris disimpan.
 
 ---
 
@@ -560,12 +561,14 @@ Contoh: QA langkah 4 (Barang B Kosong, sudah bayar Rp2.935.000).
   },
   "barang": [
     {
-      "id": 11, "nama_barang": "Barang A", "harga_aud": "24.95", "qty": 2, "markup_persen": "10",
-      "kurs_jastip": 13054, "harga_jual_unit": 359000, "subtotal": 718000, "kosong": false,
+      "id": 11, "nama_barang": "Barang A", "harga_aud": "24.95", "qty": 2,
+      "markup_persen": null, "ongkos_berat": "5.00", "fee_jastip": "3.00", "model_lama": false,
+      "kurs_jastip": 13054, "harga_jual_unit": 431000, "subtotal": 862000, "kosong": false,
       "dibuat_pada": "…", "diubah_pada": "…"
     },
     {
-      "id": 12, "nama_barang": "Barang B", "harga_aud": "8.50", "qty": 3, "markup_persen": "15",
+      "id": 12, "nama_barang": "Barang lama", "harga_aud": "8.50", "qty": 3,
+      "markup_persen": "15", "ongkos_berat": null, "fee_jastip": null, "model_lama": true,
       "kurs_jastip": 13054, "harga_jual_unit": 128000, "subtotal": 384000, "kosong": true,
       "dibuat_pada": "…", "diubah_pada": "…"
     }
@@ -611,7 +614,7 @@ Semua aksi: validasi input (`422`) → keberadaan data (`404`) → aturan bisnis
 ### `POST /open-po/{id}/keranjang/{customer_id}/baris-pesanan`
 
 ```json
-{ "nama_barang": "Barang A", "harga_aud": "24,95", "qty": 2, "markup_persen": "10" }
+{ "nama_barang": "Barang A", "harga_aud": "24,95", "qty": 2, "ongkos_berat": "5", "fee_jastip": "3" }
 ```
 
 | Field | Aturan | Pesan |
@@ -619,19 +622,22 @@ Semua aksi: validasi input (`422`) → keberadaan data (`404`) → aturan bisnis
 | `nama_barang` | wajib, maks. 150 karakter | "Nama barang wajib diisi." / "Nama barang maksimal 150 karakter." |
 | `harga_aud` | string, > 0, maks. 2 desimal, maks. 100.000,00 | "Harga wajib diisi." / "Harga harus lebih dari 0." / "Maksimal 2 angka di belakang koma." / "Isi angka saja, mis. 24,95." / "Harga maksimal AUD 100.000,00." |
 | `qty` | integer 1–999 | "Qty minimal 1." (juga jika kosong) / "Qty harus bilangan bulat." (pecahan, string, tipe lain) / "Qty maksimal 999." |
-| `markup_persen` | string 0–100, maks. 2 desimal | "Markup wajib diisi." / "Markup tidak boleh negatif." / "Markup maksimal 100%." / "Maksimal 2 angka di belakang koma." / "Isi angka, mis. 10." (bukan angka / angka JSON, sama dengan pengaturan) |
+| `ongkos_berat` | string ≥ 0, maks. 2 desimal, maks. 100.000,00 (AUD) | "Ongkos berat wajib diisi." / "Ongkos berat tidak boleh negatif." / "Ongkos berat maksimal AUD 100.000,00." / "Maksimal 2 angka di belakang koma." / "Isi angka saja, mis. 5." |
+| `fee_jastip` | string ≥ 0, maks. 2 desimal, maks. 100.000,00 (AUD) | "Fee jastip wajib diisi." / "Fee jastip tidak boleh negatif." / "Fee jastip maksimal AUD 100.000,00." / "Maksimal 2 angka di belakang koma." / "Isi angka saja, mis. 3." |
 
 Server, dalam satu transaksi:
 1. `SELECT … FOR UPDATE` baris Open PO.
 2. Jika `kurs_terkunci_at` kosong, isi dengan waktu sekarang (kurs terkunci permanen).
 3. Buat keranjang jika belum ada. Customer yang diarsipkan tanpa keranjang di PO ini → `409 CUSTOMER_DIARSIPKAN`.
-4. Hitung `harga_jual_unit` dan `subtotal` (§12.1) dengan `kurs_jastip` PO, simpan snapshot (nama, harga AUD, kurs, markup, harga jual, qty).
+4. Hitung `harga_jual_unit` dan `subtotal` (§12.1) dengan `kurs_jastip` PO, simpan snapshot (nama, harga AUD, kurs, ongkos berat, fee jastip, harga jual, qty).
 
 Kalau salah satu langkah gagal (`404`, `409`), seluruh transaksi dibatalkan, termasuk penguncian kurs. `201` objek keranjang (`open_po.kurs_terkunci` sudah `true`). Kalau angka respons berbeda dari pratinjau front-end, front-end mencatatnya di console (ui-spec §12.3).
 
+Baris pesanan yang dibuat sebelum model ongkos+fee (model lama) memakai markup persen dan ditandai `model_lama: true` di objek keranjang. Baris lama **tidak bisa diubah** (`PATCH` → `409 BARIS_MODEL_LAMA`); untuk mengubahnya, hapus lalu tambahkan lagi.
+
 ### `PATCH /baris-pesanan/{id}`
 
-Field opsional `nama_barang`, `harga_aud`, `qty`, `markup_persen` (aturan sama; hanya field yang dikirim yang divalidasi dan diubah, body `{}` tidak mengubah apa pun). Harga dihitung ulang dengan `kurs_jastip` snapshot baris itu. Baris Kosong tetap bisa diubah. `200` objek keranjang.
+Field opsional `nama_barang`, `harga_aud`, `qty`, `ongkos_berat`, `fee_jastip` (aturan sama; hanya field yang dikirim yang divalidasi dan diubah, body `{}` tidak mengubah apa pun). Harga dihitung ulang dengan `kurs_jastip` snapshot baris itu. Baris Kosong tetap bisa diubah. Baris model lama (markup) → `409 BARIS_MODEL_LAMA`. `200` objek keranjang.
 
 ### `DELETE /baris-pesanan/{id}`
 
@@ -709,34 +715,33 @@ Hapus Open PO, pulihkan customer arsip, ubah pembayaran/pengembalian dana, dafta
 
 ### 12.1 Harga jual per baris (ui-spec §12.3)
 
-Hanya bilangan bulat. Gunakan `BigInt` di JavaScript (nilai antara bisa sampai 2×10¹⁷ untuk input maksimum).
+Hanya bilangan bulat. Gunakan `BigInt` di JavaScript.
+
+Model BARU (ongkos berat + fee jastip, semua sen AUD):
 
 ```
-harga_sen  = harga AUD × 100            (parse string, mis. "24,95" → 2495; tanpa parseFloat)
-kurs       = kurs_jastip PO              (rupiah bulat)
-markup_bp  = markup % × 100              (parse string, mis. "10" → 1000, "7,5" → 750)
+harga_sen   = harga AUD × 100           (parse string, mis. "24,95" → 2495; tanpa parseFloat)
+ongkos_sen  = ongkos berat AUD × 100    (mis. "5" → 500)
+fee_sen     = fee jastip AUD × 100      (mis. "3" → 300)
+kurs        = kurs_jastip PO            (rupiah bulat)
 
-N               = harga_sen × kurs × (10000 + markup_bp)    // satuan 1/10.000 sen rupiah
-sen             = floor((2N + 10000) / 20000)               // bulat 2 desimal, half-up
-harga_jual_unit = ceil(sen / 100000) × 1000                 // ke atas ke Rp1.000; kelipatan tepat tidak naik
+total_sen       = harga_sen + ongkos_sen + fee_sen
+harga_jual_unit = ceil( total_sen × kurs / 100 / 1000 ) × 1000   // ke atas ke Rp1.000
 subtotal        = harga_jual_unit × qty
 ```
 
-"Rincian hitungan": `harga × kurs` = `harga_sen × kurs` sen (mis. 32.569.730 sen = Rp325.697,30); `+ markup` = `sen` (Rp358.267,03).
+Tidak ada pembulatan 2 desimal di tengah karena semua input kelipatan sen.
 
-Vektor uji (semua ada di unit test server `tests/Unit/Domain/PricingTest.php`):
+Vektor uji (unit test server `tests/Unit/Domain/PricingTest.php`, front-end `tests/unit/harga.test.mjs`):
 
-| Kasus | harga_sen | kurs | markup_bp | N | sen | harga_jual_unit | qty | subtotal |
-|---|---|---|---|---|---|---|---|---|
-| QA Barang A | 2495 | 13054 | 1000 | 358.267.030.000 | 35.826.703 | 359.000 | 2 | 718.000 |
-| QA Barang B | 850 | 13054 | 1500 | 127.602.850.000 | 12.760.285 | 128.000 | 3 | 384.000 |
-| QA Barang C | 12999 | 13054 | 800 | 1.832.640.616.800 | 183.264.062 | 1.833.000 | 1 | 1.833.000 |
-| Tepat kelipatan Rp1.000 | 3590 | 10000 | 0 | 359.000.000.000 | 35.900.000 | 359.000 | 1 | 359.000 |
-| Bulat 2 desimal dulu (41.000,0032) | 302 | 13054 | 400 | 41.000.003.200 | 4.100.000 | 41.000 | 1 | 41.000 |
-| Bulat 2 desimal dulu (821.000,0004) | 5666 | 13054 | 1100 | 821.000.000.400 | 82.100.000 | 821.000 | 1 | 821.000 |
-| Half-up (6.559,635) | 50 | 13054 | 50 | 6.559.635.000 | 655.964 | 7.000 | 1 | 7.000 |
+| Kasus | harga_sen | ongkos_sen | fee_sen | kurs | harga_jual_unit | qty | subtotal |
+|---|---|---|---|---|---|---|---|
+| Swisse | 3500 | 500 | 300 | 12904 → 12900 | 555.000 | 33 | 18.315.000 |
+| Barang kecil | 2495 | 500 | 300 | 13054 | 431.000 | 2 | 862.000 |
+| Tepat kelipatan Rp1.000 | 3500 | 0 | 0 | 10000 | 350.000 | 1 | 350.000 |
 
-Baris "Bulat 2 desimal dulu" menunjukkan kenapa pembulatan 2 desimal wajib dilakukan sebelum pembulatan ke ribuan: tanpa itu, 41.000,0032 naik menjadi Rp42.000.
+Model LAMA (markup persen) hanya untuk baris pesanan yang dibuat sebelum perubahan ini:
+`N = harga_sen × kurs × (10000 + markup_bp); sen = floor((2N + 10000)/20000); harga_jual_unit = ceil(sen/100000) × 1000`. Baris lama ditandai `model_lama: true` dan tidak bisa diubah.
 
 ### 12.2 Status pembayaran (dihitung server, tidak di front-end)
 

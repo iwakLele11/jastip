@@ -8,7 +8,7 @@ import { parseBulat, parseDesimal, parseRupiah } from './parse.js';
 export const MAX_NAMA_BARANG = 150;
 export const MAX_CATATAN = 255;
 const MAX_HARGA_SEN = 10_000_000n; // AUD 100.000,00
-const MAX_MARKUP_BP = 10_000n; // 100%
+const MAX_TAMBAHAN_SEN = 10_000_000n; // AUD 100.000,00 (ongkos berat, fee jastip)
 const MAX_QTY = 999n;
 const MAX_NOMINAL = 1_000_000_000_000n;
 
@@ -39,29 +39,30 @@ function pesanQty(input) {
   return null;
 }
 
-function pesanMarkup(input) {
+function pesanTambahan(input, label) {
   const r = parseDesimal(input, 2);
   if (!r.ok) {
     return {
-      kosong: 'Markup wajib diisi.',
-      bukan_angka: 'Isi angka, mis. 10.',
+      kosong: `${label} wajib diisi.`,
+      bukan_angka: 'Isi angka saja, mis. 5.',
       desimal: 'Maksimal 2 angka di belakang koma.',
-      negatif: 'Markup tidak boleh negatif.',
+      negatif: `${label} tidak boleh negatif.`,
     }[r.alasan];
   }
-  if (r.nilai > MAX_MARKUP_BP) return 'Markup maksimal 100%.';
+  if (r.nilai > MAX_TAMBAHAN_SEN) return `${label} maksimal AUD 100.000,00.`;
   return null;
 }
 
 /**
  * Isi form barang (string) → error per field (kunci = nama field API) atau body request.
- * `qty` dikirim sebagai integer JSON (server menolak string), harga dan markup sebagai string.
+ * `qty` dikirim sebagai integer JSON (server menolak string); harga, ongkos, fee sebagai string.
  *
- * @param {{nama: string, harga: string, qty: string, markup: string}} isian
+ * @param {{nama: string, harga: string, qty: string, ongkos: string, fee: string}} isian
  * @returns {{errors: Record<string, string>, body: null} |
- *           {errors: {}, body: {nama_barang: string, harga_aud: string, qty: number, markup_persen: string}}}
+ *           {errors: {}, body: {nama_barang: string, harga_aud: string, qty: number,
+ *                               ongkos_berat: string, fee_jastip: string}}}
  */
-export function validasiBarang({ nama, harga, qty, markup }) {
+export function validasiBarang({ nama, harga, qty, ongkos, fee }) {
   const errors = {};
   const n = String(nama ?? '').trim();
   if (n === '') errors.nama_barang = 'Nama barang wajib diisi.';
@@ -70,8 +71,10 @@ export function validasiBarang({ nama, harga, qty, markup }) {
   if (eh) errors.harga_aud = eh;
   const eq = pesanQty(qty);
   if (eq) errors.qty = eq;
-  const em = pesanMarkup(markup);
-  if (em) errors.markup_persen = em;
+  const eo = pesanTambahan(ongkos, 'Ongkos berat');
+  if (eo) errors.ongkos_berat = eo;
+  const ef = pesanTambahan(fee, 'Fee jastip');
+  if (ef) errors.fee_jastip = ef;
   if (Object.keys(errors).length) return { errors, body: null };
   return {
     errors: {},
@@ -79,7 +82,8 @@ export function validasiBarang({ nama, harga, qty, markup }) {
       nama_barang: n,
       harga_aud: String(harga).trim(),
       qty: Number(String(qty).trim()),
-      markup_persen: String(markup).trim(),
+      ongkos_berat: String(ongkos).trim(),
+      fee_jastip: String(fee).trim(),
     },
   };
 }

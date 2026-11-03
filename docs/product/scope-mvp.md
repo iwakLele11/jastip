@@ -26,14 +26,15 @@ Fitur wajib baru setelah 27 Okt 2026 masuk backlog fase berikutnya.
 ### Harga jual per baris pesanan
 
 ```
-harga_jual_unit = bulat_ke_atas_Rp1000( bulat_2_desimal( harga_aud × kurs_jastip × (1 + markup%) ) )
+harga_jual_unit = bulat_ke_atas_Rp1000( (harga_aud + ongkos_berat + fee_jastip) × kurs_jastip )
 subtotal        = harga_jual_unit × qty
 ```
 
-- Harga asli dalam AUD, maksimal 2 desimal, > 0. Qty bilangan bulat ≥ 1.
-- Markup % dipilih per baris; terisi otomatis dari default markup di pengaturan. Rentang 0–100%, maksimal 2 desimal.
-- Pembulatan 2 desimal memakai half-up. Hasil yang sudah tepat kelipatan Rp1.000 tidak boleh naik ke ribuan berikutnya.
-- Setiap baris menyimpan snapshot: nama barang, harga AUD, kurs jastip, markup %, harga jual per unit, qty. Perubahan pengaturan tidak memengaruhi baris yang sudah ada.
+- Harga, ongkos berat, dan fee jastip semuanya dalam AUD (maks. 2 desimal). Harga > 0; ongkos & fee ≥ 0. Qty bilangan bulat ≥ 1.
+- Ongkos berat dan fee jastip terisi otomatis dari default di pengaturan (ongkos AUD 5,00, fee AUD 3,00), bisa diubah per baris.
+- Hasil yang sudah tepat kelipatan Rp1.000 tidak naik ke ribuan berikutnya.
+- Setiap baris menyimpan snapshot: nama barang, harga AUD, kurs jastip, ongkos berat, fee jastip, harga jual per unit, qty. Perubahan pengaturan tidak memengaruhi baris yang sudah ada.
+- Catatan: baris pesanan yang dibuat sebelum perubahan ini memakai markup persen (model lama) dan tidak bisa diubah — hapus lalu buat ulang.
 
 ### Total, DP, dan status pembayaran (per customer per Open PO)
 

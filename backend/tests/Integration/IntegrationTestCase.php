@@ -209,13 +209,15 @@ abstract class IntegrationTestCase extends TestCase
         string $nama,
         string $harga,
         int $qty = 1,
-        string $markup = '10',
+        string $ongkos = '5',
+        string $fee = '3',
     ): array {
         return $this->ok($this->call('POST', self::cartPath($po, $customer) . '/baris-pesanan', [
             'nama_barang' => $nama,
             'harga_aud' => $harga,
             'qty' => $qty,
-            'markup_persen' => $markup,
+            'ongkos_berat' => $ongkos,
+            'fee_jastip' => $fee,
         ]), 201);
     }
 

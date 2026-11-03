@@ -9,21 +9,25 @@ use RuntimeException;
 
 final class BarisPesananRepository
 {
-    private const UPDATABLE = ['nama_barang', 'harga_aud_sen', 'qty', 'markup_bp', 'harga_jual_unit', 'subtotal'];
+    private const UPDATABLE = ['nama_barang', 'harga_aud_sen', 'qty', 'ongkos_berat_sen', 'fee_jastip_sen', 'harga_jual_unit', 'subtotal'];
 
     public function __construct(private readonly Database $db)
     {
     }
 
     /**
-     * @param array{nama_barang: string, harga_aud_sen: int, qty: int, markup_bp: int, kurs_jastip: int,
+     * Baris model baru: markup_bp NULL, ongkos_berat_sen + fee_jastip_sen terisi.
+     *
+     * @param array{nama_barang: string, harga_aud_sen: int, qty: int, markup_bp: ?int,
+     *              ongkos_berat_sen: int, fee_jastip_sen: int, kurs_jastip: int,
      *              harga_jual_unit: int, subtotal: int} $data
      */
     public function insert(int $keranjangId, array $data): int
     {
         $stmt = $this->db->pdo()->prepare(
-            'INSERT INTO baris_pesanan (keranjang_id, nama_barang, harga_aud_sen, qty, markup_bp, kurs_jastip,'
-            . ' harga_jual_unit, subtotal, kosong) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)'
+            'INSERT INTO baris_pesanan (keranjang_id, nama_barang, harga_aud_sen, qty, markup_bp,'
+            . ' ongkos_berat_sen, fee_jastip_sen, kurs_jastip, harga_jual_unit, subtotal, kosong)'
+            . ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)'
         );
         $stmt->execute([
             $keranjangId,
@@ -31,6 +35,8 @@ final class BarisPesananRepository
             $data['harga_aud_sen'],
             $data['qty'],
             $data['markup_bp'],
+            $data['ongkos_berat_sen'],
+            $data['fee_jastip_sen'],
             $data['kurs_jastip'],
             $data['harga_jual_unit'],
             $data['subtotal'],
@@ -58,8 +64,8 @@ final class BarisPesananRepository
             throw new RuntimeException('findForUpdate harus dipanggil di dalam transaksi.');
         }
         $stmt = $this->db->pdo()->prepare(
-            'SELECT id, keranjang_id, nama_barang, harga_aud_sen, qty, markup_bp, kurs_jastip, harga_jual_unit,'
-            . ' subtotal, kosong FROM baris_pesanan WHERE id = ? FOR UPDATE'
+            'SELECT id, keranjang_id, nama_barang, harga_aud_sen, qty, markup_bp, ongkos_berat_sen, fee_jastip_sen,'
+            . ' kurs_jastip, harga_jual_unit, subtotal, kosong FROM baris_pesanan WHERE id = ? FOR UPDATE'
         );
         $stmt->execute([$id]);
         $row = $stmt->fetch();

@@ -68,7 +68,8 @@ menghitung harga. Nilai bawaan sudah masuk akal, tapi boleh kamu ubah.
 
 | Pengaturan | Artinya | Bawaan |
 |---|---|---|
-| **Default markup** | Keuntungan yang ditambahkan ke tiap barang (%) | 10% |
+| **Default ongkos berat** | Perkiraan ongkos berat/kirim per barang (AUD) | AUD 5 |
+| **Default fee jastip** | Fee jasa titip per barang (AUD) | AUD 3 |
 | **Buffer kurs AUD** | Pengaman kurs supaya tidak rugi saat kurs naik (%) | 3% |
 | **DP (uang muka)** | Berapa persen total yang diminta sebagai uang muka | 50% |
 
@@ -148,7 +149,11 @@ Catat barang yang dipesan tiap customer di dalam Open PO terkait.
      sama (harga AUD-nya ikut terisi otomatis).
    - **Harga AUD** — harga asli di Australia, maksimal 2 angka di belakang koma, mis. `24.95`.
    - **Qty** — jumlah, minimal 1.
-   - **Markup %** — sudah terisi dari default di Pengaturan; boleh diubah per barang.
+   - **Ongkos berat (AUD)** — perkiraan ongkos berat barang; sudah terisi default dari Pengaturan, boleh diubah per barang.
+   - **Fee jastip (AUD)** — fee jasa titip; sudah terisi default dari Pengaturan, boleh diubah per barang.
+
+   Harga jual dihitung: **(harga + ongkos berat + fee jastip) × kurs**, lalu dibulatkan ke atas ke
+   Rp1.000. Semua dikali qty.
 3. Sebelum simpan, aplikasi menampilkan **preview harga per unit dan subtotal**. Angka ini sama
    persis dengan hasil akhir.
 4. Simpan barang.
@@ -160,8 +165,11 @@ Catat barang yang dipesan tiap customer di dalam Open PO terkait.
   **tetap tampil** di rekap (supaya customer tahu), tapi **tidak dihitung** ke total. Tanda
   Kosong bisa dilepas lagi kalau barang akhirnya dapat.
 
-> Setiap baris menyimpan "foto" harga saat dicatat (harga AUD, kurs, markup, harga jual). Jadi
-> kalau nanti kamu mengubah Pengaturan, barang yang sudah dicatat **tidak berubah**.
+> Setiap baris menyimpan "foto" harga saat dicatat (harga AUD, kurs, ongkos, fee, harga jual).
+> Jadi kalau nanti kamu mengubah Pengaturan, barang yang sudah dicatat **tidak berubah**.
+>
+> Barang yang dicatat dengan versi lama aplikasi (sistem markup %) **tidak bisa diedit** — kalau
+> perlu diubah, hapus lalu tambahkan lagi.
 
 ---
 

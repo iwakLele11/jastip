@@ -109,4 +109,38 @@ final class PricingTest extends TestCase
         self::assertSame(200_000_000_000, $unit);
         self::assertSame(199_800_000_000_000, Pricing::subtotal($unit, Pricing::MAX_QTY));
     }
+
+    // ---- Model BARU: ongkos berat + fee jastip (sen AUD) ----
+
+    public function testHargaJualTambahanContohSwisse(): void
+    {
+        // (35 + 5 + 3) = $43 × Rp12.900 = Rp554.700 → Rp555.000; × 33 = Rp18.315.000.
+        $unit = Pricing::hargaJualUnitTambahan(3_500, 500, 300, 12_900);
+        self::assertSame(555_000, $unit);
+        self::assertSame(18_315_000, Pricing::subtotal($unit, 33));
+    }
+
+    public function testHargaJualTambahanTepatRibuanTidakNaik(): void
+    {
+        // (35 + 0 + 0) × Rp10.000 = Rp350.000 tepat.
+        self::assertSame(350_000, Pricing::hargaJualUnitTambahan(3_500, 0, 0, 10_000));
+    }
+
+    public function testHargaJualTambahanOngkosFeeNolDiperbolehkan(): void
+    {
+        self::assertSame(1_000, Pricing::hargaJualUnitTambahan(1, 0, 0, 13_054)); // 1 sen × 13.054 / 100 = Rp130,54 → Rp1.000
+    }
+
+    public function testHargaJualTambahanMenolakNilaiDiLuarRentang(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        Pricing::hargaJualUnitTambahan(0, 500, 300, 12_900);
+    }
+
+    public function testHargaJualTambahanTidakOverflow(): void
+    {
+        $unit = Pricing::hargaJualUnitTambahan(Pricing::MAX_HARGA_SEN, Pricing::MAX_TAMBAHAN_SEN, Pricing::MAX_TAMBAHAN_SEN, Pricing::MAX_KURS);
+        // (3 × 10.000.000) sen × 1.000.000 / 100 = 300.000.000.000.
+        self::assertSame(300_000_000_000, $unit);
+    }
 }

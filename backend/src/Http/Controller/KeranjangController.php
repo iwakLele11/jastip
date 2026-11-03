@@ -108,19 +108,27 @@ final class KeranjangController
             ],
             'customer' => self::presentCustomer(['customer_id' => $cart['customer']['id']] + $cart['customer']),
             'ringkasan' => $cart['summary']->toArray(),
-            'barang' => array_map(static fn (array $line): array => [
-                'id' => (int) $line['id'],
-                'nama_barang' => $line['nama_barang'],
-                'harga_aud' => DecimalFormatter::fixed((int) $line['harga_aud_sen'], 2),
-                'qty' => (int) $line['qty'],
-                'markup_persen' => DecimalFormatter::trimmed((int) $line['markup_bp'], 2),
-                'kurs_jastip' => (int) $line['kurs_jastip'],
-                'harga_jual_unit' => (int) $line['harga_jual_unit'],
-                'subtotal' => (int) $line['subtotal'],
-                'kosong' => (bool) $line['kosong'],
-                'dibuat_pada' => Sql::isoOrNull($line['created_at']),
-                'diubah_pada' => Sql::isoOrNull($line['updated_at']),
-            ], $cart['barang']),
+            'barang' => array_map(static function (array $line): array {
+                $modelLama = $line['markup_bp'] !== null;
+
+                return [
+                    'id' => (int) $line['id'],
+                    'nama_barang' => $line['nama_barang'],
+                    'harga_aud' => DecimalFormatter::fixed((int) $line['harga_aud_sen'], 2),
+                    'qty' => (int) $line['qty'],
+                    // Baris lama: markup_persen (read-only). Baris baru: ongkos_berat + fee_jastip.
+                    'markup_persen' => $modelLama ? DecimalFormatter::trimmed((int) $line['markup_bp'], 2) : null,
+                    'ongkos_berat' => $modelLama ? null : DecimalFormatter::fixed((int) $line['ongkos_berat_sen'], 2),
+                    'fee_jastip' => $modelLama ? null : DecimalFormatter::fixed((int) $line['fee_jastip_sen'], 2),
+                    'model_lama' => $modelLama,
+                    'kurs_jastip' => (int) $line['kurs_jastip'],
+                    'harga_jual_unit' => (int) $line['harga_jual_unit'],
+                    'subtotal' => (int) $line['subtotal'],
+                    'kosong' => (bool) $line['kosong'],
+                    'dibuat_pada' => Sql::isoOrNull($line['created_at']),
+                    'diubah_pada' => Sql::isoOrNull($line['updated_at']),
+                ];
+            }, $cart['barang']),
             'riwayat' => array_map(static fn (array $entry): array => [
                 'jenis' => $entry['jenis'],
                 'id' => $entry['id'],

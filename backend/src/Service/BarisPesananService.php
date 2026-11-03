@@ -41,9 +41,9 @@ final class BarisPesananService
      *
      * @return array{keranjang: array<string, mixed>, id: int}
      */
-    public function create(int $openPoId, int $customerId, string $nama, int $hargaSen, int $qty, int $markupBp): array
+    public function create(int $openPoId, int $customerId, string $nama, int $hargaSen, int $qty, int $ongkosSen, int $feeSen): array
     {
-        $id = $this->db->transaction(function () use ($openPoId, $customerId, $nama, $hargaSen, $qty, $markupBp): int {
+        $id = $this->db->transaction(function () use ($openPoId, $customerId, $nama, $hargaSen, $qty, $ongkosSen, $feeSen): int {
             $po = $this->locks->lockOpenPo($openPoId, exclusive: true);
             if ($po['kurs_terkunci_at'] === null) {
                 $this->openPo->lockKurs($openPoId, $this->clock->now());
@@ -51,13 +51,15 @@ final class BarisPesananService
             $keranjangId = $this->locks->openCart($openPoId, $customerId);
 
             $kurs = (int) $po['kurs_jastip'];
-            $unit = Pricing::hargaJualUnit($hargaSen, $kurs, $markupBp);
+            $unit = Pricing::hargaJualUnitTambahan($hargaSen, $ongkosSen, $feeSen, $kurs);
 
             return $this->lines->insert($keranjangId, [
                 'nama_barang' => $nama,
                 'harga_aud_sen' => $hargaSen,
                 'qty' => $qty,
-                'markup_bp' => $markupBp,
+                'markup_bp' => null,
+                'ongkos_berat_sen' => $ongkosSen,
+                'fee_jastip_sen' => $feeSen,
                 'kurs_jastip' => $kurs,
                 'harga_jual_unit' => $unit,
                 'subtotal' => Pricing::subtotal($unit, $qty),
@@ -76,10 +78,15 @@ final class BarisPesananService
     public function update(int $id, array $changes): array
     {
         $cart = $this->mutate($id, function (array $line) use ($id, $changes): void {
+            // Baris model lama (markup) tidak bisa diubah: hapus lalu buat ulang.
+            if ($line['markup_bp'] !== null) {
+                throw HttpError::conflict('BARIS_MODEL_LAMA', 'Barang lama tidak bisa diubah. Hapus lalu tambahkan lagi.');
+            }
             $hargaSen = $changes['harga_aud_sen'] ?? (int) $line['harga_aud_sen'];
             $qty = $changes['qty'] ?? (int) $line['qty'];
-            $markupBp = $changes['markup_bp'] ?? (int) $line['markup_bp'];
-            $unit = Pricing::hargaJualUnit($hargaSen, (int) $line['kurs_jastip'], $markupBp);
+            $ongkosSen = $changes['ongkos_berat_sen'] ?? (int) $line['ongkos_berat_sen'];
+            $feeSen = $changes['fee_jastip_sen'] ?? (int) $line['fee_jastip_sen'];
+            $unit = Pricing::hargaJualUnitTambahan($hargaSen, $ongkosSen, $feeSen, (int) $line['kurs_jastip']);
 
             $this->lines->update($id, $changes + [
                 'harga_jual_unit' => $unit,

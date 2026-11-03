@@ -13,12 +13,18 @@ use Jastip\Repository\Sql;
 
 final class SettingsController
 {
-    /** field API => [kolom DB, label untuk pesan] */
+    /** Field persen (basis point, 0–100%). field API => [kolom DB, label untuk pesan] */
     private const FIELDS = [
-        'default_markup_persen' => ['default_markup_bp', 'Markup'],
         'buffer_aud_persen' => ['buffer_aud_bp', 'Buffer'],
         'dp_persen' => ['dp_bp', 'DP'],
     ];
+
+    /** Field nominal AUD (sen). field API => [kolom DB, label untuk pesan] */
+    private const FIELDS_AUD = [
+        'default_ongkos_berat' => ['default_ongkos_berat_sen', 'Ongkos berat'],
+        'default_fee_jastip' => ['default_fee_jastip_sen', 'Fee jastip'],
+    ];
+    private const MAX_AUD_SEN = 10_000_000;
 
     public function __construct(private readonly SettingsRepository $settings)
     {
@@ -49,6 +55,21 @@ final class SettingsController
                 $changes[$column] = $value;
             }
         }
+        foreach (self::FIELDS_AUD as $field => [$column, $label]) {
+            if (!$v->has($field)) {
+                continue;
+            }
+            $value = $v->decimal($field, 2, [
+                'wajib' => $label . ' wajib diisi.',
+                'bukan_angka' => 'Isi angka saja, mis. 5.',
+                'desimal' => 'Maksimal 2 angka di belakang koma.',
+                'negatif' => $label . ' tidak boleh negatif.',
+                'max' => $label . ' maksimal AUD 100.000,00.',
+            ], self::MAX_AUD_SEN);
+            if ($value !== null) {
+                $changes[$column] = $value;
+            }
+        }
         $v->throwIfInvalid();
 
         $this->settings->update($changes);
@@ -64,7 +85,8 @@ final class SettingsController
         $row = $this->settings->get();
 
         return [
-            'default_markup_persen' => DecimalFormatter::trimmed($row['default_markup_bp'], 2),
+            'default_ongkos_berat' => DecimalFormatter::fixed($row['default_ongkos_berat_sen'], 2),
+            'default_fee_jastip' => DecimalFormatter::fixed($row['default_fee_jastip_sen'], 2),
             'buffer_aud_persen' => DecimalFormatter::trimmed($row['buffer_aud_bp'], 2),
             'dp_persen' => DecimalFormatter::trimmed($row['dp_bp'], 2),
             'diubah_pada' => Sql::isoOrNull($row['updated_at']),

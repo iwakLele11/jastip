@@ -22,12 +22,20 @@
         <h2 id="judul-perhitungan" class="{{judulBagian}}">Perhitungan</h2>
         <div class="{{kartu}} space-y-5">
           <div>
-            <label for="markup" class="{{label}}">Default markup</label>
+            <label for="ongkos" class="{{label}}">Default ongkos berat</label>
             <div class="{{inputGrup}}" data-input-grup>
-              <input id="markup" name="default_markup_persen" type="text" inputmode="decimal" class="{{inputDalamGrup}}" autocomplete="off" enterkeyhint="next" aria-describedby="markup-bantuan">
-              <span class="{{imbuhan}}" aria-hidden="true">%</span>
+              <span class="{{imbuhan}}" aria-hidden="true">AUD</span>
+              <input id="ongkos" name="default_ongkos_berat" type="text" inputmode="decimal" class="{{inputDalamGrup}}" autocomplete="off" enterkeyhint="next" aria-describedby="ongkos-bantuan">
             </div>
-            <p id="markup-bantuan" class="{{bantuan}}">Terisi otomatis di form barang. Tidak mengubah barang yang sudah ada.</p>
+            <p id="ongkos-bantuan" class="{{bantuan}}">Terisi otomatis di form barang. Tidak mengubah barang yang sudah ada.</p>
+          </div>
+          <div>
+            <label for="fee" class="{{label}}">Default fee jastip</label>
+            <div class="{{inputGrup}}" data-input-grup>
+              <span class="{{imbuhan}}" aria-hidden="true">AUD</span>
+              <input id="fee" name="default_fee_jastip" type="text" inputmode="decimal" class="{{inputDalamGrup}}" autocomplete="off" enterkeyhint="next" aria-describedby="fee-bantuan">
+            </div>
+            <p id="fee-bantuan" class="{{bantuan}}">Terisi otomatis di form barang. Tidak mengubah barang yang sudah ada.</p>
           </div>
           <div>
             <label for="buffer" class="{{label}}">Buffer kurs AUD</label>

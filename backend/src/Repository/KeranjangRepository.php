@@ -20,8 +20,8 @@ final class KeranjangRepository
 {
     private const SELECT = 'SELECT id, open_po_id, customer_id, created_at, updated_at FROM keranjang';
 
-    private const LINE_COLUMNS = 'id, keranjang_id, nama_barang, harga_aud_sen, qty, markup_bp, kurs_jastip,'
-        . ' harga_jual_unit, subtotal, kosong, created_at, updated_at';
+    private const LINE_COLUMNS = 'id, keranjang_id, nama_barang, harga_aud_sen, qty, markup_bp,'
+        . ' ongkos_berat_sen, fee_jastip_sen, kurs_jastip, harga_jual_unit, subtotal, kosong, created_at, updated_at';
 
     public function __construct(private readonly Database $db)
     {

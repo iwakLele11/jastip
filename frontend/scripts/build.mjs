@@ -119,9 +119,12 @@ if (!/<html[^>]*\sdata-segar="ok"/.test(segarkan) || /<script/i.test(segarkan) |
 }
 
 // ---------- CSS (Tailwind v4) ----------
+// Jalankan entry JS Tailwind CLI lewat `node` (bukan shim .bin/tailwindcss) supaya jalan sama di
+// Windows, macOS, dan Linux. Shim .bin tanpa ekstensi tidak bisa dieksekusi langsung di Windows.
+const tailwindCli = path.join(ROOT, 'node_modules', '@tailwindcss', 'cli', 'dist', 'index.mjs');
 const tw = spawnSync(
-  path.join(ROOT, 'node_modules', '.bin', 'tailwindcss'),
-  ['-i', path.join(SRC, 'styles', 'app.css'), '-o', path.join(DIST, 'css', 'app.css'), '--minify'],
+  process.execPath,
+  [tailwindCli, '-i', path.join(SRC, 'styles', 'app.css'), '-o', path.join(DIST, 'css', 'app.css'), '--minify'],
   { cwd: ROOT, stdio: ['ignore', 'inherit', 'inherit'] },
 );
 if (tw.status !== 0) {

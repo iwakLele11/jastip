@@ -158,13 +158,22 @@ async function kirim(url, { method, body, signal }) {
   const mengubah = method !== 'GET' && method !== 'HEAD';
   const headers = { Accept: 'application/json' };
   if (mengubah) headers['Content-Type'] = 'application/json';
-  const kirimBody = method === 'POST' || method === 'PATCH' || method === 'PUT';
+
+  // Method override: sebagian hosting hanya menerima GET/POST/OPTIONS dan menolak PATCH/PUT/
+  // DELETE dengan 403. Method itu dikirim sebagai POST + header X-HTTP-Method-Override; server
+  // (Request::fromGlobals) mengembalikannya ke method asli, jadi routing tetap sama.
+  let methodHttp = method;
+  if (method === 'PATCH' || method === 'PUT' || method === 'DELETE') {
+    headers['X-HTTP-Method-Override'] = method;
+    methodHttp = 'POST';
+  }
+  const kirimBody = methodHttp === 'POST';
 
   const { signal: s, selesai } = sinyalDenganBatasWaktu(signal);
   let res;
   try {
     res = await fetch(url, {
-      method,
+      method: methodHttp,
       headers,
       body: kirimBody ? JSON.stringify(body ?? {}) : undefined,
       credentials: 'same-origin',

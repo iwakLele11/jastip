@@ -61,8 +61,20 @@ final class Request
         /** @var array<string, string> $cookies */
         $cookies = array_filter($_COOKIE, 'is_string');
 
+        // Method override: sebagian hosting hanya mengizinkan GET/POST/OPTIONS dan menolak
+        // PATCH/PUT/DELETE dengan 403. Front-end lalu mengirim POST + header
+        // X-HTTP-Method-Override berisi method sebenarnya. Hanya berlaku untuk POST, dan hanya
+        // untuk method tulis yang dipakai API, supaya tidak membuka jalur tak terduga.
+        $method = strtoupper((string) ($_SERVER['REQUEST_METHOD'] ?? 'GET'));
+        if ($method === 'POST') {
+            $override = strtoupper(trim((string) ($headers['x-http-method-override'] ?? '')));
+            if (in_array($override, ['PATCH', 'PUT', 'DELETE'], true)) {
+                $method = $override;
+            }
+        }
+
         return new self(
-            method: strtoupper((string) ($_SERVER['REQUEST_METHOD'] ?? 'GET')),
+            method: $method,
             path: is_string($path) && $path !== '' ? $path : '/',
             query: $_GET,
             headers: $headers,

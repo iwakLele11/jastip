@@ -16,13 +16,14 @@ namespace Jastip\Domain;
  *   {n}. {nama barang} (Kosong, tidak ditagih)
  *
  *   *Total: {total}*
- *   DP {dp%}
+ *   DP {dp%}: {dp}
  *   [Sudah dibayar: …]   jika ada pembayaran atau pengembalian dana
  *   [Dikembalikan: …]    jika ada pengembalian dana
  *
  * Belum lunas (Belum bayar / Kurang DP / DP) — ajakan bayar, tanpa baris Status:
  *   *Silakan lakukan pembayaran*
  *   Rekening BCA : {no rek}
+ *   a.n. {nama pemilik rekening}
  * Lunas / Lebih bayar — baris penentu + status seperti semula:
  *   *{baris penentu}*
  *   Status: {STATUS}
@@ -38,6 +39,8 @@ final class RekapWa
     private const INDENT = '   ';
     /** Nomor rekening tujuan pembayaran (muncul di rekap saat belum lunas). */
     private const REKENING = '5005023600';
+    /** Nama pemilik rekening. */
+    private const NAMA_REKENING = 'Mira Putri';
 
     /**
      * @param list<RekapItem> $items
@@ -80,8 +83,7 @@ final class RekapWa
         }
 
         $lines[] = '*Total: ' . Rupiah::format($summary->total) . '*';
-        // DP hanya persen, tanpa nominal (sama di semua status).
-        $lines[] = sprintf('DP %s%%', self::persen($summary->dpBp));
+        $lines[] = sprintf('DP %s%%: %s', self::persen($summary->dpBp), Rupiah::format($summary->dp));
         if ($summary->totalPembayaran > 0 || $summary->totalPengembalian > 0) {
             $lines[] = 'Sudah dibayar: ' . Rupiah::format($summary->totalPembayaran);
         }
@@ -90,9 +92,10 @@ final class RekapWa
         }
 
         if (self::belumLunas($summary->status)) {
-            // Belum lunas: ajakan bayar + rekening, tanpa baris Status (tidak menagih customer lama).
+            // Belum lunas: ajakan bayar + rekening + nama pemilik, tanpa baris Status.
             $lines[] = '*Silakan lakukan pembayaran*';
             $lines[] = 'Rekening BCA : ' . self::REKENING;
+            $lines[] = 'a.n. ' . self::NAMA_REKENING;
         } else {
             // Lunas / Lebih bayar: tetap tampilkan baris penentu dan Status.
             $lines[] = '*' . self::penentu($summary) . '*';

@@ -246,8 +246,9 @@ seperti `Rp2.551.000`, dan tulisan tebal WhatsApp (`*teks*`) tampil benar. Baran
 barang yang dikembalikan ditampilkan. Semua rekap diakhiri `Terimakasih 💕`.
 
 Bagian bawah rekap menyesuaikan status:
-- **Belum lunas** (belum bayar / kurang DP / DP): muncul `*Silakan lakukan pembayaran*` dan
-  `Rekening BCA : 5005023600`, **tanpa** menampilkan status — supaya tidak terkesan menagih.
+- **Belum lunas** (belum bayar / kurang DP / DP): muncul `*Silakan lakukan pembayaran*`,
+  `Rekening BCA : 5005023600`, dan `a.n. Mira Putri`, **tanpa** menampilkan status — supaya tidak
+  terkesan menagih.
 - **Sudah lunas / lebih bayar**: menampilkan `Status: LUNAS ✅` atau info kelebihan bayar.
 
 Baris **Alamat** hanya muncul kalau customer punya alamat. Kalau alamatnya belum diisi, baris itu
@@ -270,9 +271,10 @@ Alamat: Jl. Melati No. 5, Jakarta
    1 x Rp1.833.000 = Rp1.833.000
 
 *Total: Rp2.551.000*
-DP 50%
+DP 50%: Rp1.276.000
 *Silakan lakukan pembayaran*
 Rekening BCA : 5005023600
+a.n. Mira Putri
 Terimakasih 💕
 ```
 
@@ -280,7 +282,7 @@ Contoh rekap untuk customer yang **sudah lunas** — tetap menampilkan status:
 
 ```
 *Total: Rp2.935.000*
-DP 50%
+DP 50%: Rp1.468.000
 Sudah dibayar: Rp2.935.000
 *Sisa pelunasan: Rp0*
 Status: LUNAS ✅

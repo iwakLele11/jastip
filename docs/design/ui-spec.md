@@ -1154,7 +1154,7 @@ Alamat: {alamat}                 (hanya jika alamat terisi)
 {n}. {nama barang} (Kosong, tidak ditagih)
 
 *Total: {total}*
-DP {dp%}
+DP {dp%}: {dp}
 [blok pembayaran]
 [bagian bawah per status]
 Terimakasih 💕
@@ -1163,14 +1163,14 @@ Terimakasih 💕
 **Aturan:**
 - Baris `Alamat: {alamat}` hanya muncul jika alamat customer terisi (dilewati kalau kosong).
 - Baris barang Kosong tetap bernomor, tanpa baris qty/harga.
-- `DP {dp%}` hanya persen, tanpa nominal (sama di semua status).
+- `DP {dp%}: {dp}` persen dan nominal (sama di semua status).
 - `Sudah dibayar: {Σ pembayaran}` muncul kalau ada pembayaran atau pengembalian dana.
 - `Dikembalikan: {Σ pengembalian}` muncul kalau ada pengembalian dana.
 - Bagian bawah per status:
 
 | Status | Bagian bawah |
 |---|---|
-| Belum bayar, Kurang DP, DP (belum lunas) | `*Silakan lakukan pembayaran*` + `Rekening BCA : {no rek}` (tanpa baris Status) |
+| Belum bayar, Kurang DP, DP (belum lunas) | `*Silakan lakukan pembayaran*` + `Rekening BCA : {no rek}` + `a.n. {nama pemilik}` (tanpa baris Status) |
 | Lunas | `*Sisa pelunasan: Rp0*` + `Status: LUNAS ✅` |
 | Lebih bayar | `*Kelebihan bayar (akan dikembalikan): {dana diterima − total}*` + `Status: LEBIH BAYAR` |
 
@@ -1195,9 +1195,10 @@ Customer: Rina (081234567890)
    1 x Rp1.833.000 = Rp1.833.000
 
 *Total: Rp2.935.000*
-DP 50%
+DP 50%: Rp1.468.000
 *Silakan lakukan pembayaran*
 Rekening BCA : 5005023600
+a.n. Mira Putri
 Terimakasih 💕
 ```
 
@@ -1205,10 +1206,11 @@ Kurang DP (sudah bayar Rp500.000), bagian bawah saja:
 
 ```
 *Total: Rp2.935.000*
-DP 50%
+DP 50%: Rp1.468.000
 Sudah dibayar: Rp500.000
 *Silakan lakukan pembayaran*
 Rekening BCA : 5005023600
+a.n. Mira Putri
 Terimakasih 💕
 ```
 
@@ -1216,10 +1218,11 @@ DP (QA langkah 2):
 
 ```
 *Total: Rp2.935.000*
-DP 50%
+DP 50%: Rp1.468.000
 Sudah dibayar: Rp1.468.000
 *Silakan lakukan pembayaran*
 Rekening BCA : 5005023600
+a.n. Mira Putri
 Terimakasih 💕
 ```
 
@@ -1227,7 +1230,7 @@ Lunas tanpa pengembalian (QA langkah 3):
 
 ```
 *Total: Rp2.935.000*
-DP 50%
+DP 50%: Rp1.468.000
 Sudah dibayar: Rp2.935.000
 *Sisa pelunasan: Rp0*
 Status: LUNAS ✅
@@ -1247,7 +1250,7 @@ Customer: Rina (081234567890)
    1 x Rp1.833.000 = Rp1.833.000
 
 *Total: Rp2.551.000*
-DP 50%
+DP 50%: Rp1.276.000
 Sudah dibayar: Rp2.935.000
 *Kelebihan bayar (akan dikembalikan): Rp384.000*
 Status: LEBIH BAYAR
@@ -1258,7 +1261,7 @@ Lunas setelah pengembalian dana (QA langkah 5):
 
 ```
 *Total: Rp2.551.000*
-DP 50%
+DP 50%: Rp1.276.000
 Sudah dibayar: Rp2.935.000
 Dikembalikan: Rp384.000
 *Sisa pelunasan: Rp0*
@@ -1271,7 +1274,7 @@ Terimakasih 💕
 | Rekap | Layar Keranjang |
 |---|---|
 | Total | Total |
-| DP {persen} | DP {persen} (rekap hanya persen, tanpa nominal) |
+| DP {persen}: {dp} | DP {persen} / nominal DP |
 | Sudah dibayar | Tanpa pengembalian: sama dengan "Dana diterima". Dengan pengembalian: baris rincian "Sudah dibayar …" di bawah Dana diterima |
 | Dikembalikan | Baris rincian "Dikembalikan …" di bawah Dana diterima |
 | Sisa pelunasan (hanya status Lunas) | Sisa pelunasan |

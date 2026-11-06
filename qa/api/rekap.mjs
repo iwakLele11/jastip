@@ -145,9 +145,9 @@ await cek('RKP-09', 'DP % desimal memakai koma ("DP 37,5%") dan DP 0% / 100%', a
 await cek('RKP-10', 'Keranjang tanpa barang (hanya pembayaran) langsung ke *Total: Rp0*; keranjang belum ada → rekap angka nol', async () => {
   const p = await admin.ok('POST', '/open-po', { nama: 'Tanpa barang', kurs: kursManual(13054) });
   const c = await admin.ok('POST', '/customer', { nama: 'Tono', no_wa: '0812-1111-2222' });
-  sama(await rekap(p.id, c.id), '*REKAP JASTIP - Tanpa barang*\nCustomer: Tono (081211112222)\n\n*Total: Rp0*\nDP 50%\n*Sisa pelunasan: Rp0*\nStatus: LUNAS ✅\nTerimakasih 💕', 'belum ada keranjang');
+  sama(await rekap(p.id, c.id), '*REKAP JASTIP - Tanpa barang*\nCustomer: Tono (081211112222)\n\n*Total: Rp0*\nDP 50%: Rp0\n*Sisa pelunasan: Rp0*\nStatus: LUNAS ✅\nTerimakasih 💕', 'belum ada keranjang');
   await admin.ok('POST', `/open-po/${p.id}/keranjang/${c.id}/pembayaran`, { nominal: 50000, tanggal: '2026-10-28' });
-  sama(await rekap(p.id, c.id), '*REKAP JASTIP - Tanpa barang*\nCustomer: Tono (081211112222)\n\n*Total: Rp0*\nDP 50%\nSudah dibayar: Rp50.000\n*Kelebihan bayar (akan dikembalikan): Rp50.000*\nStatus: LEBIH BAYAR\nTerimakasih 💕', 'hanya pembayaran');
+  sama(await rekap(p.id, c.id), '*REKAP JASTIP - Tanpa barang*\nCustomer: Tono (081211112222)\n\n*Total: Rp0*\nDP 50%: Rp0\nSudah dibayar: Rp50.000\n*Kelebihan bayar (akan dikembalikan): Rp50.000*\nStatus: LEBIH BAYAR\nTerimakasih 💕', 'hanya pembayaran');
   const r404a = await admin.req('GET', `/open-po/999999/keranjang/${c.id}/rekap`);
   const r404b = await admin.req('GET', `/open-po/${p.id}/keranjang/999999/rekap`);
   sama([r404a.status, r404a.json?.error?.pesan, r404b.status, r404b.json?.error?.pesan], [404, 'Open PO tidak ditemukan.', 404, 'Customer tidak ditemukan.']);

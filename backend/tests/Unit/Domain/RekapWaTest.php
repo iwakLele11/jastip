@@ -19,9 +19,10 @@ final class RekapWaTest extends TestCase
         . "Customer: Rina (081234567890)\n"
         . "\n";
 
-    // Ajakan bayar + rekening untuk status belum lunas.
+    // Ajakan bayar + rekening + nama pemilik untuk status belum lunas.
     private const BAYAR = "*Silakan lakukan pembayaran*\n"
-        . "Rekening BCA : 5005023600\n";
+        . "Rekening BCA : 5005023600\n"
+        . "a.n. Mira Putri\n";
     private const SALAM = 'Terimakasih 💕';
 
     private const BARANG_ABC = "1. Barang A\n"
@@ -61,7 +62,7 @@ final class RekapWaTest extends TestCase
         self::assertSame(
             self::HEADER . self::BARANG_ABC
             . "*Total: Rp2.935.000*\n"
-            . "DP 50%\n"
+            . "DP 50%: Rp1.468.000\n"
             . self::BAYAR
             . self::SALAM,
             self::rekap(CartCalculator::summarize(2_935_000, 5_000, 0, 0)),
@@ -73,7 +74,7 @@ final class RekapWaTest extends TestCase
         self::assertSame(
             self::HEADER . self::BARANG_ABC
             . "*Total: Rp2.935.000*\n"
-            . "DP 50%\n"
+            . "DP 50%: Rp1.468.000\n"
             . "Sudah dibayar: Rp500.000\n"
             . self::BAYAR
             . self::SALAM,
@@ -86,7 +87,7 @@ final class RekapWaTest extends TestCase
         self::assertSame(
             self::HEADER . self::BARANG_ABC
             . "*Total: Rp2.935.000*\n"
-            . "DP 50%\n"
+            . "DP 50%: Rp1.468.000\n"
             . "Sudah dibayar: Rp1.468.000\n"
             . self::BAYAR
             . self::SALAM,
@@ -99,7 +100,7 @@ final class RekapWaTest extends TestCase
         self::assertSame(
             self::HEADER . self::BARANG_ABC
             . "*Total: Rp2.935.000*\n"
-            . "DP 50%\n"
+            . "DP 50%: Rp1.468.000\n"
             . "Sudah dibayar: Rp2.935.000\n"
             . "*Sisa pelunasan: Rp0*\n"
             . "Status: LUNAS ✅\n"
@@ -113,7 +114,7 @@ final class RekapWaTest extends TestCase
         self::assertSame(
             self::HEADER . self::BARANG_B_KOSONG
             . "*Total: Rp2.551.000*\n"
-            . "DP 50%\n"
+            . "DP 50%: Rp1.276.000\n"
             . "Sudah dibayar: Rp2.935.000\n"
             . "*Kelebihan bayar (akan dikembalikan): Rp384.000*\n"
             . "Status: LEBIH BAYAR\n"
@@ -127,7 +128,7 @@ final class RekapWaTest extends TestCase
         self::assertSame(
             self::HEADER . self::BARANG_B_KOSONG
             . "*Total: Rp2.551.000*\n"
-            . "DP 50%\n"
+            . "DP 50%: Rp1.276.000\n"
             . "Sudah dibayar: Rp2.935.000\n"
             . "Dikembalikan: Rp384.000\n"
             . "*Sisa pelunasan: Rp0*\n"
@@ -143,7 +144,7 @@ final class RekapWaTest extends TestCase
             new RekapItem('Barang A', 1, 100_000, 100_000, false),
         ], CartCalculator::summarize(100_000, 3_750, 0, 0));
 
-        self::assertStringContainsString("\nDP 37,5%\n", $text);
+        self::assertStringContainsString("\nDP 37,5%: Rp38.000\n", $text);
     }
 
     public function testKeranjangTanpaBarang(): void
@@ -154,7 +155,7 @@ final class RekapWaTest extends TestCase
             . "Customer: Rina (081234567890)\n"
             . "\n"
             . "*Total: Rp0*\n"
-            . "DP 50%\n"
+            . "DP 50%: Rp0\n"
             . "*Sisa pelunasan: Rp0*\n"
             . "Status: LUNAS ✅\n"
             . self::SALAM,

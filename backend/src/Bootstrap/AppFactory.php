@@ -95,7 +95,7 @@ final class AppFactory
         $kurs = new KursController(new KursService($rates, $settingsRepo, $logger));
         $openPoRepo = new OpenPoRepository($db);
         $keranjangRepo = new KeranjangRepository($db);
-        $openPo = new OpenPoController(new OpenPoService($db, $openPoRepo, $settingsRepo));
+        $openPo = new OpenPoController(new OpenPoService($db, $openPoRepo, $settingsRepo, $logger));
         $customer = new CustomerController(
             new CustomerService($db, $customerRepo, $clock, $logger),
             $customerRepo,
@@ -143,6 +143,7 @@ final class AppFactory
         $r->add('GET', $v1 . '/open-po', static fn (Request $q): mixed => $openPo->index($q));
         $r->add('POST', $v1 . '/open-po', static fn (Request $q): mixed => $openPo->store($q));
         $r->add('GET', $v1 . '/open-po/{id}', static fn (Request $q, array $p): mixed => $openPo->show($p));
+        $r->add('DELETE', $v1 . '/open-po/{id}', static fn (Request $q, array $p): mixed => $openPo->destroy($p));
         $r->add('PATCH', $v1 . '/open-po/{id}', static fn (Request $q, array $p): mixed => $openPo->update($q, $p));
 
         $r->add('GET', $v1 . '/customer', static fn (Request $q): mixed => $customer->index($q));

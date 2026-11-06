@@ -8,6 +8,7 @@ use Jastip\Domain\DecimalFormatter;
 use Jastip\Domain\KursCalculator;
 use Jastip\Http\HttpError;
 use Jastip\Infrastructure\Database;
+use Jastip\Infrastructure\Logger;
 use Jastip\Repository\OpenPoRepository;
 use Jastip\Repository\SettingsRepository;
 
@@ -17,6 +18,7 @@ final class OpenPoService
         private readonly Database $db,
         private readonly OpenPoRepository $openPo,
         private readonly SettingsRepository $settings,
+        private readonly Logger $logger,
     ) {
     }
 
@@ -92,6 +94,25 @@ final class OpenPoService
         });
 
         return $this->get($id);
+    }
+
+    /**
+     * Hapus PO beserta SELURUH turunannya (barang, pembayaran, pengembalian dana) — permanen.
+     * Baris PO dikunci lebih dulu supaya tidak balapan dengan aksi lain di PO itu.
+     */
+    public function delete(int $id): void
+    {
+        $this->db->transaction(function () use ($id): void {
+            $row = $this->openPo->findForUpdate($id) ?? throw HttpError::notFound('Open PO tidak ditemukan.');
+            $ringkasan = $this->openPo->ringkasan([$id])[$id];
+            $this->openPo->delete($id);
+            $this->logger->info('open_po_dihapus', [
+                'open_po_id' => $id,
+                'jumlah_customer' => $ringkasan['jumlah_customer'],
+                'total_pesanan' => $ringkasan['total_pesanan'],
+                'dana_diterima' => $ringkasan['dana_diterima'],
+            ]);
+        });
     }
 
     /**

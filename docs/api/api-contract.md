@@ -137,6 +137,7 @@ Urutan validasi dan pesan: kosong → "No WA wajib diisi."; ada huruf/simbol →
 | ✅ | POST | `/open-po` | Buat Open PO |
 | ✅ | GET | `/open-po/{id}` | Detail Open PO + `kurs_terkunci` + ringkasan |
 | ✅ | PATCH | `/open-po/{id}` | Ubah nama / status / kurs |
+| ✅ | DELETE | `/open-po/{id}` | Hapus Open PO beserta seluruh turunannya (permanen) |
 | ✅ | GET | `/customer` | Daftar & cari customer |
 | ✅ | POST | `/customer` | Buat customer |
 | ✅ | GET | `/customer/cek-no-wa` | Cek duplikat no WA |
@@ -401,6 +402,15 @@ Semua field opsional:
 - DP % tidak bisa diubah.
 
 `200` objek Open PO.
+
+### `DELETE /open-po/{id}`
+
+Menghapus Open PO beserta **seluruh turunannya** dalam satu transaksi: keranjang, baris pesanan,
+pembayaran, dan pengembalian dana di PO itu dihapus permanen (hard delete). Data customer tidak
+ikut terhapus. Berlaku untuk PO mana pun, termasuk yang kurs-nya sudah terkunci / berstatus selesai
+(front-end menampilkan dialog konfirmasi berisi jumlah customer dan dana diterima lebih dulu).
+Penghapusan dicatat di log aplikasi (`open_po_dihapus` dengan jumlah customer, total pesanan, dana
+diterima; tanpa data customer). `204` tanpa body. `404 TIDAK_DITEMUKAN` jika PO tidak ada.
 
 ---
 

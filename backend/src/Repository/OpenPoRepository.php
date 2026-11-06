@@ -158,6 +158,25 @@ final class OpenPoRepository
     }
 
     /**
+     * Hapus PO beserta seluruh turunannya (hard delete). FK ON DELETE RESTRICT, jadi anak
+     * dihapus lebih dulu: pengembalian_dana → pembayaran → baris_pesanan → keranjang → open_po.
+     * Harus dipanggil di dalam transaksi (service yang membukanya).
+     */
+    public function delete(int $id): void
+    {
+        if (!$this->db->pdo()->inTransaction()) {
+            throw new RuntimeException('Hapus open_po harus di dalam transaksi.');
+        }
+        $pdo = $this->db->pdo();
+        $anak = 'WHERE keranjang_id IN (SELECT id FROM keranjang WHERE open_po_id = ?)';
+        $pdo->prepare('DELETE FROM pengembalian_dana ' . $anak)->execute([$id]);
+        $pdo->prepare('DELETE FROM pembayaran ' . $anak)->execute([$id]);
+        $pdo->prepare('DELETE FROM baris_pesanan ' . $anak)->execute([$id]);
+        $pdo->prepare('DELETE FROM keranjang WHERE open_po_id = ?')->execute([$id]);
+        $pdo->prepare('DELETE FROM open_po WHERE id = ?')->execute([$id]);
+    }
+
+    /**
      * Ringkasan per PO dari keranjang berisi: jumlah customer, total pesanan
      * (tanpa baris Kosong), dan dana diterima (Σ pembayaran − Σ pengembalian dana).
      *

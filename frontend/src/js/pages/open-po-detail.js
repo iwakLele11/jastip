@@ -11,6 +11,7 @@ import {
   STATUS_BAYAR, URUTAN_STATUS, aksiCobaLagi, badgeStatus, barisUang, emptyState, setBanner, skeletonBaris,
   skeletonKursCard, tombolMemuat,
 } from '../ui/komponen.js';
+import { konfirmasi } from '../ui/dialog.js';
 import { kartuKurs } from '../ui/kurs.js';
 import { bukaSheetTambahCustomer } from '../ui/sheet-customer.js';
 
@@ -26,6 +27,7 @@ const filterStatus = wajib('#filter-status');
 const chipStatus = wajib('#chip-status');
 const daftar = wajib('#daftar-customer');
 const tautanUbah = wajib('#tautan-ubah');
+const tombolHapus = wajib('#tombol-hapus-po');
 const tambahHeader = wajib('#tambah-customer-header');
 const fab = wajib('#fab-customer');
 
@@ -186,6 +188,33 @@ function tambahCustomer() {
 fab.addEventListener('click', tambahCustomer);
 tambahHeader.addEventListener('click', tambahCustomer);
 
+/** Hapus Open PO beserta seluruh isinya (permanen). Konfirmasi menampilkan jumlah customer & uang. */
+async function hapusPo() {
+  if (!po) return;
+  const r = po.ringkasan;
+  const rincian =
+    r.jumlah_customer > 0
+      ? `Open PO ini punya ${r.jumlah_customer} customer dan dana diterima ${formatRupiah(r.dana_diterima)}. `
+      : '';
+  const ya = await konfirmasi({
+    judul: `Hapus "${po.nama}"?`,
+    isi: `${rincian}Semua barang, pembayaran, dan pengembalian dana di Open PO ini akan dihapus permanen dan tidak bisa dikembalikan.`,
+    labelAksi: 'Hapus',
+    nada: 'danger',
+  });
+  if (!ya) return;
+  const pulihkan = tombolMemuat(tombolHapus, 'Menghapus…');
+  try {
+    await Api.hapusOpenPo(po.id);
+    location.replace(`${rute.beranda()}?pesan=po-dihapus`);
+  } catch (err) {
+    catatJikaBug(err);
+    pulihkan();
+    setBanner(bannerCustomer, { jenis: 'error', pesan: pesanError(err, 'aksi') });
+  }
+}
+tombolHapus.addEventListener('click', hapusPo);
+
 // ---------- Data ----------
 
 function simpanFilterDiUrl() {
@@ -251,6 +280,7 @@ async function muat() {
     document.title = `${po.nama} · Jastip Admin`;
     tautanUbah.href = rute.poUbah(po.id);
     tautanUbah.hidden = false;
+    tombolHapus.hidden = false;
     tambahHeader.hidden = false;
     fab.hidden = false;
     renderKiri();

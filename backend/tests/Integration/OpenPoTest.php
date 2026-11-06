@@ -279,4 +279,44 @@ final class OpenPoTest extends IntegrationTestCase
         $byName = array_column($list, 'ringkasan', 'nama');
         self::assertSame(['jumlah_customer' => 1, 'total_pesanan' => 5_000, 'dana_diterima' => 5_000], $byName['PO lain']);
     }
+
+    public function testHapusPoKosong(): void
+    {
+        $po = $this->createOpenPo();
+
+        $res = $this->call('DELETE', '/api/v1/open-po/' . $po['id']);
+        self::assertSame(204, $res->status);
+        $this->fails($this->call('GET', '/api/v1/open-po/' . $po['id']), 404, 'TIDAK_DITEMUKAN');
+        self::assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM open_po')->fetchColumn());
+    }
+
+    public function testHapusPoMenghapusSeluruhTurunannya(): void
+    {
+        $po = $this->createOpenPo();
+        $lain = $this->createOpenPo('PO lain');
+        $rina = $this->createCustomer('Rina', '081234567890');
+        $sari = $this->createCustomer('Sari', '081398765432');
+
+        // PO target: barang + pembayaran + pengembalian dana.
+        $this->seedCart($po['id'], $rina['id'], [[359_000, 2, false], [128_000, 3, true]], [1_000_000], [50_000]);
+        // PO lain: tidak boleh ikut terhapus.
+        $this->seedCart($lain['id'], $sari['id'], [[5_000, 1, false]], [5_000]);
+
+        $res = $this->call('DELETE', '/api/v1/open-po/' . $po['id']);
+        self::assertSame(204, $res->status);
+
+        // PO target + seluruh turunannya hilang; PO lain + turunannya utuh; customer tetap ada.
+        self::assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM open_po WHERE id = ' . (int) $po['id'])->fetchColumn());
+        self::assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM keranjang WHERE open_po_id = ' . (int) $po['id'])->fetchColumn());
+        self::assertSame(1, (int) $this->pdo->query('SELECT COUNT(*) FROM open_po WHERE id = ' . (int) $lain['id'])->fetchColumn());
+        self::assertSame(1, (int) $this->pdo->query('SELECT COUNT(*) FROM baris_pesanan')->fetchColumn());
+        self::assertSame(1, (int) $this->pdo->query('SELECT COUNT(*) FROM pembayaran')->fetchColumn());
+        self::assertSame(0, (int) $this->pdo->query('SELECT COUNT(*) FROM pengembalian_dana')->fetchColumn());
+        self::assertSame(2, (int) $this->pdo->query('SELECT COUNT(*) FROM customer')->fetchColumn());
+    }
+
+    public function testHapusPoTidakAda(): void
+    {
+        $this->fails($this->call('DELETE', '/api/v1/open-po/999999'), 404, 'TIDAK_DITEMUKAN');
+    }
 }

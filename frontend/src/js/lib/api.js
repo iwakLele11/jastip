@@ -298,6 +298,7 @@ export const Api = {
   openPo: (id) => api(`/open-po/${id}`),
   buatOpenPo: (body) => api('/open-po', { method: 'POST', body }),
   ubahOpenPo: (id, body) => api(`/open-po/${id}`, { method: 'PATCH', body }),
+  hapusOpenPo: (id) => api(`/open-po/${id}`, { method: 'DELETE' }),
   customerOpenPo: (id, query) => api(`/open-po/${id}/customer`, { query }),
 
   daftarCustomer: (query, signal) => api('/customer', { query, signal }),

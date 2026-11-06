@@ -11,6 +11,7 @@ const DURASI_MS = 4000;
 export const PESAN_FLASH = {
   'po-dibuat': 'Open PO dibuat.',
   'po-diubah': 'Perubahan disimpan.',
+  'po-dihapus': 'Open PO dihapus.',
   'customer-disimpan': 'Customer disimpan.',
   'customer-diarsipkan': 'Customer diarsipkan.',
   'customer-dihapus': 'Customer dihapus.',

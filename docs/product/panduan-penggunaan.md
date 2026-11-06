@@ -117,6 +117,13 @@ Open PO adalah satu sesi titipan (satu periode belanja).
 > semua customer di PO yang sama dihitung dengan kurs yang sama. Jadi pastikan kurs sudah benar
 > **sebelum** mencatat barang.
 
+**Menghapus Open PO.** Kalau ada PO yang salah dibuat dan ingin dibuang, buka PO itu lalu klik
+tombol **Hapus** di kanan atas. Muncul konfirmasi yang menyebut berapa customer dan berapa dana
+yang sudah masuk di PO itu — sebagai pengingat. Kalau kamu lanjutkan, **seluruh isi PO (barang,
+pembayaran, pengembalian dana) ikut terhapus permanen** dan tidak bisa dikembalikan. Data customer
+sendiri tidak terhapus (mereka tetap ada di menu Customer). Karena permanen, baca dulu angka di
+konfirmasi sebelum menghapus.
+
 ---
 
 ## 6. Menambah Customer

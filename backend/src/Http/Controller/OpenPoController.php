@@ -65,6 +65,18 @@ final class OpenPoController
     }
 
     /**
+     * DELETE /open-po/{id}. Hapus PO beserta seluruh turunannya (permanen).
+     *
+     * @param array<string, int> $params
+     */
+    public function destroy(array $params): Response
+    {
+        $this->service->delete($params['id']);
+
+        return Response::noContent();
+    }
+
+    /**
      * Semua field opsional. Jangan kirim "kurs" kalau kurs_terkunci = true (ditolak 409).
      *
      * @param array<string, int> $params

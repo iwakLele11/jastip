@@ -1,6 +1,13 @@
 // Uji teks rekap WA (GET /open-po/{id}/keranjang/{customer_id}/rekap) terhadap ui-spec §9.6.
 // Contoh per status diambil langsung dari blok kode di docs/design/ui-spec.md, jadi uji ini
 // mengikuti dokumen sumber kebenaran. Hasil: qa/hasil/rekap[-…].json
+//
+// TODO(model-ongkos-fee + rekap-baru): setup barang di skrip ini masih memakai `markup_persen`
+// (model lama) dan sebagian assertion (mis. RKP-07, RKP-09) masih mengacu format rekap lama
+// ("Mohon transfer DP", "DP %: nominal", "Status" di semua baris). ui-spec §9.6 dan RekapWa sudah
+// diperbarui ke format baru (ongkos+fee, "Silakan lakukan pembayaran" + rekening, tanpa Status
+// saat belum lunas, diakhiri "Terimakasih 💕"). Perlu dijalankan ulang + disesuaikan di lingkungan
+// dengan MySQL sebelum dipakai sebagai gate QA.
 import { readFileSync } from 'node:fs';
 import { Klien, kursManual, noWaUnik } from '../lib/klien.mjs';
 import { bagian, cek, harap, sama, selesai } from '../lib/uji.mjs';
@@ -40,7 +47,7 @@ function aturanUmum(teks) {
   });
   // Baris tebal yang diwajibkan format: judul, Total, baris penentu. Isi di antara * tidak boleh
   // memuat * lagi dan tidak boleh diawali/diakhiri spasi (aturan WA: * menempel ke teks).
-  const tebal = baris.filter((b) => /^\*(REKAP JASTIP - |Total: |Mohon transfer DP: |Sisa pelunasan: |Kelebihan bayar \(akan dikembalikan\): )/.test(b));
+  const tebal = baris.filter((b) => /^\*(REKAP JASTIP - |Total: |Silakan lakukan pembayaran|Sisa pelunasan: |Kelebihan bayar \(akan dikembalikan\): )/.test(b));
   if (tebal.length !== 3) salah.push(`harap 3 baris tebal, ada ${tebal.length}`);
   for (const b of tebal) if (!/^\*[^*\s](?:[^*]*[^*\s])?\*$/.test(b)) salah.push(`baris tebal rusak (WA tidak menebalkan utuh): ${JSON.stringify(b)}`);
   if (/AUD|[Kk]urs|[Mm]arkup/.test(teks)) salah.push('memuat AUD/kurs/markup');
@@ -138,9 +145,9 @@ await cek('RKP-09', 'DP % desimal memakai koma ("DP 37,5%") dan DP 0% / 100%', a
 await cek('RKP-10', 'Keranjang tanpa barang (hanya pembayaran) langsung ke *Total: Rp0*; keranjang belum ada → rekap angka nol', async () => {
   const p = await admin.ok('POST', '/open-po', { nama: 'Tanpa barang', kurs: kursManual(13054) });
   const c = await admin.ok('POST', '/customer', { nama: 'Tono', no_wa: '0812-1111-2222' });
-  sama(await rekap(p.id, c.id), '*REKAP JASTIP - Tanpa barang*\nCustomer: Tono (081211112222)\n\n*Total: Rp0*\nDP 50%: Rp0\n*Sisa pelunasan: Rp0*\nStatus: LUNAS ✅', 'belum ada keranjang');
+  sama(await rekap(p.id, c.id), '*REKAP JASTIP - Tanpa barang*\nCustomer: Tono (081211112222)\n\n*Total: Rp0*\nDP 50%\n*Sisa pelunasan: Rp0*\nStatus: LUNAS ✅\nTerimakasih 💕', 'belum ada keranjang');
   await admin.ok('POST', `/open-po/${p.id}/keranjang/${c.id}/pembayaran`, { nominal: 50000, tanggal: '2026-10-28' });
-  sama(await rekap(p.id, c.id), '*REKAP JASTIP - Tanpa barang*\nCustomer: Tono (081211112222)\n\n*Total: Rp0*\nDP 50%: Rp0\nSudah dibayar: Rp50.000\n*Kelebihan bayar (akan dikembalikan): Rp50.000*\nStatus: LEBIH BAYAR', 'hanya pembayaran');
+  sama(await rekap(p.id, c.id), '*REKAP JASTIP - Tanpa barang*\nCustomer: Tono (081211112222)\n\n*Total: Rp0*\nDP 50%\nSudah dibayar: Rp50.000\n*Kelebihan bayar (akan dikembalikan): Rp50.000*\nStatus: LEBIH BAYAR\nTerimakasih 💕', 'hanya pembayaran');
   const r404a = await admin.req('GET', `/open-po/999999/keranjang/${c.id}/rekap`);
   const r404b = await admin.req('GET', `/open-po/${p.id}/keranjang/999999/rekap`);
   sama([r404a.status, r404a.json?.error?.pesan, r404b.status, r404b.json?.error?.pesan], [404, 'Open PO tidak ditemukan.', 404, 'Customer tidak ditemukan.']);

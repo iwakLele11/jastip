@@ -19,6 +19,11 @@ final class RekapWaTest extends TestCase
         . "Customer: Rina (081234567890)\n"
         . "\n";
 
+    // Ajakan bayar + rekening untuk status belum lunas.
+    private const BAYAR = "*Silakan lakukan pembayaran*\n"
+        . "Rekening BCA : 5005023600\n";
+    private const SALAM = 'Terimakasih 💕';
+
     private const BARANG_ABC = "1. Barang A\n"
         . "   2 x Rp359.000 = Rp718.000\n"
         . "2. Barang B\n"
@@ -56,9 +61,9 @@ final class RekapWaTest extends TestCase
         self::assertSame(
             self::HEADER . self::BARANG_ABC
             . "*Total: Rp2.935.000*\n"
-            . "DP 50%: Rp1.468.000\n"
-            . "*Mohon transfer DP: Rp1.468.000*\n"
-            . 'Status: BELUM BAYAR',
+            . "DP 50%\n"
+            . self::BAYAR
+            . self::SALAM,
             self::rekap(CartCalculator::summarize(2_935_000, 5_000, 0, 0)),
         );
     }
@@ -68,10 +73,10 @@ final class RekapWaTest extends TestCase
         self::assertSame(
             self::HEADER . self::BARANG_ABC
             . "*Total: Rp2.935.000*\n"
-            . "DP 50%: Rp1.468.000\n"
+            . "DP 50%\n"
             . "Sudah dibayar: Rp500.000\n"
-            . "*Sisa pelunasan: Rp2.435.000*\n"
-            . 'Status: KURANG DP',
+            . self::BAYAR
+            . self::SALAM,
             self::rekap(CartCalculator::summarize(2_935_000, 5_000, 500_000, 0)),
         );
     }
@@ -81,10 +86,10 @@ final class RekapWaTest extends TestCase
         self::assertSame(
             self::HEADER . self::BARANG_ABC
             . "*Total: Rp2.935.000*\n"
-            . "DP 50%: Rp1.468.000\n"
+            . "DP 50%\n"
             . "Sudah dibayar: Rp1.468.000\n"
-            . "*Sisa pelunasan: Rp1.467.000*\n"
-            . 'Status: DP DITERIMA ✅',
+            . self::BAYAR
+            . self::SALAM,
             self::rekap(CartCalculator::summarize(2_935_000, 5_000, 1_468_000, 0)),
         );
     }
@@ -94,10 +99,11 @@ final class RekapWaTest extends TestCase
         self::assertSame(
             self::HEADER . self::BARANG_ABC
             . "*Total: Rp2.935.000*\n"
-            . "DP 50%: Rp1.468.000\n"
+            . "DP 50%\n"
             . "Sudah dibayar: Rp2.935.000\n"
             . "*Sisa pelunasan: Rp0*\n"
-            . 'Status: LUNAS ✅',
+            . "Status: LUNAS ✅\n"
+            . self::SALAM,
             self::rekap(CartCalculator::summarize(2_935_000, 5_000, 2_935_000, 0)),
         );
     }
@@ -107,10 +113,11 @@ final class RekapWaTest extends TestCase
         self::assertSame(
             self::HEADER . self::BARANG_B_KOSONG
             . "*Total: Rp2.551.000*\n"
-            . "DP 50%: Rp1.276.000\n"
+            . "DP 50%\n"
             . "Sudah dibayar: Rp2.935.000\n"
             . "*Kelebihan bayar (akan dikembalikan): Rp384.000*\n"
-            . 'Status: LEBIH BAYAR',
+            . "Status: LEBIH BAYAR\n"
+            . self::SALAM,
             self::rekap(CartCalculator::summarize(2_551_000, 5_000, 2_935_000, 0), bKosong: true),
         );
     }
@@ -120,11 +127,12 @@ final class RekapWaTest extends TestCase
         self::assertSame(
             self::HEADER . self::BARANG_B_KOSONG
             . "*Total: Rp2.551.000*\n"
-            . "DP 50%: Rp1.276.000\n"
+            . "DP 50%\n"
             . "Sudah dibayar: Rp2.935.000\n"
             . "Dikembalikan: Rp384.000\n"
             . "*Sisa pelunasan: Rp0*\n"
-            . 'Status: LUNAS ✅',
+            . "Status: LUNAS ✅\n"
+            . self::SALAM,
             self::rekap(CartCalculator::summarize(2_551_000, 5_000, 2_935_000, 384_000), bKosong: true),
         );
     }
@@ -135,19 +143,21 @@ final class RekapWaTest extends TestCase
             new RekapItem('Barang A', 1, 100_000, 100_000, false),
         ], CartCalculator::summarize(100_000, 3_750, 0, 0));
 
-        self::assertStringContainsString("\nDP 37,5%: Rp38.000\n", $text);
+        self::assertStringContainsString("\nDP 37,5%\n", $text);
     }
 
     public function testKeranjangTanpaBarang(): void
     {
+        // Total Rp0 = Lunas (dana diterima = total). Tetap pakai format lunas, bukan ajakan bayar.
         self::assertSame(
             "*REKAP JASTIP - PO*\n"
             . "Customer: Rina (081234567890)\n"
             . "\n"
             . "*Total: Rp0*\n"
-            . "DP 50%: Rp0\n"
+            . "DP 50%\n"
             . "*Sisa pelunasan: Rp0*\n"
-            . 'Status: LUNAS ✅',
+            . "Status: LUNAS ✅\n"
+            . self::SALAM,
             RekapWa::text('PO', 'Rina', '081234567890', null, [], CartCalculator::summarize(0, 5_000, 0, 0)),
         );
     }

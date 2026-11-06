@@ -16,11 +16,18 @@ namespace Jastip\Domain;
  *   {n}. {nama barang} (Kosong, tidak ditagih)
  *
  *   *Total: {total}*
- *   DP {dp%}: {dp}
+ *   DP {dp%}
  *   [Sudah dibayar: …]   jika ada pembayaran atau pengembalian dana
  *   [Dikembalikan: …]    jika ada pengembalian dana
+ *
+ * Belum lunas (Belum bayar / Kurang DP / DP) — ajakan bayar, tanpa baris Status:
+ *   *Silakan lakukan pembayaran*
+ *   Rekening BCA : {no rek}
+ * Lunas / Lebih bayar — baris penentu + status seperti semula:
  *   *{baris penentu}*
  *   Status: {STATUS}
+ *
+ * Semua diakhiri: Terimakasih 💕
  *
  * Tanpa harga AUD, kurs, atau markup. Baris baru "\n", tanpa spasi di akhir baris.
  * Nama (PO, customer, barang) dirapikan menjadi satu baris supaya setiap pasangan "*"
@@ -29,6 +36,8 @@ namespace Jastip\Domain;
 final class RekapWa
 {
     private const INDENT = '   ';
+    /** Nomor rekening tujuan pembayaran (muncul di rekap saat belum lunas). */
+    private const REKENING = '5005023600';
 
     /**
      * @param list<RekapItem> $items
@@ -71,17 +80,35 @@ final class RekapWa
         }
 
         $lines[] = '*Total: ' . Rupiah::format($summary->total) . '*';
-        $lines[] = sprintf('DP %s%%: %s', self::persen($summary->dpBp), Rupiah::format($summary->dp));
+        // DP hanya persen, tanpa nominal (sama di semua status).
+        $lines[] = sprintf('DP %s%%', self::persen($summary->dpBp));
         if ($summary->totalPembayaran > 0 || $summary->totalPengembalian > 0) {
             $lines[] = 'Sudah dibayar: ' . Rupiah::format($summary->totalPembayaran);
         }
         if ($summary->totalPengembalian > 0) {
             $lines[] = 'Dikembalikan: ' . Rupiah::format($summary->totalPengembalian);
         }
-        $lines[] = '*' . self::penentu($summary) . '*';
-        $lines[] = 'Status: ' . $summary->status->rekapLabel();
+
+        if (self::belumLunas($summary->status)) {
+            // Belum lunas: ajakan bayar + rekening, tanpa baris Status (tidak menagih customer lama).
+            $lines[] = '*Silakan lakukan pembayaran*';
+            $lines[] = 'Rekening BCA : ' . self::REKENING;
+        } else {
+            // Lunas / Lebih bayar: tetap tampilkan baris penentu dan Status.
+            $lines[] = '*' . self::penentu($summary) . '*';
+            $lines[] = 'Status: ' . $summary->status->rekapLabel();
+        }
+        $lines[] = 'Terimakasih 💕';
 
         return implode("\n", $lines);
+    }
+
+    private static function belumLunas(PaymentStatus $status): bool
+    {
+        return match ($status) {
+            PaymentStatus::BelumBayar, PaymentStatus::KurangDp, PaymentStatus::Dp => true,
+            PaymentStatus::Lunas, PaymentStatus::LebihBayar => false,
+        };
     }
 
     private static function penentu(CartSummary $summary): string

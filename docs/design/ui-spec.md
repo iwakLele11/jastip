@@ -1147,31 +1147,34 @@ Rekap dibuat oleh API (satu sumber untuk web dan aplikasi mobile nanti). Front-e
 ```
 *REKAP JASTIP - {nama Open PO}*
 Customer: {nama} ({no WA})
+Alamat: {alamat}                 (hanya jika alamat terisi)
 
 {n}. {nama barang}
    {qty} x {harga/unit} = {subtotal}
 {n}. {nama barang} (Kosong, tidak ditagih)
 
 *Total: {total}*
-DP {dp%}: {dp}
+DP {dp%}
 [blok pembayaran]
-[baris penentu]
-Status: {STATUS}
-[baris kosong + teks penutup, (Should), jika diisi]
+[bagian bawah per status]
+Terimakasih 💕
 ```
 
 **Aturan:**
+- Baris `Alamat: {alamat}` hanya muncul jika alamat customer terisi (dilewati kalau kosong).
 - Baris barang Kosong tetap bernomor, tanpa baris qty/harga.
+- `DP {dp%}` hanya persen, tanpa nominal (sama di semua status).
 - `Sudah dibayar: {Σ pembayaran}` muncul kalau ada pembayaran atau pengembalian dana.
 - `Dikembalikan: {Σ pengembalian}` muncul kalau ada pengembalian dana.
-- Baris penentu (selalu tebal) per status:
+- Bagian bawah per status:
 
-| Status | Baris penentu |
+| Status | Bagian bawah |
 |---|---|
-| Belum bayar | `*Mohon transfer DP: {dp}*` |
-| Kurang DP, DP, Lunas | `*Sisa pelunasan: {sisa}*` |
-| Lebih bayar | `*Kelebihan bayar (akan dikembalikan): {dana diterima − total}*` |
+| Belum bayar, Kurang DP, DP (belum lunas) | `*Silakan lakukan pembayaran*` + `Rekening BCA : {no rek}` (tanpa baris Status) |
+| Lunas | `*Sisa pelunasan: Rp0*` + `Status: LUNAS ✅` |
+| Lebih bayar | `*Kelebihan bayar (akan dikembalikan): {dana diterima − total}*` + `Status: LEBIH BAYAR` |
 
+- Semua rekap diakhiri baris `Terimakasih 💕`.
 - Tidak menampilkan harga AUD, kurs, maupun markup.
 - Huruf tebal WA: tanda `*` menempel langsung ke teks (tanpa spasi di dalam), dan setiap pasangan `*` berada di satu baris.
 - Baris baru `\n`, tanpa spasi di akhir baris. Indentasi baris qty memakai 3 spasi. Tanda kali di rekap memakai huruf `x` (di layar memakai `×`).
@@ -1192,39 +1195,43 @@ Customer: Rina (081234567890)
    1 x Rp1.833.000 = Rp1.833.000
 
 *Total: Rp2.935.000*
-DP 50%: Rp1.468.000
-*Mohon transfer DP: Rp1.468.000*
-Status: BELUM BAYAR
+DP 50%
+*Silakan lakukan pembayaran*
+Rekening BCA : 5005023600
+Terimakasih 💕
 ```
 
 Kurang DP (sudah bayar Rp500.000), bagian bawah saja:
 
 ```
 *Total: Rp2.935.000*
-DP 50%: Rp1.468.000
+DP 50%
 Sudah dibayar: Rp500.000
-*Sisa pelunasan: Rp2.435.000*
-Status: KURANG DP
+*Silakan lakukan pembayaran*
+Rekening BCA : 5005023600
+Terimakasih 💕
 ```
 
 DP (QA langkah 2):
 
 ```
 *Total: Rp2.935.000*
-DP 50%: Rp1.468.000
+DP 50%
 Sudah dibayar: Rp1.468.000
-*Sisa pelunasan: Rp1.467.000*
-Status: DP DITERIMA ✅
+*Silakan lakukan pembayaran*
+Rekening BCA : 5005023600
+Terimakasih 💕
 ```
 
 Lunas tanpa pengembalian (QA langkah 3):
 
 ```
 *Total: Rp2.935.000*
-DP 50%: Rp1.468.000
+DP 50%
 Sudah dibayar: Rp2.935.000
 *Sisa pelunasan: Rp0*
 Status: LUNAS ✅
+Terimakasih 💕
 ```
 
 Lebih bayar (QA langkah 4, Barang B ditandai Kosong):
@@ -1240,21 +1247,23 @@ Customer: Rina (081234567890)
    1 x Rp1.833.000 = Rp1.833.000
 
 *Total: Rp2.551.000*
-DP 50%: Rp1.276.000
+DP 50%
 Sudah dibayar: Rp2.935.000
 *Kelebihan bayar (akan dikembalikan): Rp384.000*
 Status: LEBIH BAYAR
+Terimakasih 💕
 ```
 
 Lunas setelah pengembalian dana (QA langkah 5):
 
 ```
 *Total: Rp2.551.000*
-DP 50%: Rp1.276.000
+DP 50%
 Sudah dibayar: Rp2.935.000
 Dikembalikan: Rp384.000
 *Sisa pelunasan: Rp0*
 Status: LUNAS ✅
+Terimakasih 💕
 ```
 
 **Pemetaan angka layar ↔ rekap** (syarat "angka identik dengan layar"):
@@ -1262,11 +1271,10 @@ Status: LUNAS ✅
 | Rekap | Layar Keranjang |
 |---|---|
 | Total | Total |
-| DP {persen} | DP {persen} |
+| DP {persen} | DP {persen} (rekap hanya persen, tanpa nominal) |
 | Sudah dibayar | Tanpa pengembalian: sama dengan "Dana diterima". Dengan pengembalian: baris rincian "Sudah dibayar …" di bawah Dana diterima |
 | Dikembalikan | Baris rincian "Dikembalikan …" di bawah Dana diterima |
-| Mohon transfer DP | Sama dengan DP |
-| Sisa pelunasan | Sisa pelunasan |
+| Sisa pelunasan (hanya status Lunas) | Sisa pelunasan |
 | Kelebihan bayar (akan dikembalikan) | Kelebihan bayar |
 
 ---

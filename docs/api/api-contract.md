@@ -695,9 +695,11 @@ Format persis ui-spec §9.6 (sumber kebenaran untuk kata-kata; contoh di scope-m
 
 - Judul `*REKAP JASTIP - {nama PO}*`, baris `Customer: {nama} ({no_wa_tampil})`, lalu `Alamat: {alamat}` hanya jika alamat customer terisi (dilewati kalau kosong), baris kosong.
 - Barang bernomor sesuai urutan `barang`. Baris qty diindentasi 3 spasi: `{qty} x {Rp unit} = {Rp subtotal}`. Barang Kosong: `{n}. {nama} (Kosong, tidak ditagih)` tanpa baris qty.
-- Baris kosong, `*Total: {total}*`, `DP {dp_persen}%: {dp}` (persen memakai koma desimal, mis. `DP 37,5%`).
+- Baris kosong, `*Total: {total}*`, `DP {dp_persen}%` (hanya persen, tanpa nominal; koma desimal, mis. `DP 37,5%`).
 - `Sudah dibayar: {total_pembayaran}` jika ada pembayaran atau pengembalian dana. `Dikembalikan: {total_pengembalian}` jika ada pengembalian dana.
-- Baris penentu (tebal): Belum bayar `*Mohon transfer DP: {dp}*`; Kurang DP / DP / Lunas `*Sisa pelunasan: {sisa}*`; Lebih bayar `*Kelebihan bayar (akan dikembalikan): {kelebihan_bayar}*`.
+- **Belum lunas** (Belum bayar / Kurang DP / DP): `*Silakan lakukan pembayaran*` + `Rekening BCA : {no rek}`, tanpa baris Status (tidak menagih customer secara eksplisit).
+- **Lunas / Lebih bayar**: baris penentu (tebal) + `Status: {STATUS}`. Lunas `*Sisa pelunasan: Rp0*` / `Status: LUNAS ✅`; Lebih bayar `*Kelebihan bayar (akan dikembalikan): {kelebihan_bayar}*` / `Status: LEBIH BAYAR`.
+- Semua diakhiri baris `Terimakasih 💕`.
 - `Status: {label rekap}` (§12.2).
 - Tanpa harga AUD, kurs, atau markup. Baris baru `\n`, tanpa spasi di akhir baris, setiap pasangan `*` di satu baris.
 - Spasi, tab, atau baris baru di dalam nama PO, customer, dan barang diringkas menjadi satu spasi supaya format di atas tetap berlaku. Keranjang tanpa barang langsung lanjut ke `*Total: Rp0*` (tidak ada blok barang).

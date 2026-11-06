@@ -234,16 +234,22 @@ Fitur paling sering dipakai untuk komunikasi ke customer.
 2. Klik **Salin rekap WA**. Teks rekap tersalin ke clipboard.
 3. Buka WhatsApp customer, **tempel** (paste), kirim.
 
-Isi rekap otomatis rapi: alamat customer (kalau diisi), daftar barang, total, DP, yang sudah
-dibayar, sisa, dan status. Format rupiah seperti `Rp2.551.000`, dan tulisan tebal WhatsApp
-(`*teks*`) tampil benar. Barang Kosong ditandai, barang yang dikembalikan ditampilkan.
+Isi rekap otomatis rapi: alamat customer (kalau diisi), daftar barang, dan total. Format rupiah
+seperti `Rp2.551.000`, dan tulisan tebal WhatsApp (`*teks*`) tampil benar. Barang Kosong ditandai,
+barang yang dikembalikan ditampilkan. Semua rekap diakhiri `Terimakasih 💕`.
+
+Bagian bawah rekap menyesuaikan status:
+- **Belum lunas** (belum bayar / kurang DP / DP): muncul `*Silakan lakukan pembayaran*` dan
+  `Rekening BCA : 5005023600`, **tanpa** menampilkan status — supaya tidak terkesan menagih.
+- **Sudah lunas / lebih bayar**: menampilkan `Status: LUNAS ✅` atau info kelebihan bayar.
 
 Baris **Alamat** hanya muncul kalau customer punya alamat. Kalau alamatnya belum diisi, baris itu
 tidak ditampilkan (rekap tetap rapi).
 
 Rekap **tidak** menampilkan harga asli AUD, kurs, atau markup — jadi aman dikirim ke customer.
 
-Contoh hasil rekap:
+Contoh rekap untuk customer yang **belum lunas** (belum bayar / kurang DP / DP) — berisi ajakan
+bayar + nomor rekening, tanpa baris status:
 
 ```
 *REKAP JASTIP - Open PO Australia Nov 2026*
@@ -257,11 +263,21 @@ Alamat: Jl. Melati No. 5, Jakarta
    1 x Rp1.833.000 = Rp1.833.000
 
 *Total: Rp2.551.000*
-DP 50%: Rp1.276.000
+DP 50%
+*Silakan lakukan pembayaran*
+Rekening BCA : 5005023600
+Terimakasih 💕
+```
+
+Contoh rekap untuk customer yang **sudah lunas** — tetap menampilkan status:
+
+```
+*Total: Rp2.935.000*
+DP 50%
 Sudah dibayar: Rp2.935.000
-Dikembalikan: Rp384.000
 *Sisa pelunasan: Rp0*
 Status: LUNAS ✅
+Terimakasih 💕
 ```
 
 ---

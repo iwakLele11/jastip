@@ -1,0 +1,121 @@
+{
+  "waktu": "2026-10-26T09:28:09.446Z",
+  "target": "http://127.0.0.1:8282",
+  "total": 16,
+  "lulus": 14,
+  "gagal": 2,
+  "hasil": [
+    {
+      "id": "RKP-01",
+      "judul": "Belum bayar: teks lengkap = contoh ui-spec",
+      "lulus": true,
+      "catatan": null,
+      "ms": 14
+    },
+    {
+      "id": "RKP-02",
+      "judul": "Kurang DP (bayar Rp500.000) = contoh ui-spec",
+      "lulus": true,
+      "catatan": null,
+      "ms": 22
+    },
+    {
+      "id": "RKP-03",
+      "judul": "DP (QA langkah 2, total bayar Rp1.468.000) = contoh ui-spec",
+      "lulus": true,
+      "catatan": null,
+      "ms": 22
+    },
+    {
+      "id": "RKP-04",
+      "judul": "Lunas tanpa pengembalian (QA langkah 3) = contoh ui-spec",
+      "lulus": true,
+      "catatan": null,
+      "ms": 23
+    },
+    {
+      "id": "RKP-05",
+      "judul": "Lebih bayar (QA langkah 4, Barang B Kosong) = contoh ui-spec",
+      "lulus": true,
+      "catatan": null,
+      "ms": 27
+    },
+    {
+      "id": "RKP-06",
+      "judul": "Lunas setelah pengembalian dana (QA langkah 5) = contoh ui-spec",
+      "lulus": true,
+      "catatan": null,
+      "ms": 24
+    },
+    {
+      "id": "RKP-07",
+      "judul": "Angka rekap identik dengan ringkasan keranjang di setiap langkah (Total, DP, Sudah dibayar, Dikembalikan, baris penentu, barang)",
+      "lulus": true,
+      "catatan": "6 langkah",
+      "ms": 10
+    },
+    {
+      "id": "RKP-08",
+      "judul": "Hapus refund dan lepas Kosong mengubah rekap kembali (Lebih bayar → Lunas tanpa baris Dikembalikan); hapus pembayaran → Kurang DP",
+      "lulus": true,
+      "catatan": null,
+      "ms": 62
+    },
+    {
+      "id": "RKP-09",
+      "judul": "DP % desimal memakai koma (\"DP 37,5%\") dan DP 0% / 100%",
+      "lulus": true,
+      "catatan": "DP 37,5%: Rp1.101.000 / *Mohon transfer DP: Rp1.101.000* | DP 12,34%: Rp363.000 / *Mohon transfer DP: Rp363.000* | DP 0%: Rp0 / *Mohon transfer DP: Rp0* | DP 100%: Rp2.935.000 / *Mohon transfer DP: Rp2.935.000*",
+      "ms": 215
+    },
+    {
+      "id": "RKP-10",
+      "judul": "Keranjang tanpa barang (hanya pembayaran) langsung ke *Total: Rp0*; keranjang belum ada → rekap angka nol",
+      "lulus": true,
+      "catatan": null,
+      "ms": 49
+    },
+    {
+      "id": "RKP-11",
+      "judul": "Format rupiah angka besar (Rp1.000.000.000.000) dan semua barang Kosong",
+      "lulus": true,
+      "catatan": null,
+      "ms": 58
+    },
+    {
+      "id": "RKP-12",
+      "judul": "Customer diarsipkan: rekap PO lama tetap bisa dibuat",
+      "lulus": true,
+      "catatan": null,
+      "ms": 43
+    },
+    {
+      "id": "RKP-13",
+      "judul": "Baris baru, tab, CR, U+2028, spasi ganda di nama PO/customer/barang diringkas menjadi satu spasi; aturan format tetap berlaku",
+      "lulus": true,
+      "catatan": null,
+      "ms": 33
+    },
+    {
+      "id": "RKP-14",
+      "judul": "Nama sangat panjang (PO 100, customer 100, barang 150 karakter, emoji) tetap satu baris per elemen dan lolos aturan format",
+      "lulus": true,
+      "catatan": null,
+      "ms": 34
+    },
+    {
+      "id": "RKP-15",
+      "judul": "Judul tebal *REKAP JASTIP - {nama PO}* tetap utuh untuk nama PO dengan *, _, ~, `, emoji",
+      "lulus": false,
+      "catatan": "Judul tebal rusak (WA menutup/membuka tebal di tempat yang salah atau tidak menebalkan):\ntanda * di tengah: \"*REKAP JASTIP - PO *Spesial* Nov*\"\ntanda * di akhir: \"*REKAP JASTIP - PO Nov 2026**\"\ntanda * di awal: \"*REKAP JASTIP - *PO Nov 2026*\"\nsatu tanda *: \"*REKAP JASTIP - PO 5* Nov*\"\nNBSP saja (lihat SEC-M4): \"*REKAP JASTIP - *\"\nUtuh: garis bawah, tilde, backtick, emoji",
+      "ms": 235
+    },
+    {
+      "id": "RKP-16",
+      "judul": "Nama customer/barang dengan *…*, _…_, ~…~ tidak menimbulkan format WA yang tidak diminta di baris Customer/barang",
+      "lulus": false,
+      "catatan": "Baris yang akan berformat di WA karena isi nama:\nCustomer: Rina *VIP* (081288938706)\n1. Tas *Promo*\n2. Sepatu _Nike_\n3. Jaket ~Diskon~\n4. Kaos ```XL```",
+      "ms": 63
+    }
+  ]
+}

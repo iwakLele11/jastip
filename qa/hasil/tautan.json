@@ -1,0 +1,163 @@
+{
+  "waktu": "2026-10-26T10:17:50.426Z",
+  "target": "http://127.0.0.1:8090",
+  "total": 22,
+  "lulus": 19,
+  "gagal": 3,
+  "hasil": [
+    {
+      "id": "TAU-A1-webkit",
+      "judul": "webkit: 10 halaman + aset dimuat tanpa 4xx/5xx/gagal, tanpa error JS",
+      "lulus": true,
+      "catatan": "52 URL unik dikumpulkan",
+      "ms": 4995
+    },
+    {
+      "id": "TAU-A2-webkit",
+      "judul": "webkit: semua tautan internal (a, link, script) membalas 200 dengan Content-Type yang benar; tidak ada tautan eksternal",
+      "lulus": true,
+      "catatan": "52 URL diperiksa, 0 eksternal",
+      "ms": 4016
+    },
+    {
+      "id": "TAU-B-webkit",
+      "judul": "webkit: 22 URL dengan ID tidak ada / parameter salah menampilkan state yang benar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1256
+    },
+    {
+      "id": "TAU-C-webkit",
+      "judul": "webkit: kembali/maju/refresh di setiap layar (beranda, detail + filter, keranjang, form PO, customer + cari, pengaturan)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 2012
+    },
+    {
+      "id": "TAU-D-webkit",
+      "judul": "webkit: setelah Keluar, tombol kembali tidak menampilkan data lama (bfcache) dan berakhir di login",
+      "lulus": true,
+      "catatan": "kembali 1: /login.html?next=%2Fkeranjang.html%3Fpo%3D1%26customer%3D1 sekilas=[] bfcache=[]; kembali 2: /login.html?next=%2Fpo.html%3Fid%3D1 sekilas=[] bfcache=[]; kembali 3: /login.html?next=%2Findex.html sekilas=[] bfcache=[]",
+      "ms": 8889
+    },
+    {
+      "id": "TAU-E1-webkit",
+      "judul": "webkit: ?i=N dibuang dari URL di setiap halaman, parameter lain tetap",
+      "lulus": true,
+      "catatan": null,
+      "ms": 3665
+    },
+    {
+      "id": "TAU-E2-webkit",
+      "judul": "webkit: tantangan set=on saat membuka halaman + login dengan next → selesai sendiri, URL tanpa i",
+      "lulus": true,
+      "catatan": "login /login.html?next=%2Fpo.html%3Fid%3D1%26status%3Dlunas",
+      "ms": 530
+    },
+    {
+      "id": "TAU-E3-webkit",
+      "judul": "webkit: kunci diputar saat halaman terbuka → POST pembayaran dipulihkan lewat iframe, tercatat tepat sekali",
+      "lulus": true,
+      "catatan": "POST terkirim 2× (1 ditantang + 1 ulang), respons HTML tantangan 1, tercatat 1",
+      "ms": 891
+    },
+    {
+      "id": "TAU-E4-webkit",
+      "judul": "webkit: tantangan tidak bisa diselesaikan (set=rusak) → pesan \"Muat ulang\", data tidak berubah",
+      "lulus": true,
+      "catatan": "Koneksi ke server perlu diperbarui. Muat ulang halaman, lalu coba lagi.",
+      "ms": 16254
+    },
+    {
+      "id": "TAU-F-webkit",
+      "judul": "webkit: regresi QA-A-01 — setelah login dari next=/..//evil.example/… tetap di origin aplikasi",
+      "lulus": false,
+      "catatan": "/..//evil.example/index.html → http://evil.example/index.html\n/.//evil.example/index.html → http://evil.example/index.html\n/%2e%2e//evil.example/po.html → http://evil.example/po.html",
+      "ms": 3540
+    },
+    {
+      "id": "TAU-G-webkit",
+      "judul": "webkit: tombol kembali browser saat sheet \"Tambah barang\" berisi isian (catat perilaku)",
+      "lulus": true,
+      "catatan": "kembali → /po.html?id=1; sheet hilang; konfirmasi tidak ada; isian hilang tanpa \"Tutup tanpa menyimpan?\"",
+      "ms": 1380
+    },
+    {
+      "id": "TAU-A1-firefox",
+      "judul": "firefox: 10 halaman + aset dimuat tanpa 4xx/5xx/gagal, tanpa error JS",
+      "lulus": true,
+      "catatan": "53 URL unik dikumpulkan",
+      "ms": 5568
+    },
+    {
+      "id": "TAU-A2-firefox",
+      "judul": "firefox: semua tautan internal (a, link, script) membalas 200 dengan Content-Type yang benar; tidak ada tautan eksternal",
+      "lulus": true,
+      "catatan": "53 URL diperiksa, 0 eksternal",
+      "ms": 4252
+    },
+    {
+      "id": "TAU-B-firefox",
+      "judul": "firefox: 22 URL dengan ID tidak ada / parameter salah menampilkan state yang benar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1809
+    },
+    {
+      "id": "TAU-C-firefox",
+      "judul": "firefox: kembali/maju/refresh di setiap layar (beranda, detail + filter, keranjang, form PO, customer + cari, pengaturan)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 2594
+    },
+    {
+      "id": "TAU-D-firefox",
+      "judul": "firefox: setelah Keluar, tombol kembali tidak menampilkan data lama (bfcache) dan berakhir di login",
+      "lulus": true,
+      "catatan": "kembali 1: /login.html?next=%2Fkeranjang.html%3Fpo%3D1%26customer%3D1 sekilas=[] bfcache=[]; kembali 2: /login.html?next=%2Fpo.html%3Fid%3D1 sekilas=[] bfcache=[]; kembali 3: /login.html?next=%2Findex.html sekilas=[] bfcache=[]",
+      "ms": 9096
+    },
+    {
+      "id": "TAU-E1-firefox",
+      "judul": "firefox: ?i=N dibuang dari URL di setiap halaman, parameter lain tetap",
+      "lulus": true,
+      "catatan": null,
+      "ms": 3786
+    },
+    {
+      "id": "TAU-E2-firefox",
+      "judul": "firefox: tantangan set=on saat membuka halaman + login dengan next → selesai sendiri, URL tanpa i",
+      "lulus": true,
+      "catatan": "login /login.html?next=%2Fpo.html%3Fid%3D1%26status%3Dlunas",
+      "ms": 623
+    },
+    {
+      "id": "TAU-E3-firefox",
+      "judul": "firefox: kunci diputar saat halaman terbuka → POST pembayaran dipulihkan lewat iframe, tercatat tepat sekali",
+      "lulus": true,
+      "catatan": "POST terkirim 2× (1 ditantang + 1 ulang), respons HTML tantangan 1, tercatat 1",
+      "ms": 850
+    },
+    {
+      "id": "TAU-E4-firefox",
+      "judul": "firefox: tantangan tidak bisa diselesaikan (set=rusak) → pesan \"Muat ulang\", data tidak berubah",
+      "lulus": true,
+      "catatan": "Koneksi ke server perlu diperbarui. Muat ulang halaman, lalu coba lagi.",
+      "ms": 16241
+    },
+    {
+      "id": "TAU-F-firefox",
+      "judul": "firefox: regresi QA-A-01 — setelah login dari next=/..//evil.example/… tetap di origin aplikasi",
+      "lulus": false,
+      "catatan": "/..//evil.example/index.html → http://evil.example/index.html\n/.//evil.example/index.html → http://evil.example/index.html\n/%2e%2e//evil.example/po.html → http://evil.example/po.html",
+      "ms": 3936
+    },
+    {
+      "id": "TAU-G-firefox",
+      "judul": "firefox: tombol kembali browser saat sheet \"Tambah barang\" berisi isian (catat perilaku)",
+      "lulus": false,
+      "catatan": "locator.click: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator('#tambah-barang')\n    - locator resolved to <button type=\"button\" id=\"tambah-barang\" aria-haspopup=\"dialog\" data-fokus=\"tambah-barang\" class=\"inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-lg px-4 text-base font-semibold whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed data-memuat:cursor-wait bg-primary text-white hover:bg-primary-hover disabled:bg-kosong-bg disabled:text-ink-subtle data-memuat:disabled:bg-primary data-memuat:disabled:text-whi…>+ Tambah barang</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    30 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n",
+      "ms": 15558
+    }
+  ]
+}

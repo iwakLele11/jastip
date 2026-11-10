@@ -1,0 +1,18 @@
+# QA-A-07: MigrationTest mengharapkan SQLSTATE 23000 untuk pelanggaran CHECK (khas MariaDB)
+# Sumber: qa/mysql8/test-backend-mysql8.sh, 2026-10-26T09:32:23Z
+
+  1) Jastip\Tests\Integration\MigrationTest::testConstraintMenolakDataSalah
+  pengaturan kedua: SQLSTATE[HY000]: General error: 3819 Check constraint 'chk_pengaturan_satu_baris' is violated.
+  Failed asserting that two strings are identical.
+  --- Expected
+  +++ Actual
+  @@ @@
+  -'23000'
+  +'HY000'
+  
+  /projects/sandbox/backend/tests/Integration/MigrationTest.php:74
+
+Constraint tetap ditegakkan di MySQL 8.4 (qa/mysql8/sql-mysql8.sh M8-04):
+  ERROR 3819 (HY000) at line 1: Check constraint 'chk_pengaturan_satu_baris' is violated.
+
+Kode aplikasi (backend/src) tidak bergantung pada SQLSTATE 23000 (grep: hanya ErrorContext yang mencatat kode).

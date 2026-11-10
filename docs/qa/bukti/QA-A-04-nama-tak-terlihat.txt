@@ -1,0 +1,17 @@
+# QA-A-04: nama wajib yang hanya berisi spasi Unicode / karakter tak terlihat diterima server
+# Dibuat qa/tools/bukti.mjs, 2026-10-26T09:32:07.640Z, target http://127.0.0.1:8090 (dev-stack)
+
+POST /api/v1/customer {"nama": "NBSP U+00A0"} → 201 {"data":{"id":2,"nama":" ","no_wa":"6281212764001","no_wa_tampil":"081212764001","alamat":null,"diarsipkan":fa…
+POST /api/v1/open-po {"nama": "NBSP U+00A0"} → 201 nama=" "
+  rekap: ["*REKAP JASTIP - *","Customer:  (081212764001)","","1. "]
+  kontrol "   " (spasi ASCII) → 422 Nama wajib diisi.
+
+POST /api/v1/customer {"nama": "spasi ideografis U+3000"} → 201 {"data":{"id":3,"nama":"　","no_wa":"6281212769303","no_wa_tampil":"081212769303","alamat":null,"diarsipkan":fa…
+POST /api/v1/open-po {"nama": "spasi ideografis U+3000"} → 201 nama="　"
+  rekap: ["*REKAP JASTIP - *","Customer:  (081212769303)","","1. "]
+  kontrol "   " (spasi ASCII) → 422 Nama wajib diisi.
+
+POST /api/v1/customer {"nama": "zero-width space U+200B"} → 201 {"data":{"id":4,"nama":"​","no_wa":"6281212774405","no_wa_tampil":"081212774405","alamat":null,"diarsipkan":fa…
+POST /api/v1/open-po {"nama": "zero-width space U+200B"} → 201 nama="​"
+  rekap: ["*REKAP JASTIP - ​*","Customer: ​ (081212774405)","","1. ​"]
+  kontrol "   " (spasi ASCII) → 422 Nama wajib diisi.

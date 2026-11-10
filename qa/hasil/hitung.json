@@ -1,0 +1,177 @@
+{
+  "waktu": "2026-10-26T09:26:56.329Z",
+  "target": "http://127.0.0.1:8090",
+  "total": 24,
+  "lulus": 24,
+  "gagal": 0,
+  "hasil": [
+    {
+      "id": "CALC-A1",
+      "judul": "Pratinjau front-end (harga.js) == oracle decimal untuk 443 kasus (acak seed 20261126 + batas)",
+      "lulus": true,
+      "catatan": "443 kasus cocok (unit, subtotal, rincian sen)",
+      "ms": 3
+    },
+    {
+      "id": "CALC-A2",
+      "judul": "Pratinjau front-end kosong (null) tepat untuk input yang ditolak server (batas di luar rentang)",
+      "lulus": true,
+      "catatan": "17 kasus",
+      "ms": 186
+    },
+    {
+      "id": "CALC-B1",
+      "judul": "Server (POST baris-pesanan, kurs manual 1 … 1.000.000) == oracle untuk 443 kasus",
+      "lulus": true,
+      "catatan": "443 baris server cocok; total keranjang per kurs cocok",
+      "ms": 6071
+    },
+    {
+      "id": "CALC-B2",
+      "judul": "PATCH baris (harga/qty/markup) dihitung ulang dengan kurs snapshot baris == oracle",
+      "lulus": true,
+      "catatan": "25 PATCH cocok",
+      "ms": 419
+    },
+    {
+      "id": "CALC-C1",
+      "judul": "Vektor uji kontrak §12.1 dan tabel scope (harga × kurs, × (1+markup) 2 desimal, harga/unit, subtotal) cocok di oracle dan front-end",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "CALC-K1",
+      "judul": "Kurs jastip otomatis = ceil(kurs_pasar × (1 + buffer%)) == oracle (vektor kontrak §12.3 + 60 acak, buffer 0–100% desimal)",
+      "lulus": true,
+      "catatan": "67 kasus; kurs_jastip dari klien diabaikan pada mode otomatis",
+      "ms": 1537
+    },
+    {
+      "id": "CALC-K2",
+      "judul": "GET /kurs/aud-idr memakai buffer pengaturan saat ini (stub 12673: 3% → 13.054, 3,5% → 13.117); Frankfurter gagal → 502",
+      "lulus": true,
+      "catatan": null,
+      "ms": 47
+    },
+    {
+      "id": "CALC-K3",
+      "judul": "Kurs manual tanpa buffer; kurs_pasar + tanggal opsional berdua sebagai pembanding",
+      "lulus": true,
+      "catatan": null,
+      "ms": 31
+    },
+    {
+      "id": "CALC-D1",
+      "judul": "DP server (keranjang nyata, DP% 0–100 termasuk desimal) == oracle decimal (70 kasus)",
+      "lulus": true,
+      "catatan": "70 kasus DP cocok",
+      "ms": 1931
+    },
+    {
+      "id": "CALC-E1",
+      "judul": "Transisi maju belum_bayar → kurang_dp → dp → lunas → lebih_bayar (B Kosong) → lunas (refund) sesuai vektor kontrak §12.2",
+      "lulus": true,
+      "catatan": "awal=belum_bayar → bayar 500.000=kurang_dp → bayar s/d DP=dp → pelunasan=lunas → B kosong=lebih_bayar → refund 384.000=lunas",
+      "ms": 143
+    },
+    {
+      "id": "CALC-E2",
+      "judul": "Transisi mundur: hapus refund → lebih_bayar; lepas Kosong → lunas; hapus pembayaran → dp → kurang_dp → belum_bayar; batas tepat dana = DP → dp, DP − 1.000 → kurang_dp",
+      "lulus": true,
+      "catatan": null,
+      "ms": 193
+    },
+    {
+      "id": "CALC-E3",
+      "judul": "Total Rp0: semua Kosong + dana 0 → lunas; hanya pembayaran tanpa barang → lebih_bayar; refund penuh → lunas 0 = 0",
+      "lulus": true,
+      "catatan": null,
+      "ms": 111
+    },
+    {
+      "id": "CALC-E4",
+      "judul": "Jalan acak 6 keranjang × 30 aksi (barang, Kosong, ubah, hapus, bayar, hapus bayar, refund, hapus refund): ringkasan, status, bisa_dihapus, kode error == oracle",
+      "lulus": true,
+      "catatan": "150 aksi; status dikunjungi {\"belum_bayar\":56,\"kurang_dp\":34,\"lunas\":2,\"dp\":28,\"lebih_bayar\":30}",
+      "ms": 2105
+    },
+    {
+      "id": "CALC-F1",
+      "judul": "Refund saat bukan lebih bayar → 409; > kelebihan → 422 (pesan nominal); = kelebihan → 201 lunas; 0/negatif → 422",
+      "lulus": true,
+      "catatan": null,
+      "ms": 140
+    },
+    {
+      "id": "CALC-F2",
+      "judul": "Hapus pembayaran yang membuat dana negatif → 409 HAPUS_PENGEMBALIAN_DULU (pesan nominal); setelah refund dihapus → bisa",
+      "lulus": true,
+      "catatan": null,
+      "ms": 108
+    },
+    {
+      "id": "CALC-F3",
+      "judul": "Refund untuk customer tanpa keranjang di PO → 409 dan keranjang tidak dibuat",
+      "lulus": true,
+      "catatan": null,
+      "ms": 47
+    },
+    {
+      "id": "CALC-G1",
+      "judul": "Kurs terkunci sejak barang pertama; tetap terkunci walau semua barang dihapus; nama/status tetap bisa diubah; konflik membatalkan seluruh PATCH",
+      "lulus": true,
+      "catatan": null,
+      "ms": 89
+    },
+    {
+      "id": "CALC-G2",
+      "judul": "Tambah barang yang gagal (422, 404 customer, 409 customer arsip) tidak mengunci kurs; pembayaran saja tidak mengunci kurs",
+      "lulus": true,
+      "catatan": null,
+      "ms": 119
+    },
+    {
+      "id": "CALC-G3",
+      "judul": "Sebelum terkunci: PATCH kurs otomatis memakai buffer pengaturan saat ini; manual → buffer null; DP % tidak ikut berubah",
+      "lulus": true,
+      "catatan": "PATCH dp_persen -> 200 (diabaikan)",
+      "ms": 71
+    },
+    {
+      "id": "CALC-H1",
+      "judul": "Ubah markup/buffer/DP% di Pengaturan tidak mengubah PO, baris, DP keranjang, dan PATCH baris lama; PO baru memakai nilai baru",
+      "lulus": true,
+      "catatan": null,
+      "ms": 117
+    },
+    {
+      "id": "CALC-I1",
+      "judul": "Customer diarsipkan: tetap tampil di PO lama, keranjang lama tetap bisa diubah/dibayar, PO baru → 409, hilang dari daftar/cari/cek-no-wa, hapus → 409, arsip idempoten",
+      "lulus": true,
+      "catatan": null,
+      "ms": 139
+    },
+    {
+      "id": "CALC-I2",
+      "judul": "Customer tanpa pesanan bisa dihapus (204); keranjang yang dikosongkan lagi (barang dihapus) membuat punya_pesanan false",
+      "lulus": true,
+      "catatan": null,
+      "ms": 88
+    },
+    {
+      "id": "CALC-J1",
+      "judul": "Ringkasan PO, daftar customer per PO (urut nama, filter, jumlah_per_status, pagination) dengan 8 keranjang di 5 status",
+      "lulus": true,
+      "catatan": null,
+      "ms": 419
+    },
+    {
+      "id": "CALC-S1",
+      "judul": "Scope \"Contoh hitungan\": kurs 12.673 + 3% → 13.054; rincian A/B/C; langkah 1–5 (DP, Lunas, B Kosong → Lebih bayar 384.000, refund → Lunas)",
+      "lulus": true,
+      "catatan": null,
+      "ms": 127
+    }
+  ]
+}

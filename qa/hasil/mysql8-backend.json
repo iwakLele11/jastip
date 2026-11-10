@@ -1,0 +1,2150 @@
+{
+  "waktu": "2026-10-26T09:30:44.924524Z",
+  "target": "backend/bin/test.sh, MySQL 8.4.13",
+  "total": 293,
+  "lulus": 291,
+  "gagal": 2,
+  "per_kelas": {
+    "Unit\\Auth\\PhpPasswordHasherTest": {
+      "total": 3,
+      "gagal": 0
+    },
+    "Unit\\Auth\\UsernameTest": {
+      "total": 24,
+      "gagal": 0
+    },
+    "Unit\\Domain\\CartCalculatorTest": {
+      "total": 16,
+      "gagal": 0
+    },
+    "Unit\\Domain\\DecimalParserTest": {
+      "total": 26,
+      "gagal": 0
+    },
+    "Unit\\Domain\\PricingTest": {
+      "total": 13,
+      "gagal": 0
+    },
+    "Unit\\Domain\\RekapWaTest": {
+      "total": 9,
+      "gagal": 0
+    },
+    "Unit\\Domain\\WhatsAppNumberTest": {
+      "total": 18,
+      "gagal": 0
+    },
+    "Integration\\AuthTest": {
+      "total": 28,
+      "gagal": 0
+    },
+    "Integration\\CreateAdminSqlTest": {
+      "total": 3,
+      "gagal": 0
+    },
+    "Integration\\CustomerTest": {
+      "total": 17,
+      "gagal": 0
+    },
+    "Integration\\HttpProtectionTest": {
+      "total": 7,
+      "gagal": 0
+    },
+    "Integration\\HttpSmokeTest": {
+      "total": 2,
+      "gagal": 0
+    },
+    "Integration\\KeranjangTest": {
+      "total": 8,
+      "gagal": 0
+    },
+    "Integration\\KeranjangValidasiTest": {
+      "total": 46,
+      "gagal": 0
+    },
+    "Integration\\KonkurensiTest": {
+      "total": 7,
+      "gagal": 0
+    },
+    "Integration\\LoginPembatasanTest": {
+      "total": 6,
+      "gagal": 0
+    },
+    "Integration\\MigrationTest": {
+      "total": 2,
+      "gagal": 1
+    },
+    "Integration\\OpenPoCustomerTest": {
+      "total": 5,
+      "gagal": 0
+    },
+    "Integration\\OpenPoTest": {
+      "total": 19,
+      "gagal": 0
+    },
+    "Integration\\PembayaranTest": {
+      "total": 6,
+      "gagal": 0
+    },
+    "Integration\\SettingsAndKursTest": {
+      "total": 22,
+      "gagal": 0
+    },
+    "Integration\\SqlExportTest": {
+      "total": 6,
+      "gagal": 1
+    }
+  },
+  "hasil": [
+    {
+      "id": "Unit\\Auth\\PhpPasswordHasherTest::testHashDummyKonstanDenganCostSamaDenganPasswordDefault",
+      "judul": "Unit\\Auth\\PhpPasswordHasherTest::testHashDummyKonstanDenganCostSamaDenganPasswordDefault",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "Unit\\Auth\\PhpPasswordHasherTest::testSemuaHashDummyBcryptDenganCostSesuaiKunci",
+      "judul": "Unit\\Auth\\PhpPasswordHasherTest::testSemuaHashDummyBcryptDenganCostSesuaiKunci",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\PhpPasswordHasherTest::testHashVerifyDanRehash",
+      "judul": "Unit\\Auth\\PhpPasswordHasherTest::testHashVerifyDanRehash",
+      "lulus": true,
+      "catatan": null,
+      "ms": 573
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testNormalisasiKeHurufKecilAscii with data set \"huruf kecil\"",
+      "judul": "Unit\\Auth\\UsernameTest::testNormalisasiKeHurufKecilAscii with data set \"huruf kecil\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testNormalisasiKeHurufKecilAscii with data set \"huruf besar\"",
+      "judul": "Unit\\Auth\\UsernameTest::testNormalisasiKeHurufKecilAscii with data set \"huruf besar\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testNormalisasiKeHurufKecilAscii with data set \"campuran\"",
+      "judul": "Unit\\Auth\\UsernameTest::testNormalisasiKeHurufKecilAscii with data set \"campuran\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testNormalisasiKeHurufKecilAscii with data set \"spasi di tepi\"",
+      "judul": "Unit\\Auth\\UsernameTest::testNormalisasiKeHurufKecilAscii with data set \"spasi di tepi\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testNormalisasiKeHurufKecilAscii with data set \"tab dan baris baru di tepi\"",
+      "judul": "Unit\\Auth\\UsernameTest::testNormalisasiKeHurufKecilAscii with data set \"tab dan baris baru di tepi\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testNormalisasiKeHurufKecilAscii with data set \"angka, titik, garis bawah, tanda hubung\"",
+      "judul": "Unit\\Auth\\UsernameTest::testNormalisasiKeHurufKecilAscii with data set \"angka, titik, garis bawah, tanda hubung\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testNormalisasiKeHurufKecilAscii with data set \"3 karakter\"",
+      "judul": "Unit\\Auth\\UsernameTest::testNormalisasiKeHurufKecilAscii with data set \"3 karakter\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testNormalisasiKeHurufKecilAscii with data set \"50 karakter\"",
+      "judul": "Unit\\Auth\\UsernameTest::testNormalisasiKeHurufKecilAscii with data set \"50 karakter\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"aksen (satu code point)\"",
+      "judul": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"aksen (satu code point)\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"aksen (combining mark)\"",
+      "judul": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"aksen (combining mark)\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"umlaut\"",
+      "judul": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"umlaut\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"fullwidth\"",
+      "judul": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"fullwidth\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"soft hyphen\"",
+      "judul": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"soft hyphen\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"zero width space\"",
+      "judul": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"zero width space\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"NBSP di tepi (tidak di-trim)\"",
+      "judul": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"NBSP di tepi (tidak di-trim)\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"Kelvin sign (mb_strtolower jadi k)\"",
+      "judul": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"Kelvin sign (mb_strtolower jadi k)\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"I bertitik\"",
+      "judul": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"I bertitik\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"spasi di tengah\"",
+      "judul": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"spasi di tengah\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"terlalu pendek\"",
+      "judul": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"terlalu pendek\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"terlalu panjang\"",
+      "judul": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"terlalu panjang\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"hanya spasi\"",
+      "judul": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"hanya spasi\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"petik\"",
+      "judul": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"petik\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"baris baru di tengah\"",
+      "judul": "Unit\\Auth\\UsernameTest::testDiLuarPolaDitolak with data set \"baris baru di tengah\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Auth\\UsernameTest::testIsValidTidakMembuangSpasi",
+      "judul": "Unit\\Auth\\UsernameTest::testIsValidTidakMembuangSpasi",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\CartCalculatorTest::testLangkah1TotalDanDp",
+      "judul": "Unit\\Domain\\CartCalculatorTest::testLangkah1TotalDanDp",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\CartCalculatorTest::testLangkah2BayarDp",
+      "judul": "Unit\\Domain\\CartCalculatorTest::testLangkah2BayarDp",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\CartCalculatorTest::testLangkah3Lunas",
+      "judul": "Unit\\Domain\\CartCalculatorTest::testLangkah3Lunas",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\CartCalculatorTest::testLangkah4BarangBKosongJadiLebihBayar",
+      "judul": "Unit\\Domain\\CartCalculatorTest::testLangkah4BarangBKosongJadiLebihBayar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\CartCalculatorTest::testLangkah5PengembalianDanaJadiLunas",
+      "judul": "Unit\\Domain\\CartCalculatorTest::testLangkah5PengembalianDanaJadiLunas",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\CartCalculatorTest::testKurangDp",
+      "judul": "Unit\\Domain\\CartCalculatorTest::testKurangDp",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\CartCalculatorTest::testTotalNolDanDanaNolAdalahLunas",
+      "judul": "Unit\\Domain\\CartCalculatorTest::testTotalNolDanDanaNolAdalahLunas",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\CartCalculatorTest::testSemuaBarangKosongSetelahBayarJadiLebihBayar",
+      "judul": "Unit\\Domain\\CartCalculatorTest::testSemuaBarangKosongSetelahBayarJadiLebihBayar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\CartCalculatorTest::testBatasDpTepat",
+      "judul": "Unit\\Domain\\CartCalculatorTest::testBatasDpTepat",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\CartCalculatorTest::testDpNolPersen",
+      "judul": "Unit\\Domain\\CartCalculatorTest::testDpNolPersen",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\CartCalculatorTest::testDpTidakOverflowUntukTotalBesar",
+      "judul": "Unit\\Domain\\CartCalculatorTest::testDpTidakOverflowUntukTotalBesar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\CartCalculatorTest::testDanaNegatifDitolak",
+      "judul": "Unit\\Domain\\CartCalculatorTest::testDanaNegatifDitolak",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\CartCalculatorTest::testPengembalianDanaHanyaSaatLebihBayar",
+      "judul": "Unit\\Domain\\CartCalculatorTest::testPengembalianDanaHanyaSaatLebihBayar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\CartCalculatorTest::testPengembalianDanaMelebihiKelebihanBayar",
+      "judul": "Unit\\Domain\\CartCalculatorTest::testPengembalianDanaMelebihiKelebihanBayar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\CartCalculatorTest::testHapusPembayaranDiblokirOlehPengembalianDana",
+      "judul": "Unit\\Domain\\CartCalculatorTest::testHapusPembayaranDiblokirOlehPengembalianDana",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\CartCalculatorTest::testHapusPembayaranDiizinkanJikaDanaTidakNegatif",
+      "judul": "Unit\\Domain\\CartCalculatorTest::testHapusPembayaranDiizinkanJikaDanaTidakNegatif",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"titik desimal\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"titik desimal\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"koma desimal\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"koma desimal\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"satu desimal\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"satu desimal\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"tanpa desimal\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"tanpa desimal\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"harga C\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"harga C\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"spasi di tepi\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"spasi di tepi\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"nol di depan\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"nol di depan\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"nol\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"nol\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"persen desimal\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"persen desimal\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"kurs pasar bulat\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"kurs pasar bulat\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"kurs pasar desimal\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"kurs pasar desimal\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"minus nol\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testParsesValidInput with data set \"minus nol\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"kosong\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"kosong\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"spasi saja\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"spasi saja\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"huruf\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"huruf\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"titik di akhir\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"titik di akhir\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"titik di awal\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"titik di awal\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"pemisah ganda\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"pemisah ganda\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"eksponen\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"eksponen\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"mata uang\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"mata uang\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"1.299 dibaca 3 desimal\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"1.299 dibaca 3 desimal\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"3 desimal koma\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"3 desimal koma\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"negatif\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"negatif\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"terlalu besar\"",
+      "judul": "Unit\\Domain\\DecimalParserTest::testRejectsInvalidInput with data set \"terlalu besar\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testRoundHalfUpForExternalRates",
+      "judul": "Unit\\Domain\\DecimalParserTest::testRoundHalfUpForExternalRates",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\DecimalParserTest::testFormatterRoundTrips",
+      "judul": "Unit\\Domain\\DecimalParserTest::testFormatterRoundTrips",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\PricingTest::testKursJastipContohScope",
+      "judul": "Unit\\Domain\\PricingTest::testKursJastipContohScope",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\PricingTest::testKursJastipTepatBulatTidakNaik",
+      "judul": "Unit\\Domain\\PricingTest::testKursJastipTepatBulatTidakNaik",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\PricingTest::testKursJastipDariKursPasarDesimal",
+      "judul": "Unit\\Domain\\PricingTest::testKursJastipDariKursPasarDesimal",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\PricingTest::testContohQaScope with data set \"Barang A\"",
+      "judul": "Unit\\Domain\\PricingTest::testContohQaScope with data set \"Barang A\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\PricingTest::testContohQaScope with data set \"Barang B\"",
+      "judul": "Unit\\Domain\\PricingTest::testContohQaScope with data set \"Barang B\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\PricingTest::testContohQaScope with data set \"Barang C\"",
+      "judul": "Unit\\Domain\\PricingTest::testContohQaScope with data set \"Barang C\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\PricingTest::testHasilTepatKelipatanSeribuTidakNaik",
+      "judul": "Unit\\Domain\\PricingTest::testHasilTepatKelipatanSeribuTidakNaik",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\PricingTest::testPembulatanDuaDesimalSebelumKeRibuan with data set \"AUD 3,02 markup 4%\"",
+      "judul": "Unit\\Domain\\PricingTest::testPembulatanDuaDesimalSebelumKeRibuan with data set \"AUD 3,02 markup 4%\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\PricingTest::testPembulatanDuaDesimalSebelumKeRibuan with data set \"AUD 56,66 markup 11%\"",
+      "judul": "Unit\\Domain\\PricingTest::testPembulatanDuaDesimalSebelumKeRibuan with data set \"AUD 56,66 markup 11%\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\PricingTest::testPembulatanDuaDesimalSebelumKeRibuan with data set \"AUD 189,41 markup 7,5%\"",
+      "judul": "Unit\\Domain\\PricingTest::testPembulatanDuaDesimalSebelumKeRibuan with data set \"AUD 189,41 markup 7,5%\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\PricingTest::testPembulatanHalfUp",
+      "judul": "Unit\\Domain\\PricingTest::testPembulatanHalfUp",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\PricingTest::testMenolakNilaiDiLuarRentang",
+      "judul": "Unit\\Domain\\PricingTest::testMenolakNilaiDiLuarRentang",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\PricingTest::testNilaiMaksimumTidakOverflow",
+      "judul": "Unit\\Domain\\PricingTest::testNilaiMaksimumTidakOverflow",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\RekapWaTest::testBelumBayar",
+      "judul": "Unit\\Domain\\RekapWaTest::testBelumBayar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\RekapWaTest::testKurangDp",
+      "judul": "Unit\\Domain\\RekapWaTest::testKurangDp",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\RekapWaTest::testDp",
+      "judul": "Unit\\Domain\\RekapWaTest::testDp",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\RekapWaTest::testLunasTanpaPengembalian",
+      "judul": "Unit\\Domain\\RekapWaTest::testLunasTanpaPengembalian",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\RekapWaTest::testLebihBayar",
+      "judul": "Unit\\Domain\\RekapWaTest::testLebihBayar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\RekapWaTest::testLunasSetelahPengembalianDana",
+      "judul": "Unit\\Domain\\RekapWaTest::testLunasSetelahPengembalianDana",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\RekapWaTest::testPersenDesimalMemakaiKoma",
+      "judul": "Unit\\Domain\\RekapWaTest::testPersenDesimalMemakaiKoma",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\RekapWaTest::testKeranjangTanpaBarang",
+      "judul": "Unit\\Domain\\RekapWaTest::testKeranjangTanpaBarang",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\RekapWaTest::testNamaBerisiBarisBaruDijadikanSatuBaris",
+      "judul": "Unit\\Domain\\RekapWaTest::testNamaBerisiBarisBaruDijadikanSatuBaris",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\WhatsAppNumberTest::testNormalisasiKeFormatKanonik with data set \"awalan 08\"",
+      "judul": "Unit\\Domain\\WhatsAppNumberTest::testNormalisasiKeFormatKanonik with data set \"awalan 08\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\WhatsAppNumberTest::testNormalisasiKeFormatKanonik with data set \"awalan 62\"",
+      "judul": "Unit\\Domain\\WhatsAppNumberTest::testNormalisasiKeFormatKanonik with data set \"awalan 62\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\WhatsAppNumberTest::testNormalisasiKeFormatKanonik with data set \"awalan +62\"",
+      "judul": "Unit\\Domain\\WhatsAppNumberTest::testNormalisasiKeFormatKanonik with data set \"awalan +62\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\WhatsAppNumberTest::testNormalisasiKeFormatKanonik with data set \"tanda hubung\"",
+      "judul": "Unit\\Domain\\WhatsAppNumberTest::testNormalisasiKeFormatKanonik with data set \"tanda hubung\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\WhatsAppNumberTest::testNormalisasiKeFormatKanonik with data set \"spasi\"",
+      "judul": "Unit\\Domain\\WhatsAppNumberTest::testNormalisasiKeFormatKanonik with data set \"spasi\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\WhatsAppNumberTest::testNormalisasiKeFormatKanonik with data set \"kurung dan spasi\"",
+      "judul": "Unit\\Domain\\WhatsAppNumberTest::testNormalisasiKeFormatKanonik with data set \"kurung dan spasi\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\WhatsAppNumberTest::testNormalisasiKeFormatKanonik with data set \"+62 dengan spasi\"",
+      "judul": "Unit\\Domain\\WhatsAppNumberTest::testNormalisasiKeFormatKanonik with data set \"+62 dengan spasi\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\WhatsAppNumberTest::testMenolakInputSalah with data set \"kosong\"",
+      "judul": "Unit\\Domain\\WhatsAppNumberTest::testMenolakInputSalah with data set \"kosong\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\WhatsAppNumberTest::testMenolakInputSalah with data set \"huruf\"",
+      "judul": "Unit\\Domain\\WhatsAppNumberTest::testMenolakInputSalah with data set \"huruf\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\WhatsAppNumberTest::testMenolakInputSalah with data set \"simbol\"",
+      "judul": "Unit\\Domain\\WhatsAppNumberTest::testMenolakInputSalah with data set \"simbol\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\WhatsAppNumberTest::testMenolakInputSalah with data set \"plus di tengah\"",
+      "judul": "Unit\\Domain\\WhatsAppNumberTest::testMenolakInputSalah with data set \"plus di tengah\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\WhatsAppNumberTest::testMenolakInputSalah with data set \"awalan 021\"",
+      "judul": "Unit\\Domain\\WhatsAppNumberTest::testMenolakInputSalah with data set \"awalan 021\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\WhatsAppNumberTest::testMenolakInputSalah with data set \"awalan 8\"",
+      "judul": "Unit\\Domain\\WhatsAppNumberTest::testMenolakInputSalah with data set \"awalan 8\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\WhatsAppNumberTest::testMenolakInputSalah with data set \"negara lain\"",
+      "judul": "Unit\\Domain\\WhatsAppNumberTest::testMenolakInputSalah with data set \"negara lain\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\WhatsAppNumberTest::testMenolakInputSalah with data set \"terlalu pendek\"",
+      "judul": "Unit\\Domain\\WhatsAppNumberTest::testMenolakInputSalah with data set \"terlalu pendek\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\WhatsAppNumberTest::testMenolakInputSalah with data set \"terlalu panjang\"",
+      "judul": "Unit\\Domain\\WhatsAppNumberTest::testMenolakInputSalah with data set \"terlalu panjang\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\WhatsAppNumberTest::testPolaPencarian",
+      "judul": "Unit\\Domain\\WhatsAppNumberTest::testPolaPencarian",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Unit\\Domain\\WhatsAppNumberTest::testFormatRupiah",
+      "judul": "Unit\\Domain\\WhatsAppNumberTest::testFormatRupiah",
+      "lulus": true,
+      "catatan": null,
+      "ms": 0
+    },
+    {
+      "id": "Integration\\AuthTest::testLoginWebMengirimCookieAmanTanpaTokenDiBody",
+      "judul": "Integration\\AuthTest::testLoginWebMengirimCookieAmanTanpaTokenDiBody",
+      "lulus": true,
+      "catatan": null,
+      "ms": 946
+    },
+    {
+      "id": "Integration\\AuthTest::testTokenDisimpanSebagaiHashSaja",
+      "judul": "Integration\\AuthTest::testTokenDisimpanSebagaiHashSaja",
+      "lulus": true,
+      "catatan": null,
+      "ms": 408
+    },
+    {
+      "id": "Integration\\AuthTest::testSesiDanLogout",
+      "judul": "Integration\\AuthTest::testSesiDanLogout",
+      "lulus": true,
+      "catatan": null,
+      "ms": 415
+    },
+    {
+      "id": "Integration\\AuthTest::testLoginMobileMemakaiBearer",
+      "judul": "Integration\\AuthTest::testLoginMobileMemakaiBearer",
+      "lulus": true,
+      "catatan": null,
+      "ms": 405
+    },
+    {
+      "id": "Integration\\AuthTest::testLoginGagalPesanUmumUntukPasswordSalahDanPenggunaTidakAda",
+      "judul": "Integration\\AuthTest::testLoginGagalPesanUmumUntukPasswordSalahDanPenggunaTidakAda",
+      "lulus": true,
+      "catatan": null,
+      "ms": 613
+    },
+    {
+      "id": "Integration\\AuthTest::testValidasiLogin",
+      "judul": "Integration\\AuthTest::testValidasiLogin",
+      "lulus": true,
+      "catatan": null,
+      "ms": 11
+    },
+    {
+      "id": "Integration\\AuthTest::testNamaPenggunaTidakPekaHurufBesar",
+      "judul": "Integration\\AuthTest::testNamaPenggunaTidakPekaHurufBesar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 396
+    },
+    {
+      "id": "Integration\\AuthTest::testLimaKaliGagalLaluDiblokirLimaBelasMenit",
+      "judul": "Integration\\AuthTest::testLimaKaliGagalLaluDiblokirLimaBelasMenit",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1625
+    },
+    {
+      "id": "Integration\\AuthTest::testSesiBerakhirSetelahDuaBelasJamTidakAktif",
+      "judul": "Integration\\AuthTest::testSesiBerakhirSetelahDuaBelasJamTidakAktif",
+      "lulus": true,
+      "catatan": null,
+      "ms": 415
+    },
+    {
+      "id": "Integration\\AuthTest::testSesiSlidingDiperpanjangSetiapAktivitas",
+      "judul": "Integration\\AuthTest::testSesiSlidingDiperpanjangSetiapAktivitas",
+      "lulus": true,
+      "catatan": null,
+      "ms": 414
+    },
+    {
+      "id": "Integration\\AuthTest::testTokenTidakDikenalDitolak",
+      "judul": "Integration\\AuthTest::testTokenTidakDikenalDitolak",
+      "lulus": true,
+      "catatan": null,
+      "ms": 6
+    },
+    {
+      "id": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #0",
+      "judul": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #0",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #1",
+      "judul": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #1",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #2",
+      "judul": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #2",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #3",
+      "judul": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #3",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #4",
+      "judul": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #4",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #5",
+      "judul": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #5",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #6",
+      "judul": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #6",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #7",
+      "judul": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #7",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #8",
+      "judul": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #8",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #9",
+      "judul": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #9",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #10",
+      "judul": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #10",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #11",
+      "judul": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #11",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #12",
+      "judul": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #12",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #13",
+      "judul": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #13",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #14",
+      "judul": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #14",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #15",
+      "judul": "Integration\\AuthTest::testSemuaEndpointSelainLoginWajibSesi with data set #15",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "Integration\\AuthTest::testLogTidakMemuatKataSandiAtauToken",
+      "judul": "Integration\\AuthTest::testLogTidakMemuatKataSandiAtauToken",
+      "lulus": true,
+      "catatan": null,
+      "ms": 602
+    },
+    {
+      "id": "Integration\\CreateAdminSqlTest::testSqlAdminBaruBisaDipakaiLogin",
+      "judul": "Integration\\CreateAdminSqlTest::testSqlAdminBaruBisaDipakaiLogin",
+      "lulus": true,
+      "catatan": null,
+      "ms": 750
+    },
+    {
+      "id": "Integration\\CreateAdminSqlTest::testSqlResetMenggantiSandiDanMengakhiriSesi",
+      "judul": "Integration\\CreateAdminSqlTest::testSqlResetMenggantiSandiDanMengakhiriSesi",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1142
+    },
+    {
+      "id": "Integration\\CreateAdminSqlTest::testInputTidakValidDitolakTanpaSql",
+      "judul": "Integration\\CreateAdminSqlTest::testInputTidakValidDitolakTanpaSql",
+      "lulus": true,
+      "catatan": null,
+      "ms": 693
+    },
+    {
+      "id": "Integration\\CustomerTest::testBuatMenormalkanNoWa",
+      "judul": "Integration\\CustomerTest::testBuatMenormalkanNoWa",
+      "lulus": true,
+      "catatan": null,
+      "ms": 404
+    },
+    {
+      "id": "Integration\\CustomerTest::testValidasi with data set \"semua kosong\"",
+      "judul": "Integration\\CustomerTest::testValidasi with data set \"semua kosong\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 411
+    },
+    {
+      "id": "Integration\\CustomerTest::testValidasi with data set \"no wa huruf\"",
+      "judul": "Integration\\CustomerTest::testValidasi with data set \"no wa huruf\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 407
+    },
+    {
+      "id": "Integration\\CustomerTest::testValidasi with data set \"awalan salah\"",
+      "judul": "Integration\\CustomerTest::testValidasi with data set \"awalan salah\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 409
+    },
+    {
+      "id": "Integration\\CustomerTest::testValidasi with data set \"no wa angka JSON\"",
+      "judul": "Integration\\CustomerTest::testValidasi with data set \"no wa angka JSON\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 404
+    },
+    {
+      "id": "Integration\\CustomerTest::testValidasi with data set \"alamat terlalu panjang\"",
+      "judul": "Integration\\CustomerTest::testValidasi with data set \"alamat terlalu panjang\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 405
+    },
+    {
+      "id": "Integration\\CustomerTest::testValidasi with data set \"nama terlalu panjang\"",
+      "judul": "Integration\\CustomerTest::testValidasi with data set \"nama terlalu panjang\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 403
+    },
+    {
+      "id": "Integration\\CustomerTest::testCekNoWaDuplikatHanyaPeringatan",
+      "judul": "Integration\\CustomerTest::testCekNoWaDuplikatHanyaPeringatan",
+      "lulus": true,
+      "catatan": null,
+      "ms": 420
+    },
+    {
+      "id": "Integration\\CustomerTest::testCariNamaAtauNoWa",
+      "judul": "Integration\\CustomerTest::testCariNamaAtauNoWa",
+      "lulus": true,
+      "catatan": null,
+      "ms": 426
+    },
+    {
+      "id": "Integration\\CustomerTest::testPaginationDanUrutTerakhirDiubah",
+      "judul": "Integration\\CustomerTest::testPaginationDanUrutTerakhirDiubah",
+      "lulus": true,
+      "catatan": null,
+      "ms": 431
+    },
+    {
+      "id": "Integration\\CustomerTest::testPenandaSudahDiPo",
+      "judul": "Integration\\CustomerTest::testPenandaSudahDiPo",
+      "lulus": true,
+      "catatan": null,
+      "ms": 440
+    },
+    {
+      "id": "Integration\\CustomerTest::testUbahCustomer",
+      "judul": "Integration\\CustomerTest::testUbahCustomer",
+      "lulus": true,
+      "catatan": null,
+      "ms": 438
+    },
+    {
+      "id": "Integration\\CustomerTest::testHapusCustomerTanpaPesanan",
+      "judul": "Integration\\CustomerTest::testHapusCustomerTanpaPesanan",
+      "lulus": true,
+      "catatan": null,
+      "ms": 433
+    },
+    {
+      "id": "Integration\\CustomerTest::testCustomerBerpesananHarusDiarsipkan with data set \"punya baris\"",
+      "judul": "Integration\\CustomerTest::testCustomerBerpesananHarusDiarsipkan with data set \"punya baris\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 439
+    },
+    {
+      "id": "Integration\\CustomerTest::testCustomerBerpesananHarusDiarsipkan with data set \"hanya baris Kosong\"",
+      "judul": "Integration\\CustomerTest::testCustomerBerpesananHarusDiarsipkan with data set \"hanya baris Kosong\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 449
+    },
+    {
+      "id": "Integration\\CustomerTest::testCustomerBerpesananHarusDiarsipkan with data set \"hanya pembayaran\"",
+      "judul": "Integration\\CustomerTest::testCustomerBerpesananHarusDiarsipkan with data set \"hanya pembayaran\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 452
+    },
+    {
+      "id": "Integration\\CustomerTest::testCustomerDiarsipkanTidakTampilDiDaftarPencarianDanCekDuplikat",
+      "judul": "Integration\\CustomerTest::testCustomerDiarsipkanTidakTampilDiDaftarPencarianDanCekDuplikat",
+      "lulus": true,
+      "catatan": null,
+      "ms": 449
+    },
+    {
+      "id": "Integration\\HttpProtectionTest::testPostTanpaContentTypeJsonDitolak",
+      "judul": "Integration\\HttpProtectionTest::testPostTanpaContentTypeJsonDitolak",
+      "lulus": true,
+      "catatan": null,
+      "ms": 418
+    },
+    {
+      "id": "Integration\\HttpProtectionTest::testOriginAsingDitolakUntukRequestYangMengubahData",
+      "judul": "Integration\\HttpProtectionTest::testOriginAsingDitolakUntukRequestYangMengubahData",
+      "lulus": true,
+      "catatan": null,
+      "ms": 403
+    },
+    {
+      "id": "Integration\\HttpProtectionTest::testOriginSendiriDanTanpaOriginDiterima",
+      "judul": "Integration\\HttpProtectionTest::testOriginSendiriDanTanpaOriginDiterima",
+      "lulus": true,
+      "catatan": null,
+      "ms": 415
+    },
+    {
+      "id": "Integration\\HttpProtectionTest::testJsonRusakDanBodyBukanObjek",
+      "judul": "Integration\\HttpProtectionTest::testJsonRusakDanBodyBukanObjek",
+      "lulus": true,
+      "catatan": null,
+      "ms": 410
+    },
+    {
+      "id": "Integration\\HttpProtectionTest::testRouteTidakAdaDanMetodeSalah",
+      "judul": "Integration\\HttpProtectionTest::testRouteTidakAdaDanMetodeSalah",
+      "lulus": true,
+      "catatan": null,
+      "ms": 7
+    },
+    {
+      "id": "Integration\\HttpProtectionTest::testHeaderKeamananDanGarisMiringDiAkhir",
+      "judul": "Integration\\HttpProtectionTest::testHeaderKeamananDanGarisMiringDiAkhir",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1
+    },
+    {
+      "id": "Integration\\HttpProtectionTest::testErrorTakTerdugaJadi500TanpaDetail",
+      "judul": "Integration\\HttpProtectionTest::testErrorTakTerdugaJadi500TanpaDetail",
+      "lulus": true,
+      "catatan": null,
+      "ms": 405
+    },
+    {
+      "id": "Integration\\HttpSmokeTest::testAlurLoginLewatHttp",
+      "judul": "Integration\\HttpSmokeTest::testAlurLoginLewatHttp",
+      "lulus": true,
+      "catatan": null,
+      "ms": 849
+    },
+    {
+      "id": "Integration\\HttpSmokeTest::testGagalMulaiTetapTanpaXPoweredBy",
+      "judul": "Integration\\HttpSmokeTest::testGagalMulaiTetapTanpaXPoweredBy",
+      "lulus": true,
+      "catatan": null,
+      "ms": 618
+    },
+    {
+      "id": "Integration\\KeranjangTest::testSkenarioQaLangkah1Sampai5",
+      "judul": "Integration\\KeranjangTest::testSkenarioQaLangkah1Sampai5",
+      "lulus": true,
+      "catatan": null,
+      "ms": 463
+    },
+    {
+      "id": "Integration\\KeranjangTest::testKursTerkunciSetelahBarisPertamaDanTetapTerkunciSetelahSemuaDihapus",
+      "judul": "Integration\\KeranjangTest::testKursTerkunciSetelahBarisPertamaDanTetapTerkunciSetelahSemuaDihapus",
+      "lulus": true,
+      "catatan": null,
+      "ms": 480
+    },
+    {
+      "id": "Integration\\KeranjangTest::testPembayaranSajaTidakMengunciKurs",
+      "judul": "Integration\\KeranjangTest::testPembayaranSajaTidakMengunciKurs",
+      "lulus": true,
+      "catatan": null,
+      "ms": 438
+    },
+    {
+      "id": "Integration\\KeranjangTest::testUbahBarisMenghitungUlangDenganKursSnapshotBaris",
+      "judul": "Integration\\KeranjangTest::testUbahBarisMenghitungUlangDenganKursSnapshotBaris",
+      "lulus": true,
+      "catatan": null,
+      "ms": 454
+    },
+    {
+      "id": "Integration\\KeranjangTest::testTandaKosongIdempotenDanBarisKosongTetapBisaDiubah",
+      "judul": "Integration\\KeranjangTest::testTandaKosongIdempotenDanBarisKosongTetapBisaDiubah",
+      "lulus": true,
+      "catatan": null,
+      "ms": 460
+    },
+    {
+      "id": "Integration\\KeranjangTest::testCustomerDiarsipkanTidakBisaMembuatKeranjangBaruTapiKeranjangLamaTetapTerbuka",
+      "judul": "Integration\\KeranjangTest::testCustomerDiarsipkanTidakBisaMembuatKeranjangBaruTapiKeranjangLamaTetapTerbuka",
+      "lulus": true,
+      "catatan": null,
+      "ms": 467
+    },
+    {
+      "id": "Integration\\KeranjangTest::testKeranjangKosongTidakMunculDiDaftarCustomerPo",
+      "judul": "Integration\\KeranjangTest::testKeranjangKosongTidakMunculDiDaftarCustomerPo",
+      "lulus": true,
+      "catatan": null,
+      "ms": 482
+    },
+    {
+      "id": "Integration\\KeranjangTest::testOperasiBarisMemakaiKeranjangPemiliknya",
+      "judul": "Integration\\KeranjangTest::testOperasiBarisMemakaiKeranjangPemiliknya",
+      "lulus": true,
+      "catatan": null,
+      "ms": 457
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"semua kosong\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"semua kosong\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 428
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"nama spasi\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"nama spasi\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 422
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"nama 151 karakter\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"nama 151 karakter\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 421
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"harga kosong\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"harga kosong\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 421
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"harga nol\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"harga nol\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 419
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"harga negatif\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"harga negatif\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 423
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"harga 3 desimal (1.299)\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"harga 3 desimal (1.299)\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 424
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"harga huruf\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"harga huruf\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 420
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"harga pemisah ribuan\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"harga pemisah ribuan\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 420
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"harga angka JSON\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"harga angka JSON\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 422
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"harga di atas maksimum\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"harga di atas maksimum\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 422
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"qty nol\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"qty nol\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 427
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"qty negatif\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"qty negatif\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 423
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"qty pecahan\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"qty pecahan\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 427
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"qty teks\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"qty teks\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 423
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"qty 1000\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"qty 1000\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 423
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"markup kosong\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"markup kosong\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 424
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"markup negatif\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"markup negatif\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 422
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"markup di atas 100\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"markup di atas 100\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 422
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"markup 3 desimal\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"markup 3 desimal\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 426
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"markup angka JSON\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiTambahBarang with data set \"markup angka JSON\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 423
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testBatasAtasBarangDiterima",
+      "judul": "Integration\\KeranjangValidasiTest::testBatasAtasBarangDiterima",
+      "lulus": true,
+      "catatan": null,
+      "ms": 436
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiUbahBarisHanyaFieldYangDikirim",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiUbahBarisHanyaFieldYangDikirim",
+      "lulus": true,
+      "catatan": null,
+      "ms": 437
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"semua kosong\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"semua kosong\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 428
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"nominal nol\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"nominal nol\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 426
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"nominal negatif\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"nominal negatif\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 420
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"nominal teks\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"nominal teks\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 424
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"nominal pecahan\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"nominal pecahan\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 423
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"nominal terlalu besar\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"nominal terlalu besar\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 423
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"tanggal kosong\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"tanggal kosong\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 422
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"tanggal tidak ada\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"tanggal tidak ada\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 429
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"tanggal format lain\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"tanggal format lain\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 426
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"tanggal angka\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPembayaran with data set \"tanggal angka\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 421
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"semua kosong\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"semua kosong\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 423
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"nominal nol\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"nominal nol\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 421
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"nominal negatif\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"nominal negatif\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 426
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"nominal teks\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"nominal teks\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 420
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"nominal pecahan\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"nominal pecahan\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 419
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"nominal terlalu besar\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"nominal terlalu besar\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 423
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"tanggal kosong\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"tanggal kosong\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 427
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"tanggal tidak ada\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"tanggal tidak ada\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 424
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"tanggal format lain\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"tanggal format lain\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 423
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"tanggal angka\"",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiPengembalianDanaSebelumCekStatus with data set \"tanggal angka\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 428
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testValidasiCatatanPengembalianDana",
+      "judul": "Integration\\KeranjangValidasiTest::testValidasiCatatanPengembalianDana",
+      "lulus": true,
+      "catatan": null,
+      "ms": 437
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testIdTidakDitemukan",
+      "judul": "Integration\\KeranjangValidasiTest::testIdTidakDitemukan",
+      "lulus": true,
+      "catatan": null,
+      "ms": 461
+    },
+    {
+      "id": "Integration\\KeranjangValidasiTest::testRouteMetodeDanProteksi",
+      "judul": "Integration\\KeranjangValidasiTest::testRouteMetodeDanProteksi",
+      "lulus": true,
+      "catatan": null,
+      "ms": 428
+    },
+    {
+      "id": "Integration\\KonkurensiTest::testDuaPengembalianDanaBersamaanTidakMelebihiKelebihanBayar with data set \"request 1 mengembalikan semua\"",
+      "judul": "Integration\\KonkurensiTest::testDuaPengembalianDanaBersamaanTidakMelebihiKelebihanBayar with data set \"request 1 mengembalikan semua\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 616
+    },
+    {
+      "id": "Integration\\KonkurensiTest::testDuaPengembalianDanaBersamaanTidakMelebihiKelebihanBayar with data set \"request 1 mengembalikan sebagian\"",
+      "judul": "Integration\\KonkurensiTest::testDuaPengembalianDanaBersamaanTidakMelebihiKelebihanBayar with data set \"request 1 mengembalikan sebagian\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 631
+    },
+    {
+      "id": "Integration\\KonkurensiTest::testHapusPembayaranSaatPengembalianDanaSedangDicatat",
+      "judul": "Integration\\KonkurensiTest::testHapusPembayaranSaatPengembalianDanaSedangDicatat",
+      "lulus": true,
+      "catatan": null,
+      "ms": 637
+    },
+    {
+      "id": "Integration\\KonkurensiTest::testDuaHapusPembayaranBersamaan",
+      "judul": "Integration\\KonkurensiTest::testDuaHapusPembayaranBersamaan",
+      "lulus": true,
+      "catatan": null,
+      "ms": 641
+    },
+    {
+      "id": "Integration\\KonkurensiTest::testUbahKursMenungguBarisPertamaLaluDitolak",
+      "judul": "Integration\\KonkurensiTest::testUbahKursMenungguBarisPertamaLaluDitolak",
+      "lulus": true,
+      "catatan": null,
+      "ms": 607
+    },
+    {
+      "id": "Integration\\KonkurensiTest::testBarisPertamaMenungguUbahKursLaluMemakaiKursBaru",
+      "judul": "Integration\\KonkurensiTest::testBarisPertamaMenungguUbahKursLaluMemakaiKursBaru",
+      "lulus": true,
+      "catatan": null,
+      "ms": 601
+    },
+    {
+      "id": "Integration\\KonkurensiTest::testDuaPembayaranPertamaBersamaanMemakaiSatuKeranjang",
+      "judul": "Integration\\KonkurensiTest::testDuaPembayaranPertamaBersamaanMemakaiSatuKeranjang",
+      "lulus": true,
+      "catatan": null,
+      "ms": 596
+    },
+    {
+      "id": "Integration\\LoginPembatasanTest::testVariasiNamaSaatAkunTerkunciTidakPernahBerhasil",
+      "judul": "Integration\\LoginPembatasanTest::testVariasiNamaSaatAkunTerkunciTidakPernahBerhasil",
+      "lulus": true,
+      "catatan": null,
+      "ms": 2452
+    },
+    {
+      "id": "Integration\\LoginPembatasanTest::testTebakanDenganVariasiNamaDariBanyakIpHanyaLimaYangDiperiksa",
+      "judul": "Integration\\LoginPembatasanTest::testTebakanDenganVariasiNamaDariBanyakIpHanyaLimaYangDiperiksa",
+      "lulus": true,
+      "catatan": null,
+      "ms": 2627
+    },
+    {
+      "id": "Integration\\LoginPembatasanTest::testLoginNormalTetapBerhasilTanpaMembedakanHurufBesarKecil",
+      "judul": "Integration\\LoginPembatasanTest::testLoginNormalTetapBerhasilTanpaMembedakanHurufBesarKecil",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1001
+    },
+    {
+      "id": "Integration\\LoginPembatasanTest::testPencarianAdminBinerBukanKesetaraanCollation",
+      "judul": "Integration\\LoginPembatasanTest::testPencarianAdminBinerBukanKesetaraanCollation",
+      "lulus": true,
+      "catatan": null,
+      "ms": 613
+    },
+    {
+      "id": "Integration\\LoginPembatasanTest::testDuaPuluhGagalDariSatuIpMemblokirIpItu",
+      "judul": "Integration\\LoginPembatasanTest::testDuaPuluhGagalDariSatuIpMemblokirIpItu",
+      "lulus": true,
+      "catatan": null,
+      "ms": 4632
+    },
+    {
+      "id": "Integration\\LoginPembatasanTest::testSetiapLoginGagalTepatSatuVerifyTanpaPasswordHash",
+      "judul": "Integration\\LoginPembatasanTest::testSetiapLoginGagalTepatSatuVerifyTanpaPasswordHash",
+      "lulus": true,
+      "catatan": null,
+      "ms": 816
+    },
+    {
+      "id": "Integration\\MigrationTest::testUpDownUp",
+      "judul": "Integration\\MigrationTest::testUpDownUp",
+      "lulus": true,
+      "catatan": null,
+      "ms": 1091
+    },
+    {
+      "id": "Integration\\MigrationTest::testConstraintMenolakDataSalah",
+      "judul": "Integration\\MigrationTest::testConstraintMenolakDataSalah",
+      "lulus": false,
+      "catatan": "Jastip\\Tests\\Integration\\MigrationTest::testConstraintMenolakDataSalah | pengaturan kedua: SQLSTATE[HY000]: General error: 3819 Check constraint 'chk_pengaturan_satu_baris' is violated. | Failed asserting that two strings are identical. | --- Expected | +++ Actual | @@ @@",
+      "ms": 538
+    },
+    {
+      "id": "Integration\\OpenPoCustomerTest::testDaftarUrutNamaDenganStatusDanJumlahPerStatus",
+      "judul": "Integration\\OpenPoCustomerTest::testDaftarUrutNamaDenganStatusDanJumlahPerStatus",
+      "lulus": true,
+      "catatan": null,
+      "ms": 532
+    },
+    {
+      "id": "Integration\\OpenPoCustomerTest::testFilterStatusTidakMengubahJumlahPerStatus",
+      "judul": "Integration\\OpenPoCustomerTest::testFilterStatusTidakMengubahJumlahPerStatus",
+      "lulus": true,
+      "catatan": null,
+      "ms": 547
+    },
+    {
+      "id": "Integration\\OpenPoCustomerTest::testStatusBerubahSaatBarisDitandaiKosong",
+      "judul": "Integration\\OpenPoCustomerTest::testStatusBerubahSaatBarisDitandaiKosong",
+      "lulus": true,
+      "catatan": null,
+      "ms": 461
+    },
+    {
+      "id": "Integration\\OpenPoCustomerTest::testPoTanpaKeranjang",
+      "judul": "Integration\\OpenPoCustomerTest::testPoTanpaKeranjang",
+      "lulus": true,
+      "catatan": null,
+      "ms": 433
+    },
+    {
+      "id": "Integration\\OpenPoCustomerTest::testBarangUnikPerNamaDanHargaTermasukKosong",
+      "judul": "Integration\\OpenPoCustomerTest::testBarangUnikPerNamaDanHargaTermasukKosong",
+      "lulus": true,
+      "catatan": null,
+      "ms": 478
+    },
+    {
+      "id": "Integration\\OpenPoTest::testBuatOtomatisServerMenghitungUlangKursJastip",
+      "judul": "Integration\\OpenPoTest::testBuatOtomatisServerMenghitungUlangKursJastip",
+      "lulus": true,
+      "catatan": null,
+      "ms": 428
+    },
+    {
+      "id": "Integration\\OpenPoTest::testBuatManualTanpaBufferDenganAtauTanpaKursPasar",
+      "judul": "Integration\\OpenPoTest::testBuatManualTanpaBufferDenganAtauTanpaKursPasar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 419
+    },
+    {
+      "id": "Integration\\OpenPoTest::testValidasiBuat with data set \"nama kosong, kurs tidak ada\"",
+      "judul": "Integration\\OpenPoTest::testValidasiBuat with data set \"nama kosong, kurs tidak ada\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 409
+    },
+    {
+      "id": "Integration\\OpenPoTest::testValidasiBuat with data set \"manual tanpa kurs\"",
+      "judul": "Integration\\OpenPoTest::testValidasiBuat with data set \"manual tanpa kurs\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 403
+    },
+    {
+      "id": "Integration\\OpenPoTest::testValidasiBuat with data set \"manual nol\"",
+      "judul": "Integration\\OpenPoTest::testValidasiBuat with data set \"manual nol\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 408
+    },
+    {
+      "id": "Integration\\OpenPoTest::testValidasiBuat with data set \"manual negatif\"",
+      "judul": "Integration\\OpenPoTest::testValidasiBuat with data set \"manual negatif\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 405
+    },
+    {
+      "id": "Integration\\OpenPoTest::testValidasiBuat with data set \"manual teks\"",
+      "judul": "Integration\\OpenPoTest::testValidasiBuat with data set \"manual teks\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 404
+    },
+    {
+      "id": "Integration\\OpenPoTest::testValidasiBuat with data set \"manual desimal\"",
+      "judul": "Integration\\OpenPoTest::testValidasiBuat with data set \"manual desimal\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 403
+    },
+    {
+      "id": "Integration\\OpenPoTest::testValidasiBuat with data set \"otomatis tanpa kurs pasar\"",
+      "judul": "Integration\\OpenPoTest::testValidasiBuat with data set \"otomatis tanpa kurs pasar\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 407
+    },
+    {
+      "id": "Integration\\OpenPoTest::testValidasiBuat with data set \"otomatis tanggal salah\"",
+      "judul": "Integration\\OpenPoTest::testValidasiBuat with data set \"otomatis tanggal salah\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 402
+    },
+    {
+      "id": "Integration\\OpenPoTest::testValidasiBuat with data set \"mode tidak dikenal\"",
+      "judul": "Integration\\OpenPoTest::testValidasiBuat with data set \"mode tidak dikenal\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 407
+    },
+    {
+      "id": "Integration\\OpenPoTest::testValidasiBuat with data set \"nama terlalu panjang\"",
+      "judul": "Integration\\OpenPoTest::testValidasiBuat with data set \"nama terlalu panjang\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 404
+    },
+    {
+      "id": "Integration\\OpenPoTest::testDpDanBufferDisnapshotSaatPoDibuat",
+      "judul": "Integration\\OpenPoTest::testDpDanBufferDisnapshotSaatPoDibuat",
+      "lulus": true,
+      "catatan": null,
+      "ms": 422
+    },
+    {
+      "id": "Integration\\OpenPoTest::testDaftarBukaDuluTerbaruDiAtasDenganPagination",
+      "judul": "Integration\\OpenPoTest::testDaftarBukaDuluTerbaruDiAtasDenganPagination",
+      "lulus": true,
+      "catatan": null,
+      "ms": 437
+    },
+    {
+      "id": "Integration\\OpenPoTest::testValidasiQueryDaftar",
+      "judul": "Integration\\OpenPoTest::testValidasiQueryDaftar",
+      "lulus": true,
+      "catatan": null,
+      "ms": 408
+    },
+    {
+      "id": "Integration\\OpenPoTest::testDetailTidakAda",
+      "judul": "Integration\\OpenPoTest::testDetailTidakAda",
+      "lulus": true,
+      "catatan": null,
+      "ms": 405
+    },
+    {
+      "id": "Integration\\OpenPoTest::testUbahNamaStatusDanKursSebelumTerkunci",
+      "judul": "Integration\\OpenPoTest::testUbahNamaStatusDanKursSebelumTerkunci",
+      "lulus": true,
+      "catatan": null,
+      "ms": 424
+    },
+    {
+      "id": "Integration\\OpenPoTest::testKursTerkunciDitolak409TapiNamaDanStatusTetapBisaDiubah",
+      "judul": "Integration\\OpenPoTest::testKursTerkunciDitolak409TapiNamaDanStatusTetapBisaDiubah",
+      "lulus": true,
+      "catatan": null,
+      "ms": 426
+    },
+    {
+      "id": "Integration\\OpenPoTest::testRingkasanPoDariKeranjangBerisi",
+      "judul": "Integration\\OpenPoTest::testRingkasanPoDariKeranjangBerisi",
+      "lulus": true,
+      "catatan": null,
+      "ms": 487
+    },
+    {
+      "id": "Integration\\PembayaranTest::testHapusPembayaranDiblokirLaluBerhasilSetelahPengembalianDanaDihapus",
+      "judul": "Integration\\PembayaranTest::testHapusPembayaranDiblokirLaluBerhasilSetelahPengembalianDanaDihapus",
+      "lulus": true,
+      "catatan": null,
+      "ms": 482
+    },
+    {
+      "id": "Integration\\PembayaranTest::testHapusSebagianPembayaranDiizinkanSelamaDanaTidakNegatif",
+      "judul": "Integration\\PembayaranTest::testHapusSebagianPembayaranDiizinkanSelamaDanaTidakNegatif",
+      "lulus": true,
+      "catatan": null,
+      "ms": 479
+    },
+    {
+      "id": "Integration\\PembayaranTest::testPengembalianDanaSaatStatusBukanLebihBayarDitolak409",
+      "judul": "Integration\\PembayaranTest::testPengembalianDanaSaatStatusBukanLebihBayarDitolak409",
+      "lulus": true,
+      "catatan": null,
+      "ms": 468
+    },
+    {
+      "id": "Integration\\PembayaranTest::testPengembalianDanaMelebihiKelebihanBayarDitolak422",
+      "judul": "Integration\\PembayaranTest::testPengembalianDanaMelebihiKelebihanBayarDitolak422",
+      "lulus": true,
+      "catatan": null,
+      "ms": 481
+    },
+    {
+      "id": "Integration\\PembayaranTest::testRiwayatTerbaruDiAtasMenurutTanggalLaluWaktuDicatat",
+      "judul": "Integration\\PembayaranTest::testRiwayatTerbaruDiAtasMenurutTanggalLaluWaktuDicatat",
+      "lulus": true,
+      "catatan": null,
+      "ms": 467
+    },
+    {
+      "id": "Integration\\PembayaranTest::testPembayaranPertamaMembuatKeranjang",
+      "judul": "Integration\\PembayaranTest::testPembayaranPertamaMembuatKeranjang",
+      "lulus": true,
+      "catatan": null,
+      "ms": 444
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testNilaiAwalPengaturan",
+      "judul": "Integration\\SettingsAndKursTest::testNilaiAwalPengaturan",
+      "lulus": true,
+      "catatan": null,
+      "ms": 422
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testUbahSebagianDenganKomaAtauTitik",
+      "judul": "Integration\\SettingsAndKursTest::testUbahSebagianDenganKomaAtauTitik",
+      "lulus": true,
+      "catatan": null,
+      "ms": 409
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"markup negatif\"",
+      "judul": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"markup negatif\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 410
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"markup > 100\"",
+      "judul": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"markup > 100\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 404
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"markup 3 desimal\"",
+      "judul": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"markup 3 desimal\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 407
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"markup huruf\"",
+      "judul": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"markup huruf\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 402
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"markup angka JSON\"",
+      "judul": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"markup angka JSON\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 408
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"markup kosong\"",
+      "judul": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"markup kosong\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 410
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"buffer negatif\"",
+      "judul": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"buffer negatif\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 403
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"dp > 100\"",
+      "judul": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"dp > 100\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 407
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"dp negatif\"",
+      "judul": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"dp negatif\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 403
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"dp float JSON\"",
+      "judul": "Integration\\SettingsAndKursTest::testValidasiPengaturan with data set \"dp float JSON\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 409
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testBatasNolDanSeratusDiterima",
+      "judul": "Integration\\SettingsAndKursTest::testBatasNolDanSeratusDiterima",
+      "lulus": true,
+      "catatan": null,
+      "ms": 411
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testPratinjauKursContohScope",
+      "judul": "Integration\\SettingsAndKursTest::testPratinjauKursContohScope",
+      "lulus": true,
+      "catatan": null,
+      "ms": 407
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testPratinjauKursMemakaiBufferTerbaruDanKursDesimal",
+      "judul": "Integration\\SettingsAndKursTest::testPratinjauKursMemakaiBufferTerbaruDanKursDesimal",
+      "lulus": true,
+      "catatan": null,
+      "ms": 409
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testKursGagalMengembalikanKodeKhusus with data set \"jaringan gagal\"",
+      "judul": "Integration\\SettingsAndKursTest::testKursGagalMengembalikanKodeKhusus with data set \"jaringan gagal\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 412
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testKursGagalMengembalikanKodeKhusus with data set \"bukan JSON\"",
+      "judul": "Integration\\SettingsAndKursTest::testKursGagalMengembalikanKodeKhusus with data set \"bukan JSON\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 405
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testKursGagalMengembalikanKodeKhusus with data set \"pasangan salah\"",
+      "judul": "Integration\\SettingsAndKursTest::testKursGagalMengembalikanKodeKhusus with data set \"pasangan salah\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 405
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testKursGagalMengembalikanKodeKhusus with data set \"rate string\"",
+      "judul": "Integration\\SettingsAndKursTest::testKursGagalMengembalikanKodeKhusus with data set \"rate string\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 405
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testKursGagalMengembalikanKodeKhusus with data set \"rate nol\"",
+      "judul": "Integration\\SettingsAndKursTest::testKursGagalMengembalikanKodeKhusus with data set \"rate nol\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 405
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testKursGagalMengembalikanKodeKhusus with data set \"rate negatif\"",
+      "judul": "Integration\\SettingsAndKursTest::testKursGagalMengembalikanKodeKhusus with data set \"rate negatif\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 402
+    },
+    {
+      "id": "Integration\\SettingsAndKursTest::testKursGagalMengembalikanKodeKhusus with data set \"tanggal salah\"",
+      "judul": "Integration\\SettingsAndKursTest::testKursGagalMengembalikanKodeKhusus with data set \"tanggal salah\"",
+      "lulus": true,
+      "catatan": null,
+      "ms": 407
+    },
+    {
+      "id": "Integration\\SqlExportTest::testInstallSqlMenghasilkanSkemaYangSamaDenganMigrator",
+      "judul": "Integration\\SqlExportTest::testInstallSqlMenghasilkanSkemaYangSamaDenganMigrator",
+      "lulus": true,
+      "catatan": null,
+      "ms": 533
+    },
+    {
+      "id": "Integration\\SqlExportTest::testInstallSqlKeDatabaseBerisiBerhentiDiPernyataanPertama",
+      "judul": "Integration\\SqlExportTest::testInstallSqlKeDatabaseBerisiBerhentiDiPernyataanPertama",
+      "lulus": true,
+      "catatan": null,
+      "ms": 527
+    },
+    {
+      "id": "Integration\\SqlExportTest::testUpgradeSqlDenganPengaman",
+      "judul": "Integration\\SqlExportTest::testUpgradeSqlDenganPengaman",
+      "lulus": false,
+      "catatan": "Jastip\\Tests\\Integration\\SqlExportTest::testUpgradeSqlDenganPengaman | SQLSTATE[HY000]: General error: 1093 You can't specify target table 'schema_migrations' for update in FROM clause | Failed asserting that 1093 is identical to 1048. | /projects/sandbox/backend/tests/Integration/SqlExportTest.php:178 | /projects/sandbox/backend/tests/Integration/SqlExportTest.php:103",
+      "ms": 553
+    },
+    {
+      "id": "Integration\\SqlExportTest::testUpgradeVersiPertamaAtauTidakAdaDitolak",
+      "judul": "Integration\\SqlExportTest::testUpgradeVersiPertamaAtauTidakAdaDitolak",
+      "lulus": true,
+      "catatan": null,
+      "ms": 16
+    },
+    {
+      "id": "Integration\\SqlExportTest::testMigrasiYangTidakBisaDiimporPhpMyAdminDitolak",
+      "judul": "Integration\\SqlExportTest::testMigrasiYangTidakBisaDiimporPhpMyAdminDitolak",
+      "lulus": true,
+      "catatan": null,
+      "ms": 17
+    },
+    {
+      "id": "Integration\\SqlExportTest::testCliMenulisInstallSqlKeStdout",
+      "judul": "Integration\\SqlExportTest::testCliMenulisInstallSqlKeStdout",
+      "lulus": true,
+      "catatan": null,
+      "ms": 153
+    }
+  ]
+}

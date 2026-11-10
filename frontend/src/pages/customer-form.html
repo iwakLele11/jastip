@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="id">
+<head>
+<!-- @include head -->
+<title>Customer baru · Jastip Admin</title>
+<script type="module" src="js/pages/customer-form.js"></script>
+</head>
+<body class="bg-page text-ink antialiased">
+<!-- @include lewati -->
+<!-- @include topnav aktif=customer -->
+<main id="konten" class="pb-10">
+  <header class="sticky top-0 z-20 border-b border-line bg-page">
+    <div class="mx-auto flex min-h-14 max-w-lg items-center gap-1 px-2 py-1 md:px-4">
+      <a href="customer.html" data-kembali class="{{tombolIkon}}" aria-label="Kembali"><!-- @ikon chevron-left 24 size-6 --></a>
+      <h1 id="judul" class="min-w-0 flex-1 text-xl font-semibold break-words">Customer baru</h1>
+    </div>
+  </header>
+  <div class="mx-auto max-w-lg px-4 pt-4 md:px-6">
+    <div data-banner-halaman hidden class="mb-4"></div>
+    <div id="memuat" hidden></div>
+
+    <form id="form-customer" class="space-y-4" novalidate>
+      <div>
+        <label for="nama" class="{{label}}">Nama</label>
+        <input id="nama" name="nama" type="text" class="{{input}}" maxlength="100" autocomplete="off" enterkeyhint="next" required>
+      </div>
+      <div>
+        <label for="no-wa" class="{{label}}">No WA</label>
+        <input id="no-wa" name="no_wa" type="tel" class="{{input}}" autocomplete="off" enterkeyhint="next" aria-describedby="no-wa-bantuan" required>
+        <p id="no-wa-bantuan" class="{{bantuan}}">Contoh: 081234567890</p>
+      </div>
+      <div>
+        <label for="alamat" class="{{label}}">Alamat (opsional)</label>
+        <textarea id="alamat" name="alamat" rows="3" maxlength="500" class="{{textarea}}" autocomplete="off"></textarea>
+      </div>
+      <div data-banner-form hidden></div>
+      <button type="submit" id="tombol-simpan" class="{{tombolPrimary}} w-full md:w-auto">Simpan customer</button>
+    </form>
+
+    <section id="bagian-arsip" class="mt-8 border-t border-line pt-4" aria-label="Arsipkan atau hapus customer" hidden>
+      <div data-banner-arsip hidden class="mb-3"></div>
+      <button type="button" id="tombol-arsip" class="{{tombolGhostDanger}} -ml-3"></button>
+      <p id="bantuan-arsip" class="text-sm text-ink-muted" hidden>Customer dengan pesanan diarsipkan, tidak dihapus.</p>
+    </section>
+  </div>
+</main>
+<!-- @include toast -->
+</body>
+</html>

@@ -19,6 +19,8 @@ final class RekapWaTest extends TestCase
         . "Customer: Rina (081234567890)\n"
         . "\n";
 
+    // Garis pemisah antara baris DP dan bagian pembayaran.
+    private const SEKAT = "————————————————\n";
     // Ajakan bayar + rekening + nama pemilik untuk status belum lunas.
     private const BAYAR = "*Silakan lakukan pembayaran*\n"
         . "Rekening BCA : 5005023600\n"
@@ -63,6 +65,7 @@ final class RekapWaTest extends TestCase
             self::HEADER . self::BARANG_ABC
             . "*Total: Rp2.935.000*\n"
             . "DP 50%: Rp1.468.000\n"
+            . self::SEKAT
             . self::BAYAR
             . self::SALAM,
             self::rekap(CartCalculator::summarize(2_935_000, 5_000, 0, 0)),
@@ -75,6 +78,7 @@ final class RekapWaTest extends TestCase
             self::HEADER . self::BARANG_ABC
             . "*Total: Rp2.935.000*\n"
             . "DP 50%: Rp1.468.000\n"
+            . self::SEKAT
             . "Sudah dibayar: Rp500.000\n"
             . self::BAYAR
             . self::SALAM,
@@ -88,6 +92,7 @@ final class RekapWaTest extends TestCase
             self::HEADER . self::BARANG_ABC
             . "*Total: Rp2.935.000*\n"
             . "DP 50%: Rp1.468.000\n"
+            . self::SEKAT
             . "Sudah dibayar: Rp1.468.000\n"
             . self::BAYAR
             . self::SALAM,
@@ -101,6 +106,7 @@ final class RekapWaTest extends TestCase
             self::HEADER . self::BARANG_ABC
             . "*Total: Rp2.935.000*\n"
             . "DP 50%: Rp1.468.000\n"
+            . self::SEKAT
             . "Sudah dibayar: Rp2.935.000\n"
             . "*Sisa pelunasan: Rp0*\n"
             . "Status: LUNAS ✅\n"
@@ -115,6 +121,7 @@ final class RekapWaTest extends TestCase
             self::HEADER . self::BARANG_B_KOSONG
             . "*Total: Rp2.551.000*\n"
             . "DP 50%: Rp1.276.000\n"
+            . self::SEKAT
             . "Sudah dibayar: Rp2.935.000\n"
             . "*Kelebihan bayar (akan dikembalikan): Rp384.000*\n"
             . "Status: LEBIH BAYAR\n"
@@ -129,6 +136,7 @@ final class RekapWaTest extends TestCase
             self::HEADER . self::BARANG_B_KOSONG
             . "*Total: Rp2.551.000*\n"
             . "DP 50%: Rp1.276.000\n"
+            . self::SEKAT
             . "Sudah dibayar: Rp2.935.000\n"
             . "Dikembalikan: Rp384.000\n"
             . "*Sisa pelunasan: Rp0*\n"
@@ -156,6 +164,7 @@ final class RekapWaTest extends TestCase
             . "\n"
             . "*Total: Rp0*\n"
             . "DP 50%: Rp0\n"
+            . self::SEKAT
             . "*Sisa pelunasan: Rp0*\n"
             . "Status: LUNAS ✅\n"
             . self::SALAM,

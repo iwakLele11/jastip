@@ -272,6 +272,7 @@ Alamat: Jl. Melati No. 5, Jakarta
 
 *Total: Rp2.551.000*
 DP 50%: Rp1.276.000
+————————————————
 *Silakan lakukan pembayaran*
 Rekening BCA : 5005023600
 a.n. Mira Putri
@@ -283,6 +284,7 @@ Contoh rekap untuk customer yang **sudah lunas** — tetap menampilkan status:
 ```
 *Total: Rp2.935.000*
 DP 50%: Rp1.468.000
+————————————————
 Sudah dibayar: Rp2.935.000
 *Sisa pelunasan: Rp0*
 Status: LUNAS ✅

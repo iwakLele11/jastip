@@ -1155,6 +1155,7 @@ Alamat: {alamat}                 (hanya jika alamat terisi)
 
 *Total: {total}*
 DP {dp%}: {dp}
+————————————————
 [blok pembayaran]
 [bagian bawah per status]
 Terimakasih 💕
@@ -1164,6 +1165,7 @@ Terimakasih 💕
 - Baris `Alamat: {alamat}` hanya muncul jika alamat customer terisi (dilewati kalau kosong).
 - Baris barang Kosong tetap bernomor, tanpa baris qty/harga.
 - `DP {dp%}: {dp}` persen dan nominal (sama di semua status).
+- Garis pemisah `————————————————` (16 em-dash) selalu muncul setelah baris DP, sebelum bagian pembayaran.
 - `Sudah dibayar: {Σ pembayaran}` muncul kalau ada pembayaran atau pengembalian dana.
 - `Dikembalikan: {Σ pengembalian}` muncul kalau ada pengembalian dana.
 - Bagian bawah per status:
@@ -1196,6 +1198,7 @@ Customer: Rina (081234567890)
 
 *Total: Rp2.935.000*
 DP 50%: Rp1.468.000
+————————————————
 *Silakan lakukan pembayaran*
 Rekening BCA : 5005023600
 a.n. Mira Putri
@@ -1207,6 +1210,7 @@ Kurang DP (sudah bayar Rp500.000), bagian bawah saja:
 ```
 *Total: Rp2.935.000*
 DP 50%: Rp1.468.000
+————————————————
 Sudah dibayar: Rp500.000
 *Silakan lakukan pembayaran*
 Rekening BCA : 5005023600
@@ -1219,6 +1223,7 @@ DP (QA langkah 2):
 ```
 *Total: Rp2.935.000*
 DP 50%: Rp1.468.000
+————————————————
 Sudah dibayar: Rp1.468.000
 *Silakan lakukan pembayaran*
 Rekening BCA : 5005023600
@@ -1231,6 +1236,7 @@ Lunas tanpa pengembalian (QA langkah 3):
 ```
 *Total: Rp2.935.000*
 DP 50%: Rp1.468.000
+————————————————
 Sudah dibayar: Rp2.935.000
 *Sisa pelunasan: Rp0*
 Status: LUNAS ✅
@@ -1251,6 +1257,7 @@ Customer: Rina (081234567890)
 
 *Total: Rp2.551.000*
 DP 50%: Rp1.276.000
+————————————————
 Sudah dibayar: Rp2.935.000
 *Kelebihan bayar (akan dikembalikan): Rp384.000*
 Status: LEBIH BAYAR
@@ -1262,6 +1269,7 @@ Lunas setelah pengembalian dana (QA langkah 5):
 ```
 *Total: Rp2.551.000*
 DP 50%: Rp1.276.000
+————————————————
 Sudah dibayar: Rp2.935.000
 Dikembalikan: Rp384.000
 *Sisa pelunasan: Rp0*

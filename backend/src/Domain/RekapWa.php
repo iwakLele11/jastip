@@ -17,6 +17,7 @@ namespace Jastip\Domain;
  *
  *   *Total: {total}*
  *   DP {dp%}: {dp}
+ *   ————————————————
  *   [Sudah dibayar: …]   jika ada pembayaran atau pengembalian dana
  *   [Dikembalikan: …]    jika ada pengembalian dana
  *
@@ -41,6 +42,8 @@ final class RekapWa
     private const REKENING = '5005023600';
     /** Nama pemilik rekening. */
     private const NAMA_REKENING = 'Mira Putri';
+    /** Garis pemisah antara baris DP dan bagian pembayaran. */
+    private const SEKAT = '————————————————';
 
     /**
      * @param list<RekapItem> $items
@@ -84,6 +87,7 @@ final class RekapWa
 
         $lines[] = '*Total: ' . Rupiah::format($summary->total) . '*';
         $lines[] = sprintf('DP %s%%: %s', self::persen($summary->dpBp), Rupiah::format($summary->dp));
+        $lines[] = self::SEKAT;
         if ($summary->totalPembayaran > 0 || $summary->totalPengembalian > 0) {
             $lines[] = 'Sudah dibayar: ' . Rupiah::format($summary->totalPembayaran);
         }
